@@ -1,10 +1,9 @@
 import React from 'react'
 import { SplashScreen } from './src/screens/SplashScreen'
 import AppLoading from 'expo-app-loading'
-import { ThemeProvider } from 'styled-components'
 import { useColorScheme } from  'react-native'
 import { useFonts, Quicksand_400Regular, Quicksand_600SemiBold, Quicksand_700Bold } from '@expo-google-fonts/quicksand';
-import { theme } from './src/styles'
+import { CustomThemeProvider } from './src/context/ThemeContext'
 
 export default function App() {
   
@@ -23,8 +22,8 @@ export default function App() {
   }
  
   return (
-    <ThemeProvider theme = { theme }>
+    <CustomThemeProvider>
       <SplashScreen />
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { PageTitle, PageSubtitle, CardText  } from '../../components/';
 import { Container, Subcontainer } from '../../components/atoms/Container';
+import ToggleThemeButton from '../../components/atoms/Button';
 
 export const SplashScreen = () => {
   return (
@@ -9,6 +10,7 @@ export const SplashScreen = () => {
         <PageTitle>CroMo</PageTitle>
         <PageSubtitle>E-mail</PageSubtitle>
         <CardText>Senha</CardText>
+        <ToggleThemeButton />
       </Subcontainer>
     </Container>
   )
