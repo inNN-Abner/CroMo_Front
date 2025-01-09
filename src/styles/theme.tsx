@@ -10,6 +10,7 @@ export const lightTheme = {
         lightGray: '#bbc0c4',
         darkRed: '#a82325',
         darkGreen: '#265160',
+        everWhite: '#ffffff',
         
         transparent: 'rgba(255, 255, 255, 0.0);'
     
@@ -20,12 +21,13 @@ export const lightTheme = {
 
 export const darkTheme = {
     colors: {
-        white: '#ffffff',
-        brisk: '#1a2224',
+        white: '#1a2224',
+        brisk: '#ffffff',
         gray: '#ffffff', 
         lightGray: '#bbc0c4',
-        darkRed: '#rgb(90, 8, 8);',
+        darkRed: '#a82325',
         darkGreen: '#265160',
+        everWhite: '#ffffff',
         
         transparent: 'rgba(255, 255, 255, 0.0);'
     

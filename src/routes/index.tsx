@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { HomeScreen, SplashScreen } from '../screens'
+import { HomeScreen, LoginScreen } from '../screens'
 
 /*
 interface BottomRoutes{
@@ -65,7 +65,7 @@ export const Routes = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name='Splash' component={ SplashScreen } />
+                <Stack.Screen name='Login' component={ LoginScreen } />
                 <Stack.Screen name='Home' component={ HomeScreen } />
             </Stack.Navigator>
         </NavigationContainer>

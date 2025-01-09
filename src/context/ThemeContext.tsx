@@ -18,7 +18,7 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeToggleContext.Provider value={{ toggleTheme, isDark }}>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <ThemeProvider theme={ isDark ? darkTheme : lightTheme }>
         {children}
       </ThemeProvider>
     </ThemeToggleContext.Provider>
