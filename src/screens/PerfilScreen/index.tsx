@@ -3,12 +3,13 @@ import ToggleThemeButton from '~/components/atoms/Button';
 import { Headers, PageTitle } from '~/components/';
 import { Container } from '~/components/atoms/Container';
 
-export const HomeScreen = ({ navigation }) => {
+export const PerfilScreen = ({ navigation }) => {
   
   return (
     <Container hgt='100'>
         <Headers />
-        <PageTitle>Tela principal</PageTitle>
+        <PageTitle>Tela de perfil</PageTitle>
+        <ToggleThemeButton />
     </Container>
   )
 }

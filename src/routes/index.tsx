@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from 'react'
+import { theme } from '../styles'
 import { Keyboard } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { useTheme } from '~/context/ThemeContext'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { HomeScreen, LoginScreen } from '../screens'
+import { ContactsScreen, HomeScreen, LoginScreen, MonitoringScreen, PerfilScreen } from '../screens'
 
-/*
 interface BottomRoutes{
-    Main: string
-    Appointments: string
+    Home: string
+    Monitoring: string
     Contacts: string
     Perfil: string
 }
 
 const routeIcons: Record<string, keyof typeof Ionicons.glyphMap> = {
-    Main: 'home',
-    Appointments: 'calendar',
+    Home: 'home',
+    Monitoring: 'calendar',
     Contacts: 'id-card',
     Perfil: 'person'
 }
 
-
 const BottomRoute = () => {
     const Tab = createBottomTabNavigator()
+    const { isDark } = useTheme()
     const [isKeyboardVisible, setKeyboardVisible] = useState(false)
 
     useEffect(() => {
@@ -41,24 +42,29 @@ const BottomRoute = () => {
     }, [])
     
     return (
-        <Tab.Navigator  
+        <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
                     const iconName = routeIcons[route.name as keyof BottomRoutes]
-                    return <Ionicons name={iconName} size={theme.metrics.px(34)} color={focused ? 'red' : theme.colors.darkRed}/>
+                    return <Ionicons name={iconName} size={theme.metrics.px(34)} color={focused ? 'red' : theme.lightTheme.colors.darkRed}/>
                 },
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
+                    backgroundColor: isDark ? theme.darkTheme.colors.white : theme.darkTheme.colors.gray,
                     display: isKeyboardVisible ? 'none' : 'flex',
                 },
-            })}>
-            <Tab.Screen name='Main' component={HomeScreen} />
-            <Tab.Screen name='SummarySchedule' component={SummaryScheduleScreen} options={{ tabBarButton: () => null}} />
+            })}
+            >
+            <Tab.Screen name='Home' component={HomeScreen} />
+            <Tab.Screen name='Monitoring' component={MonitoringScreen} />
+            <Tab.Screen name='Contacts' component={ContactsScreen} />
+            <Tab.Screen name='Perfil' component={PerfilScreen} />
+
         </Tab.Navigator>
     )
 }
-*/
+
 export const Routes = () => {
     const Stack = createStackNavigator()
 
@@ -66,7 +72,7 @@ export const Routes = () => {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name='Login' component={ LoginScreen } />
-                <Stack.Screen name='Home' component={ HomeScreen } />
+                <Stack.Screen name='HomeBottom' component={ BottomRoute } />
             </Stack.Navigator>
         </NavigationContainer>
     )

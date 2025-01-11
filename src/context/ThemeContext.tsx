@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components/native';
-import { lightTheme, darkTheme } from '../styles/theme';
+import { theme } from '../styles/theme';
 
 const ThemeToggleContext = createContext({
   toggleTheme: () => {},
@@ -18,7 +18,7 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeToggleContext.Provider value={{ toggleTheme, isDark }}>
-      <ThemeProvider theme={ isDark ? darkTheme : lightTheme }>
+      <ThemeProvider theme={ isDark ? theme.darkTheme : theme.lightTheme }>
         {children}
       </ThemeProvider>
     </ThemeToggleContext.Provider>

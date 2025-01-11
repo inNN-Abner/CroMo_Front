@@ -1,4 +1,4 @@
-import { HeaderPhotoStyle } from './styles'
+import { PhotoStyle } from './styles'
 
 interface PhotoProps{
     source?: string
@@ -9,9 +9,9 @@ interface PhotoProps{
     bdRd?: string
 }
 
-export const HeaderPhoto = ({ source, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
+export const Photo = ({ source, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
     return (
-        <HeaderPhotoStyle 
+        <PhotoStyle 
         source={source}
         wdt={wdt}
         hgt={hgt}

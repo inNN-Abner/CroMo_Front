@@ -13,7 +13,7 @@ export const LoginScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleLogin = async() => {
-    navigation.navigate('Home')
+    navigation.navigate('HomeBottom')
   }
 
   return (

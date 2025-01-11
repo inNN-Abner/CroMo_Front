@@ -6,9 +6,9 @@ export const PageTitleStyle = styled.Text
     color: ${({ color, theme }) => theme.colors[color || 'white']};
     font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'bold']};
     font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(20)}px`)};
-    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 10])}px;
+    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 15])}px;
     marginBottom: ${({ mgBottom, theme }) => theme.metrics.px([mgBottom || 0])}px;
-    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 10])}px;
+    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 15])}px;
 `
 
 export const PageSubTitleStyle = styled.Text
@@ -20,8 +20,8 @@ export const PageSubTitleStyle = styled.Text
     alignSelf: ${({ alignSelf }) => alignSelf || 'flex-start'}; 
     marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 10])}px;
     marginBottom: ${({ mgBottom, theme }) => theme.metrics.px([mgBottom || 0])}px;
-    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 10])}px;
-    paddingLeft: ${({ pddLeft, theme }) => theme.metrics.px([pddLeft || 60])}px;
+    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 15])}px;
+    paddingLeft: ${({ pddLeft, theme }) => theme.metrics.px([pddLeft || 0])}px;
 `
 
 export const LoginTitleStyle = styled.Text
@@ -50,13 +50,29 @@ export const HeaderTextStyle = styled.Text
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 5])}px;
 `
 
-
-export const CardTextStyle = styled.Text
-<{ color?: string; fontFamily?: string; fontSize?: string }>
+export const ContactNameStyle = styled.Text
+<{ color?: string; fontWgt?: string; fontFamily?: string; fontSize?: string; mgTop?:string; mgLeft?: string }>
 `
-    color: ${({ color, theme }) => theme.colors[color || 'white']};
-    font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'semiBold']};
-    font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(12)}px`)};
+    color: ${({ color, theme }) => theme.colors[color || 'darkGreen']};
+    font-weight: ${({ fontWgt }) => fontWgt || 'bold' };
+    font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'regular']};
+    font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(14)}px`)};
+    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 0])}px;
+    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 5])}px;
+`
+
+export const InfoTextStyle = styled.Text
+<{ color?: string; fontWgt?: string; fontFamily?: string; fontSize?: string; mgTop?:string; mgBottom?:string; mgLeft?: string; mgRight?: string }>
+`
+    color: ${({ color, theme }) => theme.colors[color || 'darkGreen']};
+    font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'regular']};
+    font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(13)}px`)};
+    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 0])}px;
+    marginBottom: ${({ mgBottom, theme }) => theme.metrics.px([mgBottom || -3])}px;
+    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 5])}px;
+    marginRight: ${({ mgRight, theme }) => theme.metrics.px([mgRight || 0])}px;
+    flex-wrap: nowrap;
+    overflow: hidden;
 `
 
 export const ButtonTextStyle = styled.Text

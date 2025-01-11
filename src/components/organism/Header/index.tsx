@@ -1,45 +1,29 @@
 import React from 'react'
-import { HeaderPhoto, HeaderText, LogoHeader } from '~/components/atoms'
-import { useTheme } from 'styled-components'
 import { HeaderContainerStyle } from './styles'
 import { HeaderDate } from '~/components/molecules'
+import { Photo, HeaderText, LogoHeader } from '~/components/atoms'
+
 const HarryIcon = require('~/../assets/HarryIcon.png')
-const DarkContainer_Logo = require('~/../assets/ContainerDark_CroMo.png')
-const LightContainer_Logo = require('~/../assets/ContainerLight_CroMo.png')
+const HeaderLogo = require('~/../assets/Cromo_LogoBKG.png')
 
-interface HeaderProps {
-    source?: string
-    bg?: string
-    wdt?: string
-    hgt?: string
-    align?: string
-    mgTop?: string
-}
-
-export const Headers = ({ bg, wdt, hgt, align, mgTop, source }: HeaderProps) => {
-    const { isDark } = useTheme()
+export const Headers = () => {
     
     return (
-        <HeaderContainerStyle
-        bg={'white'}
-        wdt={wdt}
-        hgt={hgt}
-        >
-            <HeaderPhoto
+        <HeaderContainerStyle>
+
+            <Photo
                 source={HarryIcon}
                 wdt='45'
                 hgt='45'    
             />
 
             <HeaderContainerStyle
-                bg={'white'}
                 wdt={'235'}
-                hgt={'10'}
+                hgt={'15'}
                 dir={'column'}
-                align={'flex-end'}
             >
                 <HeaderText fontSize='14' fontWgt='bold' mgTop='-25' alignSelf='flex-start'>Henrique Oleiro</HeaderText>
-                <HeaderText fontSize='10' mgTop='-10' alignSelf='flex-start'>Logística aeroportuária</HeaderText>
+                <HeaderText fontSize='10' mgTop='0' alignSelf='flex-start'>Logística aeroportuária</HeaderText>
             </HeaderContainerStyle>
 
             <HeaderContainerStyle 
@@ -47,12 +31,12 @@ export const Headers = ({ bg, wdt, hgt, align, mgTop, source }: HeaderProps) => 
                 dir='column' align='center' justify='center'>
 
                 <LogoHeader
-                    source={ isDark ? DarkContainer_Logo : LightContainer_Logo }
-                    wdt='50'
+                    source={ HeaderLogo }
+                    wdt='70'
                     hgt='15'
-                    mgTop='0'
+                    mgTop='5'
                 />
-                <HeaderDate mgTop='0'/>
+                <HeaderDate />
             </HeaderContainerStyle>
 
         </HeaderContainerStyle>
