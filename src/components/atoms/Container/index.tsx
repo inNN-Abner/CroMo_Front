@@ -37,8 +37,8 @@ export const Listcontainer = styled.SafeAreaView
     align-items: ${({ align }) => align || 'center'}; 
     justify-content: ${({ justify }) => justify || 'flex-start'};
     marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 10])}px;
-    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 4])}px;
-    width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : `${theme.metrics.px(330)}px`)};
+    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 8])}px;
+    width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : `${theme.metrics.px(320)}px`)};
     height: ${({ hgt, theme }) => (hgt ? `${theme.metrics.px(hgt)}px` : `${theme.metrics.px(60)}px`)};
     border-radius: ${({ bdRd, theme }) => (bdRd ? `${theme.metrics.px(bdRd)}px` : `${theme.metrics.px(10)}px`)};
 `

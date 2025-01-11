@@ -33,7 +33,7 @@ export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ nav
                             mgLeft='0'
                             justify='center'
                             hgt='48'
-                            wdt='240'
+                            wdt='255'
                         >
                             <ContactText  mgTop='-3'>
                                 {item.name}

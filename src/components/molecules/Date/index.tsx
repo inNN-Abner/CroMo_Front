@@ -15,7 +15,7 @@ interface TextProps {
     pddLeft?: string
 }
 
-export const HeaderDate = ({ children, color, fontWgt, fontFamily, fontSize, alignSelf, wdt, mgTop, mgLeft }: TextProps) => {
+export const HeaderDate = ({ children, color, fontWgt, fontFamily, fontSize, wdt, mgTop, mgLeft }: TextProps) => {
     const [currentDate, setCurrentDate] = useState('');
 
     useEffect(() => {
@@ -34,7 +34,6 @@ export const HeaderDate = ({ children, color, fontWgt, fontFamily, fontSize, ali
             fontWgt={fontWgt}
             fontFamily = {fontFamily}
             fontSize = {fontSize}
-            alignSelf = {alignSelf}
             wdt = {wdt}
             mgTop = {mgTop}
             mgLeft = {mgLeft}

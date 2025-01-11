@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'
 import { useTheme } from '../../../context/ThemeContext';
-import { ButtonTextStyle, StyledButtonStyle } from './styles';
+import { ButtonTextStyle, StyledButtonStyle, ThemeButtonStyle } from './styles';
+import { Subcontainer } from '../Container';
 
 interface ButtonProps {
   source?: string
@@ -43,14 +45,23 @@ export const StylezedButton = ({ bg, color, ftSz, align, justify, dir, wdt, hgt,
     </StyledButtonStyle>
     )
 }
-const ToggleThemeButton = () => {
+
+const ToggleThemeButton = ({ bg, wdt, hgt, mgLeft, bdRd, onPress }: ButtonProps) => {
   const { toggleTheme, isDark } = useTheme();
 
   return (
-    <Button 
-      title={ isDark ? "Modo Claro" : "Modo Escuro" } 
-      onPress={toggleTheme} 
-    />
+    <ThemeButtonStyle
+      bg={bg}
+      mgLeft={mgLeft}
+      hgt={hgt}
+      wdt={wdt}
+      bdRd={bdRd}
+      onPress={toggleTheme}
+    >
+      <Subcontainer mgLeft='0' mgTop='0' bg='transparent' align='center' justify='center'>
+        <Ionicons name={ isDark ? 'moon' : 'sunny'} size={40} color={ isDark ? 'white' : 'white'}  />
+      </Subcontainer>
+    </ThemeButtonStyle>
   )
 }
 

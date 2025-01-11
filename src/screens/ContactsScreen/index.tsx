@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import contacts from '~/../archives/contacts'
 import { ListOfContacts } from '~/components/organism/List';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
-import { Headers, PageSubtitle, PageTitle, SearchInput, Windows } from '~/components/';
 import { Container, Subcontainer } from '~/components/atoms/Container';
+import { Headers, PageSubtitle, PageTitle, SearchInput, Windows } from '~/components/';
 
 export const ContactsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [list, setList] = useState(contacts)

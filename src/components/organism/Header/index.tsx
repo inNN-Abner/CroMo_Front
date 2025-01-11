@@ -42,3 +42,27 @@ export const Headers = () => {
         </HeaderContainerStyle>
     )
 }
+
+export const PerfilHeaders = () => {
+    
+    return (
+        <HeaderContainerStyle justify='flex-end' bg='transparent' >
+
+            <HeaderContainerStyle 
+                wdt='100' hgt='50' mgTop='0'
+                dir='column' align='center' justify='center'>
+
+                <LogoHeader
+                    source={ HeaderLogo }
+                    wdt='70'
+                    hgt='15'
+                    mgTop='5'
+                    mgLeft='13'
+                />
+
+                <HeaderDate mgLeft='53'/>
+            </HeaderContainerStyle>
+
+        </HeaderContainerStyle>
+    )
+}

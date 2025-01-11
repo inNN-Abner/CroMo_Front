@@ -5,7 +5,7 @@ export default [
       info: 'alvo.dumbledore@fatec.sp.gov.br | Alvo.Dumbledore_01',
       photo: require('../assets/Icon_AlvoDumbledore.png'),
       type: 'Monitor',
-      email: 'albus.dumbledore@email.coms',
+      email: 'albus.dumbledore@email.com',
       teams: 'Alvo.Dumbledore_01'
     },
     {
