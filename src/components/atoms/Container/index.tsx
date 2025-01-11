@@ -28,7 +28,7 @@ export const Subcontainer = styled.SafeAreaView
     max-height: ${({ maxHgt }) => (maxHgt ? `${(maxHgt)}%` : '100%')};
 `
 
-export const Listcontainer = styled.SafeAreaView
+export const ListContainer = styled.SafeAreaView
 <{ dir?: string; bg?: string; align?: string; justify?: string; mgTop?: string; mgLeft?: string; wdt?: string; hgt?: string; bdRd?: string }>
 `
     display: flex;

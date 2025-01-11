@@ -35,5 +35,4 @@ export default [
       email: 'roland.hooch@fatec.sp.gov.br',
       teams: 'Rolanda.Hooch_02'
     },
-
   ]

@@ -1,9 +1,9 @@
 import React from 'react'
 import ToggleThemeButton from '~/components/atoms/Button';
-import { PageTitle, PerfilHeaders } from '~/components/';
+import { IdentificationCard, PageTitle, PerfilHeaders } from '~/components/';
 import { Container } from '~/components/atoms/Container';
 
-export const PerfilScreen = ({ navigation }) => {
+export const PerfilScreen = ({ route }) => {
   
   return (
     <Container hgt='100'>

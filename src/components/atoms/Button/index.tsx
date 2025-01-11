@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import Fontisto from '@expo/vector-icons/Fontisto'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { useTheme } from '../../../context/ThemeContext';
 import { ButtonTextStyle, StyledButtonStyle, ThemeButtonStyle } from './styles';
 import { Subcontainer } from '../Container';
@@ -66,3 +68,50 @@ const ToggleThemeButton = ({ bg, wdt, hgt, mgLeft, bdRd, onPress }: ButtonProps)
 }
 
 export default ToggleThemeButton;
+
+export const AddButton = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgTop={mgTop}
+        onPress={onPress}>
+        <Ionicons name="add-circle" size={24} color={'white'} />
+    </StyledButtonStyle>
+  )
+}
+
+export const EditButton  = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
+  const { isDark } = useTheme();
+
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgTop={mgTop}
+        onPress={onPress}>
+        <FontAwesome name="pencil" size={24} color={ isDark ? 'white' : 'dark'} />
+    </StyledButtonStyle>
+  )
+}
+
+export const TrashButton = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgTop={mgTop}
+        onPress={onPress}>
+        <Fontisto name="trash" size={24} color="white" />
+    </StyledButtonStyle>
+  )
+}

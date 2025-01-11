@@ -12,6 +12,7 @@ export const lightTheme = {
         everWhite: '#ffffff',
         greenBlack: '#265160',
         greenWhite: '#ffffff',
+        whiteGreen: '#265160',
         blueYellow: 'rgb(255, 166, 0)',
         
         transparent: 'rgba(255, 94, 0, 0)',
@@ -32,6 +33,7 @@ export const darkTheme = {
         everWhite: '#ffffff',
         greenBlack: '#1a2224',
         greenWhite: '#265160',
+        whiteGreen: '#ffffff',
         blueYellow: 'rgb(40, 53, 124)',
 
         transparent: 'rgba(255, 255, 255, 0.0)',

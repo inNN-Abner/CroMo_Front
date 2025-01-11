@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 
 export const HeaderContainerStyle = styled.View
-    <{ bg?: string; wdt?: string; hgt?: string; align?: string; justify?: string; dir?: string; mgTop?: string; mgLeft?: string }>`
+    <{ bg?: string; wdt?: string; hgt?: string; align?: string; justify?: string; dir?: string; mgTop?: string; mgLeft?: string }>
+`
     background-color: ${({ bg, theme }) => theme.colors[bg || 'white']};
     flex-direction: ${({ dir }) => dir || 'row'};
     align-items: ${({ align }) => align || 'center'};
