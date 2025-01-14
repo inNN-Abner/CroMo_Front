@@ -18,12 +18,12 @@ export const StyledButtonStyle = styled.TouchableOpacity
 `
 
 export const ButtonTextStyle = styled.Text
-<{ color?: string; ftSz?: string; mgLeft?: string; }>
+<{ color?: string; fontSize?: string; mgLeft?: string; }>
 `
     color: ${({ color, theme }) => theme.colors[color || 'everWhite']};
     font-weight: bold;
     font-family: 'PTSans_400Regular';
-    font-size: ${({ ftSz, theme }) => (ftSz ? `${theme.metrics.px(ftSz)}px` : `${theme.metrics.px(20)}px`)};
+    font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(20)}px`)};
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 0])}px;
 `
 

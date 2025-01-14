@@ -23,7 +23,7 @@ export const ContactsDetailGrid = ({ navigation }) => {
                 <EditButton 
                     bg='white'
                     onPress={() => {
-                    navigation.navigate('AddTimeTeacher', {
+                    navigation.navigate('MonitorSchedule', {
                         id: item.id,
                         diaSemana: item.weekDay,
                         horario: item.hour,
@@ -70,7 +70,7 @@ export const ContactsDetailGrid = ({ navigation }) => {
                 mgLeft='5'
                 bg='darkRed'
                 onPress={() => {
-                    navigation.navigate('AddTimeTeacher')
+                    navigation.navigate('MonitorSchedule')
                 }} />
         </ListContainer>
     </> 

@@ -6,7 +6,7 @@ import { useTheme } from '~/context/ThemeContext'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { ContactsScreen, HomeScreen, LoginScreen, MonitoringScreen, PerfilScreen } from '../screens'
+import { ContactsScreen, HomeScreen, LoginScreen, MonitoringScreen, MonitorScheduleScreen, PerfilScreen } from '../screens'
 import { ContactsDetailScreen } from '~/screens/ContactsDetailScreen'
 
 interface BottomRoutes{
@@ -61,10 +61,11 @@ const BottomRoute = () => {
             <Tab.Screen name='Monitoring' component={MonitoringScreen} />
             <Tab.Screen name='Contacts' component={ContactsScreen} />
             <Tab.Screen name='ContactsDetail' component={ContactsDetailScreen} options={{ tabBarButton: () => null}} />
+            <Tab.Screen name='MonitorSchedule' component={MonitorScheduleScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='Perfil' component={PerfilScreen} />
 
         </Tab.Navigator>
-    )
+    ) 
 }
 
 export const Routes = () => {
