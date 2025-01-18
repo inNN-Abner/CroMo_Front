@@ -1,5 +1,4 @@
 import React from 'react'
-import ToggleThemeButton from '~/components/atoms/Button';
 import { Headers, PageTitle } from '~/components/';
 import { Container } from '~/components/atoms/Container';
 
