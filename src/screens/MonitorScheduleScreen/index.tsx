@@ -1,5 +1,5 @@
 import { Keyboard, TouchableWithoutFeedback } from 'react-native'
-import { Headers, Container, SelectDay, Subcontainer, StylezedButton, Windows, ContactText, PageTitle, PageSubtitle, TimeInput } from '../../components'
+import { Headers, Container, SelectDay, Subcontainer, StylezedButton, Windows, ContactText, PageTitle, PageSubtitle, TimeInput, ClassroomSelector, InfoText } from '../../components'
 
 export const MonitorScheduleScreen = ({ navigation }) => {
   const handleTimeSelected = (time: string) => {
@@ -38,10 +38,19 @@ export const MonitorScheduleScreen = ({ navigation }) => {
 
             <SelectDay />
             
-          <Subcontainer align='center' maxHgt='62' mgLeft='0'>
+          <Subcontainer align='center' maxHgt='50' mgLeft='0'>
             <TimeInput />
 
-              <StylezedButton 
+            <PageSubtitle alignSelf='center' mgTop='15' 
+            >
+              Selecione um local
+            </PageSubtitle>
+            
+            <ClassroomSelector />
+            
+            </Subcontainer>
+
+            <StylezedButton
                 wdt='320'
                 hgt='50'
                 bdRd='10'
@@ -49,7 +58,7 @@ export const MonitorScheduleScreen = ({ navigation }) => {
                 onPress={() => {
                   navigation.navigate('Contacts')
                 }} />
-            </Subcontainer>
+
         </Subcontainer>
 
       </Container>
