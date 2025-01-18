@@ -23,6 +23,7 @@ interface ButtonProps {
   children?: React.ReactNode
   label?: string
   hour?: string
+  classRoom?: string
   onPress?: () => void
 }
 
@@ -102,7 +103,7 @@ export const DayButton = ({ hgt, label, color, bg, onPress }: ButtonProps ) => {
   )
 }
 
-export const DefineTimeButton = ({ bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSize, onPress, hour }: ButtonProps ) => {
+export const SetTimeButton = ({ bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSize, onPress, hour }: ButtonProps ) => {
   return (
   <StyledButtonStyle 
       bg={bg}
@@ -113,12 +114,12 @@ export const DefineTimeButton = ({ bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fon
       bdRd={bdRd}
       onPress={onPress}
       >
-          <ButtonTextStyle
-              color={color}
-              fontSize={fontSize}
-            >
-              {hour}
-          </ButtonTextStyle>
+        <ButtonTextStyle
+            color={color}
+            fontSize={fontSize}
+          >
+            {hour}
+        </ButtonTextStyle>
   </StyledButtonStyle>
   )
 }
