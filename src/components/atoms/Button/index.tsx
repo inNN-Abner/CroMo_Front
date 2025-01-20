@@ -5,6 +5,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { useTheme } from '../../../context/ThemeContext';
 import { ButtonTextStyle, StyledButtonStyle, ThemeButtonStyle } from './styles';
 import { Subcontainer } from '../Container';
+import { Photo } from '../Photo';
 
 interface ButtonProps {
   source?: string
@@ -23,6 +24,7 @@ interface ButtonProps {
   children?: React.ReactNode
   label?: string
   hour?: string
+  info?: string
   classRoom?: string
   onPress?: () => void
 }
@@ -67,7 +69,6 @@ const ToggleThemeButton = ({ bg, wdt, hgt, mgLeft, bdRd }: ButtonProps) => {
     </ThemeButtonStyle>
   )
 }
-
 export default ToggleThemeButton;
 
 export const AddButton = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
@@ -103,7 +104,59 @@ export const DayButton = ({ hgt, label, color, bg, onPress }: ButtonProps ) => {
   )
 }
 
-export const SetTimeButton = ({ bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSize, onPress, hour }: ButtonProps ) => {
+export const EditButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={'everWhite'}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgTop={mgTop}
+        onPress={onPress}>
+        <FontAwesome name="pencil" size={24} color={'black'} />
+    </StyledButtonStyle>
+  )
+}
+
+export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop, mgLeft, label, color, bg, fontSize, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle 
+        justify={justify}
+        align={align}
+        bdRd={bdRd}
+        wdt={wdt}
+        hgt={hgt}
+        mgTop={mgTop}
+        mgLeft={mgLeft}
+        bg={bg}
+        dir={'row'}
+        onPress={onPress}
+        >
+          <Photo
+              hgt='35'
+              wdt='40'
+              mgLeft='5'
+              mgTop='0'
+              source={source}
+            />
+
+          <ButtonTextStyle
+              fontSize={fontSize}
+              color={color}
+              mgLeft='5'
+              style={{
+                  flex: 1,
+                  flexWrap: 'wrap',
+                  maxWidth: '80%'
+              }}  >
+                {label}
+          </ButtonTextStyle>
+    </StyledButtonStyle>
+  )
+}
+
+export const SetTimeButton = ({ bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSize, onPress, info }: ButtonProps ) => {
   return (
   <StyledButtonStyle 
       bg={bg}
@@ -118,24 +171,9 @@ export const SetTimeButton = ({ bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSi
             color={color}
             fontSize={fontSize}
           >
-            {hour}
+            {info}
         </ButtonTextStyle>
   </StyledButtonStyle>
-  )
-}
-
-export const EditButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
-  return (
-    <StyledButtonStyle
-        bg={'everWhite'}
-        wdt={wdt}
-        hgt={hgt}
-        bdRd={bdRd}
-        mgLeft={mgLeft}
-        mgTop={mgTop}
-        onPress={onPress}>
-        <FontAwesome name="pencil" size={24} color={'black'} />
-    </StyledButtonStyle>
   )
 }
 

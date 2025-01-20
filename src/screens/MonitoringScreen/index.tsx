@@ -1,17 +1,13 @@
 import { useState } from 'react'
-import { GenericText, Container, HeaderPage, Subcontainer, Calendar, StylezedButton, PageSubtitle, PageTitle } from '../../components'
-import { CreateModal } from '../../components/molecules'
 import { DefineTimeScheduling } from '../../components/organism/DefineTimeScheduling'
-import { LanguageList } from '../../components/organism/LanguageList'
-import { TeacherList } from '../../components/organism/TeacherSelectList'
+import { Calendar, Container, CreateModal, Headers, InfoText, MonitorList, PageSubtitle, PageTitle, StylezedButton, Subcontainer } from '~/components'
 
-export const SchedulingScreen = ({ navigation }) => {
+export const MonitoringScreen = ({ navigation }) => {
 
   const [openModal, setOpenModal] = useState(false)
   const [step, setStep] = useState(1)
   const [selectedDate, setSelectedDate] = useState(null)
-  const [selectedLanguage, setSelectedLanguage] = useState(null)
-  const [selectedTeacher, setSelectedTeacher] = useState(null)
+  const [selectedMonitor, setSelectedMonitor] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
   const [confirming, setConfirming] = useState(false)
   const [titleMessage, setTitleMessage] = useState('');
@@ -19,7 +15,7 @@ export const SchedulingScreen = ({ navigation }) => {
 
   function handleOnPress () {
     setOpenModal(!openModal)
-  }    
+  }
   
   const modalConfirm = () => {
     setTitleMessage ('Confirmar agendamento')
@@ -35,8 +31,7 @@ export const SchedulingScreen = ({ navigation }) => {
 
   const handleConfirm = () => {
     setSelectedDate(null)
-    setSelectedLanguage(null)
-    setSelectedTeacher(null)
+    setSelectedMonitor(null)
     setSelectedTime(null)
     navigation.navigate('Contacts')
   }
@@ -44,37 +39,30 @@ export const SchedulingScreen = ({ navigation }) => {
   return (
     <Container>
 
-      <HeaderPage />
+      <Headers />
         <PageTitle>Calendário</PageTitle>
         <PageSubtitle>Novo agendamento de aula</PageSubtitle>
 
-        <Subcontainer maxHgt='28' justify='flex-start' mgLeft='0'>
-
+        <Subcontainer maxHgt='50' justify='flex-start' mgLeft='0'>
           {step >= 1 && (
-              <Calendar onDateSelected={(date) => {setSelectedDate(date); setStep(2) }}  />
+            <Calendar onDateSelected={(date) => {setSelectedDate(date); setStep(2) }}  />
           )}
-            <Subcontainer maxHgt='100' align='justify-start' justify='center' mgLeft='0' mgTop='90' dir='row'>
-            {step >= 2 && (
-                <LanguageList onLanguageSelected={(language) => { setSelectedLanguage(language); setStep(3) }} />
-            )}
 
-            {step >= 3 && (
-                <TeacherList onTeacherSelected={(teacher) => { setSelectedTeacher(teacher); setStep(4) }} />
-            )}
-              </Subcontainer>
+          <Subcontainer maxHgt='100' justify='center' mgLeft='0' mgTop='75' dir='row'>
+          {step >= 2 && (
+            <MonitorList onMonitorSelected={(monitor) => { setSelectedMonitor(monitor); setStep(3) }} />
+          )}
 
-              <Subcontainer maxHgt='100' align='justify-start' justify='center' mgLeft='0' dir='row'>
-              {step >= 4 && (
-                <DefineTimeScheduling onTimeSelected={(time) => { setSelectedTime(time); setStep(5) }} />
-              )}
-            </Subcontainer>
+          {step >= 3 && (
+            <DefineTimeScheduling onTimeSelected={(time) => { setSelectedTime(time); setStep(4) }} />
+          )}
+          </Subcontainer>
 
-
-            {step >= 5 && (
-            <Subcontainer dir='row' justify='center' mgLeft='0' mgTop='-30' bdRd='0'>
+            {step >= 4 && (
+            <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0'>
               <StylezedButton
                 bg='white'
-                mgTop='0'
+                mgTop='10'
                 bdRd='10'
                 color='darkRed'
                 label={'Cancelar'}
@@ -83,7 +71,7 @@ export const SchedulingScreen = ({ navigation }) => {
 
               <StylezedButton
                   bg='white'
-                  mgTop='0'
+                  mgTop='10'
                   bdRd='10'
                   mgLeft='20'
                   color='darkBlue'
@@ -100,41 +88,42 @@ export const SchedulingScreen = ({ navigation }) => {
                   hgt='150'
                   pdd='0'
                   align='center'
+                  justify='center'
               >   
-                  <GenericText ftype='bold' color='darkBlue' mgTop='-15'  mgLeft='0' fontSize='16'>
-                    {titleMessage}</GenericText>
+                  <InfoText fontFamily='bold' color='brisk' mgTop='-15'  mgLeft='0' fontSize='16'>
+                    {titleMessage}
+                  </InfoText>
 
-                  <GenericText ftype='regular' color='darkBlue' mgTop='10' fontSize='14' mgLeft='0'>
-                    {bodyMessage}</GenericText>
+                  <InfoText fontFamily='regular' color='brisk' mgTop='10' fontSize='14' mgLeft='0'>
+                    {bodyMessage}
+                  </InfoText>
 
                     <Subcontainer dir='row-reverse' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
                       <StylezedButton 
-                      label={'Agendar'}
-                      bg='darkRed'
-                      mgTop='10'
-                      wdt='150'
-                      hgt='40'
-                      bdRd='10'
-                      fontSize='18'
-                      onPress={() => {
-                          handleOnPress(),
-                          navigation.navigate('Appointments')
-                      }}
-                      />
+                        label={'Agendar'}
+                        bg='darkRed'
+                        mgTop='10'
+                        wdt='150'
+                        hgt='40'
+                        bdRd='10'
+                        fontSize='18'
+                        onPress={() => {
+                            handleOnPress(),
+                            navigation.navigate('Appointments')
+                        }}  />
 
                       <StylezedButton 
-                      label={'Cancelar'}
-                      bg='white'
-                      color='darkRed'
-                      mgTop='10'
-                      wdt='150'
-                      hgt='40'
-                      bdRd='10'
-                      fontSize='18'
-                      onPress={() => {
-                          handleOnPress()
-                      }}
-                      />
+                        label={'Cancelar'}
+                        bg='white'
+                        color='darkRed'
+                        mgTop='10'
+                        wdt='150'
+                        hgt='40'
+                        bdRd='10'
+                        fontSize='18'
+                        onPress={() => {
+                            handleOnPress()
+                        }}  />
                     </Subcontainer>
               </CreateModal>
             </Subcontainer>

@@ -33,6 +33,7 @@ export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose
               <OptionText>{classroom}</OptionText>
             </OptionButton>
           ))}
+          
           </ScrollableContent>
           <CloseButton onPress={onClose}>
             <CloseButtonText>Fechar</CloseButtonText>

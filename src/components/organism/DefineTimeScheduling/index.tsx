@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { DefineTimeButton, Subcontainer, PageSubtitle } from '../../atoms'
+import { Subcontainer, PageSubtitle, SetTimeButton, Divider } from '~/components/atoms'
 import hours from '~/../archives/hours'
+import { ScrollView } from 'react-native-gesture-handler'
 
 export const DefineTimeScheduling: React.FC<{ onTimeSelected: (time: string) => void }> = ({ onTimeSelected }) => {
 
@@ -12,34 +13,39 @@ export const DefineTimeScheduling: React.FC<{ onTimeSelected: (time: string) => 
     }
 
     return (
-        <Subcontainer dir='column' align='center' mgLeft='0' maxHgt='100' mgTop='10'>
+        <Subcontainer align='center' maxHgt='100' mgTop='0' mgLeft='5' bdRd='10' wdt='175'>
+
             <PageSubtitle
-                children={'Horários disponíveis'}
-                mgLeft='0'
+                children={'Horários'}
+                mgLeft='5'
                 mgTop='0'
                 pddLeft='0'
                 fontSize='18'
             />
+            
+            <Divider />
 
-            <Subcontainer dir='row' align='center' justify='center' wrap='wrap' maxHgt='60' mgLeft='0' bdRd='10' bg='darkGrayII'>
-                {hours.map((item, index) => (
-                    <DefineTimeButton
-                        key={item.id}
-                        onPress={() => handleButtonPress(item.id, item.hour)}
-                        justify='center'
-                        align='center'
-                        wdt='120'
-                        hgt='50'
-                        bdRd='10'
-                        mgLeft={index % 3 !== 0 ? '6' : '0'}
-                        mgTop={index >= 3 ? '0' : '18'}
-                        color={'white'}
-                        bg={selectedId === item.id ? 'darkRed' : 'gray'}
-                        hour={item.hour}
-                        fontSize='14'
-                    />
-                ))}
-            </Subcontainer>
+            <ScrollView>
+                <Subcontainer wdt='175' mgLeft='0' mgTop='0'>
+                    {hours.map((item, index) => (
+                        <SetTimeButton
+                            key={item.id}
+                            onPress={() => handleButtonPress(item.id, item.hour)}
+                            justify='center'
+                            align='center'
+                            hgt='50'
+                            bdRd='10'
+                            mgLeft='5'
+                            mgTop='5'
+                            color='white'
+                            bg={selectedId === item.id ? 'darkRed' : 'gray'}
+                            info={item.hour + '\n' + item.classRoom}
+                            fontSize='14'
+                        />
+                    ))}
+                </Subcontainer>
+            </ScrollView>
+
         </Subcontainer>
     )
 }

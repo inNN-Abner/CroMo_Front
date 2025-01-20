@@ -1,5 +1,6 @@
 export * from './Button'
 export * from './Container'
+export * from './Divider'
 export * from './Input'
 export * from './Logo'
 export * from './ModalSelector'

@@ -61,3 +61,15 @@ export const SelectDayContainer = styled.SafeAreaView
     border-bottom-left-radius: ${({ bdRdBL, theme }) => theme.metrics.px([bdRdBL || 20])}px;
     border-bottom-right-radius: ${({ bdRdBR, theme }) => theme.metrics.px([bdRdBR || 20])}px;
 `
+
+export const ModalContainer = styled.SafeAreaView
+ <{ bg?: string; align?: string; justify?: string; wdt?: string; hgt?: string; bdRd?: string; pdd?: string }>
+ `
+    background-color: ${({ bg, theme }) => theme.colors[bg || 'darkRed']};
+    align-items: ${({ align }) => align || 'center'};
+    justify-content: ${({ justify }) => justify || 'center'};
+    width: ${({ wdt, theme }) => (wdt ? (theme.metrics.px(wdt)) : '90%')};
+    height: ${({ hgt, theme }) => (hgt ? (theme.metrics.px(hgt)) : '55%')};
+    padding: ${({ pdd, theme }) => theme.metrics.px([pdd || 10])}px;
+    border-radius: ${({ bdRd, theme }) => (bdRd ? `${theme.metrics.px(bdRd)}px` : `${theme.metrics.px(20)}px`)};
+`
