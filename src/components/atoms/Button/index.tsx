@@ -21,15 +21,17 @@ interface ButtonProps {
   mgLeft?: string
   mgRight?: string
   bdRd?: string
+  bdWdt?: string
+  bdColor?: string
   children?: React.ReactNode
   label?: string
   hour?: string
-  info?: string
+  local?: string
   classRoom?: string
   onPress?: () => void
 }
 
-export const StylezedButton = ({ bg, color, fontSize, wdt, hgt, mgTop, mgLeft, mgRight, bdRd, label, onPress }: ButtonProps ) => {
+export const StylezedButton = ({ bg, color, fontSize, wdt, hgt, mgTop, mgLeft, mgRight, bdRd, bdWdt, bdColor, label, onPress }: ButtonProps ) => {
     return (
     <StyledButtonStyle
         bg={bg}
@@ -39,6 +41,8 @@ export const StylezedButton = ({ bg, color, fontSize, wdt, hgt, mgTop, mgLeft, m
         hgt={hgt}
         wdt={wdt}
         bdRd={bdRd}
+        bdWdt={bdWdt}
+        bdColor={bdColor}
         onPress={onPress}
         >
             <ButtonTextStyle
@@ -156,7 +160,7 @@ export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop
   )
 }
 
-export const SetTimeButton = ({ bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSize, onPress, info }: ButtonProps ) => {
+export const SetTimeButton = ({ align, justify, bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSize, onPress, hour, local }: ButtonProps ) => {
   return (
   <StyledButtonStyle 
       bg={bg}
@@ -166,12 +170,25 @@ export const SetTimeButton = ({ bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSi
       wdt={wdt}
       bdRd={bdRd}
       onPress={onPress}
+      align={align}
+      justify={justify}
       >
         <ButtonTextStyle
             color={color}
             fontSize={fontSize}
+            mgLeft='15'
           >
-            {info}
+            <Fontisto name="clock" size={15} color='white' />
+            {hour}
+        </ButtonTextStyle>
+
+        <ButtonTextStyle
+            color={color}
+            fontSize={fontSize}
+            mgLeft='15'
+          >
+            <Fontisto name="map-marker-alt" size={15} color='white' />
+            {local}
         </ButtonTextStyle>
   </StyledButtonStyle>
   )

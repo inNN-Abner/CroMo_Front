@@ -25,21 +25,26 @@ export const DefineTimeScheduling: React.FC<{ onTimeSelected: (time: string) => 
             
             <Divider />
 
-            <ScrollView>
+            <ScrollView
+                style={{ width: '100%' }} 
+                contentContainerStyle={{ paddingVertical: 0 }}            
+            >
                 <Subcontainer wdt='175' mgLeft='0' mgTop='0'>
                     {hours.map((item, index) => (
                         <SetTimeButton
                             key={item.id}
                             onPress={() => handleButtonPress(item.id, item.hour)}
                             justify='center'
-                            align='center'
+                            align='flex-start'
+                            wdt='165'
                             hgt='50'
-                            bdRd='10'
+                            bdRd='5'
                             mgLeft='5'
                             mgTop='5'
-                            color='white'
-                            bg={selectedId === item.id ? 'darkRed' : 'gray'}
-                            info={item.hour + '\n' + item.classRoom}
+                            color='everWhite'
+                            bg={selectedId === item.id ? 'darkRed' : 'everGray'}
+                            hour={'  ' + item.hour}
+                            local={'   (' + item.classRoom + ')'}
                             fontSize='14'
                         />
                     ))}

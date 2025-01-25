@@ -8,5 +8,5 @@ export const HeaderDateStyle = styled.Text
   font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(10)}px`)};
   width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : '100%')};
   marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 5])}px;
-  marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 10])}px;
+  marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 0])}px;
 `

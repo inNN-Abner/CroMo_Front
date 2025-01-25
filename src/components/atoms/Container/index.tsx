@@ -72,4 +72,6 @@ export const ModalContainer = styled.SafeAreaView
     height: ${({ hgt, theme }) => (hgt ? (theme.metrics.px(hgt)) : '55%')};
     padding: ${({ pdd, theme }) => theme.metrics.px([pdd || 10])}px;
     border-radius: ${({ bdRd, theme }) => (bdRd ? `${theme.metrics.px(bdRd)}px` : `${theme.metrics.px(20)}px`)};
+    top: 19%;
+    left: 5%;
 `

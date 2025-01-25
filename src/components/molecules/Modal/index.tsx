@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal } from 'react-native'
+import { Modal, View } from 'react-native'
 import { ModalContainer } from '../../atoms'
 
 interface ModalProps {
@@ -21,8 +21,19 @@ export const CreateModal = ({ visible, bg, wdt, hgt, bdRd, pdd, align, justify, 
         <Modal
             animationType='fade'
             transparent={true}
-            visible={visible}>
-            
+            visible={visible}
+        >
+        <View
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                zIndex: 0
+            }}
+        />          
             <ModalContainer
                     bg={bg}
                     wdt={wdt}

@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker'
-import { Subcontainer, StylezedButton, Windows, InfoText  } from '~/components'
-import { CreateModal } from '../Modal'
+import { useTheme } from '~/context/ThemeContext'
+import { Subcontainer, StylezedButton, Windows, InfoText, CreateModal  } from '~/components'
+import { theme } from '~/styles'
 
 export const Calendar = ({ onDateSelected }) => {
-  
+  const { isDark } = useTheme()
   const today = new Date()
   
   today.setDate(today.getDate() + 1);
@@ -36,8 +37,8 @@ export const Calendar = ({ onDateSelected }) => {
   }
 
   return (
+    
     <Subcontainer align='center' justify='flex-start' maxHgt='10' mgLeft='0'>
-
         <Windows
             bg='darkRed'
             hgt='40'
@@ -48,7 +49,7 @@ export const Calendar = ({ onDateSelected }) => {
             >
             
             <InfoText
-                color='white'
+                color='everWhite'
                 mgRight='20'
                 mgTop='5'
                 fontSize='18'
@@ -57,20 +58,19 @@ export const Calendar = ({ onDateSelected }) => {
             </InfoText>
         </Windows>
 
-          <Windows 
-              align='center'
-              justify='center'
-              hgt='50'    
-              mgTop='-5'
-              bdRdTL='0'
-              bdRdTR='0'    
-              >
+        <Windows 
+            align='center'
+            justify='center'
+            hgt='50'    
+            mgTop='-5'
+            bdRdTL='0'
+            bdRdTR='0'   
+            >
               
           <StylezedButton
-                
               label={date}
               bg='transparent'
-              color='darkGreen'
+              color='whiteGreen'
               wdt='330'
               mgTop='0'
               onPress={handleOnPress}
@@ -79,15 +79,23 @@ export const Calendar = ({ onDateSelected }) => {
               <CreateModal
               visible={openModal} 
               bg='white' 
-              bdRd='50'
+              bdRd='30'
               >
-                  <DatePicker
+                <DatePicker
                   mode='calendar'
                   selected={date}
                   minimumDate={startDate}
                   onDateChange={(propDate) => {
                     handleChange(propDate)
                     onDateSelected()
+                  }}
+                  options={{
+                    backgroundColor: isDark ? theme.darkTheme.colors.white : theme.lightTheme.colors.white,
+                    textHeaderColor: isDark ? theme.darkTheme.colors.brisk : theme.lightTheme.colors.brisk,
+                    textDefaultColor: isDark ? theme.darkTheme.colors.brisk : theme.lightTheme.colors.brisk,
+                    selectedTextColor: theme.darkTheme.colors.brisk,
+                    mainColor: theme.darkTheme.colors.darkRed,
+                    textSecondaryColor: theme.darkTheme.colors.brisk,
                   }}
                   />
                   
@@ -97,8 +105,8 @@ export const Calendar = ({ onDateSelected }) => {
                   mgTop='-10'
                   onPress={handleOnPress}
                   />
-
               </CreateModal>
+
           </Windows>
 
     </Subcontainer>

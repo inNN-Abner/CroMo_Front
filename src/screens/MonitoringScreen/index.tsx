@@ -61,25 +61,26 @@ export const MonitoringScreen = ({ navigation }) => {
             {step >= 4 && (
             <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0'>
               <StylezedButton
-                bg='white'
+                bg='brisk'
                 mgTop='10'
                 bdRd='10'
+                bdColor='darkRed'
+                bdWdt='2'
                 color='darkRed'
                 label={'Cancelar'}
                 onPress={() => modalCancel()}
               />
 
               <StylezedButton
-                  bg='white'
+                  bg='darkGreen'
                   mgTop='10'
                   bdRd='10'
                   mgLeft='20'
-                  color='darkBlue'
+                  color='everWhite'
                   label={'Agendar'}
                   onPress={() => modalConfirm()}
               />
 
-          
               <CreateModal
                   visible={openModal}
                   bg='white'

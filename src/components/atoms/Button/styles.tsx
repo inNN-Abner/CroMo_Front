@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 export const StyledButtonStyle = styled.TouchableOpacity
-<{ source?: string; bg?: string; color?: string; align?: string; justify?: string; dir?: string; wdt?: string; hgt?: string; mgTop?: string; mgLeft?: string; mgRight?: string; bdRd?: string }>
+<{ source?: string; bg?: string; color?: string; align?: string; justify?: string; dir?: string; wdt?: string; hgt?: string; mgTop?: string; mgLeft?: string; mgRight?: string; bdRd?: string; bdWdt?: string; bdColor?: string }>
 `
     source: ${({ source }) => source || 'Edit'};
     background-color: ${({ bg, theme }) => theme.colors[bg || 'darkRed']};
@@ -15,6 +15,8 @@ export const StyledButtonStyle = styled.TouchableOpacity
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 0])}px;
     marginRight: ${({ mgRight, theme }) => theme.metrics.px([mgRight || 0])}px;
     border-radius: ${({ bdRd, theme }) => theme.metrics.px([bdRd || 50])}px;
+    border-width: ${({ bdWdt }) => bdWdt || '0px'};
+    border-color: ${({ bdColor, theme }) => theme.colors[bdColor || 'darkRed']};
 `
 
 export const ButtonTextStyle = styled.Text

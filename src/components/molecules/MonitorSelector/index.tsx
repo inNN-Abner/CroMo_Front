@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Divider, ListOptionButton, PageSubtitle, Subcontainer } from '~/components/atoms'
 import contacts from '~/../archives/contacts'
 import { ScrollView } from 'react-native-gesture-handler'
+import { useTheme } from '~/context/ThemeContext'
+import { theme } from '~/styles'
 
 export const MonitorList = ({ onMonitorSelected }) => {
-
     const [selectedId, setSelectedId] = useState<number | null>(null)
 
     const handleButtonPress = (id: number) => {
@@ -27,7 +28,7 @@ export const MonitorList = ({ onMonitorSelected }) => {
 
             <ScrollView
                 style={{ width: '100%' }} 
-                contentContainerStyle={{ paddingVertical: 10 }}            
+                contentContainerStyle={{ paddingVertical: 0 }}            
             >
                 {contacts.map((item) => (
                     <ListOptionButton
@@ -37,9 +38,9 @@ export const MonitorList = ({ onMonitorSelected }) => {
                         wdt='165'
                         hgt='50'
                         bdRd='5'
-                        mgLeft='0'
+                        mgLeft='5'
                         mgTop='5'
-                        color={selectedId === item.id ? 'white' : 'darkBlue'}
+                        color={selectedId === item.id ? 'everWhite' : 'brisk' }
                         bg={selectedId === item.id ? 'darkRed' : 'white'}
                         source={item.photo}
                         label={item.name}

@@ -6,6 +6,7 @@ export const lightTheme = {
         white: '#ffffff',
         brisk: '#1a2224',
         gray: '#555555', 
+        everGray: '#555555',
         lightGray: '#bbc0c4',
         darkRed: '#a82325',
         darkGreen: '#265160',
@@ -26,7 +27,8 @@ export const darkTheme = {
     colors: {
         white: '#1a2224',
         brisk: '#ffffff',
-        gray: '#ffffff', 
+        gray: '#ffffff',
+        everGray: '#555555',
         lightGray: '#bbc0c4',
         darkRed: '#a82325',
         darkGreen: '#265160',
