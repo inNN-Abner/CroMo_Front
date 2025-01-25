@@ -1,8 +1,7 @@
-import { useState } from 'react'
-import { DefineTimeScheduling } from '../../components/organism/DefineTimeScheduling'
-import { Calendar, Container, CreateModal, Headers, InfoText, MonitorList, PageSubtitle, PageTitle, StylezedButton, Subcontainer } from '~/components'
+import { useEffect, useState } from 'react'
+import { Calendar, Container, CreateModal, DefineTimeScheduling, Headers, InfoText, MonitorList, PageSubtitle, PageTitle, StylezedButton, Subcontainer } from '~/components'
 
-export const MonitoringScreen = ({ navigation }) => {
+export const AddMonitoringScreen = ({ navigation }) => {
 
   const [openModal, setOpenModal] = useState(false)
   const [step, setStep] = useState(1)
@@ -19,7 +18,7 @@ export const MonitoringScreen = ({ navigation }) => {
   
   const modalConfirm = () => {
     setTitleMessage ('Confirmar agendamento')
-    setBodyMessage('Clique em "Confirmar" para agendar sua aula.\n Caso não vá comparecer, será necessário desmarcar o agendamento com antecedência!')
+    setBodyMessage('Clique em "Confirmar" para agendar sua monitoria.')
     handleOnPress()
   }
 
@@ -30,11 +29,21 @@ export const MonitoringScreen = ({ navigation }) => {
   }
 
   const handleConfirm = () => {
-    setSelectedDate(null)
-    setSelectedMonitor(null)
-    setSelectedTime(null)
-    navigation.navigate('Contacts')
+    navigation.navigate('Monitoring')
   }
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setStep(1);
+      setSelectedDate(null);
+      setSelectedMonitor(null);
+      setSelectedTime(null);
+      setOpenModal(false);
+    })
+  
+    return unsubscribe
+  }, [navigation])
+  
 
   return (
     <Container>
@@ -101,7 +110,7 @@ export const MonitoringScreen = ({ navigation }) => {
 
                     <Subcontainer dir='row-reverse' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
                       <StylezedButton 
-                        label={'Agendar'}
+                        label={'Confirmar'}
                         bg='darkRed'
                         mgTop='10'
                         wdt='150'
@@ -109,8 +118,8 @@ export const MonitoringScreen = ({ navigation }) => {
                         bdRd='10'
                         fontSize='18'
                         onPress={() => {
-                            handleOnPress(),
-                            navigation.navigate('Appointments')
+                            handleOnPress()
+                            handleConfirm()
                         }}  />
 
                       <StylezedButton 
@@ -124,6 +133,7 @@ export const MonitoringScreen = ({ navigation }) => {
                         fontSize='18'
                         onPress={() => {
                             handleOnPress()
+                            handleConfirm()
                         }}  />
                     </Subcontainer>
               </CreateModal>
@@ -132,5 +142,5 @@ export const MonitoringScreen = ({ navigation }) => {
         </Subcontainer>
 
     </Container>
-)
+  )
 }

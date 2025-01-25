@@ -6,8 +6,9 @@ import { useTheme } from '~/context/ThemeContext'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { ContactsScreen, HomeScreen, LoginScreen, MonitoringScreen, MonitorScheduleScreen, PerfilScreen } from '../screens'
+import { ContactsScreen, HomeScreen, LoginScreen, AddMonitoringScreen, MonitorScheduleScreen, PerfilScreen } from '../screens'
 import { ContactsDetailScreen } from '~/screens/ContactsDetailScreen'
+import { ReportSchedulingScreen } from '~/components/organism/ReportSchedulingCalendar'
 
 interface BottomRoutes{
     Home: string
@@ -58,11 +59,12 @@ const BottomRoute = () => {
             })}
             >
             <Tab.Screen name='Home' component={HomeScreen} />
-            <Tab.Screen name='Monitoring' component={MonitoringScreen} />
+            <Tab.Screen name='Monitoring' component={ReportSchedulingScreen} />
             <Tab.Screen name='Contacts' component={ContactsScreen} />
             <Tab.Screen name='ContactsDetail' component={ContactsDetailScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='MonitorSchedule' component={MonitorScheduleScreen} options={{ tabBarButton: () => null}} />
-            <Tab.Screen name='Perfil' component={PerfilScreen} />
+            <Tab.Screen name='AddMonitoring' component={AddMonitoringScreen} options={{ tabBarButton: () => null}} />
+            <Tab.Screen name='Perfil' component={PerfilScreen} />            
 
         </Tab.Navigator>
     ) 
