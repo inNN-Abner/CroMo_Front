@@ -90,6 +90,30 @@ export const AddButton = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: Button
   )
 }
 
+export const CancelButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgRight={mgRight}
+        mgTop={mgTop}
+        onPress={onPress}>
+          <Subcontainer align='center' justify='center' dir='row' bg='everWhite' wdt='195' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+              <MaterialIcons name="cancel" size={22} color="#7f0000" />
+                  <ButtonTextStyle
+                      mgLeft='10'
+                      color={color}
+                      fontSize={fontSize}>
+                      {label}
+                  </ButtonTextStyle>
+          </Subcontainer>    
+    </StyledButtonStyle>
+  )
+}
+
 export const DayButton = ({ hgt, label, color, bg, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle 

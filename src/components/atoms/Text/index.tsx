@@ -91,7 +91,6 @@ export const ContactText = ({ children, color, fontWgt, fontFamily, fontSize, mg
             fontSize = {fontSize}
             mgTop = {mgTop}
             mgLeft = {mgLeft}
-
         >
             {children}
         </ContactNameStyle>

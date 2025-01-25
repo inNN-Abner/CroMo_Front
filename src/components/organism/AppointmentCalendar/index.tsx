@@ -91,7 +91,7 @@ export const AppointmentCalendar = ({ navigation }) => {
       markingType={'custom'}
       markedDates={markedDates}
       onDayPress={() => {
-        navigation.navigate('Monitoring')
+        navigation.navigate('SummarySchedule')
       }}
     />
   )

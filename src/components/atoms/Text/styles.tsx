@@ -64,7 +64,7 @@ export const ContactNameStyle = styled.Text
 export const InfoTextStyle = styled.Text
 <{ color?: string; fontWgt?: string; fontFamily?: string; fontSize?: string; mgTop?:string; mgBottom?:string; mgLeft?: string; mgRight?: string }>
 `
-    color: ${({ color, theme }) => theme.colors[color || 'brisk']};
+    color: ${({ color, theme }) => theme.colors[color || 'darkGreen']};
     font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'regular']};
     font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(13)}px`)};
     marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 0])}px;

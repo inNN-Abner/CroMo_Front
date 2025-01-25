@@ -4,63 +4,95 @@ export default [
       weekDay: 'SEGUNDA',
       hour: '08h30 às 09h30',
       class: 'Gestão de projetos',
+      icon: require('../assets/ProjectManager.png'),
       locale: 'Sala 13',
-      info: '08h30 às 09h30 || (Sala 13)'
+      info: '08h30 às 09h30 || (Sala 13)',
+      photo: require('../assets/Icon_AlvoDumbledore.png'), 
+      monitorName: 'Alvo Dumbledore',
+      date: '30/01/2025'
     },
     {
       id: 2,
       weekDay: 'TERÇA',
       hour: '08h30 às 10h30',
       class: 'Sociedade e tecnologia',
+      icon: require('../assets/TechnologySociety.png'),
       locale: 'Sala 07',
-      info: '08h30 às 09h30 || (Sala 07)'
+      info: '08h30 às 09h30 || (Sala 07)',
+      photo: require('../assets/Icon_FilioFlitwick.png'),
+      monitorName: 'Fílio Flitwick',
+      date: '29/01/2025'
     },
     {
       id: 3,
       weekDay: 'QUARTA',
       hour: '08h30 às 09h30',
       class: 'Gestão de projetos',
+      icon: require('../assets/ProjectManager.png'),
       locale: 'Sala 13',
-      info: '08h30 às 09h30 || (Sala 13)'
+      info: '08h30 às 09h30 || (Sala 13)',
+      photo: require('../assets/Icon_FilioFlitwick.png'),
+      monitorName: 'Fílio Flitwick',
+      date: '29/01/2025'
     },
     {
       id: 4,
       weekDay: 'QUARTA',
       hour: '08h30 às 09h30',
       class: 'Interação Humano-Computador',
+      icon: require('../assets/IHC.png'),
       locale: 'Sala 07',
-      info: '08h30 às 09h30 || (Sala 07)'
+      info: '08h30 às 09h30 || (Sala 07)',
+      photo: require('../assets/Icon_SeveroSnape.png'),
+      monitorName: 'Severo Snape',
+      date: '29/01/2025'
     },
     {
       id: 5,
       weekDay: 'SEXTA',
       hour: '14h30 às 15h30',
       class: 'Transfiguração',
+      icon: require('../assets/Transfiguration.jpg'),
       locale: 'Sala 03',
-      info: '14h30 às 15h30 || (Sala 03)'
+      info: '14h30 às 15h30 || (Sala 03)',
+      photo: require('../assets/Icon_RolandaHooch.png'),
+      monitorName: 'Rolanda Hooch',
+      date: '29/01/2025'
     },
     {
       id: 6,
       weekDay: 'QUARTA',
       hour: '08h30 às 09h30',
       class: 'Gestão de projetos',
+      icon: require('../assets/ProjectManager.png'),
       locale: 'Sala 13',
-      info: '08h30 às 09h30 || (Sala 13)'
+      info: '08h30 às 09h30 || (Sala 13)',
+      photo: require('../assets/Icon_AlvoDumbledore.png'), 
+      monitorName: 'Alvo Dumbledore',
+      date: '29/01/2025'
     },
     {
       id: 7,
       weekDay: 'QUARTA',
       hour: '08h30 às 09h30',
       class: 'Interação Humano-Computador',
+      icon: require('../assets/IHC.png'),
       locale: 'Sala 07',
-      info: '08h30 às 09h30 || (Sala 07)'
+      info: '08h30 às 09h30 || (Sala 07)',
+      photo: require('../assets/Icon_SeveroSnape.png'),
+      monitorName: 'Severo Snape',
+      date: '29/01/2025'
     },
     {
       id: 8,
       weekDay: 'SEXTA',
       hour: '14h30 às 15h30',
       class: 'Transfiguração',
+      icon: require('../assets/Transfiguration.jpg'),
       locale: 'Sala 03',
-      info: '14h30 às 15h30 || (Sala 03)'
+      info: '14h30 às 15h30 || (Sala 03)',
+      photo: require('../assets/Icon_RolandaHooch.png'),
+      monitorName: 'Rolanda Hooch',
+      date: '29/01/2025'
     },
   ]

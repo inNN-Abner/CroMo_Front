@@ -9,7 +9,7 @@ export const MonitorScheduleScreen = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
-        <Container align='flex-start'>
+        <Container>
 
         <Headers />
           <PageTitle>Agenda</PageTitle>

@@ -47,7 +47,7 @@ export const TextInput = ({ placeholder, bgColor, color,  wdt, hgt, pddLeft, mgT
   )
 }
 
-export const TimeInput = () => {
+export const TimeInput = ({  pddlft, wdt, hgt, value, placeholder, mgtop, mgleft, onChangeText }) => {
   const { isDark } = useTheme()
 
   return (

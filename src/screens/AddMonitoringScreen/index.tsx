@@ -49,8 +49,8 @@ export const AddMonitoringScreen = ({ navigation }) => {
     <Container>
 
       <Headers />
-        <PageTitle>Calendário</PageTitle>
-        <PageSubtitle>Novo agendamento de aula</PageSubtitle>
+        <PageTitle>Monitoria</PageTitle>
+        <PageSubtitle>Novo agendamento de monitoria</PageSubtitle>
 
         <Subcontainer maxHgt='50' justify='flex-start' mgLeft='0'>
           {step >= 1 && (

@@ -4,7 +4,7 @@ import { Container, IdentificationCard, Windows, Subcontainer, HeaderText, Heade
 export const ContactsDetailScreen = ({ route, navigation }) => {
 
   return (
-    <Container align='flex-start'>
+    <Container>
 
       <Headers />
 
