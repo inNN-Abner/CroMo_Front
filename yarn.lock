@@ -7941,13 +7941,6 @@ react-native-get-random-values@~1.11.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-"react-native-modern-datepicker@https://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@github.com/inNN-Abner/react-native-modern-datepicker.git":
-  version "1.0.0-beta.91"
-  resolved "https://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@github.com/inNN-Abner/react-native-modern-datepicker.git#ebbcb5e0c6b5468526967551fa81e3e11c92c87d"
-  dependencies:
-    moment-jalaali "^0.9.2"
-    prop-types "^15.7.2"
-
 react-native-reanimated@~3.16.1:
   version "3.16.6"
   resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.16.6.tgz"
