@@ -41,13 +41,16 @@ export const MonitorScheduleScreen = ({ navigation }) => {
           <Subcontainer align='center' maxHgt='50' mgLeft='0'>
             <TimeInput />
 
-            <PageSubtitle alignSelf='center' mgTop='15' 
+          <Subcontainer bg='darkGreen' align='center' justify='center' mgLeft='0' wdt='325' hgt='125' mgTop='15'>
+            
+            <PageSubtitle alignSelf='center' mgTop='0' mgBottom='5' mgLeft='0' color='everWhite'
             >
-              Selecione um local
+              Selecione a sala/laboratório
             </PageSubtitle>
-            
+          
             <ClassroomSelector />
-            
+
+          </Subcontainer>  
             </Subcontainer>
 
             <StylezedButton

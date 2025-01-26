@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ClassroomModal, Container, InfoText } from '~/components/atoms'
+import { ClassroomModal, InfoText } from '~/components/atoms'
 import { StyledButtonStyle } from '~/components/atoms/Button/styles'
 
 export const ClassroomSelector: React.FC = () => {
@@ -29,10 +29,10 @@ export const ClassroomSelector: React.FC = () => {
   }
 
     return (
-      <StyledButtonStyle bdRd='15' wdt='250' mgTop='0'
+      <StyledButtonStyle bdRd='15' wdt='250' mgTop='0' bg='white'
         onPress={() => setModalVisible(true)}
       >
-        <InfoText color='everWhite' fontSize='18' mgBottom='0' mgLeft='0'>
+        <InfoText color='brisk' fontSize='18' mgBottom='0' mgLeft='0'>
           {selectedClassroom ? `${selectedClassroom}` : 'Clique para selecionar'}
         </InfoText>
 

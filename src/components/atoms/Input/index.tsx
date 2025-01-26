@@ -49,6 +49,7 @@ export const TextInput = ({ placeholder, bgColor, color,  wdt, hgt, pddLeft, mgT
 
 export const TimeInput = ({  pddlft, wdt, hgt, value, placeholder, mgtop, mgleft, onChangeText }) => {
   const { isDark } = useTheme()
+  const [date, setDate] = useState('')
 
   return (
     <WindowsStyle 
@@ -59,17 +60,37 @@ export const TimeInput = ({  pddlft, wdt, hgt, value, placeholder, mgtop, mgleft
       justify='center'
     >
         <Subcontainer mgTop='0' mgLeft='0' maxHgt='100' wdt='160' align='center' bg='darkGreen'>
-          <PageSubTitleStyle alignSelf='center' mgLeft='0' color='everWhite' fontSize='18'>Início</PageSubTitleStyle>
-          <TimeInputStyle pddLeft='0' mgTop='5' 
-            placeholder='___ : ___' placeholderTextColor={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
-            color={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white} />
+          <PageSubTitleStyle alignSelf='center' mgLeft='0' mgTop='10' color='everWhite' fontSize='18'>Início</PageSubTitleStyle>
+
+          <TimeInputStyle 
+              type={'custom'}
+              options={{
+                mask: '99:99'
+              }}            
+            pddLeft='0' 
+            mgTop='5' 
+            placeholder='___ : ___'
+            placeholderTextColor={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
+            color={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white} 
+            onChangeText={setDate}
+            />
         </Subcontainer>
 
         <Subcontainer mgTop='0' maxHgt='100' wdt='150' align='center' bg='darkGreen' >
-          <PageSubTitleStyle alignSelf='center' mgLeft='0' color='everWhite' fontSize='18'>Fim</PageSubTitleStyle>
-          <TimeInputStyle alignSelf='center' pddLeft='0' mgTop='5' 
-            placeholder='___ : ___' placeholderTextColor={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
-            color={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white} />
+          <PageSubTitleStyle alignSelf='center' mgLeft='0' mgTop='10' color='everWhite' fontSize='18'>Fim</PageSubTitleStyle>
+
+          <TimeInputStyle
+              type={'custom'}
+              options={{
+                mask: '99:99'
+              }}            
+            alignSelf='center' pddLeft='0' 
+            mgTop='5' 
+            placeholder='___ : ___'
+            placeholderTextColor={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
+            color={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
+            onChangeText={setDate}
+          />
         </Subcontainer>
     </WindowsStyle>
   )

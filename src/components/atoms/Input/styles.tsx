@@ -1,3 +1,4 @@
+import { TextInputMask } from 'react-native-masked-text'
 import styled from 'styled-components/native'
 
 export const TextInputStyle = styled.TextInput
@@ -15,16 +16,16 @@ export const TextInputStyle = styled.TextInput
     elevation: 15;
 `
 
-export const TimeInputStyle = styled.TextInput
+export const TimeInputStyle = styled(TextInputMask)
     <{ bgColor?: string; color?: string; placeholderColor?: string; alignSelf?: string; wdt?: string; hgt?: string; pddLeft?: string; mgTop?: string; mgLeft?: string }>
 `
     backgroundColor: ${({ bgColor, theme }) => theme.colors[bgColor || 'white']};
     text-align: center;
-    width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : '115px')};
-    height: ${({ hgt, theme }) => (hgt ? `${theme.metrics.px(hgt)}px` : '55px')};
+    width: ${({ wdt, theme }) => theme.metrics.px([wdt || 110])};
+    height: ${({ hgt, theme }) => theme.metrics.px([hgt || 50])};
     paddingLeft: ${({ pddLeft, theme }) => theme.metrics.px([pddLeft || 20])}px;
     marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 20])}px;
-    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 10])}px;
+    marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 0])}px;
     borderRadius: 20px;
     borderWidth: 0;
     elevation: 15;
