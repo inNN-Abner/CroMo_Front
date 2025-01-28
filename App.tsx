@@ -26,5 +26,5 @@ export default function App() {
     <CustomThemeProvider>
       <Routes />
     </CustomThemeProvider>
-  );
+  )
 }

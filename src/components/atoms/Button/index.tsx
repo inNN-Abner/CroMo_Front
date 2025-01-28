@@ -55,13 +55,14 @@ export const StylezedButton = ({ bg, color, fontSize, wdt, hgt, mgTop, mgLeft, m
     )
 }
 
-const ToggleThemeButton = ({ bg, wdt, hgt, mgLeft, bdRd }: ButtonProps) => {
+const ToggleThemeButton = ({ bg, wdt, hgt, mgLeft, mgTop, bdRd }: ButtonProps) => {
   const { toggleTheme, isDark } = useTheme()
 
   return (
     <ThemeButtonStyle
       bg={bg}
       mgLeft={mgLeft}
+      mgTop={mgTop}
       hgt={hgt}
       wdt={wdt}
       bdRd={bdRd}

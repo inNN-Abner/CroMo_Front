@@ -28,7 +28,7 @@ export const ModalContent = styled.View
 export const ModalTitle = styled.Text
   <{ color?: string; fontSize?: string; mgBottom?: string; fontWeight?: string; }>
 `
-  color: ${({ color, theme }) => theme.colors[color || 'everWhite']};
+  color: ${({ color, theme }) => theme.colors[color || 'brisk']};
   font-size: ${({ fontSize, theme }) => theme.metrics.px(fontSize || 18)}px;
   font-weight: ${({ fontWeight }) => fontWeight || 'bold'};
   margin-bottom: ${({ mgBottom, theme }) => theme.metrics.px(mgBottom || 15)}px;
@@ -48,7 +48,7 @@ export const OptionButton = styled.TouchableOpacity
 export const OptionText = styled.Text
   <{ color?: string; fontSize?: string }>
 `
-  color: ${({ color, theme }) => theme.colors[color || 'everWhite']};
+  color: ${({ color, theme }) => theme.colors[color || 'brisk']};
   font-size: ${({ fontSize, theme }) => theme.metrics.px(fontSize || 16)}px;
 `
 

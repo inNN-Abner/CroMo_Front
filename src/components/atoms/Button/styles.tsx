@@ -30,13 +30,14 @@ export const ButtonTextStyle = styled.Text
 `
 
 export const ThemeButtonStyle = styled.TouchableOpacity
-<{ color?: string; align?: string; justify?: string; bg?: string; ftSz?: string; wdt?: string; hgt?:string; mgLeft?: string; bdRd?: string }>
+<{ color?: string; align?: string; justify?: string; bg?: string; ftSz?: string; wdt?: string; hgt?:string; mgLeft?: string; mgTop?: string; bdRd?: string }>
 `
     background-color: ${({ bg, theme }) => theme.colors[bg || 'blueYellow']};
     align-items: ${({ align }) => align || 'center'};
     justify-content: ${({ justify }) => justify || 'center'};
     width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : `${theme.metrics.px(50)}px`)};
     height: ${({ hgt, theme }) => (hgt ? `${theme.metrics.px(hgt)}px` : `${theme.metrics.px(50)}px`)};
+    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 20])}px;
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 10])}px;
     border-radius: ${({ bdRd, theme }) => theme.metrics.px([bdRd || 15])}px;
 `

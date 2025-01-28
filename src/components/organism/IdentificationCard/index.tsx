@@ -33,8 +33,6 @@ export const IdentificationCard = ({ route }) => {
                 <InfoText color='whiteGreen' children={type || 'N/A'} fontWgt='normal' mgTop='-3' ></InfoText>
 
             </Subcontainer>
-
-
         </Windows>
     )
 }

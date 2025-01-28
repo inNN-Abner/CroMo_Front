@@ -15,7 +15,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
   function handleOnPress () {
     setOpenModal(!openModal)
   }
-  
+
   const modalConfirm = () => {
     setTitleMessage ('Confirmar agendamento')
     setBodyMessage('Clique em "Confirmar" para agendar sua monitoria.')
@@ -40,7 +40,6 @@ export const AddMonitoringScreen = ({ navigation }) => {
       setSelectedTime(null);
       setOpenModal(false);
     })
-  
     return unsubscribe
   }, [navigation])
   
@@ -133,7 +132,6 @@ export const AddMonitoringScreen = ({ navigation }) => {
                         fontSize='18'
                         onPress={() => {
                             handleOnPress()
-                            handleConfirm()
                         }}  />
                     </Subcontainer>
               </CreateModal>
