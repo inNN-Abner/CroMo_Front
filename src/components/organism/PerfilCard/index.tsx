@@ -9,7 +9,7 @@ export const PerfilCard = ({ navigation }) => {
             hgt='155'
             wdt='355'
             align='center'
-            mgTop='10'
+            mgTop='0'
             >
             <Photo
                 source={perfil.photo}

@@ -37,7 +37,7 @@ export const ThemeButtonStyle = styled.TouchableOpacity
     justify-content: ${({ justify }) => justify || 'center'};
     width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : `${theme.metrics.px(50)}px`)};
     height: ${({ hgt, theme }) => (hgt ? `${theme.metrics.px(hgt)}px` : `${theme.metrics.px(50)}px`)};
-    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 20])}px;
+    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 5])}px;
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 10])}px;
     border-radius: ${({ bdRd, theme }) => theme.metrics.px([bdRd || 15])}px;
 `
