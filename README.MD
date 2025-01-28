@@ -1,8 +1,17 @@
-props > theme
+# Cromo_Front
+Desenvolvimento do front-end para o APP CroMo - Trabalho de Graduação - FATEC
 
-1. source
-2. background-color
-3. fonts (color > fontFamily > fontSize )
-4. justify
-5. dimensions ( wdt > hgt > max* )
-6. margins (mgTop > mgLeft > mgRigth > mgBottom)
+# Instalação
+1. Clonar o repositório
+2. Instalar as dependências resolvendo-as: 
+yarn install --ignore-engines
+
+# Executar o projeto em desenvolvimento
+1. yarn start
+
+# Projeto
+Detalhes sobre o projeto:
+1. Desenvolvido com ReactNative e ExpoGo
+2. Estrutura de Atomic Design
+3. Foi definido os estilos em Styles
+4. Está sendo utilizado o ESlint e o Prettier
