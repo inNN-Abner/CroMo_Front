@@ -77,7 +77,8 @@ export const ClassInput = () => {
 
 export const TimeInput = () => {
   const { isDark } = useTheme()
-  const [date, setDate] = useState('')
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
 
   return (
     <WindowsStyle 
@@ -100,7 +101,9 @@ export const TimeInput = () => {
             placeholder='___ : ___'
             placeholderTextColor={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
             color={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white} 
-            onChangeText={setDate}
+            keyboardType={'numeric'}
+            onChangeText={setStartTime}
+            value={startTime}
             />
         </Subcontainer>
 
@@ -117,7 +120,9 @@ export const TimeInput = () => {
             placeholder='___ : ___'
             placeholderTextColor={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
             color={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
-            onChangeText={setDate}
+            keyboardType={'numeric'}
+            onChangeText={setEndTime}
+            value={endTime}
           />
         </Subcontainer>
     </WindowsStyle>
