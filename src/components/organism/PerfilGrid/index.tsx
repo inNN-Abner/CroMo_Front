@@ -1,7 +1,7 @@
 import React from 'react'
 import monitoringHours from '~/../archives/monitoringHours'
 import { FlatList, Text } from 'react-native'
-import { AddButton, EditButton, ListContainer, TrashButton } from '~/components/atoms'
+import { AddButton, ListContainer, TrashButton } from '~/components/atoms'
 import { TableGrid } from '~/components/molecules/Grid'
 
 export const PerfilGrid = ({ navigation }) => {
@@ -54,7 +54,7 @@ export const PerfilGrid = ({ navigation }) => {
                 mgLeft='5'
                 bg='darkRed'
                 onPress={() => {
-                    navigation.navigate('MonitorSchedule')
+                    navigation.navigate('AddClass')
                 }} />
         </ListContainer>
     </> 

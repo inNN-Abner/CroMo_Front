@@ -1,4 +1,5 @@
 export * from './AddMonitoringScreen'
+export * from './AddClassScreen'
 export * from './ContactsScreen'
 export * from './HomeScreen'
 export * from './LoginScreen'

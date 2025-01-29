@@ -3,7 +3,7 @@ import ToggleThemeButton from '~/components/atoms/Button';
 import { HeaderText, PageTitle, PerfilCard, PerfilGrid, PerfilHeaders, Windows } from '~/components/';
 import { Container, Subcontainer } from '~/components/atoms/Container';
 
-export const PerfilScreen = ({ route }) => {
+export const PerfilScreen = ({ navigation }) => {
   
   return (
     <Container hgt='100'>
@@ -41,7 +41,7 @@ export const PerfilScreen = ({ route }) => {
                 Minhas matérias
             </HeaderText>
 
-            <PerfilGrid navigation={navigator} />
+            <PerfilGrid navigation={navigation} />
 
           </Windows>
   

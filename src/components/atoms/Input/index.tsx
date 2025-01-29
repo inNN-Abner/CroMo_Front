@@ -47,6 +47,34 @@ export const TextInput = ({ placeholder, bgColor, color,  wdt, hgt, pddLeft, mgT
   )
 }
 
+export const ClassInput = () => {
+  const { isDark } = useTheme()
+
+  return (
+    <WindowsStyle 
+      dir='row' 
+      hgt='115'
+      bg='brisk'
+      align='center'
+      justify='center'
+    >
+        <Subcontainer mgTop='-10' mgLeft='0' maxHgt='95' wdt='320' align='center' bg='darkGreen'>
+          <PageSubTitleStyle alignSelf='center' mgLeft='0' mgTop='10' color='everWhite' fontSize='18'>Matéria</PageSubTitleStyle>
+
+          <TextInputStyle
+            mgTop='5'
+            mgLeft='0'
+            textAlign='center'
+            fontSize='16'
+            wdt='290'
+          />
+            
+        </Subcontainer>
+    </WindowsStyle>
+  )
+}
+
+
 export const TimeInput = () => {
   const { isDark } = useTheme()
   const [date, setDate] = useState('')

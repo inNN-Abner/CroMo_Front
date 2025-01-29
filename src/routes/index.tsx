@@ -6,9 +6,10 @@ import { useTheme } from '~/context/ThemeContext'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { ContactsScreen, HomeScreen, LoginScreen, AddMonitoringScreen, MonitorScheduleScreen, SummaryScheduleScreen, PerfilScreen } from '../screens'
+import { ContactsScreen, HomeScreen, LoginScreen, AddMonitoringScreen, MonitorScheduleScreen, SummaryScheduleScreen, PerfilScreen, AddClassScreen } from '../screens'
 import { ContactsDetailScreen } from '~/screens/ContactsDetailScreen'
 import { ReportSchedulingScreen } from '~/components/organism/ReportSchedulingCalendar'
+import { PerfilGrid } from '~/components'
 
 interface BottomRoutes{
     Home: string
@@ -65,8 +66,9 @@ const BottomRoute = () => {
             <Tab.Screen name='MonitorSchedule' component={MonitorScheduleScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='AddMonitoring' component={AddMonitoringScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='SummarySchedule' component={SummaryScheduleScreen} options={{ tabBarButton: () => null}} />
-            <Tab.Screen name='Perfil' component={PerfilScreen} />            
-
+            <Tab.Screen name='AddClass' component={AddClassScreen} options={{ tabBarButton: () => null}} />
+            <Tab.Screen name='Perfil' component={PerfilScreen} />
+            
         </Tab.Navigator>
     ) 
 }
@@ -79,6 +81,8 @@ export const Routes = () => {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name='Login' component={ LoginScreen } />
                 <Stack.Screen name='HomeBottom' component={ BottomRoute } />
+                <Stack.Screen name="PerfilGrid" component={ PerfilGrid } />
+                <Stack.Screen name="AddClass" component={AddClassScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
