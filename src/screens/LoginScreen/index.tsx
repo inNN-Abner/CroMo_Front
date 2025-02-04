@@ -7,7 +7,7 @@ import { Container, Subcontainer, LogoImage, TextInput, LoginTitle } from '~/com
 import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 export const LoginScreen = ({ navigation }) => {
-  const { isDark } = useTheme();
+  const { isDark } = useTheme()
   const [emailValue, setEmailValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
   const [errorMessage, setErrorMessage] = useState('')

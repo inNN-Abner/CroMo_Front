@@ -10,6 +10,7 @@ import { ContactsScreen, HomeScreen, LoginScreen, AddMonitoringScreen, MonitorSc
 import { ContactsDetailScreen } from '~/screens/ContactsDetailScreen'
 import { ReportSchedulingScreen } from '~/components/organism/ReportSchedulingCalendar'
 import { PerfilGrid } from '~/components'
+import { EditPerfilScreen } from '~/screens/EditPerfilScreen'
 
 interface BottomRoutes{
     Home: string
@@ -67,8 +68,9 @@ const BottomRoute = () => {
             <Tab.Screen name='AddMonitoring' component={AddMonitoringScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='SummarySchedule' component={SummaryScheduleScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='AddClass' component={AddClassScreen} options={{ tabBarButton: () => null}} />
+            <Tab.Screen name='EditPerfil' component={EditPerfilScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='Perfil' component={PerfilScreen} />
-            
+                        
         </Tab.Navigator>
     ) 
 }
