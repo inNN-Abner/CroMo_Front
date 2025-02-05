@@ -131,7 +131,7 @@ export const RedCancelButton = ({ hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, l
                   <ButtonTextStyle
                       mgLeft='5'
                       mgTop='-2'
-                      color={'white'}
+                      color={'everWhite'}
                       fontSize={fontSize}>
                       {label}
                   </ButtonTextStyle>
@@ -225,8 +225,8 @@ export const SaveButton = ({ hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label,
               <Fontisto name="check" size={18} color="#ffffff" />
                   <ButtonTextStyle
                       mgLeft='10'
-                      mgTop='0'
-                      color={'white'}
+                      mgTop='-1'
+                      color={'everWhite'}
                       fontSize={fontSize}>
                       {label}
                   </ButtonTextStyle>

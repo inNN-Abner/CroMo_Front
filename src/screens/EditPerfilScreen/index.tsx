@@ -37,7 +37,7 @@ export const EditPerfilScreen = ({ navigation }) => {
         <PerfilHeaders />
         
         <Subcontainer mgLeft='0'>
-        <PageTitle mgTop='0'>Meu perfil</PageTitle>
+        <PageTitle mgTop='-5'>Editar informações</PageTitle>
 
         <TouchableOpacity onPress={pickImage}>
           <EditPhoto
@@ -63,7 +63,7 @@ export const EditPerfilScreen = ({ navigation }) => {
               mgLeft='35'
               />
 
-          <LoginTitle mgTop='20' mgLeft='0' alignSelf='flex-start'>
+          <LoginTitle mgTop='10' mgLeft='0' alignSelf='flex-start'>
             E-mail institucional
           </LoginTitle>
             <TextInput
@@ -75,7 +75,7 @@ export const EditPerfilScreen = ({ navigation }) => {
               mgLeft='35'
               />
 
-          <LoginTitle mgTop='20' mgLeft='0' alignSelf='flex-start'>
+          <LoginTitle mgTop='10' mgLeft='0' alignSelf='flex-start'>
             Teams
           </LoginTitle>
             <TextInput 
@@ -87,12 +87,12 @@ export const EditPerfilScreen = ({ navigation }) => {
               mgLeft='35'
               />
 
-          <LoginTitle mgTop='20' mgLeft='0' mgBottom='5' alignSelf='flex-start'>
+          <LoginTitle mgTop='10' mgLeft='0' mgBottom='5' alignSelf='flex-start'>
             Curso
           </LoginTitle>
             <CourseSelector />
 
-          <Subcontainer mgLeft='0' mgTop='15' dir='row' align='center' justify='center' hgt='100'>
+          <Subcontainer mgLeft='0' mgTop='35' dir='row' align='center' justify='center' hgt='100'>
             <RedCancelButton
                 bg='everWhite'
                 wdt='170'
