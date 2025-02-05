@@ -32,7 +32,7 @@ export const ClassroomSelector: React.FC = () => {
       <StyledButtonStyle bdRd='15' wdt='250' mgTop='0' bg='white'
         onPress={() => setModalVisible(true)}
       >
-        <InfoText color='brisk' fontSize='18' mgBottom='0' mgLeft='0'>
+        <InfoText color='brisk' fontSize='18' mgBottom='0' mgLeft='0' alignSelf={'center'}>
           {selectedClassroom ? `${selectedClassroom}` : 'Clique para selecionar'}
         </InfoText>
 
@@ -46,37 +46,37 @@ export const ClassroomSelector: React.FC = () => {
     )
   }
 
-  export const CourseSelector: React.FC = () => {
-    const [modalVisible, setModalVisible] = useState(false)
-    const [selectedCourse, setSelectedCourse] = useState<string | null>(null)
-  
-    const courses = [
-      'Análise e Desenv. de Sistemas',
-      'Comércio Exterior',
-      'Desenv. de Software Multiplataforma',
-      'Gestão Empresarial',
-      'Gestão de Serviço',
-      'Logística Aeroportuária',
-      'Redes de Computadores' ]
-  
-    const handleCourseSelect = (courses: string) => {
-      setSelectedCourse(courses)
-    }
-  
-      return (
-        <StyledButtonStyle bdRd='15' wdt='250' mgTop='0' bg='white'
-          onPress={() => setModalVisible(true)}
-        >
-          <InfoText color='brisk' fontSize='18' mgBottom='0' mgLeft='0'>
-            {selectedCourse ? `${selectedCourse}` : 'Clique para selecionar'}
-          </InfoText>
-  
-          <ClassroomModal
-            visible={modalVisible}
-            onClose={() => setModalVisible(false)}
-            onSelect={handleCourseSelect}
-            options={courses}
-          />
-        </StyledButtonStyle>
-      )
-    }
+export const CourseSelector: React.FC = () => {
+  const [modalVisible, setModalVisible] = useState(false)
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(null)
+
+  const courses = [
+  'Análise e Desenv. de Sistemas',
+  'Comércio Exterior',
+  'Desenv. de Software Multiplataforma',
+  'Gestão Empresarial',
+  'Gestão de Serviço',
+  'Logística Aeroportuária',
+  'Redes de Computadores' ]
+
+  const handleCourseSelect = (courses: string) => {
+  setSelectedCourse(courses)
+  }
+
+  return (
+    <StyledButtonStyle bdRd='50' wdt='300' hgt='50' mgTop='0' mgLeft='35' bg='white'
+      onPress={() => setModalVisible(true)}
+    >
+      <InfoText color='brisk' fontSize='14' alignSelf='flex-start' mgBottom='0' mgLeft='25'>
+        {selectedCourse ? `${selectedCourse}` : 'Clique para selecionar'}
+      </InfoText>
+
+      <ClassroomModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onSelect={handleCourseSelect}
+        options={courses}
+      />
+    </StyledButtonStyle>
+  )
+}

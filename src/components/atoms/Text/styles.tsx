@@ -62,11 +62,12 @@ export const ContactNameStyle = styled.Text
 `
 
 export const InfoTextStyle = styled.Text
-<{ color?: string; fontWgt?: string; fontFamily?: string; fontSize?: string; mgTop?:string; mgBottom?:string; mgLeft?: string; mgRight?: string }>
+<{ color?: string; fontWgt?: string; fontFamily?: string; alignSelf?: string; fontSize?: string; mgTop?:string; mgBottom?:string; mgLeft?: string; mgRight?: string }>
 `
     color: ${({ color, theme }) => theme.colors[color || 'darkGreen']};
     font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'regular']};
     font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(13)}px`)};
+    alignSelf: ${({ alignSelf }) => alignSelf || 'flex-start'}; 
     marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 0])}px;
     marginBottom: ${({ mgBottom, theme }) => theme.metrics.px([mgBottom || -3])}px;
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 5])}px;

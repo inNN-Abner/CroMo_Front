@@ -20,13 +20,14 @@ export const StyledButtonStyle = styled.TouchableOpacity
 `
 
 export const ButtonTextStyle = styled.Text
-<{ color?: string; fontSize?: string; mgLeft?: string; }>
+<{ color?: string; fontSize?: string; mgTop?: string; mgLeft?: string; }>
 `
     color: ${({ color, theme }) => theme.colors[color || 'everWhite']};
     font-weight: bold;
     font-family: 'PTSans_400Regular';
     font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(20)}px`)};
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 0])}px;
+    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 0])}px;
 `
 
 export const ThemeButtonStyle = styled.TouchableOpacity

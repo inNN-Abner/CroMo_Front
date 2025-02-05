@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CancelButton, StylezedButton } from '~/components/atoms/Button'
+import { CancelButton, RedCancelButton, SaveButton, StylezedButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
 import perfil from '~/../archives/perfil'
 import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, CourseSelector, Photo, EditPhoto } from '~/components'
@@ -13,7 +13,7 @@ export const EditPerfilScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleLogin = async() => {
-    navigation.navigate('HomeBottom')
+    navigation.navigate('Perfil')
   }
   
     const [photoUri, setPhotoUri] = useState(perfil.photo)
@@ -36,7 +36,7 @@ export const EditPerfilScreen = ({ navigation }) => {
       <Container align='center'>
         <PerfilHeaders />
         
-        <Subcontainer bg='gray' mgLeft='0'>
+        <Subcontainer mgLeft='0'>
         <PageTitle mgTop='0'>Meu perfil</PageTitle>
 
         <TouchableOpacity onPress={pickImage}>
@@ -45,20 +45,22 @@ export const EditPerfilScreen = ({ navigation }) => {
             hgt='145'
             wdt='100'
             bdRd='20'
+            mgLeft='40'
+            mgTop='10'
           />
 
         </TouchableOpacity>
 
-          <LoginTitle mgTop='20' mgLeft='0' alignSelf='flex-start'>
+          <LoginTitle mgTop='10' mgLeft='0' alignSelf='flex-start'>
             Nome completo
           </LoginTitle>
             <TextInput 
-              placeholder={'Digite seu nome completo'} 
+              placeholder={'Seu nome completo'} 
               keyboardType='text'
               value={nameValue}
               onChangeText={(text) => setNameValue(text)}
               mgTop='5'
-              mgLeft='0'
+              mgLeft='35'
               />
 
           <LoginTitle mgTop='20' mgLeft='0' alignSelf='flex-start'>
@@ -70,7 +72,19 @@ export const EditPerfilScreen = ({ navigation }) => {
               value={emailValue}
               onChangeText={(text) => setEmailValue(text)}
               mgTop='5'
-              mgLeft='0'
+              mgLeft='35'
+              />
+
+          <LoginTitle mgTop='20' mgLeft='0' alignSelf='flex-start'>
+            Teams
+          </LoginTitle>
+            <TextInput 
+              placeholder={'Seu Teams'} 
+              keyboardType='text'
+              value={nameValue}
+              onChangeText={(text) => setNameValue(text)}
+              mgTop='5'
+              mgLeft='35'
               />
 
           <LoginTitle mgTop='20' mgLeft='0' mgBottom='5' alignSelf='flex-start'>
@@ -78,10 +92,10 @@ export const EditPerfilScreen = ({ navigation }) => {
           </LoginTitle>
             <CourseSelector />
 
-          <Subcontainer mgLeft='0' mgTop='100' dir='row' align='center' justify='center' hgt='100'>
-            <CancelButton
+          <Subcontainer mgLeft='0' mgTop='15' dir='row' align='center' justify='center' hgt='100'>
+            <RedCancelButton
                 bg='everWhite'
-                wdt='180'
+                wdt='170'
                 hgt='55'
                 mgTop='5'
                 mgRight='5'
@@ -89,13 +103,14 @@ export const EditPerfilScreen = ({ navigation }) => {
                 bdRd='15'
                 color='darkRed'
                 label={'CANCELAR'}
+                onPress={handleLogin}
                 fontSize='18'
             />
             
-            <StylezedButton
+            <SaveButton
               label='SALVAR'
               fontSize='18'
-              wdt='180'
+              wdt='170'
               hgt='55'
               mgTop='0'
               mgLeft='5'

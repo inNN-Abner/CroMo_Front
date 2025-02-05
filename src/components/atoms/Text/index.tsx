@@ -97,9 +97,10 @@ export const ContactText = ({ children, color, fontWgt, fontFamily, fontSize, mg
     )
 }
 
-export const InfoText = ({ children, color, fontWgt, fontFamily, fontSize, mgTop, mgBottom, mgLeft, mgRight }: TextProps) => {
+export const InfoText = ({ alignSelf, children, color, fontWgt, fontFamily, fontSize, mgTop, mgBottom, mgLeft, mgRight }: TextProps) => {
     return (
         <InfoTextStyle
+            alignSelf = {alignSelf}
             color = {color}
             fontWgt={fontWgt}
             fontFamily = {fontFamily}

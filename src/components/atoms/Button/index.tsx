@@ -102,11 +102,36 @@ export const CancelButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight
         mgRight={mgRight}
         mgTop={mgTop}
         onPress={onPress}>
-          <Subcontainer align='center' justify='center' dir='row' bg='everWhite' wdt='180' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+          <Subcontainer align='center' justify='center' dir='row' bg='everWhite' wdt='170' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
               <MaterialIcons name="cancel" size={22} color="#7f0000" />
                   <ButtonTextStyle
                       mgLeft='10'
                       color={color}
+                      fontSize={fontSize}>
+                      {label}
+                  </ButtonTextStyle>
+          </Subcontainer>    
+    </StyledButtonStyle>
+  )
+}
+
+export const RedCancelButton = ({ hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={'darkRed'}
+        wdt={'145'}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgRight={mgRight}
+        mgTop={mgTop}
+        onPress={onPress}>
+          <Subcontainer align='center' justify='center' dir='row' bg='darkRed' wdt='120' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+              <MaterialIcons name="cancel" size={22} color="#ffffff" />
+                  <ButtonTextStyle
+                      mgLeft='5'
+                      mgTop='-2'
+                      color={'white'}
                       fontSize={fontSize}>
                       {label}
                   </ButtonTextStyle>
@@ -181,6 +206,31 @@ export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop
               }}  >
                 {label}
           </ButtonTextStyle>
+    </StyledButtonStyle>
+  )
+}
+
+export const SaveButton = ({ hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={'darkGreen'}
+        wdt={'145'}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgRight={mgRight}
+        mgTop={mgTop}
+        onPress={onPress}>
+          <Subcontainer align='center' justify='center' dir='row' bg='darkGreen' wdt='120' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+              <Fontisto name="check" size={18} color="#ffffff" />
+                  <ButtonTextStyle
+                      mgLeft='10'
+                      mgTop='0'
+                      color={'white'}
+                      fontSize={fontSize}>
+                      {label}
+                  </ButtonTextStyle>
+          </Subcontainer>    
     </StyledButtonStyle>
   )
 }
