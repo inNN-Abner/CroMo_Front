@@ -31,7 +31,7 @@ export const Subcontainer = styled.SafeAreaView
 `
 
 export const ListContainer = styled.SafeAreaView
-<{ dir?: string; bg?: string; align?: string; justify?: string; mgTop?: string; mgLeft?: string; wdt?: string; hgt?: string; bdRd?: string }>
+<{ dir?: string; bg?: string; align?: string; pdd?: string; justify?: string; mgTop?: string; mgLeft?: string; wdt?: string; hgt?: string; bdRd?: string }>
 `
     display: flex;
     background-color: ${({ bg, theme }) => theme.colors[bg || 'everWhite']};
@@ -42,6 +42,7 @@ export const ListContainer = styled.SafeAreaView
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 8])}px;
     width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : `${theme.metrics.px(320)}px`)};
     height: ${({ hgt, theme }) => (hgt ? `${theme.metrics.px(hgt)}px` : `${theme.metrics.px(60)}px`)};
+    padding: ${({ pdd, theme }) => theme.metrics.px([pdd || 0])}px;
     border-radius: ${({ bdRd, theme }) => (bdRd ? `${theme.metrics.px(bdRd)}px` : `${theme.metrics.px(10)}px`)};
 `
 

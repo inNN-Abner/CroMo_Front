@@ -92,7 +92,7 @@ export const EditPerfilScreen = ({ navigation }) => {
           </LoginTitle>
             <CourseSelector />
 
-          <Subcontainer mgLeft='0' mgTop='35' dir='row' align='center' justify='center' hgt='100'>
+          <Subcontainer mgLeft='0' mgTop='20' dir='row' align='center' justify='center' hgt='100'>
             <RedCancelButton
                 bg='everWhite'
                 wdt='170'
@@ -112,7 +112,7 @@ export const EditPerfilScreen = ({ navigation }) => {
               fontSize='18'
               wdt='170'
               hgt='55'
-              mgTop='0'
+              mgTop='5'
               mgLeft='5'
               mgRight='5'
               bdRd='10'
