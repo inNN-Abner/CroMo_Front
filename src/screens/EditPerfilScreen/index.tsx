@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CancelButton, RedCancelButton, SaveButton, StylezedButton } from '~/components/atoms/Button'
+import { CancelButton, RedCancelButton, SaveButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
 import perfil from '~/../archives/perfil'
 import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, CourseSelector, Photo, EditPhoto } from '~/components'

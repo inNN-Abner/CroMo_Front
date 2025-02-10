@@ -2,12 +2,15 @@ import React from 'react'
 import { HeaderContainerStyle } from './styles'
 import { HeaderDate } from '~/components/molecules'
 import { Photo, HeaderText, LogoHeader } from '~/components/atoms'
+import { useTheme } from '~/context/ThemeContext'
 
 const HarryIcon = require('~/../assets/HarryIcon.png')
-const HeaderLogo = require('~/../assets/Cromo_LogoBKG.png')
+const HeaderLogoDark = require('~/../assets/Light_Cromo_LogoBKG.png')
+const HeaderLogoLight = require('~/../assets/Dark_Cromo_LogoBKG.png')
 
 export const Headers = () => {
-    
+    const { isDark } = useTheme()
+
     return (
         <HeaderContainerStyle>
 
@@ -31,7 +34,7 @@ export const Headers = () => {
                 dir='column' align='center' justify='center'>
 
                 <LogoHeader
-                    source={ HeaderLogo }
+                    source={ isDark ? HeaderLogoDark : HeaderLogoLight }
                     wdt='70'
                     hgt='15'
                     mgTop='5'
@@ -44,7 +47,8 @@ export const Headers = () => {
 }
 
 export const PerfilHeaders = () => {
-    
+    const { isDark } = useTheme()
+
     return (
         <HeaderContainerStyle justify='flex-end' bg='transparent' >
 
@@ -53,7 +57,7 @@ export const PerfilHeaders = () => {
                 dir='column' align='center' justify='center'>
 
                 <LogoHeader
-                    source={ HeaderLogo }
+                    source={ isDark ? HeaderLogoDark : HeaderLogoLight }
                     wdt='70'
                     hgt='15'
                     mgTop='5'
