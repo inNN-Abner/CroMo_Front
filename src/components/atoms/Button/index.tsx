@@ -210,10 +210,10 @@ export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop
   )
 }
 
-export const SaveButton = ({ hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+export const SaveButton = ({ bg, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle
-        bg={'darkGreen'}
+        bg={bg}
         wdt={'145'}
         hgt={hgt}
         bdRd={bdRd}
@@ -221,14 +221,14 @@ export const SaveButton = ({ hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label,
         mgRight={mgRight}
         mgTop={mgTop}
         onPress={onPress}>
-          <Subcontainer align='center' justify='center' dir='row' bg='darkGreen' wdt='120' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+          <Subcontainer align='center' justify='center' dir='row' bg={bg} wdt='120' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
               <Fontisto name="check" size={18} color="#ffffff" />
                   <ButtonTextStyle
-                      mgLeft='10'
-                      mgTop='-1'
-                      color={'everWhite'}
-                      fontSize={fontSize}>
-                      {label}
+                    mgLeft='10'
+                    mgTop='-1'
+                    color={'everWhite'}
+                    fontSize={fontSize}>
+                    {label}
                   </ButtonTextStyle>
           </Subcontainer>    
     </StyledButtonStyle>

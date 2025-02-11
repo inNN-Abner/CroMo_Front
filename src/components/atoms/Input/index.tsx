@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Children, useState } from 'react'
 import { TextInputStyle, TimeInputStyle } from './styles'
 import contacts from '~/../archives/contacts'
 import { useTheme } from '~/context/ThemeContext'
@@ -8,6 +8,7 @@ import { Subcontainer } from '../Container'
 import { PageSubTitleStyle } from '../Text/styles'
 
 interface InputProps {
+    children?: string
     value?: string
     placeholder: string
     keyboardType?: string
@@ -21,12 +22,14 @@ interface InputProps {
     pddLeft?: string
     mgTop?: string
     mgLeft?: string
+    bdRd?: string
+    wrap?: string;
 
     onChangeText?: (text: string) => void
     setList?: (list: any[]) => void;
 }
 
-export const TextInput = ({ placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft }: InputProps) => {
+export const TextInput = ({ children, placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
   const [text, onChangeText] = useState('')
 
   return (
@@ -34,6 +37,7 @@ export const TextInput = ({ placeholder, bgColor, color,  wdt, hgt, pddLeft, mgT
         placeholder={placeholder}
         keyboardType={'default'}
         onChangeText={onChangeText}
+        wrap={wrap}
         placeholderTextColor={'gray'} 
 
         mgTop={mgTop}
@@ -43,7 +47,10 @@ export const TextInput = ({ placeholder, bgColor, color,  wdt, hgt, pddLeft, mgT
         wdt={wdt}
         hgt={hgt}
         pddLeft={pddLeft}
-      />
+        bdRd={bdRd}
+      >
+        {children}
+      </TextInputStyle>
   )
 }
 

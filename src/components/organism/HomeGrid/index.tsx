@@ -157,7 +157,7 @@ export const ClassGrid = () => {
                     <Subcontainer dir='row' bg='white' wdt='175' hgt='55' align='center' bdRd='10' mgLeft='5' mgTop='10'>
                         <Photo
                             hgt='35'
-                            wdt='40'
+                            wdt='37'
                             mgLeft='3'
                             source={item.photo}
                         />
@@ -167,7 +167,7 @@ export const ClassGrid = () => {
                             align='flex-start'
                             wdt='125'
                             hgt='50'
-                            mgLeft='0' 
+                            mgLeft='3' 
                             fontSize='14'
                             mgTop='0'
                             color='brisk'

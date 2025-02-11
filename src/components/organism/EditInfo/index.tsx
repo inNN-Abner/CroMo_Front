@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { CancelButton, CreateModal, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
+import { CancelButton, CreateModal, InfoText, PageSubtitle, PageTitle, Photo, SaveButton, StylezedButton, Subcontainer, TextInput, Windows } from '~/components'
 import { ScrollView } from 'react-native-gesture-handler'
 import monitoringHours from '../../../../archives/monitoringHours'
+import warnings from '~/../archives/warnings'
 
 const Calendar = require('~/../assets/Calendar.png')
 const Clock = require( '~/../assets/Clock.png')
 
-export const SummarySchedule = ({ navigation }) => {
+export const EditInfo = ({ navigation }) => {
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [titleMessage, setTitleMessage] = useState('');
     const [bodyMessage, setBodyMessage] = useState('');
@@ -16,8 +17,8 @@ export const SummarySchedule = ({ navigation }) => {
     }
 
     const CreateModalCancel = () => {
-        setTitleMessage('Desmarcar monitoria')
-        setBodyMessage('Tem certeza que deseja cancelar o\nagendamento? Essa ação é irreversível!')
+        setTitleMessage('Salvar texto')
+        setBodyMessage('Tem certeza que deseja alterar as informações?')
         handleOnPress()
     }
 
@@ -25,7 +26,7 @@ export const SummarySchedule = ({ navigation }) => {
     <Subcontainer mgLeft='0' maxHgt='75' align='center' >
     <ScrollView>
 
-        {monitoringHours.map((item) => (
+        {warnings.map((item) => (
             <React.Fragment key={item.id}>
 
             <Windows 
@@ -37,18 +38,12 @@ export const SummarySchedule = ({ navigation }) => {
                 justify='flex-end'
             >
                 <Subcontainer dir='row' bg='white' mgTop='0' bdRd='100' align='center'>
-                    <Photo
-                        hgt='40'
-                        wdt='40'
-                        mgTop='0'
-                        mgLeft='15'
-                        source={item.icon} 
-                    />
+
                     <PageTitle
                         mgTop='0'
-                        mgLeft='5'
+                        mgLeft='15'
                         color='brisk'
-                    >{item.class}
+                    >{item.title}
                     </PageTitle>
                     </Subcontainer>
                 </Windows>
@@ -60,65 +55,35 @@ export const SummarySchedule = ({ navigation }) => {
                     bdRdTL='0'
                     bdRdTR='0'
                     dir='column'
-                    align='flex-start'
+                    align='center'
                 >   
-            <Subcontainer mgLeft='0' mgTop='15' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
-                <Photo
-                    source={Calendar}
-                    wdt='35'
-                    hgt='35'
-                    mgTop='0'
-                    mgLeft='15'
-                    bdRd='0'
-                />
-                    <PageSubtitle color='everWhite'>
-                        {item.date}
-                    </PageSubtitle>
-                    </Subcontainer>
-
-
-            <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
-                <Photo
-                    source={Clock}
-                    wdt='35'
-                    hgt='35'
-                    mgTop='0'
-                    mgLeft='15'
-                    bdRd='0'
-                />
-
-            <PageSubtitle color='everWhite'>
-                {item.hour}
-            </PageSubtitle>
-
-        </Subcontainer>
-
-        <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
-            <Photo
-                source={item.photo}
-                wdt='35'
-                hgt='35'
-                mgTop='0'
-                mgLeft='15'
-            />
-            <PageSubtitle color='everWhite'>
-                {item.monitorName}
-            </PageSubtitle>
-        </Subcontainer>
+                
+            <TextInput 
+                mgLeft='0' 
+                bgColor='white' 
+                wdt='280' 
+                hgt='100'
+                bdRd='10'
+                mgTop='12'
+                wrap='wrap'
+                placeholder={'Digite o seu texto'}
+            >
+                {item.info}
+            </TextInput>
 
         <Subcontainer mgLeft='0' mgTop='5' bg='darkGreen' dir='row' maxHgt='20' bdRd='0' justify='flex-end'>
-            <CancelButton
-                bg='everWhite'
+            <SaveButton
+                bg='darkRed'
                 wdt='215'
                 hgt='40'
                 mgTop='5'
-                mgRight='5'
+                mgRight='10'
                 bdRd='15'
                 color='darkRed'
-                label={'Desmarcar monitoria'}
+                label={'Salvar'}
                 fontSize='16'
                 onPress={CreateModalCancel}
-            />
+            />aa
         </Subcontainer>
         </Windows>
         </React.Fragment>
@@ -131,7 +96,7 @@ export const SummarySchedule = ({ navigation }) => {
             
             <Subcontainer dir='row-reverse' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
                 <StylezedButton
-                    label={'Cancelar aula'}
+                    label={'Alterar'}
                     bg='darkRed'
                     mgTop='15'
                     wdt='150'
@@ -144,7 +109,7 @@ export const SummarySchedule = ({ navigation }) => {
                     }}
                 />
                 <StylezedButton
-                    label={'Manter aula'}
+                    label={'Cancelar'}
                     bg='white'
                     color='darkRed'
                     mgTop='15'

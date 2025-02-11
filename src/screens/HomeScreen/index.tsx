@@ -10,20 +10,33 @@ export const HomeScreen = ({ navigation }) => {
 
         <Subcontainer align='center' mgLeft='0'>
           <ClassGrid />
-
-          <StylezedButton
-            bg='brisk'
-            color='redDarkRed'
-            fontSize='20'
-            wdt='200'
-            mgLeft='-150'
-            mgTop='0'
-            label={'+ Agendar monitoria'}
-            onPress={() => {
-              navigation.navigate('AddMonitoring')
-            }} />
+            <StylezedButton
+              bg='brisk'
+              color='redDarkRed'
+              fontSize='20'
+              wdt='200'
+              hgt='30'
+              mgLeft='-150'
+              mgTop='0'
+              label={'+ Agendar monitoria'}
+              onPress={() => {
+                navigation.navigate('AddMonitoring')
+              }} />
 
           <HomeGrid />
+            <StylezedButton
+              bg='brisk'
+              color='redDarkRed'
+              fontSize='20'
+              wdt='200'
+              hgt='30'
+              mgLeft='-150'
+              mgTop='0'
+              label={'Editar informações'}
+              onPress={() => {
+                navigation.navigate('EditInfo')
+              }} />
+
         </Subcontainer>
 
     </Container>
