@@ -83,3 +83,14 @@ export const ButtonTextStyle = styled.Text
     font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'semiBold']};
     font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(14)}px`)};
 `
+
+export const ErrorMessage = styled.Text
+<{ color?: string; cor?: string; mgTop?: string; pddLeft?: string; jtCt?: string; fontSize?: string; fontWgt?: string; fontFamily?: string }>
+`
+    color: ${({ color, theme }) => theme.colors[color || 'darkRed']};
+    font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'regular']};
+    font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(20)}px`)};
+    font-weight: ${({ fontWgt }) => fontWgt || 'normal' };
+    paddingLeft: ${({ pddLeft, theme }) => theme.metrics.px([pddLeft || 10])}px;
+    marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || 8])}px;
+`

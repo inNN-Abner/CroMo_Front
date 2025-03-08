@@ -3,7 +3,7 @@ const DarkLogin = require('~/../assets/LoginScreen_Dark.png')
 const LightLogin = require ('~/../assets/LoginScreen_Light.png')
 import { StylezedButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
-import { Container, Subcontainer, LogoImage, TextInput, LoginTitle } from '~/components'
+import { Container, Subcontainer, LogoImage, TextInput, LoginTitle, LoginError } from '~/components'
 import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 export const LoginScreen = ({ navigation }) => {
@@ -55,6 +55,8 @@ export const LoginScreen = ({ navigation }) => {
             mgTop='30'
             onPress={handleLogin}
             />
+
+          {errorMessage ? <LoginError>{errorMessage}</LoginError> : null}
 
           <StylezedButton
             label='CADASTRAR'

@@ -65,6 +65,20 @@ export const LoginTitle = ({ children, color, fontFamily, fontSize, alignSelf, m
     )
 }
 
+export const LoginError = ({ children, color, fontFamily, fontSize, mgTop }: TextProps) => {
+    return (
+        <LoginTitleStyle
+            color = {color}
+            mgTop = {mgTop}
+            fontFamily = {fontFamily}
+            fontSize = {fontSize}
+        >
+            {children}
+        </LoginTitleStyle>
+    )
+}
+
+
 export const HeaderText = ({ children, color, fontWgt, fontFamily, fontSize, alignSelf, wdt, mgTop, mgLeft }: TextProps) => {
     return (
         <HeaderTextStyle
