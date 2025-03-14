@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { CancelButton, RedCancelButton, SaveButton } from '~/components/atoms/Button'
+import { RedCancelButton, SaveButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
 import perfil from '~/../archives/perfil'
-import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, CourseSelector, Photo, EditPhoto } from '~/components'
+import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, CourseSelector, EditPhoto } from '~/components'
 import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
-import { launchImageLibrary } from 'react-native-image-picker'
+//import { launchImageLibrary } from 'react-native-image-picker'
 
 export const EditPerfilScreen = ({ navigation }) => {
   const { isDark } = useTheme()
@@ -19,7 +19,7 @@ export const EditPerfilScreen = ({ navigation }) => {
     const [photoUri, setPhotoUri] = useState(perfil.photo)
     const defaultPhoto = typeof perfil.photo === 'string' ? { uri: perfil.photo } : perfil.photo;
 
-    const pickImage = () => {
+    /*const pickImage = () => {
         launchImageLibrary(
           { mediaType: 'photo', quality: 1 },
           (response) => {
@@ -28,7 +28,7 @@ export const EditPerfilScreen = ({ navigation }) => {
             }
           }
         )
-    }
+    }*/
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -39,7 +39,7 @@ export const EditPerfilScreen = ({ navigation }) => {
         <Subcontainer mgLeft='0'>
         <PageTitle mgTop='-5'>Editar informações</PageTitle>
 
-        <TouchableOpacity onPress={pickImage}>
+        <TouchableOpacity>
           <EditPhoto
             source={photoUri}
             hgt='145'

@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react'
+import React, { useState } from 'react'
 import { TextInputStyle, TimeInputStyle } from './styles'
 import contacts from '~/../archives/contacts'
 import { useTheme } from '~/context/ThemeContext'
@@ -26,31 +26,29 @@ interface InputProps {
     wrap?: string;
 
     onChangeText?: (text: string) => void
-    setList?: (list: any[]) => void;
+    setList?: (list: any[]) => void
 }
 
-export const TextInput = ({ children, placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
-  const [text, onChangeText] = useState('')
+export const TextInput = ({ children, value, onChangeText, placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
 
   return (
-      <TextInputStyle
-        placeholder={placeholder}
-        keyboardType={'default'}
-        onChangeText={onChangeText}
-        wrap={wrap}
-        placeholderTextColor={'gray'} 
+    <TextInputStyle
+      placeholder={placeholder}
+      keyboardType={'default'}
+      onChangeText={onChangeText}
+      wrap={wrap}
+      value={value} 
+      placeholderTextColor={'gray'}
 
-        mgTop={mgTop}
-        mgLeft={mgLeft}
-        color={color}
-        bgColor={bgColor}
-        wdt={wdt}
-        hgt={hgt}
-        pddLeft={pddLeft}
-        bdRd={bdRd}
-      >
-        {children}
-      </TextInputStyle>
+      mgTop={mgTop}
+      mgLeft={mgLeft}
+      color={color}
+      bgColor={bgColor}
+      wdt={wdt}
+      hgt={hgt}
+      pddLeft={pddLeft}
+      bdRd={bdRd}
+    />
   )
 }
 

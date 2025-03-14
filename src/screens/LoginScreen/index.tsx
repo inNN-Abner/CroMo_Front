@@ -4,17 +4,52 @@ const LightLogin = require ('~/../assets/LoginScreen_Light.png')
 import { StylezedButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
 import { Container, Subcontainer, LogoImage, TextInput, LoginTitle, LoginError } from '~/components'
-import { Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import * as SecureStore from 'expo-secure-store'
+import { API_URL } from '~/configs/config'
 
 export const LoginScreen = ({ navigation }) => {
   const { isDark } = useTheme()
   const [emailValue, setEmailValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleLogin = async() => {
-    navigation.navigate('HomeBottom')
-  }
+    setLoading(true)
+      try {
+        console.log('Enviando:', { email: emailValue, senha: passwordValue });
+
+        const response = await fetch(`${API_URL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: emailValue,
+            senha: passwordValue,
+          }),
+        })
+  
+        const data = await response.json()
+        console.log('Resposta do servidor:', data);
+
+  
+        if (response.ok) {
+          await SecureStore.setItemAsync('token', data.token)
+          navigation.replace('Home') 
+        } else {
+          Alert.alert('Erro', data.message || 'E-mail ou senha inválidos!')
+        }
+      } catch (error) {
+        console.log('Erro na requisição:', error);
+
+        console.error('Erro ao efetuar login:', error)
+        Alert.alert('Erro', 'Não foi possível conectar ao servidor!')
+      } finally {
+        setLoading(false)
+      }
+    }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -34,7 +69,7 @@ export const LoginScreen = ({ navigation }) => {
             onChangeText={(text) => setEmailValue(text)}
             mgTop='5'
             mgLeft='0'
-            />
+          />
 
           <LoginTitle mgTop='20' mgLeft='0' alignSelf='flex-start'>
             Senha
@@ -48,7 +83,7 @@ export const LoginScreen = ({ navigation }) => {
             onChangeText={(text) => setPasswordValue(text)}
             mgTop='5'
             mgLeft='0'
-            />           
+          />           
 
           <StylezedButton
             label='ENTRAR' 
