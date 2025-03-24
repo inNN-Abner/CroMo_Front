@@ -1,12 +1,13 @@
 import React from 'react'
 import { Modal } from 'react-native'
 import { CloseButton, CloseButtonText, ModalContainer, ModalContent, ModalTitle, OptionButton, OptionText, ScrollableContent } from './styles'
+import * as SecureStore from 'expo-secure-store'
 
 interface ClassroomModalProps {
   visible: boolean
   onClose: () => void
   onSelect: (classroom: string) => void
-  options: string[]
+  options: { id: number, name: string }[]
 }
 
 export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose, onSelect, options }) => {
@@ -21,16 +22,17 @@ export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose
         <ModalContent>
           <ModalTitle>Clique para selecionar</ModalTitle>
           <ScrollableContent>
-          {options.map((classroom, index) => (
+          {options.map((classroom) => (
             <OptionButton
               wdt='250'
-              key={index}
-              onPress={() => {
-                onSelect(classroom)
+              key={classroom.id}
+              onPress={async () => {
+                onSelect(classroom.name)
+                await SecureStore.setItemAsync('classroom', classroom.id.toString())
                 onClose()
               }}
             >
-              <OptionText>{classroom}</OptionText>
+              <OptionText>{classroom.name}</OptionText>
             </OptionButton>
           ))}
           

@@ -33,11 +33,9 @@ export const LoginScreen = ({ navigation }) => {
   
         const data = await response.json()
         console.log('Resposta do servidor:', data);
-
   
         if (response.ok) {
-          await SecureStore.setItemAsync('token', data.token)
-          navigation.replace('Home') 
+          navigation.replace('HomeBottom') 
         } else {
           Alert.alert('Erro', data.message || 'E-mail ou senha inválidos!')
         }

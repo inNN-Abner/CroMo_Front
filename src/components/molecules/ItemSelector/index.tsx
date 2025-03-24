@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ClassroomModal, InfoText } from '~/components/atoms'
 import { StyledButtonStyle } from '~/components/atoms/Button/styles'
+import { API_URL } from '~/configs/config'
+
+interface Classroom {
+  id: number
+  tipo: string
+  numero: number
+}
 
 export const ClassroomSelector: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedClassroom, setSelectedClassroom] = useState<string | null>(null)
-
-  const classrooms = [
+  const [classrooms, setClassrooms] = useState<Classroom[]>([])
+ /* const classrooms = [
     'Sala 101',
     'Sala 102',
     'Sala 103',
@@ -22,11 +29,38 @@ export const ClassroomSelector: React.FC = () => {
     'Laboratório A',
     'Laboratório B',
     'Laboratório C',
-    'Laboratório D']
+    'Laboratório D']*/
 
   const handleClassroomSelect = (classroom: string) => {
     setSelectedClassroom(classroom)
   }
+
+  async function loadClassrooms(){
+    try{
+        const resp = await fetch(`${API_URL}/local`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            const data = await resp.json()
+            if (resp.status == 200) {
+                setClassrooms(data)
+            }
+            console.log(resp)
+        } catch(e){
+            console.log("erro: ", e)
+        }
+    } 
+
+    useEffect(() => {
+        loadClassrooms()
+    }, [])
+
+    const classroomsNames = 
+    classrooms.map((c)=> ({
+      id: c.id,
+      name: c.numero ? `${c.tipo} ${c.numero}` : `${c.tipo}`, }))
 
     return (
       <StyledButtonStyle bdRd='15' wdt='250' mgTop='0' bg='white'
@@ -40,13 +74,13 @@ export const ClassroomSelector: React.FC = () => {
           visible={modalVisible}
           onClose={() => setModalVisible(false)}
           onSelect={handleClassroomSelect}
-          options={classrooms}
+          options={classroomsNames}
         />
       </StyledButtonStyle>
     )
   }
 
-export const CourseSelector: React.FC = () => {
+/*export const CourseSelector: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null)
 
@@ -72,11 +106,11 @@ export const CourseSelector: React.FC = () => {
       </InfoText>
 
       <ClassroomModal
-        visible={modalVisible}
+        visible={modalVisible} 
         onClose={() => setModalVisible(false)}
         onSelect={handleCourseSelect}
         options={courses}
       />
     </StyledButtonStyle>
   )
-}
+}*/
