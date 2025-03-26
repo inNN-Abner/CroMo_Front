@@ -4637,6 +4637,11 @@ expo-pwa@0.0.127:
     commander "2.20.0"
     update-check "1.5.3"
 
+expo-secure-store@~14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/expo-secure-store/-/expo-secure-store-14.0.1.tgz#8953d5966430f5ff262f4d99e7551205870078d7"
+  integrity sha512-QUS+j4+UG4jRQalgnpmTvvrFnMVLqPiUZRzYPnG3+JrZ5kwVW2w6YS3WWerPoR7C6g3y/a2htRxRSylsDs+TaQ==
+
 expo-splash-screen@~0.17.0:
   version "0.17.5"
   resolved "https://registry.npmjs.org/expo-splash-screen/-/expo-splash-screen-0.17.5.tgz"

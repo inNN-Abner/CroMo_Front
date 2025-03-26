@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { SelectDayContainer, DayButton } from '../../atoms'
 import * as SecureStore from 'expo-secure-store'
 
-
-
 export const diaSemana = async(index: number) => {
     const diasDaSemana = [
     "Segunda-feira", "Terça-feira","Quarta-feira",

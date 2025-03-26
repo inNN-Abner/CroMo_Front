@@ -1,5 +1,5 @@
-import React from 'react'
-import monitoring from '~/../archives/monitoring'
+import React, { useEffect, useState } from 'react'
+import {useMonitoring} from '~/../archives/monitoring'
 import { FlatList, Text } from 'react-native'
 import { InfoText, ListContainer, Photo, Subcontainer, Windows } from '~/components/atoms'
 import { TableGrid } from '~/components/molecules'
@@ -46,7 +46,7 @@ export const HomeGrid = () => {
                 hgt='205'
                 bg='briskGray'
             >
-                <FlatList data={ monitoring } renderItem={({ item }) => (
+                <FlatList data={ useMonitoring() } renderItem={({ item }) => (
 
                         <ListContainer
                             mgTop='0'
@@ -100,6 +100,22 @@ export const HomeGrid = () => {
 }
 
 export const ClassGrid = () => {
+    const [dayWeek, setDayWeek] = useState<string>()
+
+    const loadDayWeek = () => {
+        const today = new Date()
+        today.setDate(today.getDate() - 1)
+        const diasDaSemana = [
+            "Domingo", "Segunda-feira", "Terça-feira", 
+            "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado",
+        ]
+        const todayWeek = diasDaSemana[today.getDay()]
+        setDayWeek(todayWeek)
+    }
+    useEffect(() => {
+        loadDayWeek()
+        }, [])
+
     return (
     <Subcontainer 
         hgt='265'
@@ -125,7 +141,7 @@ export const ClassGrid = () => {
                 fontSize='18'
                 fontFamily='bold'
             >
-                {'Quinta-feira'}
+                {dayWeek}
             </InfoText>
 
             </Windows>
@@ -141,7 +157,7 @@ export const ClassGrid = () => {
                 hgt='210'
                 bg='briskGray'
             >
-                <FlatList data={ monitoring } renderItem={({ item }) => (
+                <FlatList data={ useMonitoring() } renderItem={({ item }) => (
 
                     <ListContainer
                         mgTop='0'
