@@ -6,7 +6,7 @@ import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-nati
 import * as SecureStore from 'expo-secure-store'
 //import { launchImageLibrary } from 'react-native-image-picker'
 
-const imageMap = {
+export const imageMap: Record<number, any> = {
   1: require('~/../assets/Bag.png'),
   2: require('~/../assets/Book.png'),
   3: require('~/../assets/Helmet.png'),
@@ -14,23 +14,22 @@ const imageMap = {
 
 export const EditPerfilScreen = ({ navigation }) => {
   const { isDark } = useTheme()
-  const [user, setUser] = useState(null)
   const [nameValue, setNameValue] = useState('')
   const [emailValue, setEmailValue] = useState('')
   const [teamsValue, setTeamsValue] = useState('')
-  const [photoUri, setPhotoUri] = useState(null)
+  const [userData, setUserData] = useState<{ nome: string; foto: number } | null>(null);
+  
 
   useEffect(() => {
     const loadUser = async () => {
-      const userData = await SecureStore.getItemAsync('user')
+    const userData = await SecureStore.getItemAsync('user')
+    
       if (userData) {
-        console.log('User data:', parsedUser) // Verifica se o email realmente está vindo
-        const parsedUser = JSON.parse(userData)
-        setUser(parsedUser)
-        setNameValue(parsedUser.nome || '')
-        setEmailValue(parsedUser.email || '') // Tenta diferentes chaves
-        setTeamsValue(parsedUser.teams || '')
-        setPhotoUri(imageMap[parsedUser.foto] || imageMap[1])
+        const data = JSON.parse(userData)
+        setUserData(data)
+        setNameValue(data.nome || '')
+        setEmailValue(data.email || '')
+        setTeamsValue(data.teams || '')
       }
     }
     loadUser()
@@ -62,15 +61,16 @@ export const EditPerfilScreen = ({ navigation }) => {
         <PageTitle mgTop='-5'>Editar informações</PageTitle>
 
         <TouchableOpacity>
+        {userData && (
           <EditPhoto
-            source={photoUri}
+            idFoto = {userData.foto}
             hgt='145'
             wdt='100'
             bdRd='20'
             mgLeft='40'
             mgTop='10'
           />
-
+        )}
         </TouchableOpacity>
 
           <LoginTitle mgTop='10' mgLeft='0' alignSelf='flex-start'>

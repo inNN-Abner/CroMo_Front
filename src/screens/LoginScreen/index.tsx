@@ -30,9 +30,9 @@ export const LoginScreen = ({ navigation }) => {
             senha: passwordValue,
           }),
         })
-  
+ 
         const data = await response.json()
-  
+          
         if (data.token) {
           await SecureStore.setItemAsync('token', data.token)
           await SecureStore.setItemAsync('user', JSON.stringify({
@@ -41,7 +41,7 @@ export const LoginScreen = ({ navigation }) => {
             tipo: data.tipo,
             foto: data.foto,
             email: data.email
-          }))  
+          }))
           navigation.replace('HomeBottom') 
         } else {
           Alert.alert('Erro', data.message || 'E-mail ou senha inválidos!')
