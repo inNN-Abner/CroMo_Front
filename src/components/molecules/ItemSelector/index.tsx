@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ClassroomModal, InfoText } from '~/components/atoms'
 import { StyledButtonStyle } from '~/components/atoms/Button/styles'
+import { opcoesCursos } from '~/../archives/courses'
 
 export const ClassroomSelector: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -46,21 +47,26 @@ export const ClassroomSelector: React.FC = () => {
     )
   }
 
-export const CourseSelector: React.FC = () => {
+interface CourseSelectorProps {
+  selectedCourse: string
+  onSelect: (course: string) => void
+}
+
+export const CourseSelector: React.FC<{ userCourse: string, onSelect: (course: string) => void }> = ({ userCourse, onSelect }) => {
   const [modalVisible, setModalVisible] = useState(false)
-  const [selectedCourse, setSelectedCourse] = useState<string | null>(null)
 
   const courses = [
-  'Análise e Desenv. de Sistemas',
-  'Comércio Exterior',
-  'Desenv. de Software Multiplataforma',
-  'Gestão Empresarial',
-  'Gestão de Serviço',
-  'Logística Aeroportuária',
-  'Redes de Computadores' ]
+    opcoesCursos.ads,
+    opcoesCursos.comex,
+    opcoesCursos.dsm,
+    opcoesCursos.gstS,
+    opcoesCursos.gstE,
+    opcoesCursos.log,
+  ]
 
-  const handleCourseSelect = (courses: string) => {
-  setSelectedCourse(courses)
+  const handleCourseSelect = (course: string) => {
+    onSelect(course)
+    setModalVisible(false)
   }
 
   return (
@@ -68,7 +74,7 @@ export const CourseSelector: React.FC = () => {
       onPress={() => setModalVisible(true)}
     >
       <InfoText color='brisk' fontSize='14' alignSelf='flex-start' mgBottom='0' mgLeft='25'>
-        {selectedCourse ? `${selectedCourse}` : 'Clique para selecionar'}
+        {userCourse || 'Clique para selecionar'}
       </InfoText>
 
       <ClassroomModal

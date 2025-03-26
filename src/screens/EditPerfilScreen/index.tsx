@@ -17,8 +17,8 @@ export const EditPerfilScreen = ({ navigation }) => {
   const [nameValue, setNameValue] = useState('')
   const [emailValue, setEmailValue] = useState('')
   const [teamsValue, setTeamsValue] = useState('')
-  const [userData, setUserData] = useState<{ nome: string; foto: number } | null>(null);
-  
+  const [userData, setUserData] = useState<{ nome: string; foto: number; curso: string } | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -30,16 +30,20 @@ export const EditPerfilScreen = ({ navigation }) => {
         setNameValue(data.nome || '')
         setEmailValue(data.email || '')
         setTeamsValue(data.teams || '')
+        setSelectedCourse(data.curso || 'Clique para selecionar')
       }
     }
     loadUser()
   }, [])
 
+  const handleCourseChange = (course: string) => {
+    setSelectedCourse(course)
+  }
 
   const handleSave = async() => {
     navigation.navigate('Perfil')
   }
-  
+
   /*const pickImage = () => {
         launchImageLibrary(
           { mediaType: 'photo', quality: 1 },
@@ -92,6 +96,7 @@ export const EditPerfilScreen = ({ navigation }) => {
               placeholder={'email@fatec.sp.gov.br'} 
               keyboardType='email'
               value={emailValue}
+              editable={false}
               onChangeText={(text) => setEmailValue(text)}
               mgTop='5'
               mgLeft='35'
@@ -112,7 +117,10 @@ export const EditPerfilScreen = ({ navigation }) => {
           <LoginTitle mgTop='10' mgLeft='0' mgBottom='5' alignSelf='flex-start'>
             Curso
           </LoginTitle>
-            <CourseSelector />
+            <CourseSelector 
+              userCourse={selectedCourse || 'Clique para selecionar'}
+              onSelect={handleCourseChange}
+            />
 
           <Subcontainer mgLeft='0' mgTop='20' dir='row' align='center' justify='center' hgt='100'>
             <RedCancelButton
