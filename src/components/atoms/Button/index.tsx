@@ -268,7 +268,7 @@ export const LogoutButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: Button
         mgLeft={mgLeft}
         mgTop={mgTop}
         onPress={onPress}>
-        <Ionicons name="log-out" size={24} color={'white'} />
+        <Ionicons name="log-out" size={36} color={'white'} />
     </StyledButtonStyle>
   )
 }
