@@ -10,7 +10,7 @@ const HeaderLogoLight = require('~/../assets/Dark_Cromo_LogoBKG.png')
 
 export const Headers = () => {
     const { isDark } = useTheme()
-    const [user, setUser] = useState<{ nome: string; curso: string; foto: number } | null>(null);
+    const [user, setUser] = useState<{ nome: string; curso: string; foto: number; email: string } | null>(null);
 
     useEffect(() => {
         const loadUser = async () => {

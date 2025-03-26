@@ -40,6 +40,7 @@ export const LoginScreen = ({ navigation }) => {
             curso: data.curso,
             tipo: data.tipo,
             foto: data.foto,
+            email: data.email
           }))  
           navigation.replace('HomeBottom') 
         } else {
