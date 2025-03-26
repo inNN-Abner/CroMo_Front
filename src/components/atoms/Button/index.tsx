@@ -91,6 +91,30 @@ export const AddButton = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: Button
   )
 }
 
+export const AddButtonText = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+      bg={bg}
+      wdt={wdt}
+      hgt={hgt}
+      bdRd={bdRd}
+      mgLeft={mgLeft}
+      mgRight={mgRight}
+      mgTop={mgTop}
+      onPress={onPress}>
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='25' mgTop='0' mgLeft='0' bdRd='10'>
+            <Ionicons name="add-circle" size={24} color={'red'} />
+              <ButtonTextStyle
+                mgLeft='3'
+                color={color}
+                fontSize={fontSize}>
+                {label}
+              </ButtonTextStyle>
+          </Subcontainer> 
+    </StyledButtonStyle>
+  )
+}
+
 export const CancelButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle
@@ -173,6 +197,30 @@ export const EditButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonPr
   )
 }
 
+export const EditInfoButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+      bg={bg}
+      wdt={wdt}
+      hgt={hgt}
+      bdRd={bdRd}
+      mgLeft={mgLeft}
+      mgRight={mgRight}
+      mgTop={mgTop}
+      onPress={onPress}>
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='25' mgTop='0' mgLeft='0' bdRd='10'>
+        <FontAwesome name="pencil" size={24} color={'red'} />
+          <ButtonTextStyle
+                mgLeft='3'
+                color={color}
+                fontSize={fontSize}>
+                {label}
+              </ButtonTextStyle>
+          </Subcontainer> 
+    </StyledButtonStyle>
+  )
+}
+
 export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop, mgLeft, label, color, bg, fontSize, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle 
@@ -209,6 +257,22 @@ export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop
     </StyledButtonStyle>
   )
 }
+
+export const LogoutButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={'darkRed'}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgTop={mgTop}
+        onPress={onPress}>
+        <Ionicons name="log-out" size={24} color={'white'} />
+    </StyledButtonStyle>
+  )
+}
+
 
 export const SaveButton = ({ bg, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
   return (

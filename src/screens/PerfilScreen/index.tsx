@@ -1,8 +1,7 @@
 import React from 'react'
-import ToggleThemeButton, { EditButton } from '~/components/atoms/Button';
+import ToggleThemeButton, { EditButton, LogoutButton } from '~/components/atoms/Button';
 import { HeaderText, PageTitle, PerfilCard, PerfilGrid, PerfilHeaders, Windows } from '~/components/';
 import { Container, Subcontainer } from '~/components/atoms/Container';
-import { LoginScreen } from '../LoginScreen';
 
 export const PerfilScreen = ({ navigation }) => {
   
@@ -47,6 +46,20 @@ export const PerfilScreen = ({ navigation }) => {
                   Tema
               </HeaderText>
               <ToggleThemeButton />
+            </Subcontainer>
+
+            <Subcontainer bg='darkGreen' mgLeft='-0' wdt='75' mgTop='0'>
+              <HeaderText
+                mgTop='5'
+                mgLeft='18'
+                color='lightGray'
+                fontSize='16'
+                >
+                  Sair
+              </HeaderText>
+              <LogoutButton wdt='50' hgt='50' bdRd='15' mgTop='5' mgLeft='10'
+                onPress={() => {
+                  navigation.navigate('Login')}}/>
             </Subcontainer>
 
           </Subcontainer>
