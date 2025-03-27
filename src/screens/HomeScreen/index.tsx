@@ -1,5 +1,5 @@
 import React from 'react'
-import { ClassGrid, Container, Headers, HomeGrid, PageTitle, StylezedButton, Subcontainer } from '~/components/';
+import { AddButtonText, ClassGrid, Container, EditInfo, EditInfoButton, Headers, HomeGrid, PageTitle, StylezedButton, Subcontainer } from '~/components/';
 
 export const HomeScreen = ({ navigation }) => {
   
@@ -9,33 +9,40 @@ export const HomeScreen = ({ navigation }) => {
         <PageTitle>Monitorias do dia</PageTitle>
 
         <Subcontainer align='center' mgLeft='0'>
+
           <ClassGrid />
-            <StylezedButton
+            <AddButtonText
               bg='brisk'
               color='redDarkRed'
-              fontSize='20'
-              wdt='200'
-              hgt='30'
-              mgLeft='-150'
-              mgTop='0'
-              label={'+ Agendar monitoria'}
+              fontSize='18'
+              wdt='250'
+              hgt='25'
+              mgLeft='-90'
+              mgTop='3'
+              align='flex-start'
+              justify='flex-start'
+              label={'Agendar monitoria'}
               onPress={() => {
                 navigation.navigate('AddMonitoring')
-              }} />
+              }}
+            ></AddButtonText>
 
           <HomeGrid />
-            <StylezedButton
-              bg='brisk'
-              color='redDarkRed'
-              fontSize='20'
-              wdt='200'
-              hgt='30'
-              mgLeft='-150'
-              mgTop='0'
-              label={'Editar informações'}
-              onPress={() => {
-                navigation.navigate('EditInfo')
-              }} />
+            <EditInfoButton
+                bg='brisk'
+                color='redDarkRed'
+                fontSize='18'
+                wdt='250'
+                hgt='25'
+                mgLeft='-90'
+                mgTop='3'
+                align='flex-start'
+                justify='flex-start'
+                label={'Editar informações'}
+                onPress={() => {
+                  navigation.navigate('EditInfo')
+                }}
+              ></EditInfoButton>
 
         </Subcontainer>
 

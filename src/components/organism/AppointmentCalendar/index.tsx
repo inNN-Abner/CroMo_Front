@@ -59,9 +59,9 @@ export const AppointmentCalendar = ({ navigation }) => {
 
       style={{
         borderWidth: 0,
-        height: 350,
+        height: 370,
         width: 325,
-        borderRadius: 20,
+        borderRadius: 15,
         elevation: 10
       }}
 

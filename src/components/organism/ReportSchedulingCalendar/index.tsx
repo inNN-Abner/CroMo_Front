@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppointmentCalendar, Container, Headers, PageSubtitle, PageTitle, StylezedButton, Subcontainer  } from '~/components'
+import { AddButtonText, AppointmentCalendar, Container, Headers, PageSubtitle, PageTitle, Subcontainer  } from '~/components'
 
 export const ReportSchedulingScreen = ({ navigation }) => {
   return (
@@ -12,18 +12,21 @@ export const ReportSchedulingScreen = ({ navigation }) => {
       <Subcontainer align='center' justify='center' mgLeft='0' mgTop='15' hgt='380'>
         <AppointmentCalendar navigation={ navigation } />
 
-        <StylezedButton
+        <AddButtonText
           bg='brisk'
           color='redDarkRed'
-          fontSize='20'
-          wdt='200'
-          mgLeft='-100'
-          mgTop='0'
-          label={'+ Agendar monitoria'}
+          fontSize='18'
+          wdt='250'
+          hgt='25'
+          mgLeft='-40'
+          mgTop='3'
+          align='flex-start'
+          justify='flex-start'
+          label={'Agendar monitoria'}
           onPress={() => {
             navigation.navigate('AddMonitoring')
           }}
-        ></StylezedButton>
+        ></AddButtonText>
 
       </Subcontainer> 
 

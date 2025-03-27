@@ -6,28 +6,27 @@ import { TableGrid } from '~/components/molecules'
 
 export const HomeGrid = () => {
     return (
-    <Subcontainer 
-        hgt='260'
+        <Subcontainer 
+        hgt='250'
         wdt='360'
         align='center'
-        mgTop='10'
+        mgTop='15'
         mgLeft='0'
-        bg='white'
-    >
-            
-    <Windows 
-          bg='darkRed'
-          hgt='50'
-          wdt='355'
-          bdRdBL='0'
-          bdRdBR='0'
-          justify='flex-start'
-          mgTop='5'
-        >
-          <InfoText
+        bg='white'>
+
+        <Windows 
+            bg='darkRed'
+            hgt='40'
+            wdt='355'
+            bdRdBL='0'
+            bdRdBR='0'
+            justify='flex-start'
+            mgTop='3'
+            >
+            <InfoText
                 color='everWhite'
                 mgLeft='20'
-                mgTop='10'
+                mgTop='5'
                 fontSize='18'
                 fontFamily='bold'
             >
@@ -51,17 +50,18 @@ export const HomeGrid = () => {
                         <ListContainer
                             mgTop='0'
                             mgLeft='0'
-                            bg='briskGray'
+                            bg='brisk'
                             dir='column'
                             align='center'
                             justify='flex-start'
                             wdt='350'
-                            hgt='170'
+                            hgt='157'
                         >
 
                             <TableGrid 
                                 align='flex-start'
                                 wdt='335'
+                                hgt='40'
                                 mgLeft='0' 
                                 fontSize='15'
                                 mgTop='10'
@@ -76,7 +76,7 @@ export const HomeGrid = () => {
                             <TableGrid 
                                 fontSize='14'
                                 wdt='335'
-                                mgTop='7'
+                                mgTop='5'
                                 mgLeft='0'
                                 hgt='100'
                                 bdRd='10'
@@ -100,48 +100,34 @@ export const HomeGrid = () => {
 }
 
 export const ClassGrid = () => {
-    const [dayWeek, setDayWeek] = useState<string>()
-
-    const loadDayWeek = () => {
-        const today = new Date()
-        today.setDate(today.getDate() - 1)
-        const diasDaSemana = [
-            "Domingo", "Segunda-feira", "Terça-feira", 
-            "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado",
-        ]
-        const todayWeek = diasDaSemana[today.getDay()]
-        setDayWeek(todayWeek)
-    }
-    useEffect(() => {
-        loadDayWeek()
-        }, [])
+    const today = new Date().toLocaleDateString('pt-BR', { weekday: 'long' })
 
     return (
     <Subcontainer 
-        hgt='265'
+        hgt='250'
         wdt='360'
         align='center'
-        mgTop='5'
+        mgTop='0'
         mgLeft='0'
         bg='white'>
 
         <Windows 
             bg='darkRed'
-            hgt='50'
+            hgt='40'
             wdt='355'
             bdRdBL='0'
             bdRdBR='0'
             justify='flex-start'
-            mgTop='5'
+            mgTop='3'
             >
             <InfoText
                 color='everWhite'
                 mgLeft='20'
-                mgTop='10'
+                mgTop='5'
                 fontSize='18'
                 fontFamily='bold'
             >
-                {dayWeek}
+                {today.charAt(0).toUpperCase() + today.slice(1)}
             </InfoText>
 
             </Windows>

@@ -1,21 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { HeaderContainerStyle } from './styles'
 import { HeaderDate } from '~/components/molecules'
 import { Photo, HeaderText, LogoHeader } from '~/components/atoms'
 import { useTheme } from '~/context/ThemeContext'
+import * as SecureStore from 'expo-secure-store'
 
-const HarryIcon = require('~/../assets/HarryIcon.png')
 const HeaderLogoDark = require('~/../assets/Light_Cromo_LogoBKG.png')
 const HeaderLogoLight = require('~/../assets/Dark_Cromo_LogoBKG.png')
 
 export const Headers = () => {
     const { isDark } = useTheme()
+    const [user, setUser] = useState<{ nome: string; curso: string; foto: number; email: string } | null>(null);
 
+    useEffect(() => {
+        const loadUser = async () => {
+          const userData = await SecureStore.getItemAsync('user')
+          if (userData) {
+            setUser(JSON.parse(userData))
+          }
+        }
+        loadUser()
+    }, [])
+
+    if (!user) {
+        return <HeaderContainerStyle><HeaderText>Carregando...</HeaderText></HeaderContainerStyle>
+      }
+    
     return (
         <HeaderContainerStyle>
 
             <Photo
-                source={HarryIcon}
+                idFoto = {user.foto}
                 wdt='45'
                 hgt='45'    
             />
@@ -25,8 +40,12 @@ export const Headers = () => {
                 hgt={'15'}
                 dir={'column'}
             >
-                <HeaderText fontSize='14' fontWgt='bold' mgTop='-25' alignSelf='flex-start'>Henrique Oleiro</HeaderText>
-                <HeaderText fontSize='10' mgTop='0' alignSelf='flex-start'>Logística aeroportuária</HeaderText>
+                <HeaderText fontSize='14' fontWgt='bold' mgTop='-25' alignSelf='flex-start'>
+                    { user.nome || 'Usuário' }
+                </HeaderText>
+                <HeaderText fontSize='10' mgTop='0' alignSelf='flex-start'>
+                    { user.curso || 'Sem curso' }
+                </HeaderText>
             </HeaderContainerStyle>
 
             <HeaderContainerStyle 
