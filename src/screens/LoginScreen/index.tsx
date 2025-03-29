@@ -111,7 +111,9 @@ export const LoginScreen = ({ navigation }) => {
             bg='brisk'
             color='darkRed'
             mgTop='70'
-          /> 
+            onPress={() => {
+              navigation.navigate('ForgotPass')}}
+          />
 
         </Subcontainer>
         

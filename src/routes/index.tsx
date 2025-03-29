@@ -13,6 +13,7 @@ import { PerfilGrid } from '~/components'
 import { EditPerfilScreen } from '~/screens/EditPerfilScreen'
 import { EditInfoScreen } from '~/screens/EditinfoScreen'
 import { RegisterScreen } from '~/screens/RegisterScren'
+import { ForgotPassScreen } from '~/screens/ForgotPassScreen'
 
 interface BottomRoutes{
     Home: string
@@ -89,6 +90,7 @@ export const Routes = () => {
                 <Stack.Screen name="PerfilGrid" component={ PerfilGrid } />
                 <Stack.Screen name="AddClass" component={AddClassScreen} />
                 <Stack.Screen name="Register" component={RegisterScreen} />
+                <Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

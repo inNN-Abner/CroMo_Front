@@ -14,7 +14,7 @@ export const Container = styled.SafeAreaView
 `
 
 export const Subcontainer = styled.SafeAreaView
-<{ bg?: string; wrap?: string; dir?: string; align?: string; justify?: string; mgTop?: string; mgLeft?: string; wdt?: string; hgt?: string; maxHgt?: string; bdRd?: string }>
+<{ bg?: string; wrap?: string; dir?: string; align?: string; justify?: string; mgTop?: string; mgLeft?: string; wdt?: string; hgt?: string; maxHgt?: string; pdd?: string; bdRd?: string }>
 `
     display: flex;
     flexWrap: ${({ wrap }) => wrap || 'nowrap'};
@@ -26,6 +26,7 @@ export const Subcontainer = styled.SafeAreaView
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 10])}px;
     width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : '100%')};
     height: ${({ hgt, theme }) => (hgt ? `${theme.metrics.px(hgt)}px` : '100%')};
+    padding: ${({ pdd, theme }) => theme.metrics.px([pdd || 0])}px;
     max-height: ${({ maxHgt }) => (maxHgt ? `${(maxHgt)}%` : '100%')};
     border-radius: ${({ bdRd, theme }) => (bdRd ? `${theme.metrics.px(bdRd)}px` : `${theme.metrics.px(10)}px`)};
 `
