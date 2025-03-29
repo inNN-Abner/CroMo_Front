@@ -1,5 +1,5 @@
 import React from 'react'
-import { AddButtonText, ClassGrid, Container, EditInfo, EditInfoButton, Headers, HomeGrid, PageTitle, StylezedButton, Subcontainer } from '~/components/';
+import { AddButtonText, ClassGrid, Container, EditInfoButton, Headers, HomeGrid, PageTitle, Subcontainer } from '~/components/';
 
 export const HomeScreen = ({ navigation }) => {
   

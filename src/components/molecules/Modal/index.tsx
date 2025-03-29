@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, View } from 'react-native'
 import { ModalContainer } from '../../atoms'
+import { DefineModal } from './styles'
 
 interface ModalProps {
     animationType?: 'none' | 'slide' | 'fade'
@@ -34,7 +35,8 @@ export const CreateModal = ({ visible, bg, wdt, hgt, bdRd, pdd, align, justify, 
                 zIndex: 0
             }}
         />          
-            <ModalContainer
+            <ModalContainer>
+                <DefineModal
                     bg={bg}
                     wdt={wdt}
                     hgt={hgt}
@@ -44,6 +46,7 @@ export const CreateModal = ({ visible, bg, wdt, hgt, bdRd, pdd, align, justify, 
                     justify={justify}
                 >
                     {children}
+                </DefineModal>
             </ModalContainer>
         </Modal>
     )

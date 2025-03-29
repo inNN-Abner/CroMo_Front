@@ -66,13 +66,11 @@ export const SelectDayContainer = styled.SafeAreaView
 export const ModalContainer = styled.SafeAreaView
  <{ bg?: string; align?: string; justify?: string; wdt?: string; hgt?: string; bdRd?: string; pdd?: string }>
  `
-    background-color: ${({ bg, theme }) => theme.colors[bg || 'darkRed']};
     align-items: ${({ align }) => align || 'center'};
     justify-content: ${({ justify }) => justify || 'center'};
-    width: ${({ wdt, theme }) => (wdt ? (theme.metrics.px(wdt)) : '90%')};
-    height: ${({ hgt, theme }) => (hgt ? (theme.metrics.px(hgt)) : '55%')};
+    width: ${({ wdt, theme }) => (wdt ? (theme.metrics.px(wdt)) : '100%')};
+    height: ${({ hgt, theme }) => (hgt ? (theme.metrics.px(hgt)) : '100%')};
     padding: ${({ pdd, theme }) => theme.metrics.px([pdd || 10])}px;
     border-radius: ${({ bdRd, theme }) => (bdRd ? `${theme.metrics.px(bdRd)}px` : `${theme.metrics.px(20)}px`)};
-    top: 19%;
-    left: 5%;
+    transparent:  ${'true'};
 `

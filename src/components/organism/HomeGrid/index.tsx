@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {useMonitoring} from '~/../archives/monitoring'
 import { FlatList, Text } from 'react-native'
 import { InfoText, ListContainer, Photo, Subcontainer, Windows } from '~/components/atoms'
@@ -6,27 +6,28 @@ import { TableGrid } from '~/components/molecules'
 
 export const HomeGrid = () => {
     return (
-        <Subcontainer 
-        hgt='250'
+    <Subcontainer 
+        hgt='260'
         wdt='360'
         align='center'
-        mgTop='15'
+        mgTop='10'
         mgLeft='0'
-        bg='white'>
-
-        <Windows 
-            bg='darkRed'
-            hgt='40'
-            wdt='355'
-            bdRdBL='0'
-            bdRdBR='0'
-            justify='flex-start'
-            mgTop='3'
-            >
-            <InfoText
+        bg='white'
+    >
+            
+    <Windows 
+          bg='darkRed'
+          hgt='50'
+          wdt='355'
+          bdRdBL='0'
+          bdRdBR='0'
+          justify='flex-start'
+          mgTop='5'
+        >
+          <InfoText
                 color='everWhite'
                 mgLeft='20'
-                mgTop='5'
+                mgTop='10'
                 fontSize='18'
                 fontFamily='bold'
             >
@@ -50,18 +51,17 @@ export const HomeGrid = () => {
                         <ListContainer
                             mgTop='0'
                             mgLeft='0'
-                            bg='brisk'
+                            bg='briskGray'
                             dir='column'
                             align='center'
                             justify='flex-start'
                             wdt='350'
-                            hgt='157'
+                            hgt='170'
                         >
 
                             <TableGrid 
                                 align='flex-start'
                                 wdt='335'
-                                hgt='40'
                                 mgLeft='0' 
                                 fontSize='15'
                                 mgTop='10'
@@ -76,7 +76,7 @@ export const HomeGrid = () => {
                             <TableGrid 
                                 fontSize='14'
                                 wdt='335'
-                                mgTop='5'
+                                mgTop='7'
                                 mgLeft='0'
                                 hgt='100'
                                 bdRd='10'
@@ -104,26 +104,26 @@ export const ClassGrid = () => {
 
     return (
     <Subcontainer 
-        hgt='250'
+        hgt='265'
         wdt='360'
         align='center'
-        mgTop='0'
+        mgTop='5'
         mgLeft='0'
         bg='white'>
 
         <Windows 
             bg='darkRed'
-            hgt='40'
+            hgt='50'
             wdt='355'
             bdRdBL='0'
             bdRdBR='0'
             justify='flex-start'
-            mgTop='3'
+            mgTop='5'
             >
             <InfoText
                 color='everWhite'
                 mgLeft='20'
-                mgTop='5'
+                mgTop='10'
                 fontSize='18'
                 fontFamily='bold'
             >

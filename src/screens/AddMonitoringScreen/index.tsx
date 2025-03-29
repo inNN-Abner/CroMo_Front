@@ -95,15 +95,13 @@ export const AddMonitoringScreen = ({ navigation }) => {
                   bdRd='10' 
                   wdt='300'
                   hgt='150'
-                  pdd='0'
-                  align='center'
-                  justify='center'
+                  pdd='15'
               >   
-                  <InfoText fontFamily='bold' color='brisk' mgTop='-15'  mgLeft='0' fontSize='16'>
+                  <InfoText fontFamily='bold' color='brisk' mgTop='-25'  mgLeft='0' fontSize='17'>
                     {titleMessage}
                   </InfoText>
 
-                  <InfoText fontFamily='regular' color='brisk' mgTop='10' fontSize='14' mgLeft='0'>
+                  <InfoText fontFamily='regular' color='brisk' mgTop='10' fontSize='15' mgLeft='0'>
                     {bodyMessage}
                   </InfoText>
 
@@ -111,8 +109,9 @@ export const AddMonitoringScreen = ({ navigation }) => {
                       <StylezedButton 
                         label={'Confirmar'}
                         bg='darkRed'
-                        mgTop='10'
-                        wdt='150'
+                        mgTop='25'
+                        mgLeft='0'
+                        wdt='130'
                         hgt='40'
                         bdRd='10'
                         fontSize='18'
@@ -125,8 +124,8 @@ export const AddMonitoringScreen = ({ navigation }) => {
                         label={'Cancelar'}
                         bg='white'
                         color='darkRed'
-                        mgTop='10'
-                        wdt='150'
+                        mgTop='25'
+                        wdt='130'
                         hgt='40'
                         bdRd='10'
                         fontSize='18'
