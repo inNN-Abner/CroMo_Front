@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Divider, ListOptionButton, PageSubtitle, Subcontainer } from '~/components/atoms'
+import { Divider, imageMap, ListOptionButton, PageSubtitle, Subcontainer } from '~/components/atoms'
 import contacts from '~/../archives/contacts'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useTheme } from '~/context/ThemeContext'
 import { theme } from '~/styles'
+import monitors from '../../../../archives/monitors'
 
 export const MonitorList = ({ onMonitorSelected }) => {
     const [selectedId, setSelectedId] = useState<number | null>(null)
@@ -30,7 +31,7 @@ export const MonitorList = ({ onMonitorSelected }) => {
                 style={{ width: '100%' }} 
                 contentContainerStyle={{ paddingVertical: 0 }}            
             >
-                {contacts.map((item) => (
+                {monitors.map((item) => (
                     <ListOptionButton
                         key={item.id}
                         onPress={() => handleButtonPress(item.id)}
@@ -42,7 +43,7 @@ export const MonitorList = ({ onMonitorSelected }) => {
                         mgTop='5'
                         color={selectedId === item.id ? 'everWhite' : 'brisk' }
                         bg={selectedId === item.id ? 'darkRed' : 'white'}
-                        source={item.photo}
+                        source={imageMap[Number(item.photo) || 1]}
                         label={item.name}
                         fontSize='14'
                     />
