@@ -139,18 +139,18 @@ export const CancelButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight
   )
 }
 
-export const RedCancelButton = ({ hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+export const RedCancelButton = ({ hgt, wdt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle
         bg={'darkRed'}
-        wdt={'145'}
+        wdt={wdt}
         hgt={hgt}
         bdRd={bdRd}
         mgLeft={mgLeft}
         mgRight={mgRight}
         mgTop={mgTop}
         onPress={onPress}>
-          <Subcontainer align='center' justify='center' dir='row' bg='darkRed' wdt='120' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+          <Subcontainer align='center' justify='center' dir='row' bg='darkRed' wdt='150' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
               <MaterialIcons name="cancel" size={22} color="#ffffff" />
                   <ButtonTextStyle
                       mgLeft='5'
@@ -274,18 +274,18 @@ export const LogoutButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: Button
 }
 
 
-export const SaveButton = ({ bg, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+export const SaveButton = ({ bg, hgt, wdt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle
         bg={bg}
-        wdt={'145'}
+        wdt={wdt}
         hgt={hgt}
         bdRd={bdRd}
         mgLeft={mgLeft}
         mgRight={mgRight}
         mgTop={mgTop}
         onPress={onPress}>
-          <Subcontainer align='center' justify='center' dir='row' bg={bg} wdt='120' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+          <Subcontainer align='center' justify='center' dir='row' bg={bg} wdt='150' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
               <Fontisto name="check" size={18} color="#ffffff" />
                   <ButtonTextStyle
                     mgLeft='10'

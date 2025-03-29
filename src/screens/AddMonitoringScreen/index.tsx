@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Calendar, Container, CreateModal, DefineTimeScheduling, Headers, InfoText, MonitorList, PageSubtitle, PageTitle, StylezedButton, Subcontainer } from '~/components'
+import { Calendar, Container, CreateModal, DefineTimeScheduling, Headers, InfoText, MonitorList, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer } from '~/components'
 
 export const AddMonitoringScreen = ({ navigation }) => {
 
@@ -68,8 +68,9 @@ export const AddMonitoringScreen = ({ navigation }) => {
 
             {step >= 4 && (
             <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0'>
-              <StylezedButton
+              <RedCancelButton
                 bg='brisk'
+                wdt='165'
                 mgTop='10'
                 bdRd='10'
                 bdColor='darkRed'
@@ -79,8 +80,9 @@ export const AddMonitoringScreen = ({ navigation }) => {
                 onPress={() => modalCancel()}
               />
 
-              <StylezedButton
+              <SaveButton
                   bg='darkGreen'
+                  wdt='165'
                   mgTop='10'
                   bdRd='10'
                   mgLeft='20'

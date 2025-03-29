@@ -74,7 +74,7 @@ export const EditInfo = ({ navigation }) => {
         <Subcontainer mgLeft='0' mgTop='5' bg='darkGreen' dir='row' maxHgt='20' bdRd='0' justify='flex-end'>
             <SaveButton
                 bg='darkRed'
-                wdt='215'
+                wdt='145'
                 hgt='40'
                 mgTop='5'
                 mgRight='10'

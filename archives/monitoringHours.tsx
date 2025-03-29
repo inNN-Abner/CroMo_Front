@@ -75,7 +75,7 @@ export default [
       id: 7,
       weekDay: 'QUARTA',
       hour: '08h30 às 09h30',
-      class: 'Interação Humano-Computador',
+      class: 'Gestão e governaça de TI',
       icon: require('../assets/IHC.png'),
       locale: 'Sala 07',
       info: '08h30 às 09h30 || (Sala 07)',
