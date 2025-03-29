@@ -7,34 +7,28 @@ export const useMonitoring = () => {
   async function loadMonitoring(){
     const today = new Date()
     today.setDate(today.getDate() - 1)
-    const todayForm = today.toISOString().split("T")[0]
+
     try{
-        const resp = await fetch(`${API_URL}/show`,{
+        const resp = await fetch(`${API_URL}/monitoria/show`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              data: todayForm,
+              data: today,
             }),
         })
 
         if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
-
         const data = await resp.json()
-        setMonitoring(data.map((m) => ({
-            id: m.id,
-            materia: m.materia.nome,
-            dia_semana: m.dia_semana,
-            horario: `${m.horario_inicio} - ${m.horario_fim}`,
-            local: m.local
-              ? m.local.numero
-                ? `${m.local.tipo} ${m.local.numero}`
-                : `${m.local.tipo}`
-              : '',
-              //add nome do monitor
-          })))
-            
+        const monitorias = data.map((m) => ({
+            class: m.materia,
+            info: m.horario,
+            monitorName: m.monitor,
+            photo: m.foto
+          }))
+        //if (!monitorias) setMonitoring([{class: "Sem monitorias",info:"--", monitorName: "Sem monitoria", photo:""}])
+        setMonitoring(monitorias)
         } catch(e){
             console.log("erro: ", e)
         }
@@ -42,6 +36,5 @@ export const useMonitoring = () => {
     useEffect(() => {
         loadMonitoring()
          }, [])
-        
     return monitoring
     }

@@ -1,10 +1,30 @@
 import React from 'react'
-import ToggleThemeButton, { EditButton, LogoutButton } from '~/components/atoms/Button';
-import { HeaderText, PageTitle, PerfilCard, PerfilGrid, PerfilHeaders, Windows } from '~/components/';
-import { Container, Subcontainer } from '~/components/atoms/Container';
+import ToggleThemeButton, { EditButton, LogoutButton } from '~/components/atoms/Button'
+import { HeaderText, PageTitle, PerfilCard, PerfilGrid, PerfilHeaders, Windows } from '~/components/'
+import { Container, Subcontainer } from '~/components/atoms/Container'
+import { API_URL } from '~/configs/config'
+import * as SecureStore from 'expo-secure-store'
+
+const logout = async () => {
+  try{
+    const resp = await fetch(`${API_URL}/auth/logout`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    
+    if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
+    
+    await SecureStore.deleteItemAsync('user')
+    await SecureStore.deleteItemAsync('token')
+    
+    } catch(e){
+        console.log("erro: ", e)
+    }
+}
 
 export const PerfilScreen = ({ navigation }) => {
-  
   return (
     <Container hgt='100'>
         <PerfilHeaders />
@@ -58,7 +78,7 @@ export const PerfilScreen = ({ navigation }) => {
                   Sair
               </HeaderText>
               <LogoutButton wdt='50' hgt='50' bdRd='15' mgTop='5' mgLeft='10'
-                onPress={() => {
+                onPress={() => { logout()
                   navigation.navigate('Login')}}/>
             </Subcontainer>
 

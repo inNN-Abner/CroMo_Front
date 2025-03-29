@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import {useMonitoring} from '~/../archives/monitoring'
 import { FlatList, Text } from 'react-native'
-import { InfoText, ListContainer, Photo, Subcontainer, Windows } from '~/components/atoms'
+import { imageMap, InfoText, ListContainer, Photo, Subcontainer, Windows } from '~/components/atoms'
 import { TableGrid } from '~/components/molecules'
 
 export const HomeGrid = () => {
+    const monitoring = useMonitoring()
     return (
         <Subcontainer 
         hgt='250'
@@ -45,7 +46,7 @@ export const HomeGrid = () => {
                 hgt='205'
                 bg='briskGray'
             >
-                <FlatList data={ useMonitoring() } renderItem={({ item }) => (
+                <FlatList data={ monitoring } renderItem={({ item }) => (
 
                         <ListContainer
                             mgTop='0'
@@ -101,7 +102,7 @@ export const HomeGrid = () => {
 
 export const ClassGrid = () => {
     const today = new Date().toLocaleDateString('pt-BR', { weekday: 'long' })
-
+    const monitoring = useMonitoring()
     return (
     <Subcontainer 
         hgt='250'
@@ -143,7 +144,7 @@ export const ClassGrid = () => {
                 hgt='210'
                 bg='briskGray'
             >
-                <FlatList data={ useMonitoring() } renderItem={({ item }) => (
+                <FlatList data={ monitoring } renderItem={({ item }) => (
 
                     <ListContainer
                         mgTop='0'
