@@ -125,7 +125,7 @@ export const EditPerfilScreen = ({ navigation }) => {
           <Subcontainer mgLeft='0' mgTop='20' dir='row' align='center' justify='center' hgt='100'>
             <RedCancelButton
               bg='everWhite'
-              wdt='145'
+              wdt='150'
               hgt='55'
               mgTop='5'
               mgRight='5'
@@ -140,7 +140,7 @@ export const EditPerfilScreen = ({ navigation }) => {
             <SaveButton
               label='SALVAR'
               fontSize='18'
-              wdt='145'
+              wdt='150'
               hgt='55'
               mgTop='5'
               mgLeft='5'
