@@ -12,6 +12,7 @@ import { ReportSchedulingScreen } from '~/components/organism/ReportSchedulingCa
 import { PerfilGrid } from '~/components'
 import { EditPerfilScreen } from '~/screens/EditPerfilScreen'
 import { EditInfoScreen } from '~/screens/EditinfoScreen'
+import { RegisterScreen } from '~/screens/RegisterScren'
 
 interface BottomRoutes{
     Home: string
@@ -87,6 +88,7 @@ export const Routes = () => {
                 <Stack.Screen name='HomeBottom' component={ BottomRoute } />
                 <Stack.Screen name="PerfilGrid" component={ PerfilGrid } />
                 <Stack.Screen name="AddClass" component={AddClassScreen} />
+                <Stack.Screen name="Register" component={RegisterScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

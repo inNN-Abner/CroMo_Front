@@ -1,60 +1,20 @@
 import React, { useState } from 'react'
 const DarkLogin = require('~/../assets/LoginScreen_Dark.png')
 const LightLogin = require ('~/../assets/LoginScreen_Light.png')
-import { StylezedButton } from '~/components/atoms/Button'
+import { RedCancelButton, SaveButton, StylezedButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
 import { Container, Subcontainer, LogoImage, TextInput, LoginTitle, LoginError } from '~/components'
 import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 
-export const LoginScreen = ({ navigation }) => {
+export const RegisterScreen = ({ navigation }) => {
   const { isDark } = useTheme()
   const [emailValue, setEmailValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
+  const [passwordVerificationValue, setPasswordVerificationValue] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
-
-  const handleLogin = async() => {
-    setLoading(true)
-      try {
-        console.log('Enviando:', { email: emailValue, senha: passwordValue });
-
-        const response = await fetch(`${API_URL}/auth/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: emailValue,
-            senha: passwordValue,
-          }),
-        })
- 
-        const data = await response.json()
-          
-        if (data.token) {
-          await SecureStore.setItemAsync('token', data.token)
-          await SecureStore.setItemAsync('user', JSON.stringify({
-            nome: data.nome,
-            curso: data.curso,
-            tipo: data.tipo,
-            foto: data.foto,
-            email: data.email
-          }))
-          navigation.replace('HomeBottom') 
-        } else {
-          Alert.alert('Erro', data.message || 'E-mail ou senha inválidos!')
-        }
-      } catch (error) {
-        console.log('Erro na requisição:', error);
-
-        console.error('Erro ao efetuar login:', error)
-        Alert.alert('Erro', 'Não foi possível conectar ao servidor!')
-      } finally {
-        setLoading(false)
-      }
-    }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -63,8 +23,23 @@ export const LoginScreen = ({ navigation }) => {
         <Subcontainer align='center'>
           <LogoImage source={ isDark ? LightLogin : DarkLogin } />
 
-          <LoginTitle mgTop='25' mgLeft='0' alignSelf='flex-start'>
-            E-mail
+          <LoginTitle mgTop='0' mgLeft='0' alignSelf='flex-start'>
+            Nome
+          </LoginTitle>
+          
+          <TextInput 
+            placeholder={'Digite o seu nome'} 
+            keyboardType='normal'
+            value={emailValue}
+            onChangeText={(text) => setEmailValue(text)}
+            mgTop='5'
+            mgLeft='0'
+          />
+
+
+
+          <LoginTitle mgTop='15' mgLeft='0' alignSelf='flex-start'>
+            E-mail institucional
           </LoginTitle>
           
           <TextInput 
@@ -76,7 +51,7 @@ export const LoginScreen = ({ navigation }) => {
             mgLeft='0'
           />
 
-          <LoginTitle mgTop='20' mgLeft='0' alignSelf='flex-start'>
+          <LoginTitle mgTop='15' mgLeft='0' alignSelf='flex-start'>
             Senha
           </LoginTitle>
 
@@ -88,30 +63,44 @@ export const LoginScreen = ({ navigation }) => {
             onChangeText={(text) => setPasswordValue(text)}
             mgTop='5'
             mgLeft='0'
+          />
+
+          <LoginTitle mgTop='15' mgLeft='0' alignSelf='flex-start'>
+            Confirmar a senha
+          </LoginTitle>
+
+          <TextInput
+            placeholder={'Digite a sua senha novamente'} 
+            keyboardType='default'
+            secureTextEntry={true}
+            value={passwordVerificationValue}
+            onChangeText={(text) => setPasswordValue(text)}
+            mgTop='5'
+            mgLeft='0'
           />           
 
+        <Subcontainer mgTop='35' dir='row' wdt='360' mgLeft='0' hgt='70' align='center' justify='center'>
           <StylezedButton
-            label='ENTRAR' 
-            mgTop='30'
-            onPress={handleLogin}
-            />
+            label='CANCELAR' 
+            wdt='160'
+            mgTop='0'
+            onPress={() => {
+              navigation.navigate('Login')}}
+          />
 
           {errorMessage ? <LoginError>{errorMessage}</LoginError> : null}
 
           <StylezedButton
             label='CADASTRAR'
             bg='darkGreen'
-            mgTop='10'
+            mgTop='0'
+            mgLeft='10'
+            wdt='160'
             onPress={() => {
-              navigation.navigate('Register')}}
+              navigation.navigate('Login')}} //fazer a função de registrar
           />
-
-          <StylezedButton
-            label='Esqueci a senha'
-            bg='brisk'
-            color='darkRed'
-            mgTop='70'
-          /> 
+        </Subcontainer>
+         
 
         </Subcontainer>
         
