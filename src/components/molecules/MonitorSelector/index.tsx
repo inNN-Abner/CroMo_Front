@@ -4,7 +4,7 @@ import contacts from '~/../archives/contacts'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useTheme } from '~/context/ThemeContext'
 import { theme } from '~/styles'
-import monitors from '../../../../archives/monitors'
+import { useMonitors } from '../../../../archives/monitors'
 
 export const MonitorList = ({ onMonitorSelected }) => {
     const [selectedId, setSelectedId] = useState<number | null>(null)
@@ -31,7 +31,7 @@ export const MonitorList = ({ onMonitorSelected }) => {
                 style={{ width: '100%' }} 
                 contentContainerStyle={{ paddingVertical: 0 }}            
             >
-                {monitors.map((item) => (
+                {useMonitors().map((item) => (
                     <ListOptionButton
                         key={item.id}
                         onPress={() => handleButtonPress(item.id)}

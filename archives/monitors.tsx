@@ -33,7 +33,7 @@ export const useMonitors = () => {
     return monitor
     }
 
-export default [
+/*export default [
     {
       id: 1,
       name: 'Alvo Dombledore',
@@ -70,4 +70,4 @@ export default [
       email: 'roland.hooch@fatec.sp.gov.br',
       teams: 'Rolanda.Hooch_02'
     },
-]
+]*/
