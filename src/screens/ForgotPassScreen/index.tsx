@@ -14,6 +14,43 @@ export const ForgotPassScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
+  const handleEsqueciSenha = async () => {
+    console.log(API_URL)
+    if (!emailValue) {
+      setErrorMessage('Informe um e-mail válido')
+      return
+    }
+
+    setLoading(true)
+    try {
+        const response = await fetch(`${API_URL}/esqueciSenha/esqueci-senha`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: emailValue }),
+      })
+
+      console.log('STATUS:', response.status)
+      const data = await response.json()
+      console.log('DATA:', data)
+      
+      if (response.ok) {
+        Alert.alert('Sucesso', 'E-mail enviado com sucesso!')
+        console.log('Função foi chamada - ENVIAR EMAIL') 
+        navigation.navigate('Login')
+      } else {
+        setErrorMessage(data.error || 'Erro ao enviar e-mail')
+        console.log('Função foi chamada - ERRO ENVIAR EMAIL') 
+      }
+    } catch (error) {
+      setErrorMessage('Erro na conexão com o servidor')
+      console.log('Função foi chamada - ERRO') 
+    } finally {
+      setLoading(false)
+    }
+    console.log('Função foi chamada - FINAL') 
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -73,8 +110,7 @@ export const ForgotPassScreen = ({ navigation }) => {
                 bg='darkGreen'
                 mgTop='0'
                 mgLeft='10'
-                onPress={() => {
-                    navigation.navigate('Login')}} //Fazer a função para enviar o código no e-mail
+                onPress={handleEsqueciSenha}
             />
             </Subcontainer>
         </Subcontainer>
