@@ -1,4 +1,5 @@
-import { LogoImageStyle, LogoHeaderStyle } from './styles'
+import { LogoImageStyle, LogoHeaderStyle, IconButtonStyle } from './styles'
+const ChatbotIcon = require('~/../assets/Chatbot_CroMo.png')
 
 interface LogoProps {
     source?: string
@@ -29,6 +30,20 @@ export const LogoHeader = ({ source, justify, wdt, hgt, mgTop, mgRight, mgLeft }
     return (
         <LogoHeaderStyle
             source={source}
+            justify={justify}
+            wdt={wdt}
+            hgt={hgt}
+            mgTop={mgTop}
+            mgRight={mgRight}
+            mgLeft={mgLeft}
+        />
+    )
+}
+
+export const IconButton = ({ source, justify, wdt, hgt, mgTop, mgRight, mgLeft }: LogoProps) => {
+    return (
+    <IconButtonStyle
+            source={ChatbotIcon}
             justify={justify}
             wdt={wdt}
             hgt={hgt}

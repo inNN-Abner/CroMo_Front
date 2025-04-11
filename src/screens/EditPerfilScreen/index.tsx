@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { RedCancelButton, SaveButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
-import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, CourseSelector, EditPhoto } from '~/components'
+import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, EditPhoto } from '~/components'
 import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 //import { launchImageLibrary } from 'react-native-image-picker'

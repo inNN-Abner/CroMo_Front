@@ -14,6 +14,7 @@ import { EditPerfilScreen } from '~/screens/EditPerfilScreen'
 import { EditInfoScreen } from '~/screens/EditinfoScreen'
 import { RegisterScreen } from '~/screens/RegisterScren'
 import { ForgotPassScreen } from '~/screens/ForgotPassScreen'
+import { ChatbotScreen } from '~/screens/ChatbotScreen'
 
 interface BottomRoutes{
     Home: string
@@ -91,7 +92,9 @@ export const Routes = () => {
                 <Stack.Screen name="AddClass" component={AddClassScreen} />
                 <Stack.Screen name="Register" component={RegisterScreen} />
                 <Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
+                <Stack.Screen name="Chatbot" component={ChatbotScreen} />
             </Stack.Navigator>
+            
         </NavigationContainer>
     )
 }

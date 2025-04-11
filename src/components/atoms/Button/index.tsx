@@ -1,11 +1,12 @@
 import React from 'react';
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import Fontisto from '@expo/vector-icons/Fontisto'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { useTheme } from '../../../context/ThemeContext';
 import { ButtonTextStyle, StyledButtonStyle, ThemeButtonStyle } from './styles';
 import { Subcontainer } from '../Container';
 import { Photo } from '../Photo';
+import { IconButton } from '../Logo';
 
 interface ButtonProps {
   source?: string
@@ -69,7 +70,7 @@ const ToggleThemeButton = ({ bg, wdt, hgt, mgLeft, mgTop, bdRd }: ButtonProps) =
       onPress={toggleTheme}
     >
       <Subcontainer mgLeft='0' mgTop='0' bg='transparent' align='center' justify='center'>
-        <Ionicons name={ isDark ? 'moon' : 'sunny'} size={40} color={ isDark ? 'white' : 'white'}  />
+        <Ionicons name={ isDark ? 'moon' : 'sunny'} size={35} color={ isDark ? 'white' : 'white'}  />
       </Subcontainer>
     </ThemeButtonStyle>
   )
@@ -139,28 +140,18 @@ export const CancelButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight
   )
 }
 
-export const RedCancelButton = ({ hgt, wdt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+export const ChatbotButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
   return (
-    <StyledButtonStyle
-        bg={'darkRed'}
+    <ThemeButtonStyle
+        bg={'purple'}
         wdt={wdt}
         hgt={hgt}
         bdRd={bdRd}
         mgLeft={mgLeft}
-        mgRight={mgRight}
         mgTop={mgTop}
         onPress={onPress}>
-          <Subcontainer align='center' justify='center' dir='row' bg='darkRed' wdt='150' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
-              <MaterialIcons name="cancel" size={22} color="#ffffff" />
-                  <ButtonTextStyle
-                      mgLeft='5'
-                      mgTop='-2'
-                      color={'everWhite'}
-                      fontSize={fontSize}>
-                      {label}
-                  </ButtonTextStyle>
-          </Subcontainer>    
-    </StyledButtonStyle>
+        <IconButton />
+    </ThemeButtonStyle>
   )
 }
 
@@ -273,6 +264,30 @@ export const LogoutButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: Button
   )
 }
 
+export const RedCancelButton = ({ hgt, wdt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={'darkRed'}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgRight={mgRight}
+        mgTop={mgTop}
+        onPress={onPress}>
+          <Subcontainer align='center' justify='center' dir='row' bg='darkRed' wdt='150' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+              <MaterialIcons name="cancel" size={22} color="#ffffff" />
+                  <ButtonTextStyle
+                      mgLeft='5'
+                      mgTop='-2'
+                      color={'everWhite'}
+                      fontSize={fontSize}>
+                      {label}
+                  </ButtonTextStyle>
+          </Subcontainer>    
+    </StyledButtonStyle>
+  )
+}
 
 export const SaveButton = ({ bg, hgt, wdt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
   return (

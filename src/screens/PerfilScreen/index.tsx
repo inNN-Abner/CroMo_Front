@@ -1,5 +1,5 @@
 import React from 'react'
-import ToggleThemeButton, { EditButton, LogoutButton } from '~/components/atoms/Button'
+import ToggleThemeButton, { ChatbotButton, EditButton, LogoutButton } from '~/components/atoms/Button'
 import { HeaderText, PageTitle, PerfilCard, PerfilGrid, PerfilHeaders, Windows } from '~/components/'
 import { Container, Subcontainer } from '~/components/atoms/Container'
 import { API_URL } from '~/configs/config'
@@ -68,6 +68,21 @@ export const PerfilScreen = ({ navigation }) => {
               <ToggleThemeButton />
             </Subcontainer>
 
+            <Subcontainer bg='darkGreen' mgLeft='0' wdt='75' mgTop='0'>
+              <HeaderText
+                mgTop='5'
+                mgLeft='10'
+                color='lightGray'
+                fontSize='16'
+                >
+                  Ajuda
+              </HeaderText>
+              <ChatbotButton
+                onPress={() => navigation.navigate('Chatbot')}
+              />
+            </Subcontainer>
+
+            
             <Subcontainer bg='darkGreen' mgLeft='-0' wdt='75' mgTop='0'>
               <HeaderText
                 mgTop='5'
