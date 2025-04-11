@@ -18,7 +18,7 @@ export const HomeScreen = ({ navigation }) => {
               wdt='250'
               hgt='25'
               mgLeft='-90'
-              mgTop='3'
+              mgTop='7'
               align='flex-start'
               justify='flex-start'
               label={'Agendar monitoria'}
@@ -35,7 +35,7 @@ export const HomeScreen = ({ navigation }) => {
                 wdt='250'
                 hgt='25'
                 mgLeft='-90'
-                mgTop='3'
+                mgTop='7'
                 align='flex-start'
                 justify='flex-start'
                 label={'Editar informações'}

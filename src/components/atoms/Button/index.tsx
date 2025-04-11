@@ -26,6 +26,7 @@ interface ButtonProps {
   bdColor?: string
   children?: React.ReactNode
   label?: string
+  labelComponent?: React.ReactNode
   hour?: string
   local?: string
   classRoom?: string
@@ -212,7 +213,7 @@ export const EditInfoButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRig
   )
 }
 
-export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop, mgLeft, label, color, bg, fontSize, onPress }: ButtonProps ) => {
+export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop, mgLeft, label, labelComponent, color, bg, fontSize, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle 
         justify={justify}
@@ -234,6 +235,9 @@ export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop
               source={source}
             />
 
+        {labelComponent ? (
+          <>{labelComponent}</>
+        ) : (
           <ButtonTextStyle
               fontSize={fontSize}
               color={color}
@@ -245,6 +249,7 @@ export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop
               }}  >
                 {label}
           </ButtonTextStyle>
+        )}
     </StyledButtonStyle>
   )
 }

@@ -11,7 +11,7 @@ export const HomeGrid = () => {
         hgt='250'
         wdt='360'
         align='center'
-        mgTop='15'
+        mgTop='35'
         mgLeft='0'
         bg='white'>
 
@@ -105,7 +105,7 @@ export const ClassGrid = () => {
     const monitoring = useMonitoring()
     return (
     <Subcontainer 
-        hgt='250'
+        hgt='200'
         wdt='360'
         align='center'
         mgTop='0'
@@ -141,7 +141,7 @@ export const ClassGrid = () => {
                 bdRdTL='0'
                 bdRdTR='0'
                 wdt='355'
-                hgt='210'
+                hgt='160'
                 bg='briskGray'
             >
                 <FlatList data={ monitoring } renderItem={({ item }) => (

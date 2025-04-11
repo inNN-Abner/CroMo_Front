@@ -1,37 +1,59 @@
 import { useEffect, useState } from "react"
 import { API_URL } from "~/configs/config"
 
+type Monitoria = {
+  id: number
+  materia: {
+    id: number
+    nome: string
+  }
+}
+
+type Monitor = {
+  materia: string
+  id: number
+  email: string
+  name: string
+  photo: string
+  monitorias: Monitoria[]
+}
+
 export const useMonitors = () => { 
-    const [monitor, setMonitor] = useState([])
+  const [monitor, setMonitor] = useState<Monitor[]>([])
 
-  async function loadMonitor(){
-    try{
-        const resp = await fetch(`${API_URL}/auth/monitores`,{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    async function loadMonitor() {
+      try {
+        const resp = await fetch(`${API_URL}/auth/monitoresMonitoria`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
-
-        if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
-        const data = await resp.json()
-        const monitores = data.map((m) => ({
-            id: m.id,
-            email: m.email,
-            name: m.nome,
-            photo: m.idFoto
-          }))
-        console.log(monitores)
+  
+        const status = resp.status
+        const respostaBruta = await resp.text()
+        const data = JSON.parse(respostaBruta)
+  
+        const monitores = data.map((m: any) => ({
+          id: m.id,
+          email: m.email,
+          name: m.nome,
+          photo: m.idFoto,
+          materia: m.monitorias?.[0]?.materia?.nome ?? 'Sem matéria'
+        }))
+  
         setMonitor(monitores)
-        } catch(e){
-            console.log("erro: ", e)
-        }
-    } 
+      } catch (e) {
+        console.log("erro: ", e)
+      }
+    }
+  
     useEffect(() => {
       loadMonitor()
-         }, [])
+    }, [])
+  
     return monitor
-    }
+  }
 
 /*export default [
     {
