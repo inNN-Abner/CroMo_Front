@@ -20,7 +20,7 @@ export const useUserSchedule = () => {
     setError(null)
 
     try {
-      const token = await SecureStore.getItemAsync("token");
+      const token = await SecureStore.getItemAsync("token")
 
       const response = await fetch(`${API_URL}/agenda`, {
         method: "GET",
@@ -30,10 +30,10 @@ export const useUserSchedule = () => {
         },
       })
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || "Erro ao buscar agendas");
+        setError(data.error || "Erro ao buscar agendas")
         return
       }
 
@@ -45,7 +45,7 @@ export const useUserSchedule = () => {
         hour: item.horario.replace("-", "às"),
       }))
 
-      setAgendas(formatted);
+      setAgendas(formatted)
     } catch (error) {
       console.error("Erro ao buscar a agenda:", error)
       setError("Falha ao se comunicar com o servidor")
@@ -58,5 +58,49 @@ export const useUserSchedule = () => {
     loadUserSchedule()
   }, [])
 
-  return { agendas, loading, error };
+  //Delete
+  async function handleDelete(id: number) {
+    try {
+      const token = await SecureStore.getItemAsync("token")
+  
+      if (!token) {
+        console.log('Token não encontrado, usuário não está logado!')
+        return
+      }
+
+      const response = await fetch(`${API_URL}/agenda/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token || '',
+        }
+      })
+  
+      console.log('Resposta status:', response.status)
+  
+      if (response.status === 204) {
+        console.log('Agenda excluída com sucesso!')
+        loadUserSchedule()
+        return
+      }
+  
+      const contentType = response.headers.get("content-type")
+  
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json()
+        console.log('Resposta JSON:', data)
+  
+        if (!response.ok) {
+          console.log('Erro ao excluir:', data.error || 'Erro desconhecido.')
+        }
+      } else {
+        const text = await response.text()
+        console.log('Resposta texto (provável HTML):', text)
+      }
+  
+    } catch (error) {
+      console.error('Falha ao excluir agenda:', error)
+    }
+  }
+    return { agendas, loading, error, handleDelete } 
 }

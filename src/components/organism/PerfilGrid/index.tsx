@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatList, Text } from 'react-native'
-import { AddButton, InfoText, ListContainer, TrashButton } from '~/components/atoms'
+import { AddButton, InfoText, ListContainer, PageSubtitle, PageTitle, StylezedButton, Subcontainer, TrashButton } from '~/components/atoms'
+import { CreateModal } from '~/components/molecules'
 import { TableGrid } from '~/components/molecules/Grid'
 import { useUserSchedule } from '~/services/useUserScheduleHooks'
 
 export const PerfilGrid = ({ navigation }) => {
 
-    const { agendas, loading, error } = useUserSchedule()
+    const { agendas, handleDelete, loading, error } = useUserSchedule()
+    const [selectedItemId, setSelectedItemId] = useState<number | null>(null)
+    const [openCreateModal, setOpenCreateModal] = useState(false)
 
+    function handleOnPress() {
+        setOpenCreateModal(!openCreateModal)
+    }
+    
     if (loading) return <InfoText color='white' alignSelf='center' mgTop='100' fontSize='16'>Carregando...</InfoText>
     if (error) return <InfoText color='white' alignSelf='center' mgTop='100' fontSize='16'>{error}</InfoText>
 
@@ -38,7 +45,11 @@ export const PerfilGrid = ({ navigation }) => {
                 bdRd='10'
                 mgTop='3'
                 mgLeft='5'
-                bg='darkRed' 
+                bg='darkRed'
+                onPress={() => {
+                    setSelectedItemId(item.id)
+                    handleOnPress()
+                }}
             />
         </ListContainer>
         )}
@@ -66,6 +77,41 @@ export const PerfilGrid = ({ navigation }) => {
                     navigation.navigate('AddClass')
                 }} />
         </ListContainer>
-    </> 
+    
+        <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
+
+            <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{'Apagar matéria'}</PageTitle>
+            <PageSubtitle color='brisk' fontSize='15' mgLeft='5' alignSelf='center' >{'Tem certeza que deseja apagar essa matéria? A ação é irreversíel!'}</PageSubtitle>
+            
+            <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
+                <StylezedButton
+                    label={'Apagar matéria'}
+                    bg='darkRed'
+                    mgTop='27'
+                    wdt='140'
+                    hgt='40'
+                    bdRd='10'
+                    fontSize='16'
+                    onPress={() => {
+                        if (selectedItemId !== null) {
+                          handleDelete(selectedItemId)
+                          handleOnPress()
+                        }
+                    }}
+                />
+                <StylezedButton
+                    label={'Cancelar'}
+                    bg='white'
+                    color='darkRed'
+                    mgTop='27'
+                    wdt='140'
+                    hgt='40'
+                    bdRd='10'
+                    fontSize='16'
+                    onPress={handleOnPress}
+                />
+              </Subcontainer>
+          </CreateModal>
+        </> 
     )
 }
