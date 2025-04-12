@@ -8,8 +8,8 @@ const Clock = require( '~/../assets/Clock.png')
 
 export const SummarySchedule = ({ navigation }) => {
     const [openCreateModal, setOpenCreateModal] = useState(false)
-    const [titleMessage, setTitleMessage] = useState('');
-    const [bodyMessage, setBodyMessage] = useState('');
+    const [titleMessage, setTitleMessage] = useState('')
+    const [bodyMessage, setBodyMessage] = useState('')
 
     function handleOnPress() {
         setOpenCreateModal(!openCreateModal)
@@ -106,7 +106,7 @@ export const SummarySchedule = ({ navigation }) => {
             </PageSubtitle>
         </Subcontainer>
 
-        <Subcontainer mgLeft='0' mgTop='5' bg='darkGreen' dir='row' maxHgt='20' bdRd='0' justify='flex-end'>
+        <Subcontainer mgLeft='0' mgTop='5' bg='darkGreen' dir='row' maxHgt='27' bdRd='0' justify='flex-end'>
             <CancelButton
                 bg='everWhite'
                 wdt='215'
@@ -124,31 +124,31 @@ export const SummarySchedule = ({ navigation }) => {
         </React.Fragment>
         ))}
 
-        <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='150' pdd='0' align='center'>
+        <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
 
-            <PageTitle color='brisk' fontSize='20' >{titleMessage}</PageTitle>
-            <PageSubtitle color='brisk' fontSize='15' >{bodyMessage}</PageSubtitle>
+            <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{titleMessage}</PageTitle>
+            <PageSubtitle color='brisk' fontSize='15' mgLeft='5' alignSelf='center' >{bodyMessage}</PageSubtitle>
             
-            <Subcontainer dir='row-reverse' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
+            <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
                 <StylezedButton
                     label={'Cancelar aula'}
                     bg='darkRed'
-                    mgTop='15'
-                    wdt='150'
+                    mgTop='27'
+                    wdt='140'
                     hgt='40'
                     bdRd='10'
                     fontSize='16'
                     onPress={() => {
-                        handleOnPress();
-                        navigation.navigate('Monitoring');
+                        handleOnPress()
+                        navigation.navigate('Monitoring')
                     }}
                 />
                 <StylezedButton
                     label={'Manter aula'}
                     bg='white'
                     color='darkRed'
-                    mgTop='15'
-                    wdt='150'
+                    mgTop='27'
+                    wdt='140'
                     hgt='40'
                     bdRd='10'
                     fontSize='16'

@@ -1,13 +1,22 @@
 import React from 'react'
-import monitoringHours from '~/../archives/monitoringHours'
 import { FlatList, Text } from 'react-native'
-import { AddButton, ListContainer, TrashButton } from '~/components/atoms'
+import { AddButton, InfoText, ListContainer, TrashButton } from '~/components/atoms'
 import { TableGrid } from '~/components/molecules/Grid'
+import { useUserSchedule } from '~/services/useUserScheduleHooks'
 
 export const PerfilGrid = ({ navigation }) => {
+
+    const { agendas, loading, error } = useUserSchedule()
+
+    if (loading) return <InfoText color='white' alignSelf='center' mgTop='100' fontSize='16'>Carregando...</InfoText>
+    if (error) return <InfoText color='white' alignSelf='center' mgTop='100' fontSize='16'>{error}</InfoText>
+
     return (
     <>
-    <FlatList data={ monitoringHours } renderItem={({ item }) => (
+    <FlatList
+        data={ agendas }     
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => (
 
         <ListContainer
             wdt='343'
@@ -23,7 +32,7 @@ export const PerfilGrid = ({ navigation }) => {
                 <Text style={{ fontWeight: 'bold' }}>{item.locale}</Text> {`\n`} {item.hour}</TableGrid>
 
             <TrashButton
-                label={'Teste'}
+                label={''}
                 wdt='40'
                 hgt='50'
                 bdRd='10'
