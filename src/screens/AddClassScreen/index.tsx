@@ -1,10 +1,16 @@
-import { Keyboard, TouchableWithoutFeedback } from 'react-native'
-import { Headers, Container, SelectDay, Subcontainer, StylezedButton, Windows, ContactText, PageTitle, PageSubtitle, TimeInput, ClassroomSelector, InfoText, ClassInput } from '../../components'
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { Headers, Container, SelectDay, Subcontainer, StylezedButton, Windows, ContactText, PageTitle, PageSubtitle, TimeInput, ClassroomSelector, ClassInput } from '../../components'
+import { useState } from 'react'
+import { useUserSchedule } from '~/services/useUserScheduleHooks'
 
 export const AddClassScreen = ({ navigation }) => {
-  const handleTimeSelected = (time: string) => {
-    console.log('Horário selecionado:', time)
-  }
+
+  const [day, setDay] = useState<string | null>(null)
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
+  const [materia, setMateria] = useState('')
+  const [selectedClassroom, setSelectedClassroom] = useState<number | null>(null)
+  const {handleSubmit} = useUserSchedule()
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -36,11 +42,21 @@ export const AddClassScreen = ({ navigation }) => {
               </ContactText>
             </Windows>
 
-            <SelectDay />
+            <SelectDay 
+              onDaySelected={setDay} 
+            />
             
           <Subcontainer align='center' maxHgt='50' mgLeft='0'>
-            <TimeInput />
-            <ClassInput />
+            <TimeInput 
+              startTime={startTime} 
+              setStartTime={setStartTime} 
+              endTime={endTime} 
+              setEndTime={setEndTime} 
+            />
+
+          <ClassInput 
+            setMateria={setMateria}
+          />
 
           <Subcontainer bg='darkGreen' align='center' justify='center' mgLeft='0' wdt='325' hgt='125' mgTop='5'>
             
@@ -49,7 +65,10 @@ export const AddClassScreen = ({ navigation }) => {
               Selecione a sala/laboratório
             </PageSubtitle>
 
-            <ClassroomSelector />
+            <ClassroomSelector 
+              selectedClassroom={selectedClassroom} 
+              setSelectedClassroom={setSelectedClassroom} 
+            />
 
           </Subcontainer>
             </Subcontainer>
@@ -60,9 +79,15 @@ export const AddClassScreen = ({ navigation }) => {
                 bdRd='10'
                 label={'Definir monitoria'}
                 onPress={() => {
-                  navigation.navigate('Contacts')
+                  handleSubmit(
+                      navigation,
+                      day,
+                      startTime,
+                      endTime,
+                      materia,
+                      selectedClassroom
+                  )
                 }} />
-
         </Subcontainer>
 
       </Container>

@@ -93,7 +93,8 @@ export const PerfilScreen = ({ navigation }) => {
                   Sair
               </HeaderText>
               <LogoutButton wdt='50' hgt='50' bdRd='15' mgTop='5' mgLeft='10'
-                onPress={() => { logout()
+                onPress={() => { 
+                  logout()
                   navigation.navigate('Login')}}/>
             </Subcontainer>
 

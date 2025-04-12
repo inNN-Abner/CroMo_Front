@@ -6,7 +6,7 @@ import * as SecureStore from 'expo-secure-store'
 interface ClassroomModalProps {
   visible: boolean
   onClose: () => void
-  onSelect: (classroom: string) => void
+  onSelect: (classroomId: number) => void
   options: { id: number, name: string }[]
 }
 
@@ -27,7 +27,7 @@ export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose
               wdt='250'
               key={classroom.id}
               onPress={async () => {
-                onSelect(classroom.name)
+                onSelect(classroom.id) // agora passa o ID corretamente
                 await SecureStore.setItemAsync('classroom', classroom.id.toString())
                 onClose()
               }}
@@ -35,7 +35,6 @@ export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose
               <OptionText>{classroom.name}</OptionText>
             </OptionButton>
           ))}
-          
           </ScrollableContent>
           <CloseButton onPress={onClose}>
             <CloseButtonText>Fechar</CloseButtonText>

@@ -6,6 +6,7 @@ import { theme } from '~/styles'
 import { WindowsStyle } from '../Windows/styles'
 import { Subcontainer } from '../Container'
 import { PageSubTitleStyle } from '../Text/styles'
+import { LoginTitle } from '../Text'
 
 interface InputProps {
     children?: string
@@ -25,12 +26,14 @@ interface InputProps {
     mgLeft?: string
     bdRd?: string
     wrap?: string;
+    fontSize?: string;
+    align?: string;
 
     onChangeText?: (text: string) => void
     setList?: (list: any[]) => void
 }
 
-export const TextInput = ({ children, editable, value, onChangeText, placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
+export const TextInput = ({ children, editable, value, fontSize, align, onChangeText, placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
 
   return (
     <TextInputStyle
@@ -41,6 +44,8 @@ export const TextInput = ({ children, editable, value, onChangeText, placeholder
       value={value} 
       placeholderTextColor={'gray'}
       editable={editable} 
+      fontSize={fontSize}
+      align={align}
 
       mgTop={mgTop}
       mgLeft={mgLeft}
@@ -54,7 +59,11 @@ export const TextInput = ({ children, editable, value, onChangeText, placeholder
   )
 }
 
-export const ClassInput = () => {
+type ClassInputProps = {
+  setMateria: (value: string) => void
+}
+
+export const ClassInput: React.FC<ClassInputProps> = ({ setMateria }) => {
   const { isDark } = useTheme()
 
   return (
@@ -68,12 +77,15 @@ export const ClassInput = () => {
         <Subcontainer mgTop='-10' mgLeft='0' maxHgt='95' wdt='320' align='center' bg='darkGreen'>
           <PageSubTitleStyle alignSelf='center' mgLeft='0' mgTop='10' color='everWhite' fontSize='18'>Matéria</PageSubTitleStyle>
 
-          <TextInputStyle
+          <TextInput
             mgTop='5'
             mgLeft='0'
-            textAlign='center'
-            fontSize='16'
             wdt='290'
+            align='center'
+            pddLeft='0'
+            fontSize='16'
+            placeholder='Ex.: Gestão de projetos'
+            onChangeText={setMateria}
           />
             
         </Subcontainer>
@@ -82,11 +94,16 @@ export const ClassInput = () => {
 }
 
 
-export const TimeInput = () => {
+type TimeInputProps = {
+  startTime: string
+  setStartTime: (value: string) => void
+  endTime: string
+  setEndTime: (value: string) => void
+}
+
+export const TimeInput: React.FC<TimeInputProps> = ({ startTime, setStartTime, endTime, setEndTime }) => {
   const { isDark } = useTheme()
-  const [startTime, setStartTime] = useState('')
-  const [endTime, setEndTime] = useState('')
-  
+
   return (
     <WindowsStyle 
       dir='row' 
@@ -95,43 +112,44 @@ export const TimeInput = () => {
       align='center'
       justify='center'
     >
-        <Subcontainer mgTop='0' mgLeft='0' maxHgt='100' wdt='160' align='center' bg='darkGreen'>
-          <PageSubTitleStyle alignSelf='center' mgLeft='0' mgTop='10' color='everWhite' fontSize='18'>Início</PageSubTitleStyle>
+      <Subcontainer mgTop='0' mgLeft='0' maxHgt='100' wdt='160' align='center' bg='darkGreen'>
+        <PageSubTitleStyle alignSelf='center' mgLeft='0' mgTop='10' color='everWhite' fontSize='18'>
+          Início
+        </PageSubTitleStyle>
 
-          <TimeInputStyle 
-              type={'custom'}
-              options={{
-                mask: '99:99'
-              }}            
-            pddLeft='0' 
-            mgTop='5' 
-            placeholder='___ : ___'
-            placeholderTextColor={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
-            color={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white} 
-            keyboardType={'numeric'}
-            onChangeText={setStartTime}
-            value={startTime}
-            />
-        </Subcontainer>
+        <TimeInputStyle 
+          type={'custom'}
+          options={{ mask: '99:99' }}
+          pddLeft='0' 
+          mgTop='5' 
+          placeholder='___ : ___'
+          placeholderTextColor={isDark ? theme.darkTheme.colors.white : theme.lightTheme.colors.brisk}
+          color={isDark ? theme.darkTheme.colors.white : theme.lightTheme.colors.brisk} 
+          keyboardType={'numeric'}
+          onChangeText={setStartTime}
+          value={startTime}
+        />
+      </Subcontainer>
 
-        <Subcontainer mgTop='0' maxHgt='100' wdt='150' align='center' bg='darkGreen' >
-          <PageSubTitleStyle alignSelf='center' mgLeft='0' mgTop='10' color='everWhite' fontSize='18'>Fim</PageSubTitleStyle>
+      <Subcontainer mgTop='0' maxHgt='100' wdt='150' align='center' bg='darkGreen'>
+        <PageSubTitleStyle alignSelf='center' mgLeft='0' mgTop='10' color='everWhite' fontSize='18'>
+          Fim
+        </PageSubTitleStyle>
 
-          <TimeInputStyle
-              type={'custom'}
-              options={{
-                mask: '99:99'
-              }}            
-            alignSelf='center' pddLeft='0' 
-            mgTop='5' 
-            placeholder='___ : ___'
-            placeholderTextColor={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
-            color={isDark ? theme.darkTheme.colors.brisk : theme.darkTheme.colors.white}
-            keyboardType={'numeric'}
-            onChangeText={setEndTime}
-            value={endTime}
-          />
-        </Subcontainer>
+        <TimeInputStyle 
+          type={'custom'}
+          options={{ mask: '99:99' }}
+          alignSelf='center' 
+          pddLeft='0' 
+          mgTop='5' 
+          placeholder='___ : ___'
+          placeholderTextColor={isDark ? theme.darkTheme.colors.white : theme.lightTheme.colors.brisk}
+          color={isDark ? theme.darkTheme.colors.white : theme.lightTheme.colors.brisk} 
+          keyboardType={'numeric'}
+          onChangeText={setEndTime}
+          value={endTime}
+        />
+      </Subcontainer>
     </WindowsStyle>
   )
 }

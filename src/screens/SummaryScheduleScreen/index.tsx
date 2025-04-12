@@ -9,7 +9,7 @@ export const SummaryScheduleScreen = ({ navigation }) => {
       <PageTitle>Monitorias</PageTitle>
       <PageSubtitle>Minhas monitorias agendadas</PageSubtitle>
 
-      <Subcontainer align='center' mgLeft='17' mgTop='0'>
+      <Subcontainer align='center' mgLeft='15' mgTop='0'>
         <SummarySchedule navigation={navigation} />
       </Subcontainer>
     </Container>

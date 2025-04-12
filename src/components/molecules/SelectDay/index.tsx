@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
 import { SelectDayContainer, DayButton } from '../../atoms'
-import * as SecureStore from 'expo-secure-store'
 
-export const diaSemana = async(index: number) => {
-    const diasDaSemana = [
-    "Segunda-feira", "Terça-feira","Quarta-feira",
-    "Quinta-feira", "Sexta-feira", "Sábado" ]
-    await SecureStore.setItemAsync('semana', diasDaSemana[index])
+type SelectDayProps = {
+    onDaySelected: (day: string) => void
 }
 
-export const SelectDay = () => {
-    const [indexDate, setIndexDate] = useState<number | null>(null) 
+export const SelectDay: React.FC<SelectDayProps> = ({ onDaySelected }) => {
+    const [indexDate, setIndexDate] = useState<number | null>(null)
+
+    const diasDaSemana = [
+        "Segunda-feira", "Terça-feira", "Quarta-feira", 
+        "Quinta-feira", "Sexta-feira", "Sábado"
+    ]
+
     const handleButtonPress = (index: number) => {
         setIndexDate(index)
-        diaSemana(index)
+        onDaySelected(diasDaSemana[index])  // informa para o pai o valor escolhido
     }
 
     return (
-        <SelectDayContainer >
+        <SelectDayContainer>
             {['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'].map((day, index) => (
                 <DayButton 
                     key={index}

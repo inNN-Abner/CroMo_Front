@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { API_URL } from "~/configs/config"
 import * as SecureStore from "expo-secure-store"
+import { Alert } from "react-native"
 
 type Agenda = {
   id: number
@@ -102,5 +103,69 @@ export const useUserSchedule = () => {
       console.error('Falha ao excluir agenda:', error)
     }
   }
-    return { agendas, loading, error, handleDelete } 
+
+  const handleSubmit = async (navigation: any, day: string, startTime: string, endTime: string, materia: string, locale: number | null) => {
+
+    if (!day || !startTime || !endTime || !materia || locale === null) {
+      Alert.alert("Atenção", "Preencha todos os campos antes de salvar.")
+      return
+    }
+  
+    try {
+      const token = await SecureStore.getItemAsync("token")
+  
+      const response = await fetch(`${API_URL}/agenda`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token || ''
+        },
+        body: JSON.stringify({
+          dia_semana: day,
+          horario_inicio: startTime,
+          horario_fim: endTime,
+          idLocal: Number(locale),
+          nomeMateria: materia
+        })
+      })
+  
+      if (response.ok) {
+        Alert.alert("Sucesso", "Horário adicionado com sucesso!")
+        console.log('Dados para enviar:', {
+          dia_semana: day,
+          horario_inicio: startTime,
+          horario_fim: endTime,
+          nomeMateria: materia,
+          idLocal: locale
+        })
+        
+        loadUserSchedule()
+        navigation.navigate('Perfil')
+      } else {
+        const data = await response.json()
+        console.log('Dados para enviar:', {
+          dia_semana: day,
+          horario_inicio: startTime,
+          horario_fim: endTime,
+          nomeMateria: materia,
+          idLocal: locale
+        })
+        
+        Alert.alert("Erro", data.error || "Não foi possível cadastrar.")
+      }
+    } catch (error) {
+      console.log('Dados para enviar:', {
+        dia_semana: day,
+        horario_inicio: startTime,
+        horario_fim: endTime,
+        nomeMateria: materia,
+        idLocal: locale
+      })
+      
+      console.error("Erro ao enviar:", error)
+      Alert.alert("Erro", "Falha ao conectar com o servidor.")
+    }
+  }
+    
+  return { agendas, loading, error, handleDelete, handleSubmit }
 }
