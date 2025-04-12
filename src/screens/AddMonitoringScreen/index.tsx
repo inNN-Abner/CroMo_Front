@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Calendar, Container, CreateModal, DefineTimeScheduling, Headers, InfoText, MonitorList, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer } from '~/components'
+import * as SecureStore from 'expo-secure-store'
 
 export const AddMonitoringScreen = ({ navigation }) => {
 
@@ -58,7 +59,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
 
           <Subcontainer maxHgt='100' justify='center' mgLeft='0' mgTop='75' dir='row'>
           {step >= 2 && (
-            <MonitorList onMonitorSelected={(monitor) => { setSelectedMonitor(monitor); setStep(3) }} />
+            <MonitorList onMonitorSelected={ (monitor) => { setSelectedMonitor(monitor); SecureStore.setItem("monitorSelecionado", monitor.toString()); console.log(monitor); setStep(3) }} />
           )}
 
           {step >= 3 && (

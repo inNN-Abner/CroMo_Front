@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Subcontainer, PageSubtitle, SetTimeButton, Divider } from '~/components/atoms'
-import hours from '~/../archives/hours'
+import { useHours } from '~/../archives/hours'
 import { ScrollView } from 'react-native-gesture-handler'
 
 export const DefineTimeScheduling: React.FC<{ onTimeSelected: (time: string) => void }> = ({ onTimeSelected }) => {
 
     const [selectedId, setSelectedId] = useState<number | null>(null)
+    const hours = useHours()
     
     const handleButtonPress = (id: number, time: string) => {
         setSelectedId(id)

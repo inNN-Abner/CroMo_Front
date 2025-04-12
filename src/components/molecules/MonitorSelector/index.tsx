@@ -13,7 +13,7 @@ export const MonitorList = ({ onMonitorSelected }) => {
 
   const handleButtonPress = (id: number) => {
     setSelectedId(id)
-    onMonitorSelected()
+    onMonitorSelected(id)
   }
 
   const getTextColor = (selected: boolean) =>

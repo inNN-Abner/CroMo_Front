@@ -3,6 +3,7 @@ import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker'
 import { useTheme } from '~/context/ThemeContext'
 import { Subcontainer, StylezedButton, Windows, InfoText, CreateModal  } from '~/components'
 import { theme } from '~/styles'
+import * as SecureStore from 'expo-secure-store'
 
 export const Calendar = ({ onDateSelected }) => {
   const { isDark } = useTheme()
@@ -15,15 +16,16 @@ export const Calendar = ({ onDateSelected }) => {
   const [date, setDate] = useState('Selecione uma data')
   const [year, setYear] = useState(today.getFullYear())
 
-  function handleOnPress () {
+  async function handleOnPress () {
     setOpenModal(!openModal)
   }
  
-  function handleChange (propDate: string) {
+  async function handleChange (propDate: string) {
     const [year, month, day] = propDate.split('/').map(Number)
     const selectedDate = new Date(year, month - 1, day)
-
     const formattedDate = formatDate(selectedDate)
+    const dataSelecionada = selectedDate.toISOString().split('T')[0]
+    await SecureStore.setItem("dataSelecionada", dataSelecionada)
     setDate(formattedDate)
     setYear(selectedDate.getFullYear())
   }

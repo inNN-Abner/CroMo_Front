@@ -101,7 +101,7 @@ export const HomeGrid = () => {
 }
 
 export const ClassGrid = () => {
-    const today = new Date().toLocaleDateString('pt-BR', { weekday: 'long' })
+    const today = new Date().toLocaleDateString('pt-BR', { weekday: 'long', timeZone: 'America/Sao_Paulo' })
     const monitoring = useMonitoring()
     return (
     <Subcontainer 
