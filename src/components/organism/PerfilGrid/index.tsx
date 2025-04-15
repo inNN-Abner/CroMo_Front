@@ -3,11 +3,13 @@ import { FlatList, Text } from 'react-native'
 import { AddButton, InfoText, ListContainer, PageSubtitle, PageTitle, StylezedButton, Subcontainer, TrashButton } from '~/components/atoms'
 import { CreateModal } from '~/components/molecules'
 import { TableGrid } from '~/components/molecules/Grid'
-import { useUserSchedule } from '~/services/useUserScheduleHooks'
+import { useAgendaActions } from '~/services/useAgendaActions'
+import { useUserSchedule } from '~/services/useLoadUserSchedule'
 
 export const PerfilGrid = ({ navigation }) => {
 
-    const { agendas, handleDelete, loading, error } = useUserSchedule()
+    const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
+    const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null)
     const [openCreateModal, setOpenCreateModal] = useState(false)
 
@@ -92,11 +94,12 @@ export const PerfilGrid = ({ navigation }) => {
                     hgt='40'
                     bdRd='10'
                     fontSize='16'
-                    onPress={() => {
+                    onPress={async () => {
                         if (selectedItemId !== null) {
-                          handleDelete(selectedItemId)
+                          await handleDelete(selectedItemId)
                           handleOnPress()
                         }
+                        console.log(selectedItemId)
                     }}
                 />
                 <StylezedButton

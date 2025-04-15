@@ -27,7 +27,7 @@ export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose
               wdt='250'
               key={classroom.id}
               onPress={async () => {
-                onSelect(classroom.id) // agora passa o ID corretamente
+                onSelect(classroom.id)
                 await SecureStore.setItemAsync('classroom', classroom.id.toString())
                 onClose()
               }}
@@ -36,6 +36,48 @@ export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose
             </OptionButton>
           ))}
           </ScrollableContent>
+          <CloseButton onPress={onClose}>
+            <CloseButtonText>Fechar</CloseButtonText>
+          </CloseButton>
+        </ModalContent>
+      </ModalContainer>
+    </Modal>
+  )
+}
+
+interface CourseModalProps {
+  visible: boolean
+  onClose: () => void
+  onSelect: (course: string) => void
+  options: string[]
+}
+
+export const CourseModal: React.FC<CourseModalProps> = ({ visible, onClose, onSelect, options }) => {
+  return (
+    <Modal
+      transparent={true}
+      animationType='slide'
+      visible={visible}
+      onRequestClose={onClose}
+    >
+      <ModalContainer>
+        <ModalContent>
+          <ModalTitle>Selecione o curso</ModalTitle>
+          <ScrollableContent>
+            {options.map((course, index) => (
+              <OptionButton
+                wdt='250'
+                key={index}
+                onPress={() => {
+                  onSelect(course)
+                  onClose()
+                }}
+              >
+                <OptionText>{course}</OptionText>
+              </OptionButton>
+            ))}
+          </ScrollableContent>
+
           <CloseButton onPress={onClose}>
             <CloseButtonText>Fechar</CloseButtonText>
           </CloseButton>

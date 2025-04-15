@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { API_URL } from "~/configs/config"
+import * as SecureStore from "expo-secure-store"
 
-export const useMonitoring = () => { 
+export const useMonitoring = async () => { 
     const [monitoring, setMonitoring] = useState([])
-
+    const token = await SecureStore.getItemAsync("token")
+    
   async function loadMonitoring(){
     const today = new Date()
     today.setDate(today.getDate() - 1)
@@ -13,6 +15,7 @@ export const useMonitoring = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'x-access-token': token || ''
             },
             body: JSON.stringify({
               data: today,

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { ClassroomModal, InfoText } from '~/components/atoms'
+import { ClassroomModal, CourseModal, InfoText } from '~/components/atoms'
 import { StyledButtonStyle } from '~/components/atoms/Button/styles'
 import { opcoesCursos } from '~/../archives/courses'
 import { API_URL } from '~/configs/config'
+import * as SecureStore from "expo-secure-store"
 
 //Selecionar SALA/LAB
 interface Classroom {
@@ -27,10 +28,15 @@ export const ClassroomSelector: React.FC<ClassroomSelectorProps> = ({ selectedCl
 
   async function loadClassrooms() {
     try {
+      const token = await SecureStore.getItemAsync("token")
       const resp = await fetch(`${API_URL}/local`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'x-access-token': token || ''
+        },
       })
+
       const data = await resp.json()
       if (resp.status === 200) setClassrooms(data)
     } catch (e) {
@@ -73,7 +79,19 @@ interface CourseSelectorProps {
 }
 
 //Selecionar CURSO
-export const CourseSelector: React.FC<{ userCourse: string, onSelect: (course: string) => void }> = ({ userCourse, onSelect }) => {
+interface CourseSelectorProps {
+  visible: boolean
+  onClose: () => void
+  onSelect: (course: string) => void
+  options: string[]
+}
+
+interface CourseSelectorProps {
+  userCourse: string
+  onSelect: (course: string) => void
+}
+
+export const CourseSelector: React.FC<CourseSelectorProps> = ({ userCourse, onSelect }) => {
   const [modalVisible, setModalVisible] = useState(false)
 
   const courses = [
@@ -85,25 +103,22 @@ export const CourseSelector: React.FC<{ userCourse: string, onSelect: (course: s
     opcoesCursos.log,
   ]
 
-  const handleCourseSelect = (course: string) => {
-    onSelect(course)
-    setModalVisible(false)
-  }
-
   return (
-    <StyledButtonStyle bdRd='50' wdt='300' hgt='50' mgTop='0' mgLeft='35' bg='white'
-      onPress={() => setModalVisible(true)}
-    >
-      <InfoText color='brisk' fontSize='14' alignSelf='flex-start' mgBottom='0' mgLeft='25'>
-        {userCourse || 'Clique para selecionar'}
-      </InfoText>
+    <>
+      <StyledButtonStyle bdRd='50' wdt='300' hgt='50' mgTop='0' mgLeft='35' bg='white'
+        onPress={() => setModalVisible(true)}
+      >
+        <InfoText color='brisk' fontSize='14' alignSelf='flex-start' mgBottom='0' mgLeft='25'>
+          {userCourse || 'Clique para selecionar'}
+        </InfoText>
+      </StyledButtonStyle>
 
-      <ClassroomModal
+      <CourseModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        onSelect={handleCourseSelect} 
-        options={[]}
+        onSelect={onSelect}
+        options={courses}
       />
-    </StyledButtonStyle>
+    </>
   )
 }

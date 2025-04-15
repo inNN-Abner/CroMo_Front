@@ -15,7 +15,7 @@ export const SelectDay: React.FC<SelectDayProps> = ({ onDaySelected }) => {
 
     const handleButtonPress = (index: number) => {
         setIndexDate(index)
-        onDaySelected(diasDaSemana[index])  // informa para o pai o valor escolhido
+        onDaySelected(diasDaSemana[index])
     }
 
     return (

@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import { CancelButton, CreateModal, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
 import { ScrollView } from 'react-native-gesture-handler'
 import monitoringHours from '../../../../archives/monitoringHours'
-import { useUserSchedule } from '~/services/useUserScheduleHooks'
+import { useAgendaActions } from '~/services/useAgendaActions'
+import { useUserSchedule } from '~/services/useLoadUserSchedule'
 
 const Calendar = require('~/../assets/Calendar.png')
 const Clock = require( '~/../assets/Clock.png')
 
 export const SummarySchedule = ({ navigation }) => {
+    const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
+    const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)  
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [titleMessage, setTitleMessage] = useState('')
     const [bodyMessage, setBodyMessage] = useState('')
-    const {handleDelete} = useUserSchedule()
     
     function handleOnPress() {
         setOpenCreateModal(!openCreateModal)

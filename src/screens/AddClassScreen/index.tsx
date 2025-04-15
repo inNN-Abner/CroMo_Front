@@ -1,16 +1,17 @@
 import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { Headers, Container, SelectDay, Subcontainer, StylezedButton, Windows, ContactText, PageTitle, PageSubtitle, TimeInput, ClassroomSelector, ClassInput } from '../../components'
 import { useState } from 'react'
-import { useUserSchedule } from '~/services/useUserScheduleHooks'
+import { useAgendaActions } from '~/services/useAgendaActions'
+import { useUserSchedule } from '~/services/useLoadUserSchedule'
 
 export const AddClassScreen = ({ navigation }) => {
-
+  const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
+  const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)
   const [day, setDay] = useState<string | null>(null)
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [materia, setMateria] = useState('')
   const [selectedClassroom, setSelectedClassroom] = useState<number | null>(null)
-  const {handleSubmit} = useUserSchedule()
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { API_URL } from "~/configs/config"
+import * as SecureStore from "expo-secure-store"
 
 type Monitoria = {
   id: number
@@ -19,18 +20,22 @@ type Monitor = {
 }
 
 export const useMonitors = () => { 
-  const [monitor, setMonitor] = useState<Monitor[]>([])
+  const [monitors, setMonitors] = useState<Monitor[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
     async function loadMonitor() {
       try {
+        const token = await SecureStore.getItemAsync("token")
         const resp = await fetch(`${API_URL}/auth/monitoresMonitoria`, {
-          method: 'GET',
+            method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'x-access-token': token || '',
           },
         })
   
-        const status = resp.status
+        if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
         const respostaBruta = await resp.text()
         const data = JSON.parse(respostaBruta)
   
@@ -42,7 +47,7 @@ export const useMonitors = () => {
           materia: m.monitorias?.[0]?.materia?.nome ?? 'Sem matéria'
         }))
   
-        setMonitor(monitores)
+        setMonitors(monitores)
       } catch (e) {
         console.log("erro: ", e)
       }
@@ -52,7 +57,7 @@ export const useMonitors = () => {
       loadMonitor()
     }, [])
   
-    return monitor
+    return monitors
   }
 
 /*export default [
