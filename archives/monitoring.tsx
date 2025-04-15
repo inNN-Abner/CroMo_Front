@@ -7,7 +7,7 @@ interface MonitoringItem {
   info: string
   monitorName: string
   photo: string
-  icon: string
+  icon?: string
 }
 
 export const useMonitoring = () => { 
@@ -18,8 +18,14 @@ export const useMonitoring = () => {
             const today = new Date()
             today.setDate(today.getDate() - 1)
 
+            const token = await SecureStore.getItemAsync("token")
+            if (!token) {
+              console.log("Token não encontrado.")
+              return
+            }
+
             try {
-                const token = await SecureStore.getItemAsync("token")
+                console.log("TOKEN:", token)
                 const resp = await fetch(`${API_URL}/monitoria/show`, {
                     method: 'POST',
                     headers: {
@@ -30,9 +36,11 @@ export const useMonitoring = () => {
                       data: today,
                     }),
                 })
-
                 if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
                 const data = await resp.json()
+
+                console.log("Resposta da API (bruta):", data)
+
                 const monitorias = data.map((m) => ({
                     class: m.materia,
                     info: m.horario,
