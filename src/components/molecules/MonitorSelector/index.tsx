@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { Divider, imageMap, ListOptionButton, PageSubtitle, Subcontainer } from '~/components/atoms'
+import { Divider, imageMap, InfoText, ListOptionButton, PageSubtitle, Subcontainer } from '~/components/atoms'
 import { useTheme } from '~/context/ThemeContext'
 import { theme } from '~/styles'
 import { useMonitors } from '~/../archives/monitors'
+import * as SecureStore from 'expo-secure-store'
+import { API_URL } from '~/configs/config'
 
 export const MonitorList = ({ onMonitorSelected }) => {
   const [selectedId, setSelectedId] = useState<number | null>(null)
+  const { monitors, loading, error } = useMonitors()
   const isDark = useTheme().isDark
-  const monitors = useMonitors()
 
   const handleButtonPress = (id: number) => {
     setSelectedId(id)
@@ -20,7 +22,7 @@ export const MonitorList = ({ onMonitorSelected }) => {
     isDark
       ? theme.darkTheme.colors[selected ? 'everWhite' : 'brisk']
       : theme.lightTheme.colors[selected ? 'everWhite' : 'brisk']
-
+  
   return (
     <Subcontainer align='center' maxHgt='100' mgLeft='5' mgTop='0' bdRd='10' wdt='175'>
 
@@ -38,6 +40,7 @@ export const MonitorList = ({ onMonitorSelected }) => {
         style={{ width: '100%' }} 
         contentContainerStyle={{ paddingVertical: 0 }}            
       >
+
         {monitors.map((item) => {
           const isSelected = selectedId === item.id
           const textColor = getTextColor(isSelected)

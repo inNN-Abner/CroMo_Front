@@ -24,20 +24,33 @@ export const useMonitors = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  useEffect(() => {
     async function loadMonitor() {
       try {
         const token = await SecureStore.getItemAsync("token")
         const resp = await fetch(`${API_URL}/auth/monitoresMonitoria`, {
-            method: 'GET',
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'x-access-token': token || '',
           },
         })
   
-        if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
+        if (!resp.ok) {
+          setError(`Erro na requisição: ${resp.status}`)
+          setMonitors([])
+          return
+        }
+  
         const respostaBruta = await resp.text()
         const data = JSON.parse(respostaBruta)
+  
+        if (!Array.isArray(data)) {
+          console.log("Resposta inesperada:", data)
+          setError("Formato inválido de dados recebidos!")
+          setMonitors([])
+          return
+        }
   
         const monitores = data.map((m: any) => ({
           id: m.id,
@@ -51,13 +64,15 @@ export const useMonitors = () => {
         setMonitors(monitores)
       } catch (e) {
         console.log("erro: ", e)
+        setError("Falha ao carregar monitores.")
+      } finally {
+        setLoading(false)
       }
     }
   
-    useEffect(() => {
-      loadMonitor()
-    }, [])
-  
+    loadMonitor()
+  }, [])
+    
     return { monitors, loading, error }
   }
 
