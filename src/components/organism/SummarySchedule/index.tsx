@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CancelButton, CreateModal, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
 import { ScrollView } from 'react-native-gesture-handler'
-import monitoringHours from '../../../../archives/monitoringHours'
+import monitoringHours from '~/../archives/monitoringHours'
 import { useAgendaActions } from '~/services/useAgendaActions'
 import { useUserSchedule } from '~/services/useLoadUserSchedule'
 

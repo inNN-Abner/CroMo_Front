@@ -44,6 +44,7 @@ export const useMonitors = () => {
           email: m.email,
           name: m.nome,
           photo: m.idFoto,
+          monitorias: m.monitorias,
           materia: m.monitorias?.[0]?.materia?.nome ?? 'Sem matéria'
         }))
   
@@ -57,7 +58,7 @@ export const useMonitors = () => {
       loadMonitor()
     }, [])
   
-    return monitors
+    return { monitors, loading, error }
   }
 
 /*export default [

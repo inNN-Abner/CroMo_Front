@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {useMonitoring} from '~/../archives/monitoring'
 import { FlatList, Text } from 'react-native'
-import { imageMap, InfoText, ListContainer, Photo, Subcontainer, Windows } from '~/components/atoms'
-import { TableGrid } from '~/components/molecules'
+import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid } from '~/components'
 
 export const HomeGrid = () => {
     const monitoring = useMonitoring()
@@ -136,7 +135,7 @@ export const ClassGrid = () => {
             <Windows
                 dir='row'
                 justify='center'
-                align='center'
+                align='top'
                 mgTop='-5'
                 bdRdTL='0'
                 bdRdTR='0'
