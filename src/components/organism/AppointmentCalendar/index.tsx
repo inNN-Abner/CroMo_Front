@@ -1,7 +1,7 @@
 
 import { LocaleConfig } from 'react-native-calendars'
 import { Calendar } from 'react-native-calendars'
-import horarios from '~/../archives/hours'
+import { useHours } from '~/../archives/hours'
 import { useTheme } from '~/context/ThemeContext';
 import { theme } from '~/styles';
 
@@ -33,13 +33,8 @@ interface CalendarEvent {
   data: string
 }
 
-const calendarEvents: CalendarEvent[] = horarios.map(item => ({
-    id: item.id,
-    data: item.date
-}))
-  
 const getMarkedDates = () => {
-  return horarios.reduce((acc: Record<string, any>, item) => {
+  return useHours.reduce((acc: Record<string, any>, item) => {
     acc[item.date] = {
       customStyles: {
         container: { backgroundColor: '#7f0000', elevation: 5 },
@@ -50,13 +45,22 @@ const getMarkedDates = () => {
   }, {})
 }
 
-export const AppointmentCalendar = ({ navigation }) => {
+export const AppointmentCalendar = ({ navigation, date, monitorId }) => {
   const { isDark } = useTheme()
-  const markedDates = getMarkedDates()
+  const hours = useHours(date, monitorId)
+
+  const markedDates = hours.reduce((acc: Record<string, any>, item) => {
+    acc[item.date] = {
+      customStyles: {
+        container: { backgroundColor: '#7f0000', elevation: 5 },
+        text: { color: 'white' },
+      }
+    }
+    return acc
+  }, {})
 
   return (
     <Calendar
-
       style={{
         borderWidth: 0,
         height: 370,
@@ -64,11 +68,10 @@ export const AppointmentCalendar = ({ navigation }) => {
         borderRadius: 15,
         elevation: 10
       }}
-
       theme={{
         backgroundColor: theme.darkTheme.colors.darkGreen,
-        calendarBackground: isDark ? theme.lightTheme.colors.brisk: theme.darkTheme.colors.darkGreen,
-        todayTextColor: theme.lightTheme.colors.redDarkRed,
+        calendarBackground: isDark ? theme.lightTheme.colors.brisk : theme.darkTheme.colors.darkGreen,
+        todayTextColor: theme.lightTheme.colors.redDarkRed, // Verifique se essa cor existe
         dayTextColor: '#FFFFFF',
         textDisabledColor: '#696969',
         dotColor: '#BC191B',
@@ -87,12 +90,9 @@ export const AppointmentCalendar = ({ navigation }) => {
         textMonthFontSize: 16,
         textDayHeaderFontSize: 16
       }}
-
       markingType={'custom'}
       markedDates={markedDates}
-      onDayPress={() => {
-        navigation.navigate('SummarySchedule')
-      }}
+      onDayPress={() => navigation.navigate('SummarySchedule')}
     />
   )
 }
