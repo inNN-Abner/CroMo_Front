@@ -1,7 +1,7 @@
 import React from 'react'
 import {useMonitoring} from '~/../archives/monitoring'
 import { FlatList, Text } from 'react-native'
-import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid } from '~/components'
+import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid, ClassIcon } from '~/components'
 
 export const HomeGrid = () => {
     const monitoring = useMonitoring()
@@ -102,6 +102,7 @@ export const HomeGrid = () => {
 export const ClassGrid = () => {
     const today = new Date().toLocaleDateString('pt-BR', { weekday: 'long', timeZone: 'America/Sao_Paulo' })
     const monitoring = useMonitoring()
+
     return (
     <Subcontainer 
         hgt='200'
@@ -161,7 +162,7 @@ export const ClassGrid = () => {
                             hgt='35'
                             wdt='37'
                             mgLeft='3'
-                            source={item.photo}
+                            idFoto={item.photo}
                         />
 
                         <TableGrid 
@@ -181,11 +182,11 @@ export const ClassGrid = () => {
                     </Subcontainer>
                         
                     <Subcontainer dir='row' bg='gray' wdt='165' hgt='55' align='center' bdRd='10' mgLeft='5' mgTop='10'>
-                        <Photo
+                        <ClassIcon
                             hgt='30'
                             wdt='35'
                             mgLeft='3'
-                            source={item.icon}/>
+                            materiaFoto={item.materiaFoto} />
                         
                         <TableGrid
                             fontSize='13'

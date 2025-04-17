@@ -57,6 +57,7 @@ export const useMonitors = () => {
           email: m.email,
           name: m.nome,
           photo: m.idFoto,
+          materiaFoto: m.idFoto,
           monitorias: m.monitorias,
           materia: m.monitorias?.[0]?.materia?.nome ?? 'Sem matéria'
         }))

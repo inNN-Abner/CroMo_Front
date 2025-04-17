@@ -8,6 +8,7 @@ interface MonitoringItem {
   monitorName: string
   photo: string
   icon?: string
+  materiaFoto?: string
 }
 
 export const useMonitoring = () => { 
@@ -45,7 +46,8 @@ export const useMonitoring = () => {
                     class: m.materia,
                     info: m.horario,
                     monitorName: m.monitor,
-                    photo: m.foto
+                    photo: m.foto,
+                    materiaFoto: (m.idFoto)
                 }))
 
                 setMonitoring(monitorias)
