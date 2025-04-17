@@ -82,6 +82,8 @@ export const LoginError = ({ children, color, fontFamily, fontSize, mgTop }: Tex
 export const HeaderText = ({ children, color, fontWgt, fontFamily, fontSize, alignSelf, wdt, mgTop, mgLeft }: TextProps) => {
     return (
         <HeaderTextStyle
+            numberOfLines={1}
+            ellipsizeMode="tail"
             color = {color}
             fontWgt={fontWgt}
             fontFamily = {fontFamily}
@@ -114,6 +116,8 @@ export const ContactText = ({ children, color, fontWgt, fontFamily, fontSize, mg
 export const InfoText = ({ alignSelf, children, color, fontWgt, fontFamily, fontSize, mgTop, mgBottom, mgLeft, mgRight }: TextProps) => {
     return (
         <InfoTextStyle
+            numberOfLines={1}
+            ellipsizeMode="tail"
             alignSelf = {alignSelf}
             color = {color}
             fontWgt={fontWgt}

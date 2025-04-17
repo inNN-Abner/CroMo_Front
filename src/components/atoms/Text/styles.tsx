@@ -45,7 +45,7 @@ export const HeaderTextStyle = styled.Text
     font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'bold']};
     font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(14)}px`)};
     alignSelf: ${({ alignSelf }) => alignSelf || 'flex-start'}; 
-    width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : '225%')};
+    width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : '100%')};
     marginTop: ${({ mgTop, theme }) => theme.metrics.px([mgTop || -15])}px;
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 5])}px;
 `

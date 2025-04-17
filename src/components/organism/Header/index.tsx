@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { HeaderContainerStyle } from './styles'
 import { HeaderDate } from '~/components/molecules'
-import { Photo, HeaderText, LogoHeader } from '~/components/atoms'
+import { Photo, HeaderText, LogoHeader, Subcontainer } from '~/components/atoms'
 import { useTheme } from '~/context/ThemeContext'
 import * as SecureStore from 'expo-secure-store'
 
@@ -36,7 +36,7 @@ export const Headers = () => {
             />
 
             <HeaderContainerStyle
-                wdt={'235'}
+                wdt={'225'}
                 hgt={'15'}
                 dir={'column'}
             >
@@ -48,8 +48,8 @@ export const Headers = () => {
                 </HeaderText>
             </HeaderContainerStyle>
 
-            <HeaderContainerStyle 
-                wdt='65' hgt='40' mgTop='0'
+            <Subcontainer bg='white'
+                wdt='90' hgt='50' mgTop='0' mgLeft='0' pdd='0'
                 dir='column' align='center' justify='center'>
 
                 <LogoHeader
@@ -57,9 +57,10 @@ export const Headers = () => {
                     wdt='70'
                     hgt='15'
                     mgTop='5'
+                    mgRight='0'
                 />
                 <HeaderDate />
-            </HeaderContainerStyle>
+            </Subcontainer>
 
         </HeaderContainerStyle>
     )
@@ -69,10 +70,14 @@ export const PerfilHeaders = () => {
     const { isDark } = useTheme()
 
     return (
-        <HeaderContainerStyle justify='flex-end' bg='transparent' >
-
+        <HeaderContainerStyle justify='flex-end' align='flex-start' bg='transparent'>
             <HeaderContainerStyle 
-                wdt='100' hgt='50' mgTop='0'
+                mgTop='0' wdt='100' mgLeft='0'
+                dir='column' align='center' justify='center'>
+
+            <Subcontainer 
+                bg='white'
+                wdt='90' hgt='50' mgTop='0' mgLeft='0'
                 dir='column' align='center' justify='center'>
 
                 <LogoHeader
@@ -80,12 +85,11 @@ export const PerfilHeaders = () => {
                     wdt='70'
                     hgt='15'
                     mgTop='5'
-                    mgLeft='13'
+                    mgRight='0'
                 />
-
-                <HeaderDate mgLeft='53'/>
+                <HeaderDate />
+            </Subcontainer>
             </HeaderContainerStyle>
-
         </HeaderContainerStyle>
     )
 }

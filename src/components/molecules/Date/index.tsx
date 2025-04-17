@@ -7,7 +7,6 @@ interface TextProps {
     fontWgt?: string
     fontFamily?: string
     fontSize?: string
-    alignSelf?: string
     wdt?: string
     mgTop?: string
     mgBottom?: string
@@ -15,8 +14,8 @@ interface TextProps {
     pddLeft?: string
 }
 
-export const HeaderDate = ({ children, color, fontWgt, fontFamily, fontSize, wdt, mgTop, mgLeft }: TextProps) => {
-    const [currentDate, setCurrentDate] = useState('');
+export const HeaderDate = ({ color, fontWgt, fontFamily, fontSize, wdt, mgTop, mgLeft }: TextProps) => {
+    const [currentDate, setCurrentDate] = useState('')
 
     useEffect(() => {
         const today = new Date()
@@ -26,7 +25,7 @@ export const HeaderDate = ({ children, color, fontWgt, fontFamily, fontSize, wdt
     
         const formattedDate = `${day}/${month}/${year}`
         setCurrentDate(formattedDate)
-    }, []);
+    }, [])
 
     return (
         <HeaderDateStyle
