@@ -135,3 +135,23 @@ export const InfoText = ({ alignSelf, children, color, fontWgt, fontFamily, font
         </InfoTextStyle>
     )
 }
+
+export const ModalText = ({ alignSelf, children, color, fontWgt, fontFamily, fontSize, mgTop, mgBottom, mgLeft, mgRight }: TextProps) => {
+    return (
+        <InfoTextStyle
+            numberOfLines={2}
+            ellipsizeMode="tail"
+            alignSelf = {alignSelf}
+            color = {color}
+            fontWgt={fontWgt}
+            fontFamily = {fontFamily}
+            fontSize = {fontSize}
+            mgTop = {mgTop}
+            mgBottom={mgBottom}
+            mgLeft = {mgLeft}
+            mgRight={mgRight}
+        >
+            {children}
+        </InfoTextStyle>
+    )
+}

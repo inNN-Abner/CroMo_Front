@@ -60,8 +60,12 @@ export const MonitorList = ({ onMonitorSelected }) => {
               source={imageMap[Number(item.photo) || 1]}
               fontSize='14'
               labelComponent={
-                <Text>
-                  <Text style={{ fontWeight: 'bold', marginLeft: 5, color: textColor }}>
+                <Text
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                  style={{ marginLeft: 5 }}
+                >
+                  <Text style={{ fontWeight: 'bold', color: textColor }}>
                     {item.name}
                   </Text>
                   {'\n'}

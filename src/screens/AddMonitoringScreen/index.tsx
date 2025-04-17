@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MonitorList, Calendar, Container, CreateModal, DefineTimeScheduling, Headers, InfoText, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer } from '~/components'
+import { MonitorList, Calendar, Container, CreateModal, DefineTimeScheduling, Headers, InfoText, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, ModalText } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 
 export const AddMonitoringScreen = ({ navigation }) => {
@@ -110,13 +110,13 @@ export const AddMonitoringScreen = ({ navigation }) => {
               hgt='150'
               pdd='15'
             >
-              <InfoText fontFamily='bold' color='brisk' mgTop='-25' mgLeft='0' fontSize='17'>
+              <ModalText fontFamily='bold' color='brisk' mgTop='-25' mgLeft='0' fontSize='17'>
                 {titleMessage}
-              </InfoText>
+              </ModalText>
 
-              <InfoText fontFamily='regular' color='brisk' mgTop='10' fontSize='15' mgLeft='0'>
+              <ModalText fontFamily='regular' color='brisk' mgTop='10' fontSize='15' mgLeft='0'>
                 {bodyMessage}
-              </InfoText>
+              </ModalText>
 
               <Subcontainer dir='row-reverse' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
                 <StylezedButton

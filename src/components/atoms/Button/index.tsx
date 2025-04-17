@@ -104,7 +104,7 @@ export const AddButtonText = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRigh
       mgRight={mgRight}
       mgTop={mgTop}
       onPress={onPress}>
-      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='25' mgTop='0' mgLeft='0' bdRd='10'>
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
             <Ionicons name="add-circle" size={24} color={'red'} />
               <ButtonTextStyle
                 mgLeft='3'
@@ -200,7 +200,7 @@ export const EditInfoButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRig
       mgRight={mgRight}
       mgTop={mgTop}
       onPress={onPress}>
-      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='25' mgTop='0' mgLeft='0' bdRd='10'>
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
         <FontAwesome name="pencil" size={24} color={'red'} />
           <ButtonTextStyle
                 mgLeft='3'
