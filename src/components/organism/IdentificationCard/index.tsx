@@ -1,12 +1,16 @@
 import React from 'react';
 import { Windows, Subcontainer, Photo, ContactText, InfoText  } from '../../../components'
+import { PixelRatio } from 'react-native';
 
 export const IdentificationCard = ({ route }) => {
-    const { name, course, photo, type, email, teams } = route.params;
+    const { name, course, photo, type, email, teams } = route.params
+    const fontScale = PixelRatio.getFontScale()
+    const cardHeight = fontScale > 1.1 ? '185' : '155'
+    
     
     return (
         <Windows
-            hgt='150'
+            hgt={cardHeight}
             wdt='335'
             align='center'
             mgTop='0'

@@ -1,7 +1,8 @@
 import React from 'react'
 import { PageTitleStyle, PageSubTitleStyle, LoginTitleStyle, HeaderTextStyle, ContactNameStyle, InfoTextStyle, ButtonTextStyle } from './styles'
+import { ViewProps } from 'react-native'
 
-interface TextProps {
+interface TextProps extends ViewProps{
     children?: string
     color?: string
     fontWgt?: string
@@ -101,6 +102,8 @@ export const HeaderText = ({ children, color, fontWgt, fontFamily, fontSize, ali
 export const ContactText = ({ children, color, fontWgt, fontFamily, fontSize, mgTop, mgLeft }: TextProps) => {
     return (
         <ContactNameStyle
+            numberOfLines={1}
+            ellipsizeMode="tail"
             color = {color}
             fontWgt={fontWgt}
             fontFamily = {fontFamily}

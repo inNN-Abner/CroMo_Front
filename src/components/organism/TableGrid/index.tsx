@@ -15,11 +15,9 @@ export const ContactsDetailGrid = ({ navigation }) => {
                 bg='darkGreen'
                 dir='row'
             >
-
                 <TableGrid fontSize='11' color='white'>{item.weekDay}</TableGrid>
                 <TableGrid fontSize='14' wdt='140' fontFamily='regular'>
                     <Text style={{ fontWeight: 'bold' }}>{item.locale}</Text> {`\n`} {item.hour}</TableGrid>
-
                 <EditButton 
                     bg='white'
                     onPress={() => {
@@ -30,7 +28,7 @@ export const ContactsDetailGrid = ({ navigation }) => {
                         modalidae: item.locale
                     })                    
                 }}
-                    label={'Teste'}
+                    label={''}
                     wdt='45'
                     hgt='50'
                     bdRd='10'
@@ -39,7 +37,7 @@ export const ContactsDetailGrid = ({ navigation }) => {
                 />
 
                 <TrashButton
-                    label={'Teste'}
+                    label={''}
                     wdt='45'
                     hgt='50'
                     bdRd='10'
@@ -73,6 +71,6 @@ export const ContactsDetailGrid = ({ navigation }) => {
                     navigation.navigate('MonitorSchedule')
                 }} />
         </ListContainer>
-    </> 
+    </>
     )
 }

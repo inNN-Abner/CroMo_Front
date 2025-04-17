@@ -21,6 +21,8 @@ interface GridProps {
 export const TableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt, mgTop, mgLeft, align, pdd, pddLeft, bdRd, children }: GridProps) => {
     return (
         <Grid
+            numberOfLines={2}
+            ellipsizeMode="tail"      
             color={color}
             bg={bg}
             wdt={wdt}

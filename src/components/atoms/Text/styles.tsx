@@ -72,8 +72,10 @@ export const InfoTextStyle = styled.Text
     marginBottom: ${({ mgBottom, theme }) => theme.metrics.px([mgBottom || -3])}px;
     marginLeft: ${({ mgLeft, theme }) => theme.metrics.px([mgLeft || 5])}px;
     marginRight: ${({ mgRight, theme }) => theme.metrics.px([mgRight || 0])}px;
-    flex-wrap: nowrap;
+    max-width: 100%;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `
 
 export const ButtonTextStyle = styled.Text

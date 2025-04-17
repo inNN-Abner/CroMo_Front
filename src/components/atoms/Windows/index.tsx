@@ -1,7 +1,8 @@
 import React from 'react'
 import { WindowsStyle } from './styles'
+import { ViewProps } from 'react-native'
 
-interface WindowsProps {
+interface WindowsProps extends ViewProps {
     dir?: string
     bg?: string
     align?: string
