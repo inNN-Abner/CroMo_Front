@@ -10,6 +10,7 @@ import { IconButton } from '../Logo';
 
 interface ButtonProps {
   source?: string
+  idFoto?: string
   bg?: string
   color?: string
   fontSize?: string
@@ -228,12 +229,12 @@ export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop
         onPress={onPress}
         >
           <Photo
-              hgt='35'
-              wdt='40'
-              mgLeft='5'
-              mgTop='0'
-              source={source}
-            />
+            hgt='35'
+            wdt='40'
+            mgLeft='5'
+            mgTop='0'
+            source={source}
+          />
 
         {labelComponent ? (
           <>{labelComponent}</>

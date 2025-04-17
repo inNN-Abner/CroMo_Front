@@ -3,7 +3,7 @@ const DarkLogin = require('~/../assets/LoginScreen_Dark.png')
 const LightLogin = require ('~/../assets/LoginScreen_Light.png')
 import { StylezedButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
-import { Container, Subcontainer, LogoImage, TextInput, LoginTitle, LoginError, InfoText } from '~/components'
+import { Container, Subcontainer, LogoImage, TextInput, LoginTitle, LoginError, InfoText, InfoTextNoWrap } from '~/components'
 import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
@@ -68,12 +68,12 @@ export const ForgotPassScreen = ({ navigation }) => {
             hgt='80'
             pdd='10'
         >
-            <InfoText
+            <InfoTextNoWrap
                 color='white'
                 fontSize='15'
             >
                 Um link para definir uma nova senha será encaminhada no seu e-mail!
-            </InfoText>
+            </InfoTextNoWrap>
         </Subcontainer>
 
           <LoginTitle mgTop='25' mgLeft='0' alignSelf='flex-start'>

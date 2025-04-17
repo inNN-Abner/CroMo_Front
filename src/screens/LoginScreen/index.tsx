@@ -108,6 +108,7 @@ export const LoginScreen = ({ navigation }) => {
 
           <StylezedButton
             label='Esqueci a senha'
+            wdt='250'
             bg='brisk'
             color='darkRed'
             mgTop='70'

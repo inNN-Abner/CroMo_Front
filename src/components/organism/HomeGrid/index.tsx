@@ -1,7 +1,7 @@
 import React from 'react'
 import {useMonitoring} from '~/../archives/monitoring'
 import { FlatList, Text } from 'react-native'
-import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid, ClassIcon } from '~/components'
+import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid, ClassIcon, imageMap } from '~/components'
 
 export const HomeGrid = () => {
     const monitoring = useMonitoring()
@@ -162,7 +162,7 @@ export const ClassGrid = () => {
                             hgt='35'
                             wdt='37'
                             mgLeft='3'
-                            idFoto={item.photo}
+                            source={imageMap[item.photo || 1]}
                         />
 
                         <TableGrid 

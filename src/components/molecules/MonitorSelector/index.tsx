@@ -57,7 +57,7 @@ export const MonitorList = ({ onMonitorSelected }) => {
               mgTop='5'
               color={textColor}
               bg={isSelected ? 'darkRed' : 'white'}
-              source={imageMap[Number(item.photo) || 1]}
+              source={imageMap[item.photo || 1]}
               fontSize='14'
               labelComponent={
                 <Text
