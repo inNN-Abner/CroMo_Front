@@ -64,7 +64,7 @@ export const useMonitors = () => {
   
         setMonitors(monitores)
       } catch (e) {
-        console.log("erro: ", e)
+        console.log("erro Monitores: ", e)
         setError("Falha ao carregar monitores.")
       } finally {
         setLoading(false)

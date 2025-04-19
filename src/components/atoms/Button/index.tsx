@@ -31,6 +31,7 @@ interface ButtonProps {
   hour?: string
   local?: string
   classRoom?: string
+  disabled?: boolean
   onPress?: () => void
 }
 

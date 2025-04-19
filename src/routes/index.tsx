@@ -12,7 +12,7 @@ import { ReportSchedulingScreen } from '~/components/organism/ReportSchedulingCa
 import { PerfilGrid } from '~/components'
 import { EditPerfilScreen } from '~/screens/EditPerfilScreen'
 import { EditInfoScreen } from '~/screens/EditinfoScreen'
-import { RegisterScreen } from '~/screens/RegisterScren'
+import { RegisterScreen } from '~/screens/RegisterScreen'
 import { ForgotPassScreen } from '~/screens/ForgotPassScreen'
 import { ChatbotScreen } from '~/screens/ChatbotScreen'
 

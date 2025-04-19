@@ -65,7 +65,7 @@ export const ForgotPassScreen = ({ navigation }) => {
             align='center'
             justify='center'
             wdt='290'
-            hgt='80'
+            hgt='100'
             pdd='10'
         >
             <InfoTextNoWrap
@@ -90,27 +90,27 @@ export const ForgotPassScreen = ({ navigation }) => {
           />
 
         <Subcontainer 
-            dir='row' 
-            mgTop='50' 
-            mgLeft='-7' 
-            align='center' 
-            justify='center'
-            hgt='50'
+          dir='row' 
+          mgTop='50' 
+          mgLeft='-7' 
+          align='center' 
+          justify='center'
+          hgt='50'
         >
             <StylezedButton
-                label='CANCELAR'
-                bg='darkRed'
-                mgTop='0'
-                onPress={() => {
-                    navigation.navigate('Login')}}
+              label='CANCELAR'
+              bg='darkRed'
+              mgTop='0'
+              onPress={() => {
+                  navigation.navigate('Login')}}
             />
 
             <StylezedButton
-                label='ENVIAR'
-                bg='darkGreen'
-                mgTop='0'
-                mgLeft='10'
-                onPress={handleEsqueciSenha}
+              label='ENVIAR'
+              bg='darkGreen'
+              mgTop='0'
+              mgLeft='10'
+              onPress={handleEsqueciSenha}
             />
             </Subcontainer>
         </Subcontainer>

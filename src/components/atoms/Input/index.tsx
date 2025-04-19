@@ -33,7 +33,7 @@ interface InputProps {
     setList?: (list: any[]) => void
 }
 
-export const TextInput = ({ children, editable, value, fontSize, align, onChangeText, placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
+export const TextInput = ({ children, editable, value, fontSize, align, secureTextEntry, onChangeText, placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
 
   return (
     <TextInputStyle
@@ -55,6 +55,7 @@ export const TextInput = ({ children, editable, value, fontSize, align, onChange
       hgt={hgt}
       pddLeft={pddLeft}
       bdRd={bdRd}
+      secureTextEntry={secureTextEntry}
     />
   )
 }

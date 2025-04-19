@@ -25,7 +25,7 @@ export const PageSubTitleStyle = styled.Text
 `
 
 export const LoginTitleStyle = styled.Text
-<{ color?: string; fontFamily?: string; fontSize?: string; alignSelf?: string; mgTop?: string; mgBottom?: string; mgLeft?: string; pddLeft?: string }>
+<{ color?: string; fontFamily?: string; fontSize?: string; alignSelf?: string; mgTop?: string; mgBottom?: string; mgLeft?: string; pddLeft?: string;  }>
 `
     color: ${({ color, theme }) => theme.colors[color || 'white']};
     font-family: ${({ fontFamily, theme }) => theme.fonts[fontFamily || 'bold']};

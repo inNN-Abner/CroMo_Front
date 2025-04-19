@@ -73,22 +73,13 @@ export const ClassroomSelector: React.FC<ClassroomSelectorProps> = ({ selectedCl
   )
 }
 
-interface CourseSelectorProps {
-  selectedCourse: string
-  onSelect: (course: string) => void
-}
-
 //Selecionar CURSO
 interface CourseSelectorProps {
   visible: boolean
   onClose: () => void
-  onSelect: (course: string) => void
-  options: string[]
-}
-
-interface CourseSelectorProps {
-  userCourse: string
-  onSelect: (course: string) => void
+  onSelect: (course: opcoesCursos) => void 
+  options: opcoesCursos[]
+  userCourse: opcoesCursos
 }
 
 export const CourseSelector: React.FC<CourseSelectorProps> = ({ userCourse, onSelect }) => {
@@ -103,22 +94,21 @@ export const CourseSelector: React.FC<CourseSelectorProps> = ({ userCourse, onSe
     opcoesCursos.log,
   ]
 
-  return (
-    <>
-      <StyledButtonStyle bdRd='50' wdt='300' hgt='50' mgTop='0' mgLeft='35' bg='white'
-        onPress={() => setModalVisible(true)}
-      >
-        <InfoText color='brisk' fontSize='14' alignSelf='flex-start' mgBottom='0' mgLeft='25'>
-          {userCourse || 'Clique para selecionar'}
-        </InfoText>
-      </StyledButtonStyle>
+return (
+  <>
+    <StyledButtonStyle bdRd='50' wdt='300' hgt='50' mgTop='5' mgLeft='0' bg='white'
+      onPress={() => setModalVisible(true)}
+    >
+      <InfoText color='brisk' fontSize='14' alignSelf='flex-start' mgBottom='0' mgLeft='25'>
+        {userCourse || 'Clique para selecionar'}
+      </InfoText>
+    </StyledButtonStyle>
 
-      <CourseModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onSelect={onSelect}
-        options={courses}
-      />
-    </>
-  )
-}
+    <CourseModal
+      visible={modalVisible}
+      onClose={() => setModalVisible(false)}
+      onSelect={onSelect}
+      options={courses}
+    />
+  </>
+)}

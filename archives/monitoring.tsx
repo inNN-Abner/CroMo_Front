@@ -52,7 +52,7 @@ export const useMonitoring = () => {
 
                 setMonitoring(monitorias)
             } catch (e) {
-                console.log("erro: ", e)
+                console.log("erro monitorias: ", e)
             }
         } 
 

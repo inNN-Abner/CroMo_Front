@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal } from 'react-native'
 import { CloseButton, CloseButtonText, ModalContainer, ModalContent, ModalTitle, OptionButton, OptionText, ScrollableContent } from './styles'
 import * as SecureStore from 'expo-secure-store'
+import { opcoesCursos } from '~/../archives/courses'
 
 interface ClassroomModalProps {
   visible: boolean
@@ -48,8 +49,8 @@ export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose
 interface CourseModalProps {
   visible: boolean
   onClose: () => void
-  onSelect: (course: string) => void
-  options: string[]
+  onSelect: (course: opcoesCursos) => void
+  options: opcoesCursos[]
 }
 
 export const CourseModal: React.FC<CourseModalProps> = ({ visible, onClose, onSelect, options }) => {
@@ -64,10 +65,10 @@ export const CourseModal: React.FC<CourseModalProps> = ({ visible, onClose, onSe
         <ModalContent>
           <ModalTitle>Selecione o curso</ModalTitle>
           <ScrollableContent>
-            {options.map((course, index) => (
+            {options.map((course) => (
               <OptionButton
                 wdt='250'
-                key={index}
+                key={course}
                 onPress={() => {
                   onSelect(course)
                   onClose()

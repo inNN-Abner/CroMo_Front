@@ -15,6 +15,7 @@ interface TextProps extends ViewProps{
     mgLeft?: string
     mgRight?: string
     pddLeft?: string
+    txtAlign?: string
 }
 
 export const PageTitle = ({ children, color, fontFamily, fontSize, mgTop, mgBottom, mgLeft }: TextProps) => {
@@ -66,13 +67,18 @@ export const LoginTitle = ({ children, color, fontFamily, fontSize, alignSelf, m
     )
 }
 
-export const LoginError = ({ children, color, fontFamily, fontSize, mgTop }: TextProps) => {
+export const LoginError = ({ children, color, fontFamily, fontSize, mgLeft, mgTop, alignSelf }: TextProps) => {
     return (
         <LoginTitleStyle
+            numberOfLines={1}
+            ellipsizeMode="tail"
             color = {color}
             mgTop = {mgTop}
+            mgLeft = {mgLeft}
             fontFamily = {fontFamily}
             fontSize = {fontSize}
+            alignSelf = {alignSelf}
+            pddLeft='0'
         >
             {children}
         </LoginTitleStyle>
