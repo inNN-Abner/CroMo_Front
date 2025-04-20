@@ -50,10 +50,12 @@ export const LoginScreen = ({ navigation }) => {
 
       if (!response.ok) throw new Error(data.error) 
   
-      console.log(data.user)
       await SecureStore.setItemAsync('user', JSON.stringify(data.user)) 
       await SecureStore.setItemAsync('token', data.token) 
-  
+      
+      console.log('Data.user:', data.user)
+      console.log('Data.token:', data.token)
+
       return data 
   
     } catch (error) {
@@ -106,8 +108,15 @@ export const LoginScreen = ({ navigation }) => {
               setErrorMessage('')
               setLoading(true) 
               try {
-                await loginWithFirebaseAndBackend(emailValue, passwordValue) 
-                navigation.navigate('HomeBottom') 
+                const data = await loginWithFirebaseAndBackend(emailValue, passwordValue) 
+                
+                if (data?.token) {
+                  await SecureStore.setItemAsync('token', data.token)
+                  await SecureStore.setItemAsync('user', JSON.stringify(data.user))
+                  console.log('Token salvo no SecureStore:', data.token);
+                  navigation.navigate('HomeBottom')
+               }
+
               } catch (error) {
                 setErrorMessage('E-mail ou senha inválidos')
               } finally {
@@ -117,15 +126,12 @@ export const LoginScreen = ({ navigation }) => {
             disabled={loading}
           />
 
-
           <StylezedButton
             label='CADASTRAR'
             bg='darkGreen'
             mgTop='10'
             onPress={() => navigation.navigate('Register')}
           />
-
-
 
           <StylezedButton
             label='Esqueci a senha'

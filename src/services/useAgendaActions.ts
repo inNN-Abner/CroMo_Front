@@ -27,7 +27,8 @@ export const useAgendaActions = (loadUserSchedule: () => Promise<void>) => {
             nomeMateria: materia
             })
         })
-    
+        console.log('x-access-token:', token)
+
         if (response.ok) {
             Alert.alert("Sucesso", "Horário adicionado com sucesso!")
             console.log('Dados para enviar:', {

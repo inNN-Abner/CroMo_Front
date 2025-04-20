@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { auth } from '~/services/firebase'
 const DarkLogin = require('~/../assets/LoginScreen_Dark.png')
 const LightLogin = require ('~/../assets/LoginScreen_Light.png')
 import { StylezedButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
-import { Container, Subcontainer, LogoImage, TextInput, LoginTitle, LoginError, InfoText, InfoTextNoWrap } from '~/components'
+import { Container, Subcontainer, LogoImage, TextInput, LoginTitle, LoginError, InfoTextNoWrap } from '~/components'
 import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
-import * as SecureStore from 'expo-secure-store'
-import { API_URL } from '~/configs/config'
 
 export const ForgotPassScreen = ({ navigation }) => {
   const { isDark } = useTheme()
@@ -15,41 +15,31 @@ export const ForgotPassScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false)
 
   const handleEsqueciSenha = async () => {
-    console.log(API_URL)
     if (!emailValue) {
       setErrorMessage('Informe um e-mail válido')
       return
     }
 
     setLoading(true)
-    try {
-        const response = await fetch(`${API_URL}/esqueciSenha/esqueci-senha`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: emailValue }),
-      })
+    setErrorMessage('')
 
-      console.log('STATUS:', response.status)
-      const data = await response.json()
-      console.log('DATA:', data)
-      
-      if (response.ok) {
-        Alert.alert('Sucesso', 'E-mail enviado com sucesso!')
-        console.log('Função foi chamada - ENVIAR EMAIL') 
-        navigation.navigate('Login')
+    try {
+      await sendPasswordResetEmail(auth, emailValue)  // Firebase cuidando de tudo!
+      Alert.alert('Sucesso!', 'Verifique seu e-mail para redefinir sua senha.')
+      navigation.navigate('Login')
+    } catch (error: any) {
+      console.log('Erro ao enviar reset:', error)
+
+      if (error.code === 'auth/user-not-found') {
+        setErrorMessage('E-mail não encontrado.')
+      } else if (error.code === 'auth/invalid-email') {
+        setErrorMessage('E-mail inválido.')
       } else {
-        setErrorMessage(data.error || 'Erro ao enviar e-mail')
-        console.log('Função foi chamada - ERRO ENVIAR EMAIL') 
+        setErrorMessage('Erro ao enviar e-mail de redefinição.')
       }
-    } catch (error) {
-      setErrorMessage('Erro na conexão com o servidor')
-      console.log('Função foi chamada - ERRO') 
     } finally {
       setLoading(false)
     }
-    console.log('Função foi chamada - FINAL') 
   }
 
   return (
@@ -59,7 +49,7 @@ export const ForgotPassScreen = ({ navigation }) => {
         <Subcontainer align='center'>
           <LogoImage source={ isDark ? LightLogin : DarkLogin } />
 
-        <Subcontainer 
+          <Subcontainer 
             bg='gray' 
             mgLeft='-7'
             align='center'
@@ -67,14 +57,14 @@ export const ForgotPassScreen = ({ navigation }) => {
             wdt='290'
             hgt='100'
             pdd='10'
-        >
+          >
             <InfoTextNoWrap
-                color='white'
-                fontSize='15'
+              color='white'
+              fontSize='15'
             >
-                Um link para definir uma nova senha será encaminhada no seu e-mail!
+              Um link para redefinir sua senha será enviado para seu e-mail!
             </InfoTextNoWrap>
-        </Subcontainer>
+          </Subcontainer>
 
           <LoginTitle mgTop='25' mgLeft='0' alignSelf='flex-start'>
             E-mail
@@ -84,37 +74,33 @@ export const ForgotPassScreen = ({ navigation }) => {
             placeholder={'Digite o seu e-mail institucional'} 
             keyboardType='email-address'
             value={emailValue}
-            onChangeText={(text) => setEmailValue(text)}
+            onChangeText={setEmailValue}
             mgTop='5'
             mgLeft='0'
           />
 
-        <Subcontainer 
-          dir='row' 
-          mgTop='50' 
-          mgLeft='-7' 
-          align='center' 
-          justify='center'
-          hgt='50'
-        >
+          {errorMessage !== '' && (
+            <LoginError mgTop='10'>{errorMessage}</LoginError>
+          )}
+
+          <Subcontainer dir='row' mgTop='50' mgLeft='-7' align='center' justify='center' hgt='50'>
             <StylezedButton
               label='CANCELAR'
               bg='darkRed'
               mgTop='0'
-              onPress={() => {
-                  navigation.navigate('Login')}}
+              onPress={() => navigation.navigate('Login')}
             />
 
             <StylezedButton
-              label='ENVIAR'
+              label={loading ? 'ENVIANDO...' : 'ENVIAR'}
               bg='darkGreen'
               mgTop='0'
               mgLeft='10'
               onPress={handleEsqueciSenha}
+              disabled={loading}
             />
-            </Subcontainer>
+          </Subcontainer>
         </Subcontainer>
-        
       </Container>
 
     </TouchableWithoutFeedback>

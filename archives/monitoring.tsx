@@ -26,7 +26,7 @@ export const useMonitoring = () => {
             }
 
             try {
-                console.log("TOKEN:", token)
+                console.log("TOKEN Monitoria:", token)
                 const resp = await fetch(`${API_URL}/monitoria/show`, {
                     method: 'POST',
                     headers: {
@@ -37,10 +37,11 @@ export const useMonitoring = () => {
                       data: today,
                     }),
                 })
-                if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
+                if (!resp.ok) throw new Error(`Erro na requisição da monitoria: ${resp.status}`)
                 const data = await resp.json()
 
-                console.log("Resposta da API (bruta):", data)
+
+                console.log("Resposta da API (bruta) na monitoria:", data)
 
                 const monitorias = data.map((m) => ({
                     class: m.materia,
@@ -51,8 +52,11 @@ export const useMonitoring = () => {
                 }))
 
                 setMonitoring(monitorias)
+                
+                console.log("Token antes da requisição:", token);
+
             } catch (e) {
-                console.log("erro monitorias: ", e)
+                console.log("Erro na monitoria: ", e)
             }
         } 
 

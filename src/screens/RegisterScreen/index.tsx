@@ -9,80 +9,90 @@ import { API_URL } from '~/configs/config'
 import { opcoesCursos } from '~/../archives/courses'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '~/services/firebase'
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store' 
 
 export const RegisterScreen = ({ navigation }) => {
   const { isDark } = useTheme() 
 
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [confirmSenha, setConfirmSenha] = useState('');
-  const [selectedCourse, setSelectedCourse] = useState<opcoesCursos | "">("");
-  const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [nome, setNome] = useState('') 
+  const [email, setEmail] = useState('') 
+  const [senha, setSenha] = useState('') 
+  const [confirmSenha, setConfirmSenha] = useState('') 
+  const [selectedCourse, setSelectedCourse] = useState<opcoesCursos | "">("") 
+  const [errorMessage, setErrorMessage] = useState('') 
+  const [loading, setLoading] = useState(false) 
+  const [modalVisible, setModalVisible] = useState(false) 
 
-  const handleCourseSelect = (course: opcoesCursos) => setSelectedCourse(course);
+  const handleCourseSelect = (course: opcoesCursos) => setSelectedCourse(course) 
 
   const registerUser = async () => {
     if (!nome || !email || !senha || !confirmSenha || !selectedCourse) {
       setErrorMessage("Preencha todos os campos!");
       return;
     }
-
+  
     if (senha !== confirmSenha) {
       setErrorMessage("As senhas não coincidem!");
       return;
     }
-
+  
     setErrorMessage('');
     setLoading(true);
-
+  
     try {
-      // Cadastro no Firebase
+      // Passo 1: Cria o usuário no Firebase Auth
       const firebaseUser = await createUserWithEmailAndPassword(auth, email, senha);
       console.log("Usuário criado no Firebase:", firebaseUser.user.uid);
-
-      // Cadastro na sua API
+  
+      // Passo 2: Salva no banco via sua API
       const response = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nome: nome,
-          email: firebaseUser.user.email,
+          email: firebaseUser.user.email, // e-mail validado pelo Firebase
           curso: selectedCourse,
           tipo: 'Aluno',
           idFoto: 1
         }),
       });
-
+  
       const data = await response.json();
-
+  
       if (!response.ok) {
         setErrorMessage(data.error || 'Erro ao cadastrar!');
-      } else {
-        await SecureStore.setItemAsync("user", JSON.stringify(data));
-        Alert.alert("Sucesso!", "Registro concluído.");
-        navigation.navigate('Login');
+        console.log("Erro na API:", data);
+        return;
       }
-
+  
+      // Passo 3: Salvar no SecureStore local
+      await SecureStore.setItemAsync("user", JSON.stringify(data));
+      Alert.alert("Sucesso!", "Registro concluído.");
+      navigation.navigate('Login');
+  
     } catch (error: any) {
       console.error("Erro ao registrar:", error);
-      if (error.code === 'auth/email-already-in-use') {
-        setErrorMessage("Email já em uso!");
-      } else if (error.code === 'auth/invalid-email') {
-        setErrorMessage("Email inválido.");
-      } else if (error.code === 'auth/weak-password') {
-        setErrorMessage("Senha fraca, mínimo 6 caracteres.");
-      } else {
-        setErrorMessage("Erro inesperado. Tente novamente.");
+  
+      // Erros Firebase
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          setErrorMessage("E-mail já em uso!");
+          break;
+        case 'auth/invalid-email':
+          setErrorMessage("E-mail inválido.");
+          break;
+        case 'auth/weak-password':
+          setErrorMessage("Senha fraca, mínimo 6 caracteres.");
+          break;
+        default:
+          setErrorMessage("Erro inesperado. Tente novamente.");
+          break;
       }
     } finally {
       setLoading(false);
     }
   }
-
+    
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Container align='center'>
