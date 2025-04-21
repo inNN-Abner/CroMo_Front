@@ -13,6 +13,7 @@ interface MonitoringItem {
 
 export const useMonitoring = () => { 
     const [monitoring, setMonitoring] = useState<MonitoringItem[]>([])
+    const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         async function loadMonitoring() {
@@ -22,6 +23,7 @@ export const useMonitoring = () => {
             const token = await SecureStore.getItemAsync("token")
             if (!token) {
               console.log("Token não encontrado.")
+              setIsLoaded(true)
               return
             }
 
@@ -40,7 +42,6 @@ export const useMonitoring = () => {
                 if (!resp.ok) throw new Error(`Erro na requisição da monitoria: ${resp.status}`)
                 const data = await resp.json()
 
-
                 console.log("Resposta da API (bruta) na monitoria:", data)
 
                 const monitorias = data.map((m) => ({
@@ -57,11 +58,13 @@ export const useMonitoring = () => {
 
             } catch (e) {
                 console.log("Erro na monitoria: ", e)
+            } finally {
+                setIsLoaded(true)
             }
         } 
 
         loadMonitoring()
     }, [])
 
-    return monitoring
+    return { monitoring, isLoaded }
 }

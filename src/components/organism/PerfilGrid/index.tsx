@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FlatList, Text } from 'react-native'
-import { AddButton, InfoText, ListContainer, PageSubtitle, PageTitle, StylezedButton, Subcontainer, TrashButton } from '~/components/atoms'
+import { AddButton, InfoText, InfoTextNoWrap, ListContainer, PageSubtitle, PageTitle, StylezedButton, Subcontainer, TrashButton } from '~/components/atoms'
 import { CreateModal } from '~/components/molecules'
 import { TableGrid } from '~/components/molecules/Grid'
 import { useAgendaActions } from '~/services/useAgendaActions'
@@ -55,6 +55,21 @@ export const PerfilGrid = ({ navigation }) => {
             />
         </ListContainer>
         )}
+        ListEmptyComponent={
+        <>
+            <Subcontainer bg='darkRed' wdt='300' hgt='40' align='center' justify='center' pdd='0'>
+                <InfoTextNoWrap color='white' alignSelf='center' fontSize='20'>
+                    Agenda vazia! 
+                </InfoTextNoWrap>
+            </Subcontainer>
+
+            <Subcontainer bg='gray' wdt='300' hgt='180' align='center' justify='center' pdd='0' mgTop='5'>
+                <InfoTextNoWrap color='white' alignSelf='center' fontSize='16'>
+                    Você ainda não cadastrou nenhuma matéria da sua grade! Clique no " + " para adicionar sua grade e ter controle das aulas que você terá durante a semana!
+                </InfoTextNoWrap>
+            </Subcontainer>
+        </>
+        }
         >
         </FlatList>
         

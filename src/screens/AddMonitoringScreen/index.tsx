@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react'
 import { MonitorList, Calendar, Container, CreateModal, DefineTimeScheduling, Headers, InfoText, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, ModalText } from '~/components'
 import * as SecureStore from 'expo-secure-store'
+import { API_URL } from '~/configs/config'
 
 export const AddMonitoringScreen = ({ navigation }) => {
   const [openModal, setOpenModal] = useState(false)
   const [step, setStep] = useState(1)
   const [selectedDate, setSelectedDate] = useState(null)
-  const [selectedMonitor, setSelectedMonitor] = useState(null)
+  const [selectedMonitoria, setSelectedMonitoria] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
+  const [selectedWeekday, setSelectedWeekday] = useState(null)
   const [confirming, setConfirming] = useState(false)
   const [titleMessage, setTitleMessage] = useState('')
   const [bodyMessage, setBodyMessage] = useState('')
+  const weekDays = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado']
+  const filterWeekday = selectedDate ? weekDays[new Date(selectedDate).getDay()] : null
 
   function handleOnPress() {
     setOpenModal(!openModal)
@@ -27,34 +31,94 @@ export const AddMonitoringScreen = ({ navigation }) => {
     setBodyMessage('Tem certeza que deseja\ncancelar o agendamento?')
     handleOnPress()
   }
+  
+  const handleDateSelected = (date) => {
+    if (!date) {
+      console.log("Data inválida selecionada!")
+      return
+    }
+  
+    setSelectedDate(date)
+  
+    const dayOfWeek = new Date(date).toLocaleDateString('pt-BR', { weekday: 'long' })
+    setSelectedWeekday(dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1))
+    setStep(2)
+  }
 
-  const handleConfirm = () => {
+  const handleMonitorSelection = async (monitoriaId) => {
+    const token = await SecureStore.getItemAsync('token')
+    console.log('Monitor selecionado:', monitoriaId)
+    console.log('Data selecionada:', selectedDate)
+      
+    if (!selectedDate) {
+      console.log("Data não selecionada! Abortando seleção de monitor.")
+      return
+    }
+  
+    setSelectedMonitoria(monitoriaId)
+    setStep(3)
+  }
+
+  const handleCancel = () => {
     navigation.navigate('Monitoring')
+  }
+
+  const handleConfirm = async () => {
+    const token = await SecureStore.getItemAsync('token')
+
+    if (!selectedDate || !selectedMonitoria || !selectedTime) {
+      console.log("Faltam dados para agendar")
+      console.log("selectedDate:", selectedDate, "selectedMonitoria:", selectedMonitoria, "selectedTime:", selectedTime)
+      return
+    }
+      
+    try {
+
+      console.log("Enviando para API:", {
+        idMonitoria: selectedMonitoria,
+        data: selectedDate,
+        obs: ''
+      })
+      
+      const response = await fetch(`${API_URL}/agendamento`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token || ''
+        },
+        body: JSON.stringify({
+          idMonitoria: selectedMonitoria,
+          data: selectedDate.replace(/\//g, "-"),
+          obs: ''
+        })
+      })
+  
+      const result = await response.json()
+      console.log("Resposta do agendamento:", result)
+
+      if (!response.ok) {
+        alert(result.error || 'Erro ao agendar a monitoria! Verifique se você já não está com a monitoria marcada para este dia')
+        return
+      }
+  
+      navigation.navigate('Monitoring')
+
+    } catch (error) {
+      console.error("Erro ao agendar:", error)
+    }
   }
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       setStep(1)
       setSelectedDate(null)
-      setSelectedMonitor(null)
+      setSelectedMonitoria(null)
       setSelectedTime(null)
       setOpenModal(false)
     })
     return unsubscribe
   }, [navigation])
-
-  const handleMonitorSelection = async (monitor) => {
-    const token = await SecureStore.getItemAsync('token')
-    if (!token) {
-      console.log("Token não encontrado!")
-      return
-    }
-
-    setSelectedMonitor(monitor)
-    SecureStore.setItem('monitorSelecionado', monitor.toString())
-    console.log('id do monitor:', monitor)
-    setStep(3)
-  }
+  
 
   return (
     <Container>
@@ -64,18 +128,31 @@ export const AddMonitoringScreen = ({ navigation }) => {
 
       <Subcontainer maxHgt='50' justify='flex-start' mgLeft='0'>
         {step >= 1 && (
-          <Calendar onDateSelected={(date) => { setSelectedDate(date); setStep(2) }} />
+          <Calendar onDateSelected={(date) => { 
+            if (!date) {
+              console.log("Data inválida selecionada!")
+              return
+            }
+            setSelectedDate(date)
+            setStep(2)
+          }} />
         )}
 
-        <Subcontainer maxHgt='100' justify='center' mgLeft='0' mgTop='75' dir='row'>
-          {step >= 2 && (
-            <MonitorList onMonitorSelected={handleMonitorSelection} />
-          )}
+      <Subcontainer maxHgt='100' justify='center' mgLeft='0' mgTop='75' dir='row'>
+        {step >= 2 && (
+          <MonitorList 
+            onMonitorSelected={handleMonitorSelection} 
+            filterWeekday={filterWeekday} 
+          />      
+        )}
 
-          {step >= 3 && (
-            <DefineTimeScheduling onTimeSelected={(time) => { setSelectedTime(time); setStep(4) }} />
-          )}
-        </Subcontainer>
+        {step >= 3 && (
+          <DefineTimeScheduling 
+            onTimeSelected={(time) => {
+              setSelectedTime(time)
+              setStep(4) }} />
+        )}
+      </Subcontainer>
 
         {step >= 4 && (
           <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0'>
@@ -130,7 +207,11 @@ export const AddMonitoringScreen = ({ navigation }) => {
                   fontSize='18'
                   onPress={() => {
                     handleOnPress()
-                    handleConfirm()
+                    if (titleMessage === 'Confirmar agendamento') {
+                      handleConfirm()
+                    } else if (titleMessage === 'Cancelar agendamento') {
+                      handleCancel()
+                    }
                   }}
                 />
 

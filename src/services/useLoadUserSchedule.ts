@@ -29,6 +29,8 @@ export const useUserSchedule = () => {
   const [error, setError] = useState<string | null>(null)
 
   async function loadUserSchedule() {
+    setLoading(true)
+    
     try {
       const token = await SecureStore.getItemAsync("token")
 

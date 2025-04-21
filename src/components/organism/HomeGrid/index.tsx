@@ -4,7 +4,7 @@ import { FlatList, Text } from 'react-native'
 import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid, ClassIcon, imageMap } from '~/components'
 
 export const HomeGrid = () => {
-    const monitoring = useMonitoring()
+    const { monitoring, isLoaded } = useMonitoring()
     return (
         <Subcontainer 
         hgt='250'
@@ -101,7 +101,7 @@ export const HomeGrid = () => {
 
 export const ClassGrid = () => {
     const today = new Date().toLocaleDateString('pt-BR', { weekday: 'long', timeZone: 'America/Sao_Paulo' })
-    const monitoring = useMonitoring()
+    const { monitoring, isLoaded } = useMonitoring()
 
     return (
     <Subcontainer 
@@ -144,6 +144,20 @@ export const ClassGrid = () => {
                 hgt='160'
                 bg='briskGray'
             >
+            {isLoaded && monitoring.length === 0 ? (
+                <Subcontainer bg='darkRed' wdt='300' maxHgt='30' align='center' justify='center' pdd='0'>
+                    <InfoText
+                        alignSelf='center'
+                        mgBottom=''
+                        color='white'
+                        fontSize='20'
+                        fontFamily='bold'
+                        mgLeft='0'
+                    >
+                        Não há monitorias hoje!
+                    </InfoText>
+                </Subcontainer>
+                ) : (
                 <FlatList data={ monitoring } renderItem={({ item }) => (
 
                     <ListContainer
@@ -205,8 +219,8 @@ export const ClassGrid = () => {
 
                     </ListContainer>
                 )}
-                >
-                </FlatList>
+                />
+                )}
         </Windows>
     </Subcontainer>
     )

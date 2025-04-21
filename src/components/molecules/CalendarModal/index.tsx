@@ -87,10 +87,11 @@ export const Calendar = ({ onDateSelected }) => {
                   mode='calendar'
                   selected={date}
                   minimumDate={startDate}
-                  onDateChange={(propDate) => {
-                    handleChange(propDate)
-                    onDateSelected()
+                  onDateChange={(dataSelecionada) => {
+                    handleChange(dataSelecionada)
+                    onDateSelected(dataSelecionada)                  
                   }}
+
                   options={{
                     backgroundColor: isDark ? theme.darkTheme.colors.white : theme.lightTheme.colors.white,
                     textHeaderColor: isDark ? theme.darkTheme.colors.brisk : theme.lightTheme.colors.brisk,

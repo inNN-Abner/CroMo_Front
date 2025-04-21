@@ -25,8 +25,8 @@ export const HomeScreen = ({ navigation }) => {
               onPress={() => {
                 navigation.navigate('AddMonitoring')
               }}
-            ></AddButtonText>
-
+            />
+            
           <HomeGrid />
             <EditInfoButton
                 bg='brisk'
@@ -42,7 +42,7 @@ export const HomeScreen = ({ navigation }) => {
                 onPress={() => {
                   navigation.navigate('EditInfo')
                 }}
-              ></EditInfoButton>
+              />
 
         </Subcontainer>
 

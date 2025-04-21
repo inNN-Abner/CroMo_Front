@@ -1,22 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Divider, imageMap, InfoText, ListOptionButton, PageSubtitle, Subcontainer } from '~/components/atoms'
 import { useTheme } from '~/context/ThemeContext'
 import { theme } from '~/styles'
 import { useMonitors } from '~/../archives/monitors'
-import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 
-export const MonitorList = ({ onMonitorSelected }) => {
+export const MonitorList = ({ onMonitorSelected, filterWeekday }) => {
+  const [monitorias, setMonitorias] = useState([]);
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const { monitors, loading, error } = useMonitors()
   const isDark = useTheme().isDark
+  
+  useEffect(() => {
+    async function fetchMonitorias() {
+      // busca monitorias normalmente
+      const response = await fetch(`${API_URL}/monitorias`)
+      const data = await response.json()
 
-  const handleButtonPress = (id: number) => {
-    setSelectedId(id)
-    onMonitorSelected(id)
-  }
+      if (filterWeekday) {
+        // filtra as que batem com o dia da semana da data selecionada
+        const filtradas = data.filter(m => m.dia_semana === filterWeekday)
+        setMonitorias(filtradas)
+      } else {
+        setMonitorias(data)
+      }
+    }
+    fetchMonitorias()
+  }, [filterWeekday])
 
   const getTextColor = (selected: boolean) =>
     isDark
@@ -48,7 +60,10 @@ export const MonitorList = ({ onMonitorSelected }) => {
           return (
             <ListOptionButton
               key={item.id}
-              onPress={() => handleButtonPress(item.id)}
+              onPress={() => {
+                setSelectedId(item.id)  
+                onMonitorSelected(item.id)
+              }}
               justify='flex-start'
               wdt='165'
               hgt='50'

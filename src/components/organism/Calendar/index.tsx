@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { PageSubtitle, SetTimeButton, Subcontainer } from '../../atoms'
-import hours from '~/../archives/hours'
+import { useHours } from '~/../archives/hours'
 
 export const SetTime: React.FC<{ onTimeSelected: (time: string) => void }> = ({ onTimeSelected }) => {
     const [selectedId, setSelectedId] = useState<number | null>(null)
+    const hours = useHours()
+
     const handleButtonPress = (id: number, time: string) => {
         setSelectedId(id)
         onTimeSelected(time)
