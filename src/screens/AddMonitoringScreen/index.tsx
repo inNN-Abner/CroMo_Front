@@ -8,12 +8,13 @@ export const AddMonitoringScreen = ({ navigation }) => {
   const [step, setStep] = useState(1)
   const [selectedDate, setSelectedDate] = useState(null)
   const [selectedMonitoria, setSelectedMonitoria] = useState(null)
+  const [monitoriaIdToConfirm, setMonitoriaIdToConfirm] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
   const [selectedWeekday, setSelectedWeekday] = useState(null)
   const [confirming, setConfirming] = useState(false)
   const [titleMessage, setTitleMessage] = useState('')
   const [bodyMessage, setBodyMessage] = useState('')
-  const weekDays = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado']
+  const weekDays = ['Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado', 'Domingo']
   const filterWeekday = selectedDate ? weekDays[new Date(selectedDate).getDay()] : null
 
   function handleOnPress() {
@@ -49,21 +50,21 @@ export const AddMonitoringScreen = ({ navigation }) => {
     const token = await SecureStore.getItemAsync('token')
     console.log('Monitor selecionado:', monitoriaId)
     console.log('Data selecionada:', selectedDate)
-      
+
     if (!selectedDate) {
       console.log("Data não selecionada! Abortando seleção de monitor.")
       return
     }
-  
     setSelectedMonitoria(monitoriaId)
-    setStep(3)
+    setMonitoriaIdToConfirm(monitoriaId)
+      setStep(3)
   }
 
   const handleCancel = () => {
     navigation.navigate('Monitoring')
   }
 
-  const handleConfirm = async () => {
+  const handleConfirm = async (monitoriaId = monitoriaIdToConfirm) => {
     const token = await SecureStore.getItemAsync('token')
 
     if (!selectedDate || !selectedMonitoria || !selectedTime) {
@@ -73,7 +74,6 @@ export const AddMonitoringScreen = ({ navigation }) => {
     }
       
     try {
-
       console.log("Enviando para API:", {
         idMonitoria: selectedMonitoria,
         data: selectedDate,
@@ -208,7 +208,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
                   onPress={() => {
                     handleOnPress()
                     if (titleMessage === 'Confirmar agendamento') {
-                      handleConfirm()
+                      handleConfirm(monitoriaIdToConfirm)
                     } else if (titleMessage === 'Cancelar agendamento') {
                       handleCancel()
                     }

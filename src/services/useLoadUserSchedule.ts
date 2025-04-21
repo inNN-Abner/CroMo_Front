@@ -13,12 +13,12 @@ type Agenda = {
 
 function formatWeekDay(day: string): string {
   const map: Record<string, string> = {
-    "segunda-feira": "SEG",
-    "terça-feira": "TER",
-    "quarta-feira": "QUA",
-    "quinta-feira": "QUI",
-    "sexta-feira": "SEX",
-    "sábado": "SAB",
+    "Segunda-feira": "SEG",
+    "Terça-feira": "TER",
+    "Quarta-feira": "QUA",
+    "Quinta-feira": "QUI",
+    "Sexta-feira": "SEX",
+    "Sábado": "SAB",
   }
   return (map[day.toLowerCase()]) || day
 }
