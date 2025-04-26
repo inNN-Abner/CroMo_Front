@@ -20,7 +20,7 @@ interface ModalProps {
 export const CreateModal = ({ visible, bg, wdt, hgt, bdRd, pdd, align, justify, children }: ModalProps) => {
     return (
         <Modal
-            animationType='fade'
+            animationType='slide' 
             transparent={true}
             visible={visible}
         >

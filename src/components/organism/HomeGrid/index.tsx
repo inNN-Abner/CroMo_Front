@@ -149,7 +149,7 @@ export const ClassGrid = () => {
                     <InfoText
                         alignSelf='center'
                         mgBottom=''
-                        color='white'
+                        color='everWhite'
                         fontSize='20'
                         fontFamily='bold'
                         mgLeft='0'

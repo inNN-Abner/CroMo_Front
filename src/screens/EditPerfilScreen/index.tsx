@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { RedCancelButton, SaveButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
-import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, EditPhoto } from '~/components'
+import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, EditPhoto, PhotoSelectorModal } from '~/components'
 import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
-//import { launchImageLibrary } from 'react-native-image-picker'
 
 export const imageMap: Record<number, any> = {
-  1: require('~/../assets/Bag.png'),
+  1: require('~/../assets/Helmet.png'),
   2: require('~/../assets/Book.png'),
-  3: require('~/../assets/Helmet.png'),
+  3: require('~/../assets/Transfiguration.jpg'),
+  4: require('~/../assets/Helmet.png'),
+  5: require('~/../assets/TechnologySociety.png')
 }
 
 export const EditPerfilScreen = ({ navigation }) => {
@@ -18,7 +19,10 @@ export const EditPerfilScreen = ({ navigation }) => {
   const [emailValue, setEmailValue] = useState('')
   const [teamsValue, setTeamsValue] = useState('')
   const [raValue, setRaValue] = useState('')
-  const [userData, setUserData] = useState<{ nome: string; foto: number; curso: string } | null>(null);
+  const [userData, setUserData] = useState<{ nome: string; foto: number; curso: string } | null>(null)
+  const [photoModalVisible, setPhotoModalVisible] = useState(false)
+  const [selectedPhotoId, setSelectedPhotoId] = useState<number | null>(null)
+
 
   useEffect(() => {
     const loadUser = async () => {
@@ -40,17 +44,6 @@ export const EditPerfilScreen = ({ navigation }) => {
     navigation.navigate('Perfil')
   }
 
-  /*const pickImage = () => {
-        launchImageLibrary(
-          { mediaType: 'photo', quality: 1 },
-          (response) => {
-            if (!response.didCancel && !response.errorMessage && response.assets?.length) {
-              setPhotoUri({ uri: response.assets[0].uri })
-            }
-          }
-        )
-    }*/
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -60,16 +53,16 @@ export const EditPerfilScreen = ({ navigation }) => {
         <Subcontainer mgLeft='0'>
         <PageTitle mgTop='-5'>Editar informações</PageTitle>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setPhotoModalVisible(true)}>
         {userData && (
           <EditPhoto
-            idFoto = {userData.foto}
+            idFoto={selectedPhotoId ?? userData.foto}
             hgt='145'
             wdt='100'
             bdRd='20'
             mgLeft='40'
             mgTop='10'
-          />
+        />
         )}
         </TouchableOpacity>
 
@@ -152,6 +145,13 @@ export const EditPerfilScreen = ({ navigation }) => {
           </Subcontainer>
         </Subcontainer>
         
+        <PhotoSelectorModal 
+          visible={photoModalVisible}
+          onClose={() => setPhotoModalVisible(false)}
+          onSelect={(photoId) => setSelectedPhotoId(photoId)}
+          options={[1, 2, 3, 4, 5]}
+        />
+
       </Container>
 
     </TouchableWithoutFeedback>
