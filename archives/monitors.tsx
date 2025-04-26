@@ -13,10 +13,10 @@ type Monitoria = {
 type Monitor = {
   materia: string
   id: number
-  email: string
   name: string
   photo: string
-  monitorias: Monitoria[]
+ // monitorias: Monitoria[]
+  materiaFoto: string
 }
 
 export const useMonitors = () => { 
@@ -28,12 +28,16 @@ export const useMonitors = () => {
     async function loadMonitor() {
       try {
         const token = await SecureStore.getItemAsync("token")
-        const resp = await fetch(`${API_URL}/auth/monitoresMonitoria`, {
-          method: 'GET',
+        const dataSelecionada = await SecureStore.getItemAsync('dataSelecionada')
+        const resp = await fetch(`${API_URL}/monitoria/show`, {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'x-access-token': token || '',
           },
+          body: JSON.stringify({
+            data: dataSelecionada,
+          }),
         })
   
         if (!resp.ok) {
@@ -53,13 +57,12 @@ export const useMonitors = () => {
         }
   
         const monitores = data.map((m: any) => ({
-          id: m.id,
-          email: m.email,
-          name: m.nome,
-          photo: m.idFoto,
+          id: m.idMonitor,
+          name: m.monitor,
+          photo: m.idFotoMonitor,
           materiaFoto: m.idFoto,
-          monitorias: m.monitorias,
-          materia: m.monitorias?.[0]?.materia?.nome ?? 'Sem matéria'
+          //monitorias: m.monitorias,
+          materia: m.materia ?? 'Sem matéria'
         }))
   
         setMonitors(monitores)

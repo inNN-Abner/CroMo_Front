@@ -8,7 +8,7 @@ import { useMonitors } from '~/../archives/monitors'
 import { API_URL } from '~/configs/config'
 
 export const MonitorList = ({ onMonitorSelected, filterWeekday }) => {
-  const [monitorias, setMonitorias] = useState([]);
+  const [monitorias, setMonitorias] = useState([])
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const { monitors, loading, error } = useMonitors()
   const isDark = useTheme().isDark

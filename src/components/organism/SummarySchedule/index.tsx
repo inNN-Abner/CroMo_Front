@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { CancelButton, CreateModal, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
+import { CancelButton, CreateModal, imageMap, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
 import { ScrollView } from 'react-native-gesture-handler'
-import monitoringHours from '~/../archives/monitoringHours'
+import { useAgendamento } from '~/../archives/monitoringHours'
 import { useAgendaActions } from '~/services/useAgendaActions'
 import { useUserSchedule } from '~/services/useLoadUserSchedule'
+import * as SecureStore from 'expo-secure-store'
+import { API_URL } from '~/configs/config'
 
 const Calendar = require('~/../assets/Calendar.png')
 const Clock = require( '~/../assets/Clock.png')
@@ -14,12 +16,63 @@ export const SummarySchedule = ({ navigation }) => {
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [titleMessage, setTitleMessage] = useState('')
     const [bodyMessage, setBodyMessage] = useState('')
+    const [selectedMonitoria, setSelectedMonitoria] = useState(null)
+    const { monitoring, isLoaded } = useAgendamento()
     
     function handleOnPress() {
         setOpenCreateModal(!openCreateModal)
     }
 
-    const CreateModalCancel = () => {
+    const excluirMonitoria = async() => {
+        const token = await SecureStore.getItemAsync('token')
+
+        if (!selectedMonitoria) {
+        console.log("Faltam dados para desmarcar agendamento")
+        return
+        }
+        
+        try {
+        console.log("Enviando para API:", {
+            idMonitoria: selectedMonitoria,
+        })
+        
+        const response = await fetch(`${API_URL}/agendamento/delete`, {
+            method: 'DELETE',
+            headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token || ''
+            },
+            body: JSON.stringify({
+            id:  Number(selectedMonitoria),
+            })
+        })
+    
+        if (!response.ok) {
+            const errorText = await response.text()
+            throw new Error(errorText || 'Erro ao apagar agendamento!')
+        }
+
+        const result = await response.json().catch((error) => {
+            console.error("Erro ao fazer parse da resposta JSON:", error)
+            throw new Error('Erro ao processar a resposta da API')
+        })
+
+        console.log("Resposta:", result)
+
+        if (!result) {
+            alert("Resposta inválida da API.")
+            return
+        }
+    
+        navigation.navigate('Monitoring')
+
+        } catch (error) {
+        console.error("Erro ao agendar:", error)
+        }
+        }
+
+    const CreateModalCancel = (monitoria) => {
+        setSelectedMonitoria(monitoria)
         setTitleMessage('Desmarcar monitoria')
         setBodyMessage('Tem certeza que deseja cancelar o\nagendamento? Essa ação é irreversível!')
         handleOnPress()
@@ -29,7 +82,7 @@ export const SummarySchedule = ({ navigation }) => {
     <Subcontainer mgLeft='0' maxHgt='75' align='center' >
     <ScrollView>
 
-        {monitoringHours.map((item) => (
+        {monitoring.map((item) => (
             <React.Fragment key={item.id}>
 
             <Windows 
@@ -46,7 +99,7 @@ export const SummarySchedule = ({ navigation }) => {
                         wdt='40'
                         mgTop='0'
                         mgLeft='15'
-                        source={item.icon} 
+                        source={imageMap[item.icon || 1]} 
                     />
                     <PageTitle
                         mgTop='0'
@@ -99,7 +152,7 @@ export const SummarySchedule = ({ navigation }) => {
 
         <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
             <Photo
-                source={item.photo}
+                source={imageMap[item.photo || 1]}
                 wdt='35'
                 hgt='35'
                 mgTop='0'
@@ -121,7 +174,7 @@ export const SummarySchedule = ({ navigation }) => {
                 color='darkRed'
                 label={'Desmarcar monitoria'}
                 fontSize='16'
-                onPress={CreateModalCancel}
+                onPress={() => CreateModalCancel(item.id)}
             />
         </Subcontainer>
         </Windows>
@@ -143,8 +196,10 @@ export const SummarySchedule = ({ navigation }) => {
                     bdRd='10'
                     fontSize='16'
                     onPress={() => {
+                        excluirMonitoria()
+                        loadUserSchedule()
                         handleOnPress()
-                        navigation.navigate('Monitoring')
+                       // navigation.navigate('Monitoring')
                     }}
                 />
                 <StylezedButton
