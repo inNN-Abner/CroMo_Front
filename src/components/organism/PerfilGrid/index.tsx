@@ -35,7 +35,7 @@ export const PerfilGrid = ({ navigation }) => {
             dir='row'
         >
 
-            <TableGrid fontSize='11' color='white' wdt='55' mgLeft='5'>{item.weekDay}</TableGrid>
+            <TableGrid fontSize='14' color='white' wdt='55' mgLeft='5'>{item.weekDay}</TableGrid>
             <TableGrid fontSize='14' wdt='115' fontFamily='regular' mgLeft='5'>{item.class}</TableGrid>
             <TableGrid fontSize='14' wdt='115' fontFamily='regular' mgLeft='5'>
                 <Text style={{ fontWeight: 'bold' }}>{item.locale}</Text> {`\n`} {item.hour}</TableGrid>

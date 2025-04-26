@@ -13,12 +13,12 @@ type Agenda = {
 
 function formatWeekDay(day: string): string {
   const map: Record<string, string> = {
-    "Segunda-feira": "SEG",
-    "Terça-feira": "TER",
-    "Quarta-feira": "QUA",
-    "Quinta-feira": "QUI",
-    "Sexta-feira": "SEX",
-    "Sábado": "SAB",
+    "segunda-feira": "SEG",
+    "terça-feira": "TER",
+    "quarta-feira": "QUA",
+    "quinta-feira": "QUI",
+    "sexta-feira": "SEX",
+    "sábado": "SAB",
   }
   return (map[day.toLowerCase()]) || day
 }
@@ -34,11 +34,11 @@ export const useUserSchedule = () => {
     try {
       const token = await SecureStore.getItemAsync("token")
 
-      const response = await fetch(`${API_URL}/agenda`, {
+      const response = await fetch(`${API_URL}/agenda/showAgenda`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "x-access-token": token || "",
+          "x-access-token": token || '',
         },
       })
 
