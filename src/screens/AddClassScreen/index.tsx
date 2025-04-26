@@ -3,6 +3,7 @@ import { Headers, Container, SelectDay, Subcontainer, StylezedButton, Windows, C
 import { useState } from 'react'
 import { useAgendaActions } from '~/services/useAgendaActions'
 import { useUserSchedule } from '~/services/useLoadUserSchedule'
+import React from 'react'
 
 export const AddClassScreen = ({ navigation }) => {
   const { agendas, loading, error, loadUserSchedule } = useUserSchedule()

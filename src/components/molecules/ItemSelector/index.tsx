@@ -60,7 +60,7 @@ export const ClassroomSelector: React.FC<ClassroomSelectorProps> = ({ selectedCl
       onPress={() => setModalVisible(true)}
     >
       <InfoText color='brisk' fontSize='18' mgBottom='0' mgLeft='0' alignSelf={'center'}>
-        {selectedClassroom ? `${selectedClassroom}` : 'Clique para selecionar'}
+        {selectedClassroom ? `${selectedLabel}` : 'Clique para selecionar'}
       </InfoText>
 
       <ClassroomModal
