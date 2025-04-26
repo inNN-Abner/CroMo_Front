@@ -1,5 +1,6 @@
 import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { Headers, Container, SelectDay, Subcontainer, StylezedButton, Windows, ContactText, PageTitle, PageSubtitle, TimeInput, ClassroomSelector, InfoText } from '../../components'
+import React from 'react'
 
 export const MonitorScheduleScreen = ({ navigation }) => {
   const handleTimeSelected = (time: string) => {
@@ -36,7 +37,9 @@ export const MonitorScheduleScreen = ({ navigation }) => {
               </ContactText>
             </Windows>
 
-            <SelectDay />
+            <SelectDay onDaySelected={function (day: string): void {
+            throw new Error('Function not implemented.')
+          } } />
             
           <Subcontainer align='center' maxHgt='50' mgLeft='0'>
             <TimeInput />

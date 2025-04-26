@@ -61,10 +61,11 @@ export const TextInput = ({ children, editable, value, fontSize, align, secureTe
 }
 
 type ClassInputProps = {
+  value: string
   setMateria: (value: string) => void
 }
 
-export const ClassInput: React.FC<ClassInputProps> = ({ setMateria }) => {
+export const ClassInput: React.FC<ClassInputProps> = ({ value, setMateria }) => {
   const { isDark } = useTheme()
 
   return (
@@ -86,6 +87,7 @@ export const ClassInput: React.FC<ClassInputProps> = ({ setMateria }) => {
             pddLeft='0'
             fontSize='16'
             placeholder='Ex.: Gestão de projetos'
+            value={value}
             onChangeText={setMateria}
           />
             

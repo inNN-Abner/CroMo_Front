@@ -3,17 +3,38 @@ import { Headers, Container, SelectDay, Subcontainer, StylezedButton, Windows, C
 import { useState } from 'react'
 import { useAgendaActions } from '~/services/useAgendaActions'
 import { useUserSchedule } from '~/services/useLoadUserSchedule'
+import { useFocusEffect } from '@react-navigation/native'
+import { useCallback } from 'react'
 import React from 'react'
 
 export const AddClassScreen = ({ navigation }) => {
   const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
-  const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)
+  const { handleSubmit } = useAgendaActions(loadUserSchedule)
+  
   const [day, setDay] = useState<string | null>(null)
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [materia, setMateria] = useState('')
   const [selectedClassroom, setSelectedClassroom] = useState<number | null>(null)
-
+  const [resetForm, setResetForm] = useState(false)
+  
+  useFocusEffect(
+    useCallback(() => {
+      setResetForm(true)
+      setDay(null)
+      setStartTime('')
+      setEndTime('')
+      setMateria('')
+      setSelectedClassroom(null)
+  
+      const timer = setTimeout(() => {
+        setResetForm(false)
+      }, 100)
+  
+      return () => clearTimeout(timer)
+    }, [])
+  )
+  
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -21,7 +42,7 @@ export const AddClassScreen = ({ navigation }) => {
 
         <Headers />
           <PageTitle>Agenda</PageTitle>
-          <PageSubtitle>Definir horário do monitor</PageSubtitle>
+          <PageSubtitle>Definir minha agenda</PageSubtitle>
             
         <Subcontainer align='center' mgLeft='0'>
 
@@ -46,6 +67,7 @@ export const AddClassScreen = ({ navigation }) => {
 
             <SelectDay 
               onDaySelected={setDay} 
+              resetTrigger={resetForm}
             />
             
           <Subcontainer align='center' maxHgt='50' mgLeft='0'>
@@ -57,6 +79,7 @@ export const AddClassScreen = ({ navigation }) => {
             />
 
           <ClassInput 
+            value={materia}
             setMateria={setMateria}
           />
 

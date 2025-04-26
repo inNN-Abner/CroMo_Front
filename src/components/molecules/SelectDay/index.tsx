@@ -3,20 +3,27 @@ import { SelectDayContainer, DayButton } from '../../atoms'
 
 type SelectDayProps = {
     onDaySelected: (day: string) => void
+    resetTrigger?: boolean
 }
 
-export const SelectDay: React.FC<SelectDayProps> = ({ onDaySelected }) => {
+export const SelectDay: React.FC<SelectDayProps> = ({ onDaySelected, resetTrigger }) => {
     const [indexDate, setIndexDate] = useState<number | null>(null)
 
     const diasDaSemana = [
-        "Segunda-feira", "Terça-feira", 
-        "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"
+        "Segunda-feira", "Terça-feira", "Quarta-feira",
+        "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"
     ]
 
     const handleButtonPress = (index: number) => {
         setIndexDate(index)
         onDaySelected(diasDaSemana[index])
     }
+
+    React.useEffect(() => {
+        if (resetTrigger) {
+            setIndexDate(null)
+        }
+    }, [resetTrigger])
 
     return (
         <SelectDayContainer>
