@@ -1,5 +1,6 @@
 import React from 'react'
 import { PhotoStyle } from './styles'
+import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 
 interface PhotoProps {
     idFoto?: number
@@ -10,15 +11,6 @@ interface PhotoProps {
     mgTop?: string
     mgLeft?: string
     bdRd?: string
-}
-
-export const imageMap: Record<number, any> = {
-    1: require('~/../assets/Bag.png'),
-    2: require('~/../assets/Book.png'),
-    3: require('~/../assets/Transfiguration.jpg'),
-    4: require('~/../assets/Helmet.png'),
-    5: require('~/../assets/TechnologySociety.png'),
-    6: require('~/../assets/Book.png'),
 }
 
 export const Photo = ({ source, idFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {

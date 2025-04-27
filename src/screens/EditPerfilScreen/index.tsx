@@ -6,14 +6,7 @@ import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-nati
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 import { useUser } from '~/services/userContext'
-
-export const imageMap: Record<number, any> = {
-  1: require('~/../assets/Helmet.png'),
-  2: require('~/../assets/Book.png'),
-  3: require('~/../assets/Transfiguration.jpg'),
-  4: require('~/../assets/Helmet.png'),
-  5: require('~/../assets/TechnologySociety.png')
-}
+import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 
 export const EditPerfilScreen = ({ navigation }) => {
   const { isDark } = useTheme()

@@ -1,11 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import contacts from '~/../archives/contacts'
-import { ListOfContacts } from '~/components/organism/List';
-import { Container, Subcontainer } from '~/components/atoms/Container';
-import { Headers, PageSubtitle, PageTitle, SearchInput, Windows } from '~/components/';
+import { ListOfContacts } from '~/components/organism/List'
+import { Container, Subcontainer } from '~/components/atoms/Container'
+import { Headers, PageSubtitle, PageTitle, SearchInput, Windows } from '~/components/'
+import * as SecureStore from 'expo-secure-store'
 
 export const ContactsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [list, setList] = useState(contacts)
+  const [list, setList] = useState<any[]>([]) 
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const token = await SecureStore.getItemAsync("token")
+        const response = await axios.get('http://192.168.0.27:3000/contato/contatos/', {
+          headers: {
+            'x-access-token': token || ''
+          }
+        })
+        setList(response.data)
+        console.log(response.data)
+      } catch (error) {
+        console.error('Erro ao buscar contatos:', error)
+      }
+    }
+
+    fetchContacts()
+  }, [])
 
   return (
     <Container>

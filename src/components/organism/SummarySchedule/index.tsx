@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { CancelButton, CreateModal, imageMap, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
+import { CancelButton, CreateModal, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
+import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAgendamento } from '~/../archives/monitoringHours'
 import { useAgendaActions } from '~/services/useAgendaActions'

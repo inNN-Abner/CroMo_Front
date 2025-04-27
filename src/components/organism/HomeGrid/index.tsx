@@ -1,7 +1,8 @@
 import React from 'react'
 import {useMonitoring} from '~/../archives/monitoring'
 import { FlatList, Text } from 'react-native'
-import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid, ClassIcon, imageMap } from '~/components'
+import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid, ClassIcon } from '~/components'
+import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 
 export const HomeGrid = () => {
     const { monitoring, isLoaded } = useMonitoring()

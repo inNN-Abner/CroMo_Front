@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Modal, View } from 'react-native'
 import { ModalContainer, Photo, Subcontainer } from '~/components/atoms'
-import { imageMap } from '~/components/atoms'
+import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 import { ModalContent, ModalTitle, ScrollableContent, OptionButton, OptionText, CloseButton, CloseButtonText } from '~/components/atoms/ModalSelector/styles'
 import { CreateModal } from '~/components/molecules'
 

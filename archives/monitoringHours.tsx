@@ -50,10 +50,10 @@ export const useAgendamento = () => {
                   weekDay: m.dia_semana,
                   hour: m.horario,
                   class: m.materia,
-                  icon: m.idFotoMateria, //icone da materia
+                  icon: m.idFotoMateria,
                   locale: m.local,
                   info: `${m.horario} || (${m.local})`,
-                  photo: m.idFotoMonitor, //foto do monitor
+                  photo: m.idFotoMonitor,
                   monitorName: m.monitor,
                   date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
                 }))

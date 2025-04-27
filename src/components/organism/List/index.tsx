@@ -2,6 +2,7 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import { TouchableOpacity } from 'react-native'
 import { ContactText, InfoText, ListContainer, Photo, Subcontainer } from '~/components/atoms'
+import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 
 export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ navigation, list }) => {
 
@@ -14,19 +15,17 @@ export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ nav
                 onPress={() => {
                     navigation.navigate('ContactsDetail', {
                         id: item.id,
-                        name: item.name,
-                        info: item.info,
-                        photo: item.photo,
-                        type: item.type,
-                        email: item.email,
-                        teams: item.teams
+                        nome: item.nome,        
+                        teams: item.teamsUser,   
+                        idFoto: item.idFoto,      
+                        email: item.teamsEmail, 
                     })
                 }}>
                 <ListContainer>
                     
-                    <Photo
-                        source={item.photo}/>
-
+                <Photo 
+                    source={imageMap[item.idFoto] ?? defaultPhoto} 
+                />
                         <Subcontainer
                             mgTop='0'
                             bg='everWhite'
@@ -36,15 +35,15 @@ export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ nav
                             wdt='255'
                         >
                             <ContactText mgTop='-3'>
-                                {item.name}
+                                {item.nome}
                             </ContactText>
 
                             <InfoText mgTop='-3'>
-                                {item.teams}
+                                {item.teamsUser}
                             </InfoText>
                             
                             <InfoText >
-                                {item.email}
+                                {item.teamsEmail}
                             </InfoText>
 
                         </Subcontainer>
