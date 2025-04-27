@@ -5,6 +5,7 @@ import AppLoading from 'expo-app-loading'
 import { useColorScheme } from  'react-native'
 import { CustomThemeProvider } from './src/context/ThemeContext'
 import { useFonts, Quicksand_400Regular, Quicksand_600SemiBold, Quicksand_700Bold } from '@expo-google-fonts/quicksand';
+import { UserProvider } from '~/services/userContext'
 
 export default function App() {
   
@@ -24,7 +25,9 @@ export default function App() {
  
   return (
     <CustomThemeProvider>
-      <Routes />
+      <UserProvider>
+        <Routes />
+      </UserProvider>
     </CustomThemeProvider>
   )
 }

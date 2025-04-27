@@ -4,6 +4,8 @@ import { useTheme } from '~/context/ThemeContext'
 import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, EditPhoto, PhotoSelectorModal } from '~/components'
 import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
+import { API_URL } from '~/configs/config'
+import { useUser } from '~/services/userContext'
 
 export const imageMap: Record<number, any> = {
   1: require('~/../assets/Helmet.png'),
@@ -15,6 +17,7 @@ export const imageMap: Record<number, any> = {
 
 export const EditPerfilScreen = ({ navigation }) => {
   const { isDark } = useTheme()
+  const { setUser } = useUser()
   const [nameValue, setNameValue] = useState('')
   const [emailValue, setEmailValue] = useState('')
   const [teamsValue, setTeamsValue] = useState('')
@@ -33,17 +36,60 @@ export const EditPerfilScreen = ({ navigation }) => {
         setUserData(data)
         setNameValue(data.nome || '')
         setEmailValue(data.email || '')
-        setTeamsValue(data.email || '')
+        setTeamsValue(data.teams || '')
         setRaValue(data.ra || '')
       }
     }
     loadUser()
   }, [])
 
-  const handleSave = async() => {
-    navigation.navigate('Perfil')
-  }
+  const handleSave = async () => {
+    if (!nameValue || nameValue.trim().length < 5) {
+      alert('O nome deve ter pelo menos 5 caracteres.')
+      return
+    }
+  
+    const token = await SecureStore.getItemAsync('token')
+  
+    try {
+      const response = await fetch(`${API_URL}/auth/perfil`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token || ''
+        },
+        body: JSON.stringify({
+          nome: nameValue,
+          ra: raValue,
+          teams: teamsValue,
+          fotoId: selectedPhotoId ?? userData?.foto
+        })
+      })
+  
+      const text = await response.text()
+      console.log("Resposta bruta:", text)
+        
+      const result = JSON.parse(text)
+      console.log("Usuário atualizado:", result.usuario)
 
+      if (!response.ok) {
+        alert(result.error || 'Erro ao atualizar o perfil!')
+        return
+      }
+    
+      // Atualiza SecureStore
+      await SecureStore.setItemAsync('user', JSON.stringify(result.usuario))
+      await setUser(result.usuario)
+  
+      alert('Perfil atualizado com sucesso!')
+      navigation.navigate('Perfil')
+  
+    } catch (error) {
+      console.error('Erro ao atualizar perfil:', error)
+      alert('Erro ao atualizar perfil')
+    }
+  }
+  
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -126,7 +172,7 @@ export const EditPerfilScreen = ({ navigation }) => {
               bdRd='15'
               color='darkRed'
               label={'CANCELAR'}
-              onPress={handleSave}
+              onPress={() => navigation.navigate('Perfil')}
               fontSize='18'
             />
             
@@ -149,7 +195,7 @@ export const EditPerfilScreen = ({ navigation }) => {
           visible={photoModalVisible}
           onClose={() => setPhotoModalVisible(false)}
           onSelect={(photoId) => setSelectedPhotoId(photoId)}
-          options={[1, 2, 3, 4, 5]}
+          options={[1, 2, 3, 4, 5, 6]}
         />
 
       </Container>

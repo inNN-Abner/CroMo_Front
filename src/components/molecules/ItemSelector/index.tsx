@@ -37,6 +37,7 @@ export const ClassroomSelector: React.FC<ClassroomSelectorProps> = ({ selectedCl
         },
       })
 
+      console.log('Resposta API:', resp)
       const data = await resp.json()
       if (resp.status === 200) setClassrooms(data)
     } catch (e) {
@@ -54,7 +55,8 @@ export const ClassroomSelector: React.FC<ClassroomSelectorProps> = ({ selectedCl
   }))
 
   const selectedLabel = classroomsNames.find(c => c.id === selectedClassroom)?.name
-
+  console.log('Locais:', classroomsNames)
+  
   return (
     <StyledButtonStyle bdRd='15' wdt='250' mgTop='0' bg='white'
       onPress={() => setModalVisible(true)}

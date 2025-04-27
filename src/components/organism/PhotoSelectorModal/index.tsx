@@ -63,7 +63,7 @@ export const PhotoSelectorModal: React.FC<PhotoSelectorModalProps> = ({ visible,
       </ScrollableContent>
 
       <CloseButton onPress={onClose} mgBottom='15' wdt='200'>
-        <CloseButtonText>Salvar</CloseButtonText>
+        <CloseButtonText>Fechar</CloseButtonText>
       </CloseButton>
     </CreateModal>
   )

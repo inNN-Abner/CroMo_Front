@@ -12,6 +12,8 @@ interface ClassroomModalProps {
 }
 
 export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose, onSelect, options }) => {
+  console.log('Opções de locais no modal:', options)
+
   return (
     <Modal
       transparent={true}
@@ -26,6 +28,7 @@ export const ClassroomModal: React.FC<ClassroomModalProps> = ({ visible, onClose
           {options.map((classroom) => (
             <OptionButton
               wdt='250'
+              hgt='40'
               key={classroom.id}
               onPress={async () => {
                 onSelect(classroom.id)

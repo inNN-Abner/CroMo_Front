@@ -28,7 +28,6 @@ export const useMonitoring = () => {
         }
 
         try {
-            console.log("TOKEN Monitoria:", token)
             const resp = await fetch(`${API_URL}/monitoria/show`, {
                 method: 'POST',
                 headers: {
@@ -54,7 +53,7 @@ export const useMonitoring = () => {
 
             setMonitoring(monitorias)
             
-            console.log("Token antes da requisição:", token)
+            console.log("Token da MONITORIA:", token)
 
         } catch (e) {
             console.log("Erro na monitoria: ", e)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { PhotoStyle } from './styles'
 
-interface PhotoProps{
+interface PhotoProps {
     idFoto?: number
     materiaFoto?: string
     source?: string
@@ -18,6 +18,7 @@ export const imageMap: Record<number, any> = {
     3: require('~/../assets/Transfiguration.jpg'),
     4: require('~/../assets/Helmet.png'),
     5: require('~/../assets/TechnologySociety.png'),
+    6: require('~/../assets/Book.png'),
 }
 
 export const Photo = ({ source, idFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {

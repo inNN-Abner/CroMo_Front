@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { HeaderContainerStyle } from './styles'
 import { HeaderDate } from '~/components/molecules'
 import { Photo, HeaderText, LogoHeader, Subcontainer } from '~/components/atoms'
 import { useTheme } from '~/context/ThemeContext'
 import * as SecureStore from 'expo-secure-store'
+import { useUser } from '~/services/userContext'
 
 const HeaderLogoDark = require('~/../assets/Light_Cromo_LogoBKG.png')
 const HeaderLogoLight = require('~/../assets/Dark_Cromo_LogoBKG.png')
 
 export const Headers = () => {
+    const { user } = useUser()
     const { isDark } = useTheme()
-    const [user, setUser] = useState<{ nome: string; curso: string; foto: number; email: string } | null>(null);
+    //const [userII, setUser] = useState<{ nome: string; curso: string; foto: number; email: string } | null>(null);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const loadUser = async () => {
           const userData = await SecureStore.getItemAsync('user')
           if (userData) {
@@ -20,17 +22,17 @@ export const Headers = () => {
           }
         }
         loadUser()
-    }, [])
+    }, [])*/
 
     if (!user) {
         return <HeaderContainerStyle><HeaderText>Carregando...</HeaderText></HeaderContainerStyle>
       }
-    
+
     return (
         <HeaderContainerStyle>
 
             <Photo
-                idFoto = {user.foto}
+                idFoto = {user.idFoto}
                 wdt='45'
                 hgt='45'    
             />
