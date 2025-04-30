@@ -8,6 +8,7 @@ interface User {
   curso: string
   idFoto: number
   ra: string
+  tipo: string
 }
 
 interface UserContextProps {
@@ -51,4 +52,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   )
 }
 
-export const useUser = () => useContext(UserContext)
+export const useUser = () => {
+  const context = useContext(UserContext)
+  if (context === undefined) {
+    throw new Error('useUser must be used within a UserProvider')
+  }
+  return context
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import contacts from '~/../archives/contacts'
+import { API_URL } from '~/configs/config'
 import { ListOfContacts } from '~/components/organism/List'
 import { Container, Subcontainer } from '~/components/atoms/Container'
 import { Headers, PageSubtitle, PageTitle, SearchInput, Windows } from '~/components/'
@@ -13,7 +13,7 @@ export const ContactsScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
     const fetchContacts = async () => {
       try {
         const token = await SecureStore.getItemAsync("token")
-        const response = await axios.get('http://192.168.0.27:3000/contato/contatos/', {
+        const response = await axios.get(`${API_URL}/contato/contatos/`, {
           headers: {
             'x-access-token': token || ''
           }
@@ -65,7 +65,16 @@ export const ContactsScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
 
           </Windows>
 
-          <ListOfContacts navigation={navigation} list={list} />
+          <Subcontainer
+            align='center' bg='greenBlack'
+            mgLeft='0' mgTop='0'
+            maxHgt='87'
+          >
+            <ListOfContacts 
+              navigation={navigation} 
+              list={list}
+            />
+          </Subcontainer>
 
         </Windows>
 

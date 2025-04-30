@@ -4,27 +4,31 @@ import { HeaderText, PageTitle, PerfilCard, PerfilGrid, PerfilHeaders, Windows }
 import { Container, Subcontainer } from '~/components/atoms/Container'
 import { API_URL } from '~/configs/config'
 import * as SecureStore from 'expo-secure-store'
-
-const logout = async () => {
-  try{
-    const resp = await fetch(`${API_URL}/auth/logout`,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    
-    if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
-    
-    await SecureStore.deleteItemAsync('user')
-    await SecureStore.deleteItemAsync('token')
-    
-    } catch(e){
-        console.log("erro: ", e)
-    }
-}
+import { useUser } from '~/services/userContext'
 
 export const PerfilScreen = ({ navigation }) => {
+  const { user, clearUser } = useUser()
+  const logout = async () => {
+
+    try{
+      const resp = await fetch(`${API_URL}/auth/logout`,{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+      })
+      
+      if (!resp.ok) throw new Error(`Erro na requisição: ${resp.status}`)
+      
+      await SecureStore.deleteItemAsync('user')
+      await SecureStore.deleteItemAsync('token')
+      clearUser()
+  
+      } catch(e){
+        console.log("erro: ", e)
+      }
+  }
+  
   return (
     <Container hgt='100'>
         <PerfilHeaders />
@@ -95,6 +99,7 @@ export const PerfilScreen = ({ navigation }) => {
               <LogoutButton wdt='50' hgt='50' bdRd='15' mgTop='5' mgLeft='10'
                 onPress={() => { 
                   logout()
+                  console.log('ID do usuário: ', user.email)
                   navigation.navigate('Login')}}/>
             </Subcontainer>
 

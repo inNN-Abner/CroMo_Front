@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 import { Windows, Subcontainer, Photo, ContactText, InfoText  } from '../../../components'
-import { PixelRatio } from 'react-native';
+import { PixelRatio } from 'react-native'
+import { defaultPhoto, imageMap } from '~/../archives/photoMapper'
 
 export const IdentificationCard = ({ route }) => {
-    const { name, course, photo, type, email, teams } = route.params
+    const { nome, idFoto, tipo, email, teams } = route.params
     const fontScale = PixelRatio.getFontScale()
     const cardHeight = fontScale > 1.1 ? '185' : '155'
-    
-    
+        
     return (
         <Windows
             hgt={cardHeight}
@@ -16,7 +16,7 @@ export const IdentificationCard = ({ route }) => {
             mgTop='0'
             >
             <Photo
-                source={photo}
+                source={imageMap[idFoto] ?? defaultPhoto}
                 hgt='125'
                 wdt='80'
                 bdRd='20'
@@ -25,7 +25,7 @@ export const IdentificationCard = ({ route }) => {
             <Subcontainer mgLeft='5' mgTop='0' hgt='125' wdt='230' align='left' justify='center' bg='white'>
 
                 <ContactText color='whiteGreen' fontSize='12' mgTop='-5'>Nome do professor(a):</ContactText>
-                <InfoText color='whiteGreen' children={name} fontWgt='normal' mgTop='-3' ></InfoText>
+                <InfoText color='whiteGreen' children={nome} fontWgt='normal' mgTop='-3' ></InfoText>
 
                 <ContactText color='whiteGreen' fontSize='12' mgTop='5'>Teams:</ContactText>
                 <InfoText color='whiteGreen' children={teams || 'N/A'} fontWgt='normal' mgTop='-3' ></InfoText>
@@ -34,7 +34,7 @@ export const IdentificationCard = ({ route }) => {
                 <InfoText color='whiteGreen' children={email || 'N/A'} fontWgt='normal' mgTop='-3' ></InfoText>
 
                 <ContactText color='whiteGreen' fontSize='12' mgTop='5'>Tipo:</ContactText>
-                <InfoText color='whiteGreen' children={type || 'N/A'} fontWgt='normal' mgTop='-3' ></InfoText>
+                <InfoText color='whiteGreen' children={tipo || 'N/A'} fontWgt='normal' mgTop='-3' ></InfoText>
 
             </Subcontainer>
         </Windows>

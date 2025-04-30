@@ -6,6 +6,7 @@ import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 import { auth } from '~/services/firebase'
 import { getIdToken, signInWithEmailAndPassword } from 'firebase/auth'
+import { useUser } from '~/services/userContext'
 
 const DarkLogin = require('~/../assets/LoginScreen_Dark.png')
 const LightLogin = require ('~/../assets/LoginScreen_Light.png')
@@ -17,8 +18,10 @@ export const LoginScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const backgroundColor = errorMessage == '' ? 'brisk' : 'darkRed' 
+  const { setUser } = useUser()
 
   const loginWithFirebaseAndBackend = async (email, senha) => {
+
     try {
       console.log('Tentando fazer login no Firebase...') 
 
@@ -43,15 +46,14 @@ export const LoginScreen = ({ navigation }) => {
         },
         body: JSON.stringify({ email })
       }) 
-      console.log('Resposta da API:', response) 
   
       const data = await response.json() 
-      console.log('Dados recebidos da API:', data) 
 
       if (!response.ok) throw new Error(data.error) 
   
       await SecureStore.setItemAsync('user', JSON.stringify(data.user)) 
-      await SecureStore.setItemAsync('token', data.token) 
+      await SecureStore.setItemAsync('token', data.token)
+      setUser(data.user)
       
       console.log('Data.user:', data.user)
       console.log('Data.token:', data.token)

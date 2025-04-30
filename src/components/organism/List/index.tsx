@@ -7,7 +7,8 @@ import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ navigation, list }) => {
 
     return (       
-        <FlatList data={ list }
+        <FlatList 
+            data={ list }
             keyExtractor={(item) => item.id.toString()} 
             renderItem={({ item }) => (
         
@@ -18,10 +19,11 @@ export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ nav
                         nome: item.nome,        
                         teams: item.teamsUser,   
                         idFoto: item.idFoto,      
-                        email: item.teamsEmail, 
+                        email: item.teamsEmail,
+                        tipo: item.tipo
                     })
                 }}>
-                <ListContainer>
+                <ListContainer mgLeft='0'>
                     
                 <Photo 
                     source={imageMap[item.idFoto] ?? defaultPhoto} 
@@ -47,12 +49,10 @@ export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ nav
                             </InfoText>
 
                         </Subcontainer>
-                        
+                    
                 </ListContainer>
             </TouchableOpacity>  
-            
             )}
         />
-
     )
 }

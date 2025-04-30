@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import monitoringHours from '~/../archives/monitoringHours'
 import { FlatList, Text } from 'react-native'
 import { AddButton, EditButton, ListContainer, TrashButton } from '~/components/atoms'
 import { TableGrid } from '~/components/molecules/Grid'
+import { useUser } from '~/services/userContext'
+
 
 export const ContactsDetailGrid = ({ navigation }) => {
+    const { user } = useUser()
+
     return (
     <>
     <FlatList data={ monitoringHours } renderItem={({ item }) => (
@@ -50,27 +54,29 @@ export const ContactsDetailGrid = ({ navigation }) => {
         >
         </FlatList>
         
-        <ListContainer
-            mgTop='0'
-            mgLeft='0'
-            bg='darkGreen'
-            dir='row'
-        >
+        {user?.tipo === 'monitor' && (
+            <ListContainer
+                mgTop='0'
+                mgLeft='0'
+                bg='darkGreen'
+                dir='row'
+            >
+            
+            <TableGrid bg='darkRed' color='everWhite' fontSize='14' wdt='220' hgt='45' mgTop='-5' mgLeft='3' fontFamily='regular'>
+                <Text style={{ fontWeight: 'bold' }}>Adicionar</Text> {'\n'} novo horário</TableGrid>
 
-        <TableGrid bg='darkRed' color='everWhite' fontSize='14' wdt='220' hgt='45' mgTop='-5' mgLeft='3' fontFamily='regular'>
-            <Text style={{ fontWeight: 'bold' }}>Adicionar</Text> {'\n'} novo horário</TableGrid>
-
-            <AddButton
-                wdt='95'
-                hgt='45'
-                bdRd='10'
-                mgTop='-5'
-                mgLeft='5'
-                bg='darkRed'
-                onPress={() => {
-                    navigation.navigate('MonitorSchedule')
-                }} />
-        </ListContainer>
-    </>
+                <AddButton
+                    wdt='95'
+                    hgt='45'
+                    bdRd='10'
+                    mgTop='-5'
+                    mgLeft='5'
+                    bg='darkRed'
+                    onPress={() => {
+                        navigation.navigate('MonitorSchedule')
+                    }} />  
+            </ListContainer>
+            )}
+        </>
     )
 }

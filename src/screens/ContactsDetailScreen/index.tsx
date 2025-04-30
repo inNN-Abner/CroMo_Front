@@ -27,7 +27,7 @@ export const ContactsDetailScreen = ({ route, navigation }) => {
             color='lightGray'
             fontSize='16'
             >
-              Horários de monitoria
+              Horários de aula/monitoria
           </HeaderText>
 
           <ContactsDetailGrid navigation={navigation} />
