@@ -157,21 +157,22 @@ export const TimeInput: React.FC<TimeInputProps> = ({ startTime, setStartTime, e
   )
 }
 
-export const SearchInput = ({ placeholder, bgColor, color,  wdt, hgt, mgTop, mgLeft, setList }) => {
+export const SearchInput = ({ placeholder, bgColor, color,  wdt, hgt, mgTop, mgLeft, setList, originalList }) => {
   const [searchText, setSearchText] = useState('')
   const { isDark } = useTheme()
 
   const handleSearch = (text: string) => {
     setSearchText(text)
-    if (text === '') {
-        setList(contacts)
-    } else {
-        const filteredList = contacts.filter(item =>
-            item.name.toLowerCase().includes(text.toLowerCase())
-        )
-        setList(filteredList)
-    }
-}
+
+    const regex = new RegExp(text, 'i')
+
+    const filteredList = originalList.filter(item => {
+      const name = item.name || item.nome
+      return name ? regex.test(name) : false
+    })
+
+    setList(text === '' ? originalList : filteredList)
+  }
 
   return (
       <TextInputStyle
