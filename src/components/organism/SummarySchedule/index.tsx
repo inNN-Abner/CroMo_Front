@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { CancelButton, CreateModal, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
+import React, { useCallback, useState } from 'react'
+import { CancelButton, CreateModal, InfoText, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
 import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAgendamento } from '~/../archives/monitoringHours'
@@ -7,19 +7,20 @@ import { useAgendaActions } from '~/services/useAgendaActions'
 import { useUserSchedule } from '~/services/useLoadUserSchedule'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
+import { useFocusEffect } from '@react-navigation/native'
 
 const Calendar = require('~/../assets/Calendar.png')
 const Clock = require( '~/../assets/Clock.png')
 
-export const SummarySchedule = ({ navigation }) => {
-    const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
+export const SummarySchedule = ({ navigation  }) => {
+    const { loadUserSchedule } = useUserSchedule()
     const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)  
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [titleMessage, setTitleMessage] = useState('')
     const [bodyMessage, setBodyMessage] = useState('')
     const [selectedMonitoria, setSelectedMonitoria] = useState(null)
     const { monitoring, isLoaded } = useAgendamento()
-    
+
     function handleOnPress() {
         setOpenCreateModal(!openCreateModal)
     }
@@ -79,8 +80,29 @@ export const SummarySchedule = ({ navigation }) => {
         handleOnPress()
     }
 
+    if (!isLoaded) {
+        return (
+          <Subcontainer align='center' mgTop='20'>
+            <InfoText fontSize='16' color='brisk'>Carregando suas monitorias...</InfoText>
+          </Subcontainer>
+        )
+      }
+    
+    if (monitoring.length === 0) {
+        return (
+          <Subcontainer 
+            align='center' justify='center'
+            mgTop='50' mgLeft='0'
+            wdt='350' maxHgt='10'
+            bg='darkRed'
+            > 
+            <InfoText fontSize='16' alignSelf='center' color='everWhite'>Você ainda não tem monitorias marcadas!</InfoText>
+          </Subcontainer>
+        )
+      }
+
     return (
-    <Subcontainer mgLeft='0' maxHgt='75' align='center' >
+    <Subcontainer align='flex-end' justify='center' mgLeft='0' maxHgt='75' >
     <ScrollView>
 
         {monitoring.map((item) => (
@@ -189,10 +211,10 @@ export const SummarySchedule = ({ navigation }) => {
             
             <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
                 <StylezedButton
-                    label={'Cancelar aula'}
+                    label={'Desmarcar monitoria'}
                     bg='darkRed'
                     mgTop='27'
-                    wdt='140'
+                    wdt='145'
                     hgt='40'
                     bdRd='10'
                     fontSize='16'
@@ -200,11 +222,10 @@ export const SummarySchedule = ({ navigation }) => {
                         excluirMonitoria()
                         loadUserSchedule()
                         handleOnPress()
-                       // navigation.navigate('Monitoring')
                     }}
                 />
                 <StylezedButton
-                    label={'Manter aula'}
+                    label={'Manter monitoria'}
                     bg='white'
                     color='darkRed'
                     mgTop='27'

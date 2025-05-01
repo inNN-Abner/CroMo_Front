@@ -17,8 +17,8 @@ export const PerfilGrid = ({ navigation }) => {
         setOpenCreateModal(!openCreateModal)
     }
     
-    if (loading) return <InfoText color='white' alignSelf='center' mgTop='100' fontSize='16'>Carregando...</InfoText>
-    if (error) return <InfoText color='white' alignSelf='center' mgTop='100' fontSize='16'>{error}</InfoText>
+    if (loading) return <InfoText color='everWhite' alignSelf='center' mgTop='100' fontSize='16'>Carregando...</InfoText>
+    if (error) return <InfoText color='everWhite' alignSelf='center' mgTop='100' fontSize='16'>{error}</InfoText>
 
     return (
     <>
@@ -58,7 +58,7 @@ export const PerfilGrid = ({ navigation }) => {
         ListEmptyComponent={
         <>
             <Subcontainer bg='darkRed' wdt='300' hgt='40' align='center' justify='center' pdd='0'>
-                <InfoTextNoWrap color='white' alignSelf='center' fontSize='20'>
+                <InfoTextNoWrap color='everWhite' alignSelf='center' fontSize='20'>
                     Agenda vazia! 
                 </InfoTextNoWrap>
             </Subcontainer>
