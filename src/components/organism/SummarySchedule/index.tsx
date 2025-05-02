@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { CancelButton, CreateModal, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
+import { CancelButton, CreateModal, PageSubtitle, PageTitle, PDFButton, Photo, StylezedButton, Subcontainer, ViewButton, Windows } from '~/components'
 import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAgendamento } from '~/../archives/monitoringHours'
 import { useAgendaActions } from '~/services/useAgendaActions'
 import { useUserSchedule } from '~/services/useLoadUserSchedule'
 import * as SecureStore from 'expo-secure-store'
+import * as Print from 'expo-print'
+import * as Sharing from 'expo-sharing'
 import { API_URL } from '~/configs/config'
+import HTMLListaPresenca from '~/services/HTMLListaPresenca'
 
 const Calendar = require('~/../assets/Calendar.png')
 const Clock = require( '~/../assets/Clock.png')
@@ -20,6 +23,9 @@ export const SummarySchedule = ({ navigation }) => {
     const [selectedMonitoria, setSelectedMonitoria] = useState(null)
     const { monitoring, isLoaded } = useAgendamento()
     const [userType, setUserType] = useState(null)
+    const [alunos, setAlunos] = useState([])
+    const [dataAgendamento, setDataAgendamento] = useState(null)
+    const [materia, setMateria] = useState(null)
 
     useEffect(() => {
         const loadUserType = async () => {
@@ -89,12 +95,88 @@ export const SummarySchedule = ({ navigation }) => {
         }
         }
 
+    const gerarPDF = async() => {
+        if (!alunos || alunos.length === 0) {
+            alert('Nenhum aluno encontrado.')
+            return
+       }
+        
+       const html = HTMLListaPresenca(materia, dataAgendamento, alunos)
+
+        const { uri } = await Print.printToFileAsync({ html })
+        if (await Sharing.isAvailableAsync()) {
+            await Sharing.shareAsync(uri)
+        } else {
+            alert('Compartilhamento não está disponível no dispositivo.')
+        }
+        }
+
+    const consultarAlunos = async() => {
+        const token = await SecureStore.getItemAsync('token')
+
+        if (!selectedMonitoria) {
+        console.log("Faltam dados para visualizar agendamento")
+        return
+        }
+        
+        try {
+        console.log("Enviando para API:", {
+            idMonitoria: selectedMonitoria,
+        })
+        
+        const response = await fetch(`${API_URL}/agendamento/alunosAgendados`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token || ''
+            },
+            body: JSON.stringify({
+            id:  Number(selectedMonitoria),
+            })
+        })
+    
+        if (!response.ok) {
+            const errorText = await response.text()
+            throw new Error(errorText || 'Erro ao visualizar agendamento!')
+        }
+
+        const result = await response.json().catch((error) => {
+            console.error("Erro ao fazer parse da resposta JSON:", error)
+            throw new Error('Erro ao processar a resposta da API')
+        })
+
+        setDataAgendamento(result[0].data)
+        setMateria(result[0].materia)
+
+        console.log("Resposta da API:", result)
+
+        if (!result) {
+            alert("Resposta inválida da API.")
+            return
+        }
+        await setAlunos(result)
+
+        } catch (error) {
+        console.error("Erro ao visualizar:", error)
+        }
+        }
+
     const CreateModalCancel = (monitoria) => {
         setSelectedMonitoria(monitoria)
         setTitleMessage('Desmarcar monitoria')
         setBodyMessage('Tem certeza que deseja cancelar o\nagendamento? Essa ação é irreversível!')
         handleOnPress()
     }
+
+    const CreateModalStudents = async() => {
+        consultarAlunos()
+        setTitleMessage('Lista de aluno')
+        setBodyMessage(`${
+         alunos.map(aluno => `${aluno.nome} - RA: ${aluno.ra}`).join('\n')
+        }`)
+        handleOnPress()
+    }
+
     if (userType == "Aluno"){return (
     <Subcontainer mgLeft='0' maxHgt='75' align='center' >
     <ScrollView>
@@ -290,7 +372,6 @@ export const SummarySchedule = ({ navigation }) => {
                     </PageSubtitle>
                     </Subcontainer>
 
-
             <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
                 <Photo
                     source={Clock}
@@ -315,18 +396,18 @@ export const SummarySchedule = ({ navigation }) => {
         </Subcontainer>
 
         <Subcontainer mgLeft='0' mgTop='5' bg='darkGreen' dir='row' maxHgt='27' bdRd='0' justify='flex-end'>
-            <StylezedButton
-                    label={'Visualizar'}
-                    bg='darkRed'
-                    mgTop='27'
-                    wdt='140'
-                    hgt='40'
-                    bdRd='10'
-                    fontSize='16'
-                    onPress={() => {
-                        excluirMonitoria()
-                    }}
-                />
+            <ViewButton
+                bg='everWhite'
+                wdt='200'
+                hgt='40'
+                mgTop='5'
+                mgRight='5'
+                bdRd='15'
+                color='darkRed'
+                label={'Visualizar'}
+                fontSize='16'
+                onPress={() => {setSelectedMonitoria(item.id); CreateModalStudents()}}
+            />
         </Subcontainer>
         </Windows>
         </React.Fragment>
@@ -335,11 +416,11 @@ export const SummarySchedule = ({ navigation }) => {
         <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
 
             <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{titleMessage}</PageTitle>
-            <PageSubtitle color='brisk' fontSize='15' mgLeft='5' alignSelf='center' >{bodyMessage}</PageSubtitle>
+            <PageSubtitle color='brisk' fontSize='15' mgLeft='15' alignSelf='flex-start' >{bodyMessage}</PageSubtitle>
             
             <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
-                <StylezedButton
-                    label={'Cancelar aula'}
+                <PDFButton
+                    label={'Lista de Presença'}
                     bg='darkRed'
                     mgTop='27'
                     wdt='140'
@@ -347,14 +428,11 @@ export const SummarySchedule = ({ navigation }) => {
                     bdRd='10'
                     fontSize='16'
                     onPress={() => {
-                        excluirMonitoria()
-                        loadUserSchedule()
-                        handleOnPress()
-                       // navigation.navigate('Monitoring')
+                        gerarPDF()
                     }}
                 />
                 <StylezedButton
-                    label={'Manter aula'}
+                    label={'Fechar'}
                     bg='white'
                     color='darkRed'
                     mgTop='27'

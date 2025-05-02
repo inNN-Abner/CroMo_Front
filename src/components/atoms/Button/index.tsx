@@ -370,3 +370,50 @@ export const TrashButton = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: Butt
   )
 }
 
+export const ViewButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgRight={mgRight}
+        mgTop={mgTop}
+        onPress={onPress}>
+          <Subcontainer align='center' justify='center' dir='row' bg='everWhite' wdt='170' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+              <MaterialIcons name="remove-red-eye" size={22} color="#7f0000" />
+                  <ButtonTextStyle
+                      mgLeft='10'
+                      color={color}
+                      fontSize={fontSize}>
+                      {label}
+                  </ButtonTextStyle>
+          </Subcontainer>    
+    </StyledButtonStyle>
+  )
+}
+
+export const PDFButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgRight={mgRight}
+        mgTop={mgTop}
+        onPress={onPress}>
+          <Subcontainer align='center' justify='center' dir='row' bg='everWhite' wdt='170' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+              <MaterialIcons name="picture-as-pdf" size={22} color="#7f0000" />
+                  <ButtonTextStyle
+                      mgLeft='10'
+                      color={color}
+                      fontSize={fontSize}>
+                      {label}
+                  </ButtonTextStyle>
+          </Subcontainer>    
+    </StyledButtonStyle>
+  )
+}

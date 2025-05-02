@@ -53,7 +53,8 @@ export const RegisterScreen = ({ navigation }) => {
           email: firebaseUser.user.email, // e-mail validado pelo Firebase
           curso: selectedCourse,
           tipo: 'Aluno',
-          idFoto: 1
+          idFoto: 1,
+          ra: ""
         }),
       });
   
