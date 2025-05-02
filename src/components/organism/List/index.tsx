@@ -8,6 +8,7 @@ export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ nav
 
     return (       
         <FlatList 
+            keyboardShouldPersistTaps="handled"
             data={ list }
             keyExtractor={(item) => item.id.toString()} 
             renderItem={({ item }) => (

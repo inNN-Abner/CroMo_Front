@@ -14,6 +14,7 @@ interface Monitoria {
   photo: number //foto do monitor
   monitorName: string
   date: string
+  quantidade: string
 }
 
 export const useAgendamento = () => { 
@@ -24,39 +25,75 @@ export const useAgendamento = () => {
         const today = new Date()
         today.setDate(today.getDate() - 1)
 
-        const token = await SecureStore.getItemAsync("token")
-        if (!token) {
-            console.log("Token não encontrado.")
-            setIsLoaded(true)
-            return
-        }
+            const token = await SecureStore.getItemAsync("token")
+            if (!token) {
+              console.log("Token não encontrado.")
+              setIsLoaded(true)
+              return
+            }
+            
+            var userType = null, agendamentos
+            const userData = await SecureStore.getItemAsync('user')
+            const userJson = userData ? JSON.parse(userData) : null
+            if(userJson != null){
+                userType = userJson.tipo
+                console.log("Tipo de usuário", userType)
+            }
 
-        try {
-            console.log("TOKEN Monitoria:", token)
-            const resp = await fetch(`${API_URL}/agendamento/`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-access-token': token || ''
-                },
-            })
+            try {
+              if (userType == "Aluno"){
+                console.log("TOKEN Monitoria:", token)
+                const resp = await fetch(`${API_URL}/agendamento/aluno`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token || ''
+                    },
+                })
 
             if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
             const data = await resp.json()
 
+                agendamentos = data.map((m) => ({
+                  id: m.id,
+                  weekDay: m.dia_semana,
+                  hour: m.horario,
+                  class: m.materia,
+                  icon: m.idFotoMateria,
+                  locale: m.local,
+                  info: `${m.horario} || (${m.local})`,
+                  photo: m.idFotoMonitor,
+                  monitorName: m.monitor,
+                  date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
+                }))}
 
-            const agendamentos = data.map((m) => ({
-                id: m.id,
-                weekDay: m.dia_semana,
-                hour: m.horario,
-                class: m.materia,
-                icon: m.idFotoMateria,
-                locale: m.local,
-                info: `${m.horario} || (${m.local})`,
-                photo: m.idFotoMonitor,
-                monitorName: m.monitor,
-                date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
-            }))
+              else if (userType == "Monitor"){
+                console.log("TOKEN Monitoria:", token)
+                const resp = await fetch(`${API_URL}/agendamento/monitor`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token || ''
+                    },
+                })
+
+                if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
+                const data = await resp.json()
+
+                agendamentos = data.map((m) => ({
+                  id: m.id,
+                  weekDay: m.dia_semana,
+                  hour: m.horario,
+                  class: m.materia,
+                  icon: m.idFotoMateria,
+                  locale: m.local,
+                  info: `${m.horario} || (${m.local})`,
+                  photo: m.idFotoMonitor,
+                  monitorName: m.monitor,
+                  quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
+                  obs: m.obs,
+                  date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
+                }))}
 
             setMonitoring(agendamentos)
             

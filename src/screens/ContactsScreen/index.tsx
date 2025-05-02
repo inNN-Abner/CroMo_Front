@@ -7,8 +7,9 @@ import { Headers, PageSubtitle, PageTitle, SearchInput, Windows } from '~/compon
 import * as SecureStore from 'expo-secure-store'
 
 export const ContactsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [list, setList] = useState<any[]>([]) 
-
+  const [originalList, setOriginalList] = useState<any[]>([])
+  const [list, setList] = useState<any[]>([])
+  
   useEffect(() => {
     const fetchContacts = async () => {
       try {
@@ -18,15 +19,16 @@ export const ContactsScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
             'x-access-token': token || ''
           }
         })
+  
+        setOriginalList(response.data)
         setList(response.data)
-        console.log(response.data)
       } catch (error) {
         console.error('Erro ao buscar contatos:', error)
       }
     }
-
+  
     fetchContacts()
-  }, [])
+  }, []) 
 
   return (
     <Container>
@@ -61,6 +63,7 @@ export const ContactsScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
               wdt='315'
               hgt='35'
               setList={setList}
+              originalList={originalList}
             />
 
           </Windows>
