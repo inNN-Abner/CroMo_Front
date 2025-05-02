@@ -69,7 +69,7 @@ export default function gerarHTMLListaPresenca(materia, dataAgendamento, alunos)
             <tr>
               <td>${aluno.nome}</td>
               <td>${aluno.ra}</td>
-              <td class="assinatura">____________________</td>
+              <td class="assinatura"></td>
             </tr>
           `).join('')}
         </table>

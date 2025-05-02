@@ -1,12 +1,12 @@
-import React from 'react';
-import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import React from 'react'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import Fontisto from '@expo/vector-icons/Fontisto'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-import { useTheme } from '../../../context/ThemeContext';
-import { ButtonTextStyle, StyledButtonStyle, ThemeButtonStyle } from './styles';
-import { Subcontainer } from '../Container';
-import { Photo } from '../Photo';
-import { IconButton } from '../Logo';
+import { useTheme } from '../../../context/ThemeContext'
+import { ButtonTextStyle, StyledButtonStyle, ThemeButtonStyle } from './styles'
+import { Subcontainer } from '../Container'
+import { Photo } from '../Photo'
+import { IconButton } from '../Logo'
 
 interface ButtonProps {
   source?: string
@@ -405,15 +405,15 @@ export const PDFButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, f
         mgRight={mgRight}
         mgTop={mgTop}
         onPress={onPress}>
-          <Subcontainer align='center' justify='center' dir='row' bg='everWhite' wdt='170' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
-              <MaterialIcons name="picture-as-pdf" size={22} color="#7f0000" />
-                  <ButtonTextStyle
-                      mgLeft='10'
-                      color={color}
-                      fontSize={fontSize}>
-                      {label}
-                  </ButtonTextStyle>
-          </Subcontainer>    
+          <Subcontainer align='center' justify='center' dir='row' bg='darkRed' wdt='140' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+            <MaterialIcons name="picture-as-pdf" size={22} color="#FFFFFF" />
+              <ButtonTextStyle
+                  mgLeft='10'
+                  color={color}
+                  fontSize={fontSize}>
+                  {label}
+              </ButtonTextStyle>
+          </Subcontainer>
     </StyledButtonStyle>
   )
 }

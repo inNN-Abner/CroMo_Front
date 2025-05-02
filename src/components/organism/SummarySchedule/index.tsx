@@ -95,71 +95,55 @@ export const SummarySchedule = ({ navigation }) => {
         }
     }
 
-    const gerarPDF = async() => {
-        if (!alunos || alunos.length === 0) {
-            alert('Nenhum aluno encontrado.')
-            return
+        const gerarPDF = async() => {
+            if (!alunos || alunos.length === 0) {
+                alert('Nenhum aluno encontrado.')
+                return
        }
         
        const html = HTMLListaPresenca(materia, dataAgendamento, alunos)
 
         const { uri } = await Print.printToFileAsync({ html })
-        if (await Sharing.isAvailableAsync()) {
-            await Sharing.shareAsync(uri)
-        } else {
-            alert('Compartilhamento não está disponível no dispositivo.')
-        }
-    }
-
-    const consultarAlunos = async() => {
-        const token = await SecureStore.getItemAsync('token')
-
-        if (!selectedMonitoria) {
-        console.log("Faltam dados para visualizar agendamento")
-        return
-        }
-        
-        try {
-        console.log("Enviando para API:", {
-            idMonitoria: selectedMonitoria,
-        })
-        
-        const response = await fetch(`${API_URL}/agendamento/alunosAgendados`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': token || ''
-            },
-            body: JSON.stringify({
-            id:  Number(selectedMonitoria),
-            })
-        })
-    
-        if (!response.ok) {
-            const errorText = await response.text()
-            throw new Error(errorText || 'Erro ao visualizar agendamento!')
+            if (await Sharing.isAvailableAsync()) {
+                await Sharing.shareAsync(uri)
+            } else {
+                alert('Compartilhamento não está disponível no dispositivo.')
+            }
         }
 
-        const result = await response.json().catch((error) => {
-            console.error("Erro ao fazer parse da resposta JSON:", error)
-            throw new Error('Erro ao processar a resposta da API')
-        })
-
-        setDataAgendamento(result[0].data)
-        setMateria(result[0].materia)
-
-        console.log("Resposta da API:", result)
-
-        if (!result) {
-            alert("Resposta inválida da API.")
-            return
-        }
-        await setAlunos(result)
-
-        } catch (error) {
-        console.error("Erro ao visualizar:", error)
-        }
-        }
+        const consultarAlunos = async (monitoriaId) => {
+            const token = await SecureStore.getItemAsync('token')
+          
+            if (!monitoriaId) {
+              console.log("Faltam dados para visualizar agendamento")
+              return null
+            }
+          
+            try {
+              console.log("Enviando para API:", { idMonitoria: monitoriaId })
+          
+              const response = await fetch(`${API_URL}/agendamento/alunosAgendados`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-access-token': token || ''
+                },
+                body: JSON.stringify({ id: Number(monitoriaId) })
+              })
+          
+              if (!response.ok) {
+                const errorText = await response.text()
+                throw new Error(errorText || 'Erro ao visualizar agendamento!')
+              }
+          
+              const result = await response.json()
+              console.log("Resposta da API:", result)
+              return result
+            } catch (error) {
+              console.error("Erro ao visualizar:", error)
+              return null
+            }
+          }
 
     const CreateModalCancel = (monitoria) => {
         setSelectedMonitoria(monitoria)
@@ -168,14 +152,25 @@ export const SummarySchedule = ({ navigation }) => {
         handleOnPress()
     }
 
-    const CreateModalStudents = async() => {
-        consultarAlunos()
-        setTitleMessage('Lista de aluno')
-        setBodyMessage(`${
-         alunos.map(aluno => `${aluno.nome} - RA: ${aluno.ra}`).join('\n')
-        }`)
-        handleOnPress()
-    }
+    const CreateModalStudents = async (monitoriaId, materiaItem) => {
+        setOpenCreateModal(false) // Garante que ele feche antes de abrir de novo
+        setSelectedMonitoria(monitoriaId)
+        setMateria(materiaItem)
+        setAlunos([]) // Evita visualização anterior
+      
+        const result = await consultarAlunos(monitoriaId)
+        if (!result || result.length === 0) {
+          alert('Nenhum aluno encontrado.')
+          return
+        }
+      
+        setAlunos(result)
+        setDataAgendamento(result[0].data)
+        setTitleMessage('Lista de alunos')
+        setBodyMessage(result.map(aluno => `${aluno.nome} - RA: ${aluno.ra}`).join('\n'))
+        setOpenCreateModal(true)
+      }
+
 
     if (userType == "Aluno"){return (
     <Subcontainer mgLeft='0' maxHgt='75' align='center' >
@@ -280,7 +275,7 @@ export const SummarySchedule = ({ navigation }) => {
         </React.Fragment>
         ))}
 
-        <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
+        <CreateModal visible={openCreateModal && materia && alunos.length > 0} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
 
             <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{titleMessage}</PageTitle>
             <PageSubtitle color='brisk' fontSize='15' mgLeft='5' alignSelf='center' >{bodyMessage}</PageSubtitle>
@@ -406,43 +401,84 @@ export const SummarySchedule = ({ navigation }) => {
                 color='darkRed'
                 label={'Visualizar'}
                 fontSize='16'
-                onPress={() => {setSelectedMonitoria(item.id); CreateModalStudents()}}
+                onPress={() => {
+                    CreateModalStudents(item.id, item.class)
+                }}
             />
         </Subcontainer>
         </Windows>
         </React.Fragment>
         ))}
 
-        <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
+        <CreateModal visible={openCreateModal && materia && alunos.length > 0} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
+        
+        <Subcontainer bg='white' align='center' justify='center' maxHgt='15' mgTop='0'>
+            <PageTitle color='brisk' fontSize='20'>{titleMessage}</PageTitle>
+        </Subcontainer>
 
-            <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{titleMessage}</PageTitle>
-            <PageSubtitle color='brisk' fontSize='15' mgLeft='15' alignSelf='flex-start' >{bodyMessage}</PageSubtitle>
-            
-            <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
-                <PDFButton
-                    label={'Lista de Presença'}
-                    bg='darkRed'
-                    mgTop='27'
-                    wdt='140'
-                    hgt='40'
-                    bdRd='10'
-                    fontSize='16'
-                    onPress={() => {
-                        gerarPDF()
-                    }}
+        <Subcontainer
+            bg='white'
+            align='flex-start'
+            justify='flex-start'
+            hgt='180'
+            mgTop='5'
+            pdd='10'
+        >
+            <ScrollView>
+            {alunos.length > 0 ? (
+                alunos.map((aluno, index) => (
+                <PageSubtitle
+                    key={index}
+                    color='brisk'
+                    fontSize='14'
+                    mgBottom='5'
+                    children={`${aluno.nome} - RA: ${aluno.ra}`}
                 />
-                <StylezedButton
-                    label={'Fechar'}
-                    bg='white'
-                    color='darkRed'
-                    mgTop='27'
-                    wdt='140'
-                    hgt='40'
-                    bdRd='10'
-                    fontSize='16'
-                    onPress={handleOnPress}
-                />
-            </Subcontainer>
+                ))
+            ) : (
+                <PageSubtitle color='brisk' fontSize='14'>
+                    Nenhum aluno encontrado.
+                </PageSubtitle>
+            )}
+            </ScrollView>
+        </Subcontainer>
+
+        <Subcontainer
+            bg='white'
+            dir='row-reverse'
+            justify='center'
+            align='center'
+            mgLeft='0'
+            maxHgt='15'
+            mgTop='15'
+            pdd='0'
+        >
+        <PDFButton
+            label='Lista'
+            bg='darkRed'
+            color='everWhite'
+            wdt='140'
+            hgt='40'
+            bdRd='10'
+            mgTop='0'
+            fontSize='16'
+            onPress={gerarPDF}
+        />
+
+        <StylezedButton
+            label='Fechar'
+            bg='white'
+            color='darkRed'
+            wdt='140'
+            hgt='40'
+            bdRd='10'
+            fontSize='16'
+            mgTop='0'
+            onPress={handleOnPress}
+            mgRight='10'
+        />
+        </Subcontainer>
+
         </CreateModal>
     </ScrollView>
     </Subcontainer>

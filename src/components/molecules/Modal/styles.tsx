@@ -10,5 +10,4 @@ export const DefineModal = styled.View
     padding: ${({ pdd, theme }) => theme.metrics.px([pdd || 10])}px;
     align-items: ${({ align }) => align || 'center'};
     justify-content: ${({ justify }) => justify || 'center'};
-
 `
