@@ -100,7 +100,7 @@ export const Calendar = ({ onDateSelected }) => {
                     mainColor: theme.darkTheme.colors.darkRed,
                     textSecondaryColor: theme.darkTheme.colors.brisk,
                   }}
-                  />
+                />
                   
                   <StylezedButton 
                   label={'Selecionar'}

@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from "~/configs/config"
 import { useFocusEffect } from '@react-navigation/native'
+import { format, addHours } from 'date-fns'
 
 interface Monitoria {
   id: number
@@ -53,28 +54,35 @@ export const useAgendamento = () => {
 
             if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
             const data = await resp.json()
-
-                agendamentos = data.map((m) => ({
-                  id: m.id,
-                  weekDay: m.dia_semana,
-                  hour: m.horario,
-                  class: m.materia,
-                  icon: m.idFotoMateria,
-                  locale: m.local,
-                  info: `${m.horario} || (${m.local})`,
-                  photo: m.idFotoMonitor,
-                  monitorName: m.monitor,
-                  date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
-                }))}
-
-              else if (userType == "Monitor"){
+            
+            agendamentos = data.map((m) => {
+              const dateUtc = new Date(m.data)
+              const dateSaoPaulo = addHours(dateUtc, 3) // Corrige para GMT-3
+              
+              return {
+                id: m.id,
+                weekDay: m.dia_semana,
+                hour: m.horario,
+                class: m.materia,
+                icon: m.idFotoMateria,
+                locale: m.local,
+                info: `${m.horario} || (${m.local})`,
+                photo: m.idFotoMonitor,
+                monitorName: m.monitor,
+                quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
+                obs: m.obs,
+                date: format(dateSaoPaulo, 'dd/MM/yyyy')
+              }
+            })}
+  
+            else if (userType == "Monitor"){
                 console.log("TOKEN Monitoria:", token)
                 const resp = await fetch(`${API_URL}/agendamento/monitor`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-access-token': token || ''
-                    },
+                  method: 'GET',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'x-access-token': token || ''
+                  },
                 })
 
                 if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)

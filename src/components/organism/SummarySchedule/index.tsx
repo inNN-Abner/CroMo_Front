@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CancelButton, CreateModal, InfoText, PageSubtitle, PageTitle, Photo, StylezedButton, Subcontainer, Windows } from '~/components'
+import { CancelButton, CreateModal, PageSubtitle, PageTitle, PDFButton, Photo, StylezedButton, Subcontainer, ViewButton, Windows } from '~/components'
 import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAgendamento } from '~/../archives/monitoringHours'
@@ -9,12 +9,13 @@ import * as SecureStore from 'expo-secure-store'
 import * as Print from 'expo-print'
 import * as Sharing from 'expo-sharing'
 import { API_URL } from '~/configs/config'
+import HTMLListaPresenca from '~/services/HTMLListaPresenca'
 
 const Calendar = require('~/../assets/Calendar.png')
 const Clock = require( '~/../assets/Clock.png')
 
-export const SummarySchedule = ({ navigation  }) => {
-    const { loadUserSchedule } = useUserSchedule()
+export const SummarySchedule = ({ navigation }) => {
+    const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
     const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)  
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [titleMessage, setTitleMessage] = useState('')
@@ -92,7 +93,7 @@ export const SummarySchedule = ({ navigation  }) => {
         } catch (error) {
         console.error("Erro ao agendar:", error)
         }
-        }
+    }
 
     const gerarPDF = async() => {
         if (!alunos || alunos.length === 0) {
@@ -108,7 +109,7 @@ export const SummarySchedule = ({ navigation  }) => {
         } else {
             alert('Compartilhamento não está disponível no dispositivo.')
         }
-        }
+    }
 
     const consultarAlunos = async() => {
         const token = await SecureStore.getItemAsync('token')
@@ -167,27 +168,6 @@ export const SummarySchedule = ({ navigation  }) => {
         handleOnPress()
     }
 
-    if (!isLoaded) {
-        return (
-          <Subcontainer align='center' mgTop='20'>
-            <InfoText fontSize='16' color='brisk'>Carregando suas monitorias...</InfoText>
-          </Subcontainer>
-        )
-      }
-    
-    if (monitoring.length === 0) {
-        return (
-          <Subcontainer 
-            align='center' justify='center'
-            mgTop='50' mgLeft='0'
-            wdt='350' maxHgt='10'
-            bg='darkRed'
-            > 
-            <InfoText fontSize='16' alignSelf='center' color='everWhite'>Você ainda não tem monitorias marcadas!</InfoText>
-          </Subcontainer>
-        )
-      }
-
     const CreateModalStudents = async() => {
         consultarAlunos()
         setTitleMessage('Lista de aluno')
@@ -198,7 +178,7 @@ export const SummarySchedule = ({ navigation  }) => {
     }
 
     if (userType == "Aluno"){return (
-    <Subcontainer align='flex-end' justify='center' mgLeft='0' maxHgt='75' >
+    <Subcontainer mgLeft='0' maxHgt='75' align='center' >
     <ScrollView>
 
         {monitoring.map((item) => (
@@ -307,10 +287,10 @@ export const SummarySchedule = ({ navigation  }) => {
             
             <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
                 <StylezedButton
-                    label={'Desmarcar monitoria'}
+                    label={'Cancelar aula'}
                     bg='darkRed'
                     mgTop='27'
-                    wdt='145'
+                    wdt='140'
                     hgt='40'
                     bdRd='10'
                     fontSize='16'
@@ -318,10 +298,11 @@ export const SummarySchedule = ({ navigation  }) => {
                         excluirMonitoria()
                         loadUserSchedule()
                         handleOnPress()
+                       // navigation.navigate('Monitoring')
                     }}
                 />
                 <StylezedButton
-                    label={'Manter monitoria'}
+                    label={'Manter aula'}
                     bg='white'
                     color='darkRed'
                     mgTop='27'
