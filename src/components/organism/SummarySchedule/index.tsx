@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CancelButton, CreateModal, PageSubtitle, PageTitle, PDFButton, Photo, StylezedButton, Subcontainer, ViewButton, Windows } from '~/components'
+import { CancelButton, CreateModal, InfoTextNoWrap, PageSubtitle, PageTitle, PDFButton, Photo, StylezedButton, Subcontainer, ViewButton, Windows } from '~/components'
 import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAgendamento } from '~/../archives/monitoringHours'
@@ -26,7 +26,7 @@ export const SummarySchedule = ({ navigation }) => {
     const [alunos, setAlunos] = useState([])
     const [dataAgendamento, setDataAgendamento] = useState(null)
     const [materia, setMateria] = useState(null)
-
+    console.log("monitoring", monitoring)
     useEffect(() => {
         const loadUserType = async () => {
           try {
@@ -95,55 +95,55 @@ export const SummarySchedule = ({ navigation }) => {
         }
     }
 
-        const gerarPDF = async() => {
-            if (!alunos || alunos.length === 0) {
-                alert('Nenhum aluno encontrado.')
-                return
-       }
-        
-       const html = HTMLListaPresenca(materia, dataAgendamento, alunos)
+    const gerarPDF = async() => {
+        if (!alunos || alunos.length === 0) {
+            alert('Nenhum aluno encontrado.')
+            return
+    }
+    
+    const html = HTMLListaPresenca(materia, dataAgendamento, alunos)
 
-        const { uri } = await Print.printToFileAsync({ html })
-            if (await Sharing.isAvailableAsync()) {
-                await Sharing.shareAsync(uri)
-            } else {
-                alert('Compartilhamento não está disponível no dispositivo.')
-            }
+    const { uri } = await Print.printToFileAsync({ html })
+        if (await Sharing.isAvailableAsync()) {
+            await Sharing.shareAsync(uri)
+        } else {
+            alert('Compartilhamento não está disponível no dispositivo.')
         }
+    }
 
-        const consultarAlunos = async (monitoriaId) => {
-            const token = await SecureStore.getItemAsync('token')
-          
-            if (!monitoriaId) {
-              console.log("Faltam dados para visualizar agendamento")
-              return null
+    const consultarAlunos = async (monitoriaId) => {
+        const token = await SecureStore.getItemAsync('token')
+        
+        if (!monitoriaId) {
+            console.log("Faltam dados para visualizar agendamento")
+            return null
+        }
+        
+        try {
+            console.log("Enviando para API:", { idMonitoria: monitoriaId })
+        
+            const response = await fetch(`${API_URL}/agendamento/alunosAgendados`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token || ''
+            },
+            body: JSON.stringify({ id: Number(monitoriaId) })
+            })
+        
+            if (!response.ok) {
+            const errorText = await response.text()
+            throw new Error(errorText || 'Erro ao visualizar agendamento!')
             }
-          
-            try {
-              console.log("Enviando para API:", { idMonitoria: monitoriaId })
-          
-              const response = await fetch(`${API_URL}/agendamento/alunosAgendados`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'x-access-token': token || ''
-                },
-                body: JSON.stringify({ id: Number(monitoriaId) })
-              })
-          
-              if (!response.ok) {
-                const errorText = await response.text()
-                throw new Error(errorText || 'Erro ao visualizar agendamento!')
-              }
-          
-              const result = await response.json()
-              console.log("Resposta da API:", result)
-              return result
-            } catch (error) {
-              console.error("Erro ao visualizar:", error)
-              return null
-            }
-          }
+        
+            const result = await response.json()
+            console.log("Resposta da API:", result)
+            return result
+        } catch (error) {
+            console.error("Erro ao visualizar:", error)
+            return null
+        }
+    }
 
     const CreateModalCancel = (monitoria) => {
         setSelectedMonitoria(monitoria)
@@ -171,8 +171,16 @@ export const SummarySchedule = ({ navigation }) => {
         setOpenCreateModal(true)
       }
 
-
-    if (userType == "Aluno"){return (
+    if ((userType == "Aluno" || userType == "Monitor") && monitoring.length === 0){
+        return <>
+            <Subcontainer bg='darkRed' mgLeft='0' mgTop='60' wdt='250' hgt='40' align='center' justify='center' pdd='0'>
+                <InfoTextNoWrap color='everWhite' alignSelf='center' fontSize='20'>
+                    Não há agendamentos! 
+                </InfoTextNoWrap>
+            </Subcontainer>
+        </>
+    }
+    else if (userType == "Aluno"){return (
     <Subcontainer mgLeft='0' maxHgt='75' align='center' >
     <ScrollView>
 

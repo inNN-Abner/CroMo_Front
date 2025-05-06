@@ -1,7 +1,8 @@
 import React from 'react';
-import { AddButtonText, AppointmentCalendar, Container, Headers, PageSubtitle, PageTitle, Subcontainer  } from '~/components'
+import { AddButtonText, AppointmentCalendar, Container, Headers, ListButtonText, PageSubtitle, PageTitle, Subcontainer  } from '~/components'
+import * as SecureStore from 'expo-secure-store'
 
-export const ReportSchedulingScreen = ({ navigation }) => {
+export const ReportSchedulingScreen = async({ navigation }) => {
   return (
     <Container align='flex-start' style={{ flex: 1 }}>      
     
@@ -27,6 +28,23 @@ export const ReportSchedulingScreen = ({ navigation }) => {
             navigation.navigate('AddMonitoring')
           }}
         ></AddButtonText>
+
+        <ListButtonText
+          bg='brisk'
+          color='redDarkRed'
+          fontSize='18'
+          wdt='250'
+          hgt='25'
+          mgLeft='-40'
+          mgTop='3'
+          align='flex-start'
+          justify='flex-start'
+          label={'Visualizar agendamentos'}
+          onPress={async() => {
+            navigation.navigate('SummarySchedule')
+            await SecureStore.setItem("allAppointments", '1')
+          }}
+        ></ListButtonText>
 
       </Subcontainer> 
 

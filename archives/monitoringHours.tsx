@@ -23,6 +23,8 @@ export const useAgendamento = () => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     async function loadMonitoring() {
+        const allAppointments = await SecureStore.getItem("allAppointments")
+        const dataConsultada = await SecureStore.getItem("dataConsultada")
         const today = new Date()
         today.setDate(today.getDate() - 1)
 
@@ -42,7 +44,7 @@ export const useAgendamento = () => {
             }
 
             try {
-              if (userType == "Aluno"){
+              if (userType == "Aluno" && allAppointments == "1"){
                 console.log("TOKEN Monitoria:", token)
                 const resp = await fetch(`${API_URL}/agendamento/aluno`, {
                     method: 'GET',
@@ -52,30 +54,30 @@ export const useAgendamento = () => {
                     },
                 })
 
-            if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
-            const data = await resp.json()
+                if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
+                const data = await resp.json()
             
-            agendamentos = data.map((m) => {
-              const dateUtc = new Date(m.data)
-              const dateSaoPaulo = addHours(dateUtc, 3) // Corrige para GMT-3
-              
-              return {
-                id: m.id,
-                weekDay: m.dia_semana,
-                hour: m.horario,
-                class: m.materia,
-                icon: m.idFotoMateria,
-                locale: m.local,
-                info: `${m.horario} || (${m.local})`,
-                photo: m.idFotoMonitor,
-                monitorName: m.monitor,
-                quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
-                obs: m.obs,
-                date: format(dateSaoPaulo, 'dd/MM/yyyy')
-              }
-            })}
+              agendamentos = data.map((m) => {
+                const dateUtc = new Date(m.data)
+                const dateSaoPaulo = addHours(dateUtc, 3) // Corrige para GMT-3
+                
+                return {
+                  id: m.id,
+                  weekDay: m.dia_semana,
+                  hour: m.horario,
+                  class: m.materia,
+                  icon: m.idFotoMateria,
+                  locale: m.local,
+                  info: `${m.horario} || (${m.local})`,
+                  photo: m.idFotoMonitor,
+                  monitorName: m.monitor,
+                  quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
+                  obs: m.obs,
+                  date: format(dateSaoPaulo, 'dd/MM/yyyy')
+                }
+              })}
   
-            else if (userType == "Monitor"){
+              else if (userType == "Monitor" && allAppointments == "1"){
                 console.log("TOKEN Monitoria:", token)
                 const resp = await fetch(`${API_URL}/agendamento/monitor`, {
                   method: 'GET',
@@ -85,9 +87,44 @@ export const useAgendamento = () => {
                   },
                 })
 
+                  if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
+                  const data = await resp.json()
+
+                  agendamentos = data.map((m) => ({
+                    id: m.id,
+                    weekDay: m.dia_semana,
+                    hour: m.horario,
+                    class: m.materia,
+                    icon: m.idFotoMateria,
+                    locale: m.local,
+                    info: `${m.horario} || (${m.local})`,
+                    photo: m.idFotoMonitor,
+                    monitorName: m.monitor,
+                    quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
+                    obs: m.obs,
+                    date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
+              }))}
+
+              else if (userType == "Monitor" && allAppointments == "0"){
+                console.log("TOKEN Monitoria:", token)
+                const resp = await fetch(`${API_URL}/agendamento/monitorDate`, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'x-access-token': token || ''
+                  },
+                  body: JSON.stringify({
+                    data: dataConsultada,
+                  })
+               })
+
                 if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
                 const data = await resp.json()
 
+                if (data === null){
+                  agendamentos = null
+                }
+                else {
                 agendamentos = data.map((m) => ({
                   id: m.id,
                   weekDay: m.dia_semana,
@@ -101,11 +138,51 @@ export const useAgendamento = () => {
                   quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
                   obs: m.obs,
                   date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
-                }))}
+              }))}}
+              
+              else if (userType == "Aluno" && allAppointments == "0"){
+                console.log("TOKEN Monitoria:", token)
+                const resp = await fetch(`${API_URL}/agendamento/alunoDate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token || ''
+                    }, 
+                    body: JSON.stringify({
+                      data: dataConsultada,
+                    })
+                })
 
+                if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
+                const data = await resp.json()
+
+                if (data === null){
+                  agendamentos = null
+                }
+                
+                else {
+                agendamentos = data.map((m) => {
+                  const dateUtc = new Date(m.data)
+                  const dateSaoPaulo = addHours(dateUtc, 3) // Corrige para GMT-3
+                  
+                  return {
+                    id: m.id,
+                    weekDay: m.dia_semana,
+                    hour: m.horario,
+                    class: m.materia,
+                    icon: m.idFotoMateria,
+                    locale: m.local,
+                    info: `${m.horario} || (${m.local})`,
+                    photo: m.idFotoMonitor,
+                    monitorName: m.monitor,
+                    quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
+                    obs: m.obs,
+                    date: format(dateSaoPaulo, 'dd/MM/yyyy')
+                  }
+              })}}
+              
             setMonitoring(agendamentos)
             
-            console.log(agendamentos)
             console.log("Token antes da requisição:", token)
 
         } catch (e) {
@@ -118,6 +195,7 @@ export const useAgendamento = () => {
     useFocusEffect(
         useCallback(() => {
           loadMonitoring()
+          
         }, [])
       )
 

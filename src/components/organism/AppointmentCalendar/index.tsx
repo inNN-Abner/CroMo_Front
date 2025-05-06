@@ -1,9 +1,9 @@
-
 import { LocaleConfig } from 'react-native-calendars'
 import { Calendar } from 'react-native-calendars'
 import { useHours } from '~/../archives/hours'
-import { useTheme } from '~/context/ThemeContext';
-import { theme } from '~/styles';
+import { useTheme } from '~/context/ThemeContext'
+import { theme } from '~/styles'
+import * as SecureStore from 'expo-secure-store'
 
 LocaleConfig.locales['pt-BR'] = {
   monthNames: [
@@ -92,7 +92,11 @@ export const AppointmentCalendar = ({ navigation, date, monitorId }) => {
       }}
       markingType={'custom'}
       markedDates={markedDates}
-      onDayPress={() => navigation.navigate('SummarySchedule')}
+      onDayPress={async(day) => {
+        navigation.navigate('SummarySchedule')
+        await SecureStore.setItem("allAppointments", '0')
+        await SecureStore.setItem("dataConsultada", day.dateString)
+      } }
     />
   )
 }
