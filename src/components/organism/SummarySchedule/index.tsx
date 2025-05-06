@@ -158,6 +158,10 @@ export const SummarySchedule = ({ navigation }) => {
         setMateria(materiaItem)
         setAlunos([]) // Evita visualização anterior
       
+        setTitleMessage('Carregando alunos...')
+        setBodyMessage('Por favor, aguarde.')
+        setOpenCreateModal(true)
+
         const result = await consultarAlunos(monitoriaId)
         if (!result || result.length === 0) {
           alert('Nenhum aluno encontrado.')
@@ -410,7 +414,7 @@ export const SummarySchedule = ({ navigation }) => {
         </React.Fragment>
         ))}
 
-        <CreateModal visible={openCreateModal && materia && alunos.length > 0} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
+        <CreateModal visible={openCreateModal} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
         
         <Subcontainer bg='white' align='center' justify='center' maxHgt='15' mgTop='0'>
             <PageTitle color='brisk' fontSize='20'>{titleMessage}</PageTitle>

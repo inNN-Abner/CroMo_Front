@@ -1,8 +1,10 @@
 import React from 'react'
-import {useMonitoring} from '~/../archives/monitoring'
+import { useMonitoring } from '~/../archives/monitoring'
+import notes from '~/../archives/notes'
 import { FlatList, Text } from 'react-native'
 import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid, ClassIcon } from '~/components'
 import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
+import { imageMapContact, defaultPhotoContact } from '~/../archives/photoContacts'
 
 export const HomeGrid = () => {
     const { monitoring, isLoaded } = useMonitoring()
@@ -46,7 +48,7 @@ export const HomeGrid = () => {
                 hgt='205'
                 bg='briskGray'
             >
-                <FlatList data={ monitoring } renderItem={({ item }) => (
+                <FlatList data={ notes } renderItem={({ item }) => (
 
                         <ListContainer
                             mgTop='0'
@@ -87,6 +89,7 @@ export const HomeGrid = () => {
                                 fontFamily='bold'
                                 txtAlign='flex-start'
                                 bg='gray'
+                                numberLines={4}
                             >
                                 {item.info}
                             </TableGrid>
@@ -177,7 +180,7 @@ export const ClassGrid = () => {
                             hgt='35'
                             wdt='37'
                             mgLeft='3'
-                            source={imageMap[item.photo || 1]}
+                            source={imageMapContact[item.photo || 1]}
                         />
 
                         <TableGrid 
@@ -219,8 +222,8 @@ export const ClassGrid = () => {
                     </Subcontainer>
 
                     </ListContainer>
-                )}
-                />
+                    )}
+                    />
                 )}
         </Windows>
     </Subcontainer>

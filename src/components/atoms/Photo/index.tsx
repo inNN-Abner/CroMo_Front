@@ -1,6 +1,7 @@
 import React from 'react'
 import { PhotoStyle } from './styles'
 import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
+import { imageMapContact, defaultPhotoContact } from '~/../archives/photoContacts'
 
 interface PhotoProps {
     idFoto?: number
@@ -40,7 +41,7 @@ return (
 export const EditPhoto = ({ idFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
 return (
     <PhotoStyle 
-        source={imageMap[idFoto || 1]}
+        source={imageMapContact[idFoto || 1]}
         wdt={wdt}
         hgt={hgt}
         mgTop={mgTop}

@@ -188,7 +188,7 @@ export const EditPerfilScreen = ({ navigation }) => {
           visible={photoModalVisible}
           onClose={() => setPhotoModalVisible(false)}
           onSelect={(photoId) => setSelectedPhotoId(photoId)}
-          options={[1, 2, 3, 4, 5, 6]}
+          options={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
         />
 
       </Container>

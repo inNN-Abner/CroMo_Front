@@ -57,7 +57,7 @@ export const useAgendamento = () => {
             
             agendamentos = data.map((m) => {
               const dateUtc = new Date(m.data)
-              const dateSaoPaulo = addHours(dateUtc, 3) // Corrige para GMT-3
+              const dateSaoPaulo = addHours(dateUtc, 3)
               
               return {
                 id: m.id,

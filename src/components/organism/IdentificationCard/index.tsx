@@ -1,7 +1,7 @@
 import React from 'react'
 import { Windows, Subcontainer, Photo, ContactText, InfoText  } from '../../../components'
 import { PixelRatio } from 'react-native'
-import { defaultPhoto, imageMap } from '~/../archives/photoMapper'
+import { defaultPhotoContact, imageMapContact } from '~/../archives/photoContacts'
 
 export const IdentificationCard = ({ route }) => {
     const { nome, idFoto, tipo, email, teams } = route.params
@@ -16,7 +16,7 @@ export const IdentificationCard = ({ route }) => {
             mgTop='0'
             >
             <Photo
-                source={imageMap[idFoto] ?? defaultPhoto}
+                source={imageMapContact[idFoto] ?? defaultPhotoContact}
                 hgt='125'
                 wdt='80'
                 bdRd='20'
