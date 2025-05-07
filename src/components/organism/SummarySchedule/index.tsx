@@ -206,7 +206,7 @@ export const SummarySchedule = ({ navigation }) => {
                         wdt='40'
                         mgTop='0'
                         mgLeft='15'
-                        source={imageMap[item.photo || defaultPhoto]}
+                        source={imageMap[item.icon || defaultPhoto]}
                     />
                     <PageTitle
                         mgTop='0'
@@ -259,7 +259,7 @@ export const SummarySchedule = ({ navigation }) => {
 
         <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
             <Photo
-                source={imageMapContact[item.photo || 1]}
+                source={imageMapContact[item.photo || defaultPhotoContact]}
                 wdt='35'
                 hgt='35'
                 mgTop='0'
@@ -288,7 +288,7 @@ export const SummarySchedule = ({ navigation }) => {
         </React.Fragment>
         ))}
 
-        <CreateModal visible={openCreateModal && materia && alunos.length > 0} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
+        <CreateModal visible={openCreateModal && materia} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
 
             <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{titleMessage}</PageTitle>
             <PageSubtitle color='brisk' fontSize='15' mgLeft='5' alignSelf='center' >{bodyMessage}</PageSubtitle>
