@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import { Subcontainer, PageSubtitle, SetTimeButton, Divider } from '~/components/atoms'
 import { useHours } from '~/../archives/hours'
 import { ScrollView } from 'react-native-gesture-handler'
+import * as SecureStore from 'expo-secure-store'
 
 export const DefineTimeScheduling: React.FC<{ onTimeSelected: (time: string) => void }> = ({ onTimeSelected }) => {
 
     const [selectedId, setSelectedId] = useState<number | null>(null)
     const hours = useHours()
     
-    const handleButtonPress = (id: number, time: string) => {
+    const handleButtonPress = async(id: number, time: string) => {
         setSelectedId(id)
+        await SecureStore.setItem("monitoriaAgendada", id.toString())
         onTimeSelected(time)
     }
 

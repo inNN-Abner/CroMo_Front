@@ -13,15 +13,16 @@ interface GridProps {
     mgLeft?: string
     align?: string
     pdd?: string
-    pddLeft?: string;
+    pddLeft?: string
     bdRd?: string
     children?: React.ReactNode
+    numberLines?: number
 }
 
-export const TableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt, mgTop, mgLeft, align, pdd, pddLeft, bdRd, children }: GridProps) => {
+export const TableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt, mgTop, mgLeft, align, pdd, pddLeft, bdRd, children, numberLines }: GridProps) => {
     return (
         <Grid
-            numberOfLines={2}
+            numberOfLines={numberLines}
             ellipsizeMode="tail"      
             color={color}
             bg={bg}

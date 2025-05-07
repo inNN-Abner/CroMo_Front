@@ -28,24 +28,7 @@ export const HomeScreen = ({ navigation }) => {
             />
             
           <HomeGrid />
-            <EditInfoButton
-                bg='brisk'
-                color='redDarkRed'
-                fontSize='18'
-                wdt='250'
-                hgt='30'
-                mgLeft='-90'
-                mgTop='7'
-                align='flex-start'
-                justify='flex-start'
-                label={'Editar informações'}
-                onPress={() => {
-                  navigation.navigate('EditInfo')
-                }}
-              />
-
         </Subcontainer>
-
     </Container>
   )
 }

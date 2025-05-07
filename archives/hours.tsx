@@ -48,6 +48,7 @@ export const useHours = () => {
         }))
   
         setHours(infos)
+        console.log(infos)
       } catch (e) {
         console.log("erro ao buscar horários:", e)
         setHours([])

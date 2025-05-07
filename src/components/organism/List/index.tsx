@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import { TouchableOpacity } from 'react-native'
 import { ContactText, InfoText, ListContainer, Photo, Subcontainer } from '~/components/atoms'
-import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
+import { imageMapContact, defaultPhotoContact } from '~/../archives/photoContacts'
 
 export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ navigation, list }) => {
 
@@ -27,7 +27,7 @@ export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ nav
                 <ListContainer mgLeft='0'>
                     
                 <Photo 
-                    source={imageMap[item.idFoto] ?? defaultPhoto} 
+                    source={imageMapContact[item.idFoto] ?? defaultPhotoContact} 
                 />
                         <Subcontainer
                             mgTop='0'

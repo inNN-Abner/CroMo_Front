@@ -13,11 +13,19 @@ export const Calendar = ({ onDateSelected }) => {
   const startDate = getFormatedDate(today, 'YYYY/MM/DD')
 
   const [openModal, setOpenModal] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState('Selecione uma data')
   const [year, setYear] = useState(today.getFullYear())
 
   async function handleOnPress () {
-    setOpenModal(!openModal)
+    if (!openModal) {
+      setOpenModal(true)
+      setShowCalendar(false)
+      setTimeout(() => setShowCalendar(true), 500)
+    } else {
+      setOpenModal(false)
+      setShowCalendar(false)
+    }
   }
  
   async function handleChange (propDate: string) {
@@ -79,9 +87,9 @@ export const Calendar = ({ onDateSelected }) => {
               />
             
               <CreateModal
-              visible={openModal} 
-              bg='white' 
-              bdRd='30'
+                visible={openModal} 
+                bg='white' 
+                bdRd='30'
               >
                 <DatePicker
                   mode='calendar'

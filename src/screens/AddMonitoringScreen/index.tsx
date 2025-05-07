@@ -50,14 +50,14 @@ export const AddMonitoringScreen = ({ navigation }) => {
     const token = await SecureStore.getItemAsync('token')
     console.log('Monitor selecionado:', monitoriaId)
     console.log('Data selecionada:', selectedDate)
-
+    
     if (!selectedDate) {
       console.log("Data não selecionada! Abortando seleção de monitor.")
       return
     }
-    setSelectedMonitoria(monitoriaId)
+    await SecureStore.setItemAsync("monitorSelecionado", monitoriaId.toString())
     setMonitoriaIdToConfirm(monitoriaId)
-      setStep(3)
+    setStep(3)
   }
 
   const handleCancel = () => {
@@ -66,16 +66,17 @@ export const AddMonitoringScreen = ({ navigation }) => {
 
   const handleConfirm = async (monitoriaId = monitoriaIdToConfirm) => {
     const token = await SecureStore.getItemAsync('token')
+    const monitoriaAgendada = await SecureStore.getItem("monitoriaAgendada")
 
-    if (!selectedDate || !selectedMonitoria || !selectedTime) {
+    if (!selectedDate || !monitoriaAgendada) {
       console.log("Faltam dados para agendar")
-      console.log("selectedDate:", selectedDate, "selectedMonitoria:", selectedMonitoria, "selectedTime:", selectedTime)
+      console.log("selectedDate:", selectedDate, "monitoriaAgendada:", monitoriaAgendada, "selectedTime:", selectedTime)
       return
     }
       
     try {
       console.log("Enviando para API:", {
-        idMonitoria: selectedMonitoria,
+        idMonitoria: monitoriaAgendada,
         data: selectedDate,
         obs: ''
       })
@@ -87,7 +88,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
           'x-access-token': token || ''
         },
         body: JSON.stringify({
-          idMonitoria: selectedMonitoria,
+          idMonitoria: monitoriaAgendada,
           data: selectedDate.replace(/\//g, "-"),
           obs: ''
         })
@@ -148,7 +149,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
 
         {step >= 3 && (
           <DefineTimeScheduling 
-            onTimeSelected={(time) => {
+            onTimeSelected={async(time) => {
               setSelectedTime(time)
               setStep(4) }} />
         )}
