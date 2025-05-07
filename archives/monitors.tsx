@@ -56,15 +56,21 @@ export const useMonitors = () => {
           return
         }
   
-        const monitores = data.map((m: any) => ({
-          id: m.idMonitor,
-          name: m.monitor,
-          photo: m.idFotoMonitor,
-          materiaFoto: m.idFoto,
-          //monitorias: m.monitorias,
-          materia: m.materia ?? 'Sem matéria'
-        }))
-  
+        const monitoresUnicosMap = new Map<number, Monitor>()
+
+        data.forEach((m: any) => {
+          if (!monitoresUnicosMap.has(m.idMonitor)) {
+            monitoresUnicosMap.set(m.idMonitor, {
+              id: m.idMonitor,
+              name: m.monitor,
+              photo: m.idFotoMonitor,
+              materiaFoto: m.idFoto,
+              materia: m.materia ?? 'Sem matéria',
+            })
+          }
+        })
+
+        const monitores = Array.from(monitoresUnicosMap.values())
         setMonitors(monitores)
       } catch (e) {
         console.log("erro Monitores: ", e)
