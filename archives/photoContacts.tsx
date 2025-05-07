@@ -11,6 +11,7 @@ export const imageMapContact: Record<number, any> = {
   10: require('~/../assets/Contato_10.png'),
   11: require('~/../assets/Contato_11.png'),
   12: require('~/../assets/Contato_12.png'),
+  13: require('~/../assets/Contato_13.png')
 }
-  
-export const defaultPhotoContact = require('~/../assets/Contato_1.png')
+
+export const defaultPhotoContact = require('~/../assets/Contato_13.png')

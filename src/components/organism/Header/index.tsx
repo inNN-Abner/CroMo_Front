@@ -5,6 +5,7 @@ import { Photo, HeaderText, LogoHeader, Subcontainer } from '~/components/atoms'
 import { useTheme } from '~/context/ThemeContext'
 import * as SecureStore from 'expo-secure-store'
 import { useUser } from '~/services/userContext'
+import { imageMapContact } from '~/../archives/photoContacts'
 
 const HeaderLogoDark = require('~/../assets/Light_Cromo_LogoBKG.png')
 const HeaderLogoLight = require('~/../assets/Dark_Cromo_LogoBKG.png')
@@ -32,7 +33,7 @@ export const Headers = () => {
         <HeaderContainerStyle>
 
             <Photo
-                idFoto = {user.idFoto}
+                source = {imageMapContact[user?.idFoto]}
                 wdt='45'
                 hgt='45'    
             />

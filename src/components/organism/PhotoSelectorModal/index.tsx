@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Modal, View } from 'react-native'
-import { ModalContainer, Photo, Subcontainer } from '~/components/atoms'
-import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
-import { ModalContent, ModalTitle, ScrollableContent, OptionButton, OptionText, CloseButton, CloseButtonText } from '~/components/atoms/ModalSelector/styles'
+import { View } from 'react-native'
+import { Photo } from '~/components/atoms'
+import { imageMapContact } from '~/../archives/photoContacts'
+import { ModalTitle, ScrollableContent, OptionButton, OptionText, CloseButton, CloseButtonText } from '~/components/atoms/ModalSelector/styles'
 import { CreateModal } from '~/components/molecules'
 
 interface PhotoSelectorModalProps {
@@ -46,7 +46,7 @@ export const PhotoSelectorModal: React.FC<PhotoSelectorModalProps> = ({ visible,
                 }}
               >
                 <Photo 
-                  source={imageMap[photoId]} 
+                  source={imageMapContact[photoId]} 
                   wdt='50'
                   hgt='50'
                   mgTop='0'

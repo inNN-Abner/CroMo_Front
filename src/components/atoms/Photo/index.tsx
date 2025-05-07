@@ -17,7 +17,7 @@ interface PhotoProps {
 export const Photo = ({ source, idFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
 return (
     <PhotoStyle 
-        source={source || imageMap[idFoto || 1]}
+        source={source || imageMap[idFoto || defaultPhoto]}
         wdt={wdt}
         hgt={hgt}
         mgTop={mgTop}
@@ -26,10 +26,10 @@ return (
     />
 )}
 
-export const ClassIcon = ({ materiaFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
+export const ClassIcon = ({ source, materiaFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
 return (
     <PhotoStyle 
-        source={imageMap[materiaFoto || 1]}
+        source={source || imageMap[materiaFoto || defaultPhoto]}
         wdt={wdt}
         hgt={hgt}
         mgTop={mgTop}
@@ -38,10 +38,10 @@ return (
     />
 )}
 
-export const EditPhoto = ({ idFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
+export const EditPhoto = ({ source, idFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
 return (
     <PhotoStyle 
-        source={imageMapContact[idFoto || 1]}
+        source={source || imageMapContact[idFoto || defaultPhotoContact]}
         wdt={wdt}
         hgt={hgt}
         mgTop={mgTop}
@@ -50,10 +50,10 @@ return (
     />
 )}
 
-export const PhotoModal = ({ idFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
+export const PhotoModal = ({ source, idFoto, wdt, hgt, mgTop, mgLeft, bdRd }: PhotoProps) => {
     return (
         <PhotoStyle 
-            source={imageMap[idFoto || 1]}
+            source={source || imageMapContact[idFoto || defaultPhotoContact]}
             wdt={wdt}
             hgt={hgt}
             mgTop={mgTop}

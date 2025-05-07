@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CancelButton, CreateModal, InfoTextNoWrap, PageSubtitle, PageTitle, PDFButton, Photo, StylezedButton, Subcontainer, ViewButton, Windows } from '~/components'
-import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
+import { defaultPhotoContact, imageMapContact } from '~/../archives/photoContacts'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAgendamento } from '~/../archives/monitoringHours'
 import { useAgendaActions } from '~/services/useAgendaActions'
@@ -10,6 +10,7 @@ import * as Print from 'expo-print'
 import * as Sharing from 'expo-sharing'
 import { API_URL } from '~/configs/config'
 import HTMLListaPresenca from '~/services/HTMLListaPresenca'
+import { defaultPhoto, imageMap } from '~/../archives/photoMapper'
 
 const Calendar = require('~/../assets/Calendar.png')
 const Clock = require( '~/../assets/Clock.png')
@@ -185,7 +186,7 @@ export const SummarySchedule = ({ navigation }) => {
         </>
     }
     else if (userType == "Aluno"){return (
-    <Subcontainer mgLeft='0' maxHgt='75' align='center' >
+    <Subcontainer mgLeft='40' maxHgt='75' align='center'>
     <ScrollView>
 
         {monitoring.map((item) => (
@@ -205,7 +206,7 @@ export const SummarySchedule = ({ navigation }) => {
                         wdt='40'
                         mgTop='0'
                         mgLeft='15'
-                        source={imageMap[item.icon || 1]} 
+                        source={imageMap[item.photo || defaultPhoto]}
                     />
                     <PageTitle
                         mgTop='0'
@@ -258,7 +259,7 @@ export const SummarySchedule = ({ navigation }) => {
 
         <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
             <Photo
-                source={imageMap[item.photo || 1]}
+                source={imageMapContact[item.photo || 1]}
                 wdt='35'
                 hgt='35'
                 mgTop='0'
@@ -345,7 +346,7 @@ export const SummarySchedule = ({ navigation }) => {
                         wdt='40'
                         mgTop='0'
                         mgLeft='15'
-                        source={imageMap[item.icon || 1]} 
+                        source={imageMapContact[item.icon || 1]} 
                     />
                     <PageTitle
                         mgTop='0'

@@ -180,7 +180,7 @@ export const ClassGrid = () => {
                             hgt='35'
                             wdt='37'
                             mgLeft='3'
-                            source={imageMapContact[item.photo || 1]}
+                            source={imageMapContact[item.photo || defaultPhotoContact]}
                         />
 
                         <TableGrid 

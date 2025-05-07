@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Divider, ListOptionButton, PageSubtitle, Subcontainer } from '~/components/atoms'
-import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 import { useTheme } from '~/context/ThemeContext'
 import { theme } from '~/styles'
 import { useMonitors } from '~/../archives/monitors'
 import { API_URL } from '~/configs/config'
+import { defaultPhotoContact, imageMapContact } from '~/../archives/photoContacts'
 
 export const MonitorList = ({ onMonitorSelected, filterWeekday }) => {
   const [monitorias, setMonitorias] = useState([])
@@ -73,7 +73,7 @@ export const MonitorList = ({ onMonitorSelected, filterWeekday }) => {
               mgTop='5'
               color={textColor}
               bg={isSelected ? 'darkRed' : 'white'}
-              source={imageMap[item.photo || 1]}
+              source={imageMapContact[item.photo || defaultPhotoContact]}
               fontSize='14'
               labelComponent={
                 <Text

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Windows, Subcontainer, Photo, ContactText, InfoText  } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 import { PixelRatio } from 'react-native'
 import { useUser } from '~/services/userContext'
+import { imageMapContact } from '~/../archives/photoContacts'
 
 
 export const PerfilCard = ({ navigation }) => {
@@ -40,6 +41,7 @@ export const PerfilCard = ({ navigation }) => {
         return <InfoText>Carregando...</InfoText>
       }
   */
+
     return (
       <Windows
         hgt={cardHeight}
@@ -48,7 +50,7 @@ export const PerfilCard = ({ navigation }) => {
         mgTop='0'
         >
         <Photo
-          idFoto = {user.idFoto}
+          source = {imageMapContact[user?.idFoto]}
           hgt='125'
           wdt='80'
           bdRd='20'

@@ -6,7 +6,7 @@ import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-nati
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 import { useUser } from '~/services/userContext'
-import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
+import { imageMapContact, defaultPhotoContact } from '~/../archives/photoContacts'
 
 export const EditPerfilScreen = ({ navigation }) => {
   const { isDark } = useTheme()
@@ -18,7 +18,6 @@ export const EditPerfilScreen = ({ navigation }) => {
   const [userData, setUserData] = useState<{ nome: string; foto: number; curso: string } | null>(null)
   const [photoModalVisible, setPhotoModalVisible] = useState(false)
   const [selectedPhotoId, setSelectedPhotoId] = useState<number | null>(null)
-
 
   useEffect(() => {
     const loadUser = async () => {
@@ -95,13 +94,13 @@ export const EditPerfilScreen = ({ navigation }) => {
         <TouchableOpacity onPress={() => setPhotoModalVisible(true)}>
         {userData && (
           <EditPhoto
-            idFoto={selectedPhotoId ?? userData.foto}
+            source={imageMapContact[selectedPhotoId ?? userData?.foto] ?? defaultPhotoContact}
             hgt='145'
             wdt='100'
             bdRd='20'
             mgLeft='40'
             mgTop='10'
-        />
+          />
         )}
         </TouchableOpacity>
 
@@ -188,7 +187,7 @@ export const EditPerfilScreen = ({ navigation }) => {
           visible={photoModalVisible}
           onClose={() => setPhotoModalVisible(false)}
           onSelect={(photoId) => setSelectedPhotoId(photoId)}
-          options={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+          options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
         />
 
       </Container>
