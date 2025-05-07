@@ -1,5 +1,5 @@
 import React from 'react'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import Fontisto from '@expo/vector-icons/Fontisto'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { useTheme } from '../../../context/ThemeContext'
@@ -211,6 +211,21 @@ export const EditInfoButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRig
                 {label}
               </ButtonTextStyle>
           </Subcontainer> 
+    </StyledButtonStyle>
+  )
+}
+
+export const FormButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgTop={mgTop}
+        onPress={onPress}>
+        <MaterialCommunityIcons name="form-select" size={24} color={'white'} />
     </StyledButtonStyle>
   )
 }

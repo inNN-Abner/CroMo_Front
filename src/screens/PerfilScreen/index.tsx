@@ -1,5 +1,6 @@
 import React from 'react'
-import ToggleThemeButton, { ChatbotButton, EditButton, LogoutButton } from '~/components/atoms/Button'
+import { Linking } from 'react-native';
+import ToggleThemeButton, { ChatbotButton, EditButton, FormButton, LogoutButton } from '~/components/atoms/Button'
 import { HeaderText, PageTitle, PerfilCard, PerfilGrid, PerfilHeaders, Windows } from '~/components/'
 import { Container, Subcontainer } from '~/components/atoms/Container'
 import { API_URL } from '~/configs/config'
@@ -55,12 +56,12 @@ export const PerfilScreen = ({ navigation }) => {
                 >
                   Editar
               </HeaderText>
-              <EditButton wdt='50' hgt='50' bdRd='15' mgTop='5' mgLeft='10'
+              <EditButton wdt='50' hgt='50' bdRd='15' mgTop='5' mgLeft='8'
                 onPress={() => {
                   navigation.navigate('EditPerfil')}}/>
             </Subcontainer>
 
-            <Subcontainer bg='darkGreen' mgLeft='0' wdt='75' mgTop='0'>
+            <Subcontainer bg='darkGreen' mgLeft='-5' wdt='75' mgTop='0'>
               <HeaderText
                 mgTop='5'
                 mgLeft='10'
@@ -72,7 +73,7 @@ export const PerfilScreen = ({ navigation }) => {
               <ToggleThemeButton />
             </Subcontainer>
 
-            <Subcontainer bg='darkGreen' mgLeft='0' wdt='75' mgTop='0'>
+            <Subcontainer bg='darkGreen' mgLeft='-5' wdt='75' mgTop='0'>
               <HeaderText
                 mgTop='5'
                 mgLeft='10'
@@ -86,8 +87,22 @@ export const PerfilScreen = ({ navigation }) => {
               />
             </Subcontainer>
 
-            
-            <Subcontainer bg='darkGreen' mgLeft='-0' wdt='75' mgTop='0'>
+            <Subcontainer bg='darkGreen' mgLeft='-5' wdt='75' mgTop='0'>
+              <HeaderText
+                mgTop='5'
+                mgLeft='10'
+                color='lightGray'
+                fontSize='16'
+                >
+                  Avaliar
+              </HeaderText>
+              <FormButton
+                wdt='50' hgt='50' bdRd='15' mgTop='5' mgLeft='8' bg='green'
+                onPress={() => Linking.openURL('https://docs.google.com/forms/d/1rTUoVuEAqe-31Q1GstJAWO0ME0mZj_Js7yB1TF9FnvA/edit?usp=drive_web')}
+              />
+            </Subcontainer>
+
+            <Subcontainer bg='darkGreen' mgLeft='-5' wdt='75' mgTop='0'>
               <HeaderText
                 mgTop='5'
                 mgLeft='18'

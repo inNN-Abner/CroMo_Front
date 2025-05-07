@@ -109,7 +109,7 @@ export const ClassGrid = () => {
 
     return (
     <Subcontainer 
-        hgt='200'
+        hgt='220'
         wdt='360'
         align='center'
         mgTop='0'
@@ -145,7 +145,7 @@ export const ClassGrid = () => {
                 bdRdTL='0'
                 bdRdTR='0'
                 wdt='355'
-                hgt='160'
+                hgt='177'
                 bg='briskGray'
             >
             {isLoaded && monitoring.length === 0 ? (

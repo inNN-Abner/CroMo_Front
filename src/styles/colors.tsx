@@ -19,6 +19,7 @@ export const lightTheme = {
         whiteGreen: '#265160',
         blueYellow: 'rgb(255, 166, 0)',
         purple: '#6b66c6',
+        green: '#556b2f',
         
         transparent: 'rgba(255, 94, 0, 0)',
         blackTransparent: 'rgba(255, 255, 255, 0.82)'
@@ -44,6 +45,7 @@ export const darkTheme = {
         whiteGreen: '#ffffff',
         blueYellow: 'rgb(40, 53, 124)',
         purple: '#6b66c6',
+        green: '#556b2f',
 
         transparent: 'rgba(255, 255, 255, 0.0)',
         blackTransparent: 'rgba(0, 0, 0, 0.6)'
