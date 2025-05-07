@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MonitorList, Calendar, Container, CreateModal, DefineTimeScheduling, Headers, InfoText, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, ModalText } from '~/components'
+import { MonitorList, Calendar, Container, CreateModal, DefineTimeScheduling, Headers, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, ModalText } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 
@@ -14,6 +14,8 @@ export const AddMonitoringScreen = ({ navigation }) => {
   const [confirming, setConfirming] = useState(false)
   const [titleMessage, setTitleMessage] = useState('')
   const [bodyMessage, setBodyMessage] = useState('')
+  const [monitorListKey, setMonitorListKey] = useState(0)
+  const [timeListKey, setTimeListKey] = useState(0)
   const weekDays = ['Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado', 'Domingo']
   const filterWeekday = selectedDate ? weekDays[new Date(selectedDate).getDay()] : null
 
@@ -32,7 +34,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
     setBodyMessage('Tem certeza que deseja\ncancelar o agendamento?')
     handleOnPress()
   }
-  
+
   const handleDateSelected = (date) => {
     if (!date) {
       console.log("Data inválida selecionada!")
@@ -57,6 +59,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
     }
     await SecureStore.setItemAsync("monitorSelecionado", monitoriaId.toString())
     setMonitoriaIdToConfirm(monitoriaId)
+    setTimeListKey(prev => prev + 1)
     setStep(3)
   }
 
@@ -129,12 +132,13 @@ export const AddMonitoringScreen = ({ navigation }) => {
 
       <Subcontainer maxHgt='50' justify='flex-start' mgLeft='0'>
         {step >= 1 && (
-          <Calendar onDateSelected={(date) => { 
+          <Calendar onDateSelected={(date) => {
             if (!date) {
-              console.log("Data inválida selecionada!")
+              console.log("Data selecionada é inválida!")
               return
             }
             setSelectedDate(date)
+            setMonitorListKey(prev => prev + 1)
             setStep(2)
           }} />
         )}
@@ -142,13 +146,15 @@ export const AddMonitoringScreen = ({ navigation }) => {
       <Subcontainer maxHgt='100' justify='center' mgLeft='0' mgTop='75' dir='row'>
         {step >= 2 && (
           <MonitorList 
+            key={monitorListKey}
             onMonitorSelected={handleMonitorSelection} 
             filterWeekday={filterWeekday} 
           />      
         )}
 
         {step >= 3 && (
-          <DefineTimeScheduling 
+          <DefineTimeScheduling
+            key={timeListKey}
             onTimeSelected={async(time) => {
               setSelectedTime(time)
               setStep(4) }} />

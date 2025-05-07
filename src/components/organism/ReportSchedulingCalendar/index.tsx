@@ -10,7 +10,7 @@ export const ReportSchedulingScreen = async({ navigation }) => {
       <PageTitle color='greenWhite'>Monitorias</PageTitle>
       <PageSubtitle color='greenWhite'>Meus agendamentos</PageSubtitle>
 
-      <Subcontainer align='center' justify='center' mgLeft='0' mgTop='15' hgt='380'>
+      <Subcontainer align='center' justify='center' mgLeft='0' mgTop='40' hgt='380'>
         <AppointmentCalendar navigation={ navigation } />
 
         <AddButtonText
@@ -20,7 +20,7 @@ export const ReportSchedulingScreen = async({ navigation }) => {
           wdt='250'
           hgt='25'
           mgLeft='-40'
-          mgTop='3'
+          mgTop='7'
           align='flex-start'
           justify='flex-start'
           label={'Agendar monitoria'}
@@ -36,7 +36,7 @@ export const ReportSchedulingScreen = async({ navigation }) => {
           wdt='250'
           hgt='25'
           mgLeft='-40'
-          mgTop='3'
+          mgTop='13'
           align='flex-start'
           justify='flex-start'
           label={'Visualizar agendamentos'}
