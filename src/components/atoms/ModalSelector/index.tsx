@@ -70,14 +70,18 @@ export const CourseModal: React.FC<CourseModalProps> = ({ visible, onClose, onSe
           <ScrollableContent>
             {options.map((course) => (
               <OptionButton
+                bg='lightBrisk'
+                align='center'
                 wdt='250'
+                hgt='61'
+                mgVertical='3'
                 key={course}
                 onPress={() => {
                   onSelect(course)
                   onClose()
                 }}
               >
-                <OptionText>{course}</OptionText>
+                <OptionText fontSize='14' >{course}</OptionText>
               </OptionButton>
             ))}
           </ScrollableContent>

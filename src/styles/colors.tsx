@@ -9,6 +9,7 @@ export const lightTheme = {
         everGray: '#555555',
         briskGray: '#1a2224',
         lightGray: '#bbc0c4',
+        lightBrisk: 'rgb(219, 222, 223)',
         darkRed: '#a82325',
         redDarkRed: '#FF3131',
         darkGreen: '#265160',

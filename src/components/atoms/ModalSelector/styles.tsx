@@ -36,7 +36,7 @@ export const ModalTitle = styled.Text
 `
 
 export const OptionButton = styled.TouchableOpacity
-  <{ bg?: string; color?: string; pdd?: string; mgVertical?: string; wdt?: string; bdRd?: string; align?: string; hgt?: string }>
+  <{ bg?: string; color?: string; pdd?: string; jc?: string; mgVertical?: string; wdt?: string; bdRd?: string; align?: string; hgt?: string }>
 `
   background-color: ${({ bg, theme }) => theme.colors[bg || 'white']};
   align-items: ${({ align }) => align || 'center'};
@@ -45,6 +45,7 @@ export const OptionButton = styled.TouchableOpacity
   width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : '100%')};
   height: ${({ hgt, theme }) => (hgt ? `${theme.metrics.px(hgt)}px` : '100%')};
   border-radius: ${({ bdRd, theme }) => theme.metrics.px(bdRd || 5)}px;
+  justify-content: ${({ jc }) => jc || 'center'};
 `
 
 export const OptionText = styled.Text
