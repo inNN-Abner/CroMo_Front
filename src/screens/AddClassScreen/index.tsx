@@ -102,7 +102,7 @@ export const AddClassScreen = ({ navigation }) => {
                 wdt='320'
                 hgt='50'
                 bdRd='10'
-                label={'Definir monitoria'}
+                label={'Definir agenda'}
                 onPress={() => {
                   handleSubmit(
                       navigation,
