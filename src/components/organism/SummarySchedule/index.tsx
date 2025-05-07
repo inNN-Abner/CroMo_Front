@@ -288,17 +288,17 @@ export const SummarySchedule = ({ navigation }) => {
         </React.Fragment>
         ))}
 
-        <CreateModal visible={openCreateModal && materia} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
+        <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
 
             <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{titleMessage}</PageTitle>
             <PageSubtitle color='brisk' fontSize='15' mgLeft='5' alignSelf='center' >{bodyMessage}</PageSubtitle>
             
             <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
                 <StylezedButton
-                    label={'Cancelar aula'}
+                    label={'Desmarcar monitoria'}
                     bg='darkRed'
                     mgTop='27'
-                    wdt='140'
+                    wdt='160'
                     hgt='40'
                     bdRd='10'
                     fontSize='16'
@@ -314,7 +314,8 @@ export const SummarySchedule = ({ navigation }) => {
                     bg='white'
                     color='darkRed'
                     mgTop='27'
-                    wdt='140'
+                    mgLeft='-10'
+                    wdt='120'
                     hgt='40'
                     bdRd='10'
                     fontSize='16'
