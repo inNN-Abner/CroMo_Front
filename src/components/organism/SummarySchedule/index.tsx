@@ -310,7 +310,7 @@ export const SummarySchedule = ({ navigation }) => {
                     }}
                 />
                 <StylezedButton
-                    label={'Manter aula'}
+                    label={'Manter'}
                     bg='white'
                     color='darkRed'
                     mgTop='27'

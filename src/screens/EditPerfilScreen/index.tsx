@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { RedCancelButton, SaveButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
 import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, EditPhoto, PhotoSelectorModal } from '~/components'
-import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { Alert, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 import { useUser } from '~/services/userContext'
@@ -73,7 +73,7 @@ export const EditPerfilScreen = ({ navigation }) => {
       await SecureStore.setItemAsync('user', JSON.stringify(result.usuario))
       await setUser(result.usuario)
   
-      alert('Perfil atualizado com sucesso!')
+      Alert.alert('Sucesso', 'Perfil atualizado com sucesso!')
       navigation.navigate('Perfil')
   
     } catch (error) {
@@ -127,6 +127,8 @@ export const EditPerfilScreen = ({ navigation }) => {
               onChangeText={(text) => setEmailValue(text)}
               mgTop='5'
               mgLeft='35'
+              color='gray'
+              bgColor='lightGray'
             />
 
           <LoginTitle mgTop='10' mgLeft='0' alignSelf='flex-start'>

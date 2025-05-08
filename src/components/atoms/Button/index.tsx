@@ -225,7 +225,7 @@ export const FormButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, 
         mgLeft={mgLeft}
         mgTop={mgTop}
         onPress={onPress}>
-        <MaterialCommunityIcons name="form-select" size={24} color={'white'} />
+        <MaterialCommunityIcons name="form-select" size={30} color={'white'} />
     </StyledButtonStyle>
   )
 }

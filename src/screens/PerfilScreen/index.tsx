@@ -98,7 +98,7 @@ export const PerfilScreen = ({ navigation }) => {
               </HeaderText>
               <FormButton
                 wdt='50' hgt='50' bdRd='15' mgTop='5' mgLeft='8' bg='green'
-                onPress={() => Linking.openURL('https://docs.google.com/forms/d/1rTUoVuEAqe-31Q1GstJAWO0ME0mZj_Js7yB1TF9FnvA/edit?usp=drive_web')}
+                onPress={() => Linking.openURL('https://docs.google.com/forms/d/1UndBV-zOukU9UMHVhrrpMOZVaXg4LJsPkcJfXlPHbe4/edit')}
               />
             </Subcontainer>
 
