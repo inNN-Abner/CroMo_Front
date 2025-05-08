@@ -6,6 +6,12 @@ import { useColorScheme } from  'react-native'
 import { CustomThemeProvider } from './src/context/ThemeContext'
 import { useFonts, Quicksand_400Regular, Quicksand_600SemiBold, Quicksand_700Bold } from '@expo-google-fonts/quicksand';
 import { UserProvider } from '~/services/userContext'
+import { LogBox } from 'react-native'
+
+LogBox.ignoreLogs([
+  'Warning: DatePicker: Support for defaultProps',
+  'Warning: Header: Support for defaultProps',
+])
 
 export default function App() {
   

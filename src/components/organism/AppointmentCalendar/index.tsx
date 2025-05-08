@@ -1,3 +1,4 @@
+import React from 'react'
 import { LocaleConfig } from 'react-native-calendars'
 import { Calendar } from 'react-native-calendars'
 import { useHours } from '~/../archives/hours'
@@ -33,8 +34,8 @@ interface CalendarEvent {
   data: string
 }
 
-const getMarkedDates = () => {
-  return useHours.reduce((acc: Record<string, any>, item) => {
+const getMarkedDates = (hours) => {
+  return hours.reduce((acc: Record<string, any>, item) => {
     acc[item.date] = {
       customStyles: {
         container: { backgroundColor: '#7f0000', elevation: 5 },
@@ -45,9 +46,9 @@ const getMarkedDates = () => {
   }, {})
 }
 
-export const AppointmentCalendar = ({ navigation, date, monitorId }) => {
+export const AppointmentCalendar = ({ navigation }) => {
   const { isDark } = useTheme()
-  const hours = useHours(date, monitorId)
+  const hours = useHours()
 
   const markedDates = hours.reduce((acc: Record<string, any>, item) => {
     acc[item.date] = {

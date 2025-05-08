@@ -6,6 +6,7 @@ type infos = {
     id: number
     hour: string
     classRoom: string
+    date: string
   }
   
 export const useHours = () => { 

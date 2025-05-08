@@ -2,7 +2,7 @@ import React from 'react';
 import { AddButtonText, AppointmentCalendar, Container, Headers, ListButtonText, PageSubtitle, PageTitle, Subcontainer  } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 
-export const ReportSchedulingScreen = async({ navigation }) => {
+export const ReportSchedulingScreen = ({ navigation }) => {
   return (
     <Container align='flex-start' style={{ flex: 1 }}>      
     
