@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/Cromo_Logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.abner_fr.CroMo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -27,6 +28,11 @@
     "plugins": [
       "expo-font",
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "225de6e0-9cce-407c-b3f1-44105d7835b5"
+      }
+    }
   }
 }

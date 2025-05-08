@@ -1,0 +1,30 @@
+{
+  "cli": {
+    "version": ">= 16.4.1",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "image": "expo-sdk-52.0.0"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "image": "expo-sdk-52.0.0"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "android": {
+        "image": "expo-sdk-52.0.0"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
