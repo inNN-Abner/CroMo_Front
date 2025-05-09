@@ -1,7 +1,7 @@
 module.exports = {
     root: true,
     extends: '@react-native-community',
-    puglins: ['react', 'react-hooks', 'import'],
+    plugins: ['react', 'react-hooks', 'import'],
     settings: {
         'import/resolver': {
             'babel-plugin-root-import': {

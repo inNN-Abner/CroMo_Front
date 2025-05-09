@@ -1,8 +1,7 @@
 import React from 'react'
 import 'react-native-gesture-handler'
 import { Routes } from './src/routes'
-import AppLoading from 'expo-app-loading'
-import { useColorScheme } from  'react-native'
+import { useColorScheme, ActivityIndicator, View } from 'react-native';
 import { CustomThemeProvider } from './src/context/ThemeContext'
 import { useFonts, Quicksand_400Regular, Quicksand_600SemiBold, Quicksand_700Bold } from '@expo-google-fonts/quicksand';
 import { UserProvider } from '~/services/userContext'
@@ -26,7 +25,11 @@ export default function App() {
   })
 
   if (!fontsLoaded) {
-    return<AppLoading />
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    )
   }
  
   return (
