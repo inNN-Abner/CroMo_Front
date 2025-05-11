@@ -52,6 +52,7 @@
     "@babel/plugin-syntax-decorators": "^7.25.9",
     "@react-native-community/eslint-config": "^3.2.0",
     "@types/react": "~18.3.12",
+    "babel-plugin-module-resolver": "^5.0.2",
     "babel-plugin-root-import": "^5.1.0",
     "eas-cli": "^16.4.1",
     "eslint": "^8.57.1",
