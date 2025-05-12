@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MonitorList, Calendar, Container, CreateModal, DefineTimeScheduling, Headers, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, ModalText } from '~/components'
+import { MonitorList, Container, CreateModal, DefineTimeScheduling, Headers, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, ModalText, CalendarModal } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 
@@ -132,7 +132,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
 
       <Subcontainer maxHgt='50' justify='flex-start' mgLeft='0'>
         {step >= 1 && (
-          <Calendar onDateSelected={(date) => {
+          <CalendarModal onDateSelected={(date) => {
             if (!date) {
               console.log("Data selecionada é inválida!")
               return

@@ -252,7 +252,7 @@ export const SummarySchedule = ({ navigation }) => {
                 />
 
             <PageSubtitle color='everWhite'>
-                {item.hour}
+                {item.hour + ' || (' + item.locale +  ')'}
             </PageSubtitle>
 
         </Subcontainer>

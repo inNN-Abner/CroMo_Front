@@ -72,7 +72,7 @@ export const AppointmentCalendar = ({ navigation }) => {
       theme={{
         backgroundColor: theme.darkTheme.colors.darkGreen,
         calendarBackground: isDark ? theme.lightTheme.colors.brisk : theme.darkTheme.colors.darkGreen,
-        todayTextColor: theme.lightTheme.colors.redDarkRed, // Verifique se essa cor existe
+        todayTextColor: theme.lightTheme.colors.redDarkRed,
         dayTextColor: '#FFFFFF',
         textDisabledColor: '#696969',
         dotColor: '#BC191B',

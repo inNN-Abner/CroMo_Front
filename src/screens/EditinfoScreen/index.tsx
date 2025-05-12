@@ -10,7 +10,7 @@ export const EditInfoScreen = ({ navigation }) => {
       <PageSubtitle>Editar lembretes e avisos</PageSubtitle>
 
       <Subcontainer align='center' mgLeft='15' mgTop='0'>
-        <EditInfo  />
+        <EditInfo navigation={navigation}  />
       </Subcontainer>
     </Container>
   )

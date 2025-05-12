@@ -47,7 +47,7 @@ export const ForgotPassScreen = ({ navigation }) => {
 
       <Container align='center'>
         <Subcontainer align='center'>
-          <LogoImage source={ isDark ? LightLogin : DarkLogin } />
+          <LogoImage mgTop='50' source={ isDark ? LightLogin : DarkLogin } />
 
           <Subcontainer 
             bg='gray' 

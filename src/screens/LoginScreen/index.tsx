@@ -70,13 +70,13 @@ export const LoginScreen = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Container align='center'>
         <Subcontainer align='center'>
-          <LogoImage source={ isDark ? LightLogin : DarkLogin } />
+          <LogoImage mgTop='50' source={ isDark ? LightLogin : DarkLogin } />
 
           <Subcontainer bg={backgroundColor} justify='center' maxHgt='5' mgTop='-5' mgLeft='0' wdt='300'>
-            {errorMessage ? <LoginError alignSelf='center' mgLeft='0' mgTop='0' >{errorMessage}</LoginError> : null}
+            {errorMessage ? <LoginError alignSelf='center' color='everWhite' mgLeft='0' mgTop='0' >{errorMessage}</LoginError> : null}
           </Subcontainer>
           
-          <LoginTitle mgTop='15' mgLeft='0' alignSelf='flex-start'>
+          <LoginTitle mgTop='35' mgLeft='0' alignSelf='flex-start'>
             E-mail
           </LoginTitle>
           
@@ -115,7 +115,9 @@ export const LoginScreen = ({ navigation }) => {
                 if (data?.token) {
                   await SecureStore.setItemAsync('token', data.token)
                   await SecureStore.setItemAsync('user', JSON.stringify(data.user))
-                  console.log('Token salvo no SecureStore:', data.token);
+                  console.log('Token salvo no SecureStore:', data.token)
+                  setEmailValue('')
+                  setPasswordValue('')
                   navigation.navigate('HomeBottom')
                }
 
@@ -132,7 +134,8 @@ export const LoginScreen = ({ navigation }) => {
             label='CADASTRAR'
             bg='darkGreen'
             mgTop='10'
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => 
+              navigation.navigate('Register')}
           />
 
           <StylezedButton

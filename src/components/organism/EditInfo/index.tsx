@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
-import { CancelButton, CreateModal, InfoText, PageSubtitle, PageTitle, Photo, SaveButton, StylezedButton, Subcontainer, TextInput, Windows } from '~/components'
+import { CreateModal, PageSubtitle, PageTitle, SaveButton, StylezedButton, Subcontainer, TextInput, Windows } from '~/components'
 import { ScrollView } from 'react-native-gesture-handler'
-import monitoringHours from '../../../../archives/monitoringHours'
 import warnings from '~/../archives/warnings'
-
-const Calendar = require('~/../assets/Calendar.png')
-const Clock = require( '~/../assets/Clock.png')
 
 export const EditInfo = ({ navigation }) => {
     const [openCreateModal, setOpenCreateModal] = useState(false)
@@ -104,8 +100,8 @@ export const EditInfo = ({ navigation }) => {
                     bdRd='10'
                     fontSize='16'
                     onPress={() => {
-                        handleOnPress();
-                        navigation.navigate('Monitoring');
+                        handleOnPress()
+                        navigation.navigate('Monitoring')
                     }}
                 />
                 <StylezedButton

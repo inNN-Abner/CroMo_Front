@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { AddButtonText, AppointmentCalendar, Container, Headers, ListButtonText, PageSubtitle, PageTitle, Subcontainer  } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 
@@ -11,7 +11,7 @@ export const ReportSchedulingScreen = ({ navigation }) => {
       <PageSubtitle color='greenWhite'>Meus agendamentos</PageSubtitle>
 
       <Subcontainer align='center' justify='center' mgLeft='0' mgTop='40' hgt='380'>
-        <AppointmentCalendar navigation={ navigation } />
+        <AppointmentCalendar navigation={ navigation }/>
 
         <AddButtonText
           bg='brisk'

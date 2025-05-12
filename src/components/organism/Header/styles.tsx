@@ -7,9 +7,9 @@ export const HeaderContainerStyle = styled.View
     flex-direction: ${({ dir }) => dir || 'row'};
     align-items: ${({ align }) => align || 'center'};
     justify-content: ${({ justify }) => justify || 'center'};
-    width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : '100%')};
-    height: ${({hgt, theme }) => (hgt ? `${theme.metrics.px(hgt)}px` : '60px')};
-    margin-top:  ${({ mgTop, theme }) => (mgTop ? `${theme.metrics.px(mgTop)}px` :  `${theme.metrics.px(30)}px`)};
+    width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(Number(wdt))}px` : '100%')};
+    height: ${({hgt, theme }) => (hgt ? `${theme.metrics.px(Number(hgt))}px` : '60px')};
+    margin-top:  ${({ mgTop, theme }) => (mgTop ? `${theme.metrics.px(Number(mgTop))}px` :  `${theme.metrics.px(30)}px`)};
     border-radius: 20px;
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;

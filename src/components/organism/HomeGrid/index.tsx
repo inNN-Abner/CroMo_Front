@@ -3,8 +3,8 @@ import { useMonitoring } from '~/../archives/monitoring'
 import notes from '~/../archives/notes'
 import { FlatList, Text } from 'react-native'
 import { InfoText, ListContainer, Photo, Subcontainer, Windows, TableGrid, ClassIcon } from '~/components'
-import { imageMap, defaultPhoto } from '~/../archives/photoMapper'
 import { imageMapContact, defaultPhotoContact } from '~/../archives/photoContacts'
+import { ScrollView } from 'react-native-gesture-handler'
 
 export const HomeGrid = () => {
     const { monitoring, isLoaded } = useMonitoring()
@@ -60,7 +60,7 @@ export const HomeGrid = () => {
                             wdt='350'
                             hgt='157'
                         >
-
+                        
                             <TableGrid 
                                 align='flex-start'
                                 wdt='335'
@@ -75,7 +75,12 @@ export const HomeGrid = () => {
                             >
                                     {item.class}
                                 </TableGrid>
-
+                        <ScrollView
+                            style={{
+                            height: 150,
+                            marginTop: 5,
+                            borderRadius: 10,
+                        }}>
                             <TableGrid 
                                 fontSize='14'
                                 wdt='335'
@@ -89,11 +94,10 @@ export const HomeGrid = () => {
                                 fontFamily='bold'
                                 txtAlign='flex-start'
                                 bg='gray'
-                                numberLines={4}
                             >
                                 {item.info}
                             </TableGrid>
-
+                        </ScrollView>
                         </ListContainer>
                     )}
                     >

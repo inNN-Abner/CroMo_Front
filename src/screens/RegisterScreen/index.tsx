@@ -4,7 +4,7 @@ const LightLogin = require('~/../assets/LoginScreen_Light.png')
 import { StylezedButton } from '~/components/atoms/Button' 
 import { useTheme } from '~/context/ThemeContext' 
 import { Container, Subcontainer, LogoImage, TextInput, LoginTitle, LoginError, CourseSelector } from '~/components' 
-import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native' 
+import { Alert, Keyboard, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback } from 'react-native' 
 import { API_URL } from '~/configs/config' 
 import { opcoesCursos } from '~/../archives/courses'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
@@ -27,22 +27,22 @@ export const RegisterScreen = ({ navigation }) => {
 
   const registerUser = async () => {
     if (!nome || !email || !senha || !confirmSenha || !selectedCourse) {
-      setErrorMessage("Preencha todos os campos!");
-      return;
+      setErrorMessage("Preencha todos os campos!") 
+      return 
     }
   
     if (senha !== confirmSenha) {
-      setErrorMessage("As senhas não coincidem!");
-      return;
+      setErrorMessage("As senhas não coincidem!") 
+      return 
     }
   
-    setErrorMessage('');
-    setLoading(true);
+    setErrorMessage('') 
+    setLoading(true) 
   
     try {
       // Passo 1: Cria o usuário no Firebase Auth
-      const firebaseUser = await createUserWithEmailAndPassword(auth, email, senha);
-      console.log("Usuário criado no Firebase:", firebaseUser.user.uid);
+      const firebaseUser = await createUserWithEmailAndPassword(auth, email, senha) 
+      console.log("Usuário criado no Firebase:", firebaseUser.user.uid) 
   
       // Passo 2: Salva no banco via sua API
       const response = await fetch(`${API_URL}/auth/register`, {
@@ -56,49 +56,59 @@ export const RegisterScreen = ({ navigation }) => {
           idFoto: 1,
           ra: ""
         }),
-      });
+      }) 
   
-      const data = await response.json();
+      const data = await response.json() 
   
       if (!response.ok) {
-        setErrorMessage(data.error || 'Erro ao cadastrar!');
-        console.log("Erro na API:", data);
-        return;
+        setErrorMessage(data.error || 'Erro ao cadastrar!') 
+        console.log("Erro na API:", data) 
+        return 
       }
   
       // Passo 3: Salvar no SecureStore local
-      await SecureStore.setItemAsync("user", JSON.stringify(data));
-      Alert.alert("Sucesso!", "Registro concluído.");
-      navigation.navigate('Login');
+      await SecureStore.setItemAsync("user", JSON.stringify(data)) 
+      Alert.alert("Sucesso!", "Registro concluído.") 
+      navigation.navigate('Login') 
   
     } catch (error: any) {
-      console.error("Erro ao registrar:", error);
+      console.error("Erro ao registrar:", error) 
   
       // Erros Firebase
       switch (error.code) {
         case 'auth/email-already-in-use':
-          setErrorMessage("E-mail já em uso!");
-          break;
+          setErrorMessage("E-mail já em uso!") 
+          break 
         case 'auth/invalid-email':
-          setErrorMessage("E-mail inválido.");
-          break;
+          setErrorMessage("E-mail inválido.") 
+          break 
         case 'auth/weak-password':
-          setErrorMessage("Senha fraca, mínimo 6 caracteres.");
-          break;
+          setErrorMessage("Senha fraca, mínimo 6 caracteres.") 
+          break 
         default:
-          setErrorMessage("Erro inesperado. Tente novamente.");
-          break;
+          setErrorMessage("Erro inesperado. Tente novamente.") 
+          break 
       }
     } finally {
-      setLoading(false);
+      setLoading(false) 
     }
   }
     
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+    >
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
         <Container align='center'>
           <Subcontainer align='center' mgLeft='0' mgTop='0'>
-            <LogoImage mgRight='0' source={useTheme().isDark ? LightLogin : DarkLogin} />
+            <LogoImage justify='center' mgRight='0' mgTop='50' source={useTheme().isDark ? LightLogin : DarkLogin} />
 
             <LoginTitle mgTop='-15' alignSelf='flex-start'>
               Nome
@@ -148,7 +158,7 @@ export const RegisterScreen = ({ navigation }) => {
             />
             {errorMessage ? <LoginError>{errorMessage}</LoginError> : null}
 
-            <Subcontainer mgLeft='0' mgTop='5' dir='row' wdt='360' hgt='80' align='center' justify='center'>
+            <Subcontainer mgLeft='0' mgTop='15' dir='row' wdt='360' hgt='80' align='center' justify='center'>
               <StylezedButton 
                 label="CANCELAR"
                 mgTop='0'
@@ -169,6 +179,8 @@ export const RegisterScreen = ({ navigation }) => {
 
           </Subcontainer>
         </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   )
 }

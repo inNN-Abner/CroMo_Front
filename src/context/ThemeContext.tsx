@@ -16,9 +16,18 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
     setIsDark(!isDark);
   }
 
+  const mergedTheme = {
+    ...theme,
+    ...(
+      isDark
+        ? theme.darkTheme
+        : theme.lightTheme
+    )
+  }
+
   return (
     <ThemeToggleContext.Provider value={{ toggleTheme, isDark }}>
-      <ThemeProvider theme={ isDark ? theme.darkTheme : theme.lightTheme }>
+      <ThemeProvider theme={mergedTheme}>
         {children}
       </ThemeProvider>
     </ThemeToggleContext.Provider>
