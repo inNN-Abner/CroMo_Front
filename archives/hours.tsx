@@ -46,6 +46,7 @@ export const useHours = () => {
           id: m.id,
           hour: m.horario,
           classRoom: m.local,
+          date: m.date
         }))
   
         setHours(infos)

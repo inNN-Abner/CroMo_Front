@@ -37,10 +37,9 @@ interface CalendarEvent {
 const getMarkedDates = (hours) => {
   return hours.reduce((acc: Record<string, any>, item) => {
     acc[item.date] = {
-      customStyles: {
-        container: { backgroundColor: '#7f0000', elevation: 5 },
-        text: { color: 'white' },
-      }
+      selected: true,
+      selectedColor: '#FF0000',
+      selectedTextColor: '#FFFFFF'
     }
     return acc
   }, {})
@@ -52,10 +51,8 @@ export const AppointmentCalendar = ({ navigation }) => {
 
   const markedDates = hours.reduce((acc: Record<string, any>, item) => {
     acc[item.date] = {
-      customStyles: {
-        container: { backgroundColor: '#7f0000', elevation: 5 },
-        text: { color: 'white' },
-      }
+      selectedColor: '#FF0000',
+      selectedTextColor: '#FFFFFF'
     }
     return acc
   }, {})
@@ -91,7 +88,6 @@ export const AppointmentCalendar = ({ navigation }) => {
         textMonthFontSize: 16,
         textDayHeaderFontSize: 16
       }}
-      markingType={'custom'}
       markedDates={markedDates}
       onDayPress={async(day) => {
         navigation.navigate('SummarySchedule')
