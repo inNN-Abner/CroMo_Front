@@ -5,6 +5,7 @@ import { useHours } from '~/../archives/hours'
 import { useTheme } from '~/context/ThemeContext'
 import { theme } from '~/styles'
 import * as SecureStore from 'expo-secure-store'
+import { useAgendamento } from '~/../archives/monitoringHours'
 
 LocaleConfig.locales['pt-BR'] = {
   monthNames: [
@@ -37,9 +38,8 @@ interface CalendarEvent {
 const getMarkedDates = (hours) => {
   return hours.reduce((acc: Record<string, any>, item) => {
     acc[item.date] = {
-      selected: true,
-      selectedColor: '#FF0000',
-      selectedTextColor: '#FFFFFF'
+      selectedColor: '#FF6347',
+      selectedTextColor: '#FF6347'
     }
     return acc
   }, {})
@@ -49,14 +49,20 @@ export const AppointmentCalendar = ({ navigation }) => {
   const { isDark } = useTheme()
   const hours = useHours()
 
-  const markedDates = hours.reduce((acc: Record<string, any>, item) => {
-    acc[item.date] = {
-      selectedColor: '#FF0000',
-      selectedTextColor: '#FFFFFF'
+  const { monitoring, isLoaded } = useAgendamento()
+
+  const markedDates = monitoring.reduce((acc, item) => {
+    const [dia, mes, ano] = item.date.split('/')
+    const dateFormatted = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`
+  
+    acc[dateFormatted] = {
+      marked: true,
+      dotColor: 'red'
     }
+  
     return acc
   }, {})
-
+  
   return (
     <Calendar
       style={{
@@ -72,8 +78,6 @@ export const AppointmentCalendar = ({ navigation }) => {
         todayTextColor: theme.lightTheme.colors.redDarkRed,
         dayTextColor: '#FFFFFF',
         textDisabledColor: '#696969',
-        dotColor: '#BC191B',
-        selectedDotColor: '#E2EAEE',
         arrowColor: theme.darkTheme.colors.darkRed,
         disabledArrowColor: '#D9E1E8',
         monthTextColor: '#FF3131',
@@ -89,7 +93,7 @@ export const AppointmentCalendar = ({ navigation }) => {
         textDayHeaderFontSize: 16
       }}
       markedDates={markedDates}
-      onDayPress={async(day) => {
+          onDayPress={async(day) => {
         navigation.navigate('SummarySchedule')
         await SecureStore.setItem("allAppointments", '0')
         await SecureStore.setItem("dataConsultada", day.dateString)
