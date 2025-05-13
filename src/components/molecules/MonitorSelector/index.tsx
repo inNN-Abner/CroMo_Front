@@ -20,10 +20,13 @@ export const MonitorList = ({ onMonitorSelected, filterWeekday }) => {
       const response = await fetch(`${API_URL}/monitorias`)
       const data = await response.json()
 
+      console.log('Monitorias recebidas:', data)  
+      
       if (filterWeekday) {
         // filtra as que batem com o dia da semana da data selecionada
         const filtradas = data.filter(m => m.dia_semana === filterWeekday)
         setMonitorias(filtradas)
+        console.log('Datas filtadas:', filtradas)
       } else {
         setMonitorias(data)
       }

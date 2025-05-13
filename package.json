@@ -20,6 +20,7 @@
     "@types/react-native-modern-datepicker": "^1.0.5",
     "axios": "^1.9.0",
     "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "expo": "^52.0.46",
     "expo-font": "~13.0.2",
     "expo-linear-gradient": "~14.0.1",

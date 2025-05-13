@@ -1,9 +1,6 @@
 import React from 'react'
 import { LocaleConfig } from 'react-native-calendars'
 import { Calendar } from 'react-native-calendars'
-import { useHours } from '~/../archives/hours'
-import { useTheme } from '~/context/ThemeContext'
-import { theme } from '~/styles'
 import * as SecureStore from 'expo-secure-store'
 import { useAgendamento } from '~/../archives/monitoringHours'
 
@@ -23,12 +20,12 @@ LocaleConfig.locales['pt-BR'] = {
     'Dezembro'
   ],
   monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-  dayNames: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+  dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
   dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-  today: "Hoje"
+  today: 'Hoje'
 }
 
-LocaleConfig.defaultLocale = 'pt-BR';
+LocaleConfig.defaultLocale = 'pt-BR'
 
 interface CalendarEvent {
   id: number
@@ -46,10 +43,8 @@ const getMarkedDates = (hours) => {
 }
 
 export const AppointmentCalendar = ({ navigation }) => {
-  const { isDark } = useTheme()
-  const hours = useHours()
 
-  const { monitoring, isLoaded } = useAgendamento()
+  const { monitoring } = useAgendamento()
 
   const markedDates = monitoring.reduce((acc, item) => {
     const [dia, mes, ano] = item.date.split('/')
@@ -73,18 +68,15 @@ export const AppointmentCalendar = ({ navigation }) => {
         elevation: 10
       }}
       theme={{
-        backgroundColor: theme.darkTheme.colors.darkGreen,
-        calendarBackground: isDark ? theme.lightTheme.colors.brisk : theme.darkTheme.colors.darkGreen,
-        todayTextColor: theme.lightTheme.colors.redDarkRed,
+        backgroundColor: '#265160',
+        calendarBackground: '#265160',
+        todayTextColor: '#FF3131',
         dayTextColor: '#FFFFFF',
         textDisabledColor: '#696969',
-        arrowColor: theme.darkTheme.colors.darkRed,
+        arrowColor: '#a82325',
         disabledArrowColor: '#D9E1E8',
         monthTextColor: '#FF3131',
         indicatorColor: '#7F0000',
-        textDayFontFamily: 'monospace',
-        textMonthFontFamily: 'monospace',
-        textDayHeaderFontFamily: 'monospace',
         textDayFontWeight: '300',
         textMonthFontWeight: 'bold',
         textDayHeaderFontWeight: '300',
