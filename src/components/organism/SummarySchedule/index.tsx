@@ -176,6 +176,14 @@ export const SummarySchedule = ({ navigation }) => {
         setOpenCreateModal(true)
       }
 
+    if (!userType) {
+    return (
+        <Subcontainer align='center' justify='center' mgTop='100'>
+            <PageSubtitle color='brisk'>Carregando dados do usuário...</PageSubtitle>
+        </Subcontainer>
+        )
+    }
+      
     if ((userType == "Aluno" || userType == "Monitor") && monitoring.length === 0){
         return <>
             <Subcontainer bg='darkRed' mgLeft='0' mgTop='60' wdt='250' hgt='40' align='center' justify='center' pdd='0'>
@@ -327,7 +335,7 @@ export const SummarySchedule = ({ navigation }) => {
     </Subcontainer>
     )}
     else{return (
-    <Subcontainer mgLeft='0' maxHgt='75' align='center' >
+    <Subcontainer mgLeft='0' maxHgt='75' align='flex-end'>
     <ScrollView>
 
         {monitoring.map((item) => (
@@ -347,7 +355,7 @@ export const SummarySchedule = ({ navigation }) => {
                         wdt='40'
                         mgTop='0'
                         mgLeft='15'
-                        source={imageMapContact[item.icon || 1]} 
+                        source={imageMap[item.icon || defaultPhoto]} 
                     />
                     <PageTitle
                         mgTop='0'
