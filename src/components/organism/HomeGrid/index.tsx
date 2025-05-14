@@ -7,7 +7,6 @@ import { imageMapContact, defaultPhotoContact } from '~/../archives/photoContact
 import { ScrollView } from 'react-native-gesture-handler'
 
 export const HomeGrid = () => {
-    const { monitoring, isLoaded } = useMonitoring()
     return (
         <Subcontainer 
         hgt='250'

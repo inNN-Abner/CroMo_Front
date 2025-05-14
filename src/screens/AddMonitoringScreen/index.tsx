@@ -17,7 +17,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
   const [monitorListKey, setMonitorListKey] = useState(0)
   const [timeListKey, setTimeListKey] = useState(0)
   const weekDays = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']
-  const filterWeekday = selectedDate ? weekDays[new Date(selectedDate).getDay()] : null
+  const filterWeekday = selectedDate ? weekDays[new Date(selectedDate).getDay()+1] : null
   
   function handleOnPress() {
     setOpenModal(!openModal)
