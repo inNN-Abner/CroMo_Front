@@ -18,7 +18,7 @@ export const useMonitoring = () => {
     useEffect(() => {
         async function loadMonitoring() {
         const today = new Date()
-        today.setDate(today.getDate() - 1)
+        today.setDate(today.getDate())
 
         const token = await SecureStore.getItemAsync("token")
         if (!token) {
