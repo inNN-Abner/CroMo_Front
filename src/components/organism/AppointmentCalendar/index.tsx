@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { LocaleConfig } from 'react-native-calendars'
 import { Calendar } from 'react-native-calendars'
 import * as SecureStore from 'expo-secure-store'
@@ -32,32 +32,25 @@ interface CalendarEvent {
   data: string
 }
 
-const getMarkedDates = (hours) => {
-  return hours.reduce((acc: Record<string, any>, item) => {
-    acc[item.date] = {
-      selectedColor: '#FF6347',
-      selectedTextColor: '#FF6347'
-    }
-    return acc
-  }, {})
-}
-
 export const AppointmentCalendar = ({ navigation }) => {
 
   const { monitoring } = useAgendamento()
 
-  const markedDates = monitoring.reduce((acc, item) => {
-    const [dia, mes, ano] = item.date.split('/')
-    const dateFormatted = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`
+
+  const markedDates = useMemo(() => {
+    return (monitoring ?? []).reduce((acc, item) => {
+      const [dia, mes, ano] = item.date.split('/')
+      const dateFormatted = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`
   
-    acc[dateFormatted] = {
-      marked: true,
-      dotColor: 'red'
-    }
+      acc[dateFormatted] = {
+        marked: true,
+        dotColor: 'red'
+      }
   
-    return acc
-  }, {})
-  
+      return acc
+    }, {})
+  }, [monitoring])
+    
   return (
     <Calendar
       style={{

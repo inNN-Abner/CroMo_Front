@@ -12,8 +12,8 @@ import { API_URL } from '~/configs/config'
 import HTMLListaPresenca from '~/services/HTMLListaPresenca'
 import { defaultPhoto, imageMap } from '~/../archives/photoMapper'
 
-const Calendar = require('~/../assets/Calendar.png')
-const Clock = require( '~/../assets/Clock.png')
+const Calendar = require('../../../../assets/Calendar.png')
+const Clock = require( '../../../../assets/Clock.png')
 
 export const SummarySchedule = ({ navigation }) => {
     const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
