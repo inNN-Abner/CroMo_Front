@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { RedCancelButton, SaveButton } from '~/components/atoms/Button'
 import { useTheme } from '~/context/ThemeContext'
-import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, EditPhoto, PhotoSelectorModal } from '~/components'
+import { Container, Subcontainer, TextInput, LoginTitle, PerfilHeaders, PageTitle, EditPhoto, PhotoSelectorModal, InfoText } from '~/components'
 import { Alert, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 import { useUser } from '~/services/userContext'
 import { imageMapContact, defaultPhotoContact } from '~/../archives/photoContacts'
+import { useFocusEffect } from '@react-navigation/native'
+import { useCallback } from 'react'
 
 export const EditPerfilScreen = ({ navigation }) => {
   const { isDark } = useTheme()
@@ -19,7 +21,13 @@ export const EditPerfilScreen = ({ navigation }) => {
   const [photoModalVisible, setPhotoModalVisible] = useState(false)
   const [selectedPhotoId, setSelectedPhotoId] = useState<number | null>(null)
 
-  useEffect(() => {
+  const { user } = useUser()
+    if (!user) {
+      return <InfoText>Carregando...</InfoText>
+    }
+
+  useFocusEffect(
+    useCallback(() => {
     const loadUser = async () => {
     const userData = await SecureStore.getItemAsync('user')
     
@@ -30,10 +38,11 @@ export const EditPerfilScreen = ({ navigation }) => {
         setEmailValue(data.email || '')
         setTeamsValue(data.teams || '')
         setRaValue(data.ra || '')
+        setSelectedPhotoId(null)
       }
     }
     loadUser()
-  }, [])
+  }, []))
 
   const handleSave = async () => {
     if (!nameValue || nameValue.trim().length < 5) {
@@ -103,7 +112,7 @@ export const EditPerfilScreen = ({ navigation }) => {
               <TouchableOpacity onPress={() => setPhotoModalVisible(true)}>
                 {userData && (
                   <EditPhoto
-                    source={imageMapContact[selectedPhotoId ?? userData?.foto] ?? defaultPhotoContact}
+                    source={imageMapContact[selectedPhotoId ?? user?.idFoto] ?? defaultPhotoContact}
                     hgt='145'
                     wdt='100'
                     bdRd='20'

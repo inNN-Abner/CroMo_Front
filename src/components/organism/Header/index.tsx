@@ -13,17 +13,6 @@ const HeaderLogoLight = require('~/../assets/Dark_Cromo_LogoBKG.png')
 export const Headers = () => {
     const { user } = useUser()
     const { isDark } = useTheme()
-    //const [userII, setUser] = useState<{ nome: string; curso: string; foto: number; email: string } | null>(null);
-
-    /*useEffect(() => {
-        const loadUser = async () => {
-          const userData = await SecureStore.getItemAsync('user')
-          if (userData) {
-            setUser(JSON.parse(userData))
-          }
-        }
-        loadUser()
-    }, [])*/
 
     if (!user) {
         return <HeaderContainerStyle><HeaderText>Carregando...</HeaderText></HeaderContainerStyle>
@@ -51,7 +40,8 @@ export const Headers = () => {
                 </HeaderText>
             </HeaderContainerStyle>
 
-            <Subcontainer bg='white'
+            <Subcontainer 
+                bg='white'
                 wdt='90' hgt='50' mgTop='0' mgLeft='0' pdd='0'
                 dir='column' align='center' justify='center'>
 
@@ -73,14 +63,14 @@ export const PerfilHeaders = () => {
     const { isDark } = useTheme()
 
     return (
-        <HeaderContainerStyle justify='flex-end' align='flex-start' bg='transparent'>
+        <HeaderContainerStyle  bg='transparent' justify='flex-end' >
             <HeaderContainerStyle 
                 mgTop='0' wdt='100' mgLeft='0'
                 dir='column' align='center' justify='center'>
 
             <Subcontainer 
                 bg='white'
-                wdt='90' hgt='50' mgTop='0' mgLeft='0'
+                wdt='90' hgt='50' mgTop='0' mgLeft='5'
                 dir='column' align='center' justify='center'>
 
                 <LogoHeader
