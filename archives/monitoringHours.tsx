@@ -26,7 +26,7 @@ export const useAgendamento = () => {
         const allAppointments = await SecureStore.getItem("allAppointments")
         const dataConsultada = await SecureStore.getItem("dataConsultada")
         const today = new Date()
-        today.setDate(today.getDate() - 1)
+        today.setDate(today.getDate()- 1)
 
             const token = await SecureStore.getItemAsync("token")
             if (!token) {
@@ -90,7 +90,11 @@ export const useAgendamento = () => {
                   if (!resp.ok) throw new Error(`Erro na requisição do agendamento: ${resp.status}`)
                   const data = await resp.json()
 
-                  agendamentos = data.map((m) => ({
+                  agendamentos = data.map((m) => {
+                    const dateUtc = new Date(m.data)
+                    const dateSaoPaulo = addHours(dateUtc, 3) // Corrige para GMT-3
+
+                  return {
                     id: m.id,
                     weekDay: m.dia_semana,
                     hour: m.horario,
@@ -102,8 +106,9 @@ export const useAgendamento = () => {
                     monitorName: m.monitor,
                     quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
                     obs: m.obs,
-                    date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
-              }))}
+                    date: format(dateSaoPaulo, 'dd/MM/yyyy')
+                    }
+                  })}
 
               else if (userType == "Monitor" && allAppointments == "0"){
                 console.log("TOKEN Monitoria:", token)
@@ -125,7 +130,12 @@ export const useAgendamento = () => {
                   agendamentos = null
                 }
                 else {
-                agendamentos = data.map((m) => ({
+                agendamentos = data.map((m) => {
+                const dateUtc = new Date(m.data)
+                const dateSaoPaulo = addHours(dateUtc, 3) // Corrige para GMT-3
+
+                return {
+
                   id: m.id,
                   weekDay: m.dia_semana,
                   hour: m.horario,
@@ -137,8 +147,9 @@ export const useAgendamento = () => {
                   monitorName: m.monitor,
                   quantidade: `Quantidade de alunos: ${m.quantidadeAluno}`,
                   obs: m.obs,
-                  date: `${new Date(m.data).toLocaleDateString('pt-BR')}`
-              }))}}
+                  date: format(dateSaoPaulo, 'dd/MM/yyyy')
+                }
+          })}}
               
               else if (userType == "Aluno" && allAppointments == "0"){
                 console.log("TOKEN Monitoria:", token)
