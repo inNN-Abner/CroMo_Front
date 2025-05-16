@@ -185,13 +185,13 @@ export const SummarySchedule = ({ navigation }) => {
     }
       
     if ((userType == "Aluno" || userType == "Monitor") && monitoring.length === 0){
-        return <>
+        return (
             <Subcontainer bg='darkRed' mgLeft='0' mgTop='60' wdt='250' hgt='40' align='center' justify='center' pdd='0'>
                 <InfoTextNoWrap color='everWhite' alignSelf='center' fontSize='20'>
                     Não há agendamentos! 
                 </InfoTextNoWrap>
             </Subcontainer>
-        </>
+        )
     }
     else if (userType == "Aluno"){return (
     <Subcontainer mgLeft='40' maxHgt='75' align='center'>
@@ -400,7 +400,7 @@ export const SummarySchedule = ({ navigation }) => {
                 />
 
             <PageSubtitle color='everWhite'>
-                {item.hour}
+                {item.hour + ' || (' + item.locale + ')'}
             </PageSubtitle>
 
         </Subcontainer>
@@ -421,7 +421,7 @@ export const SummarySchedule = ({ navigation }) => {
                 mgRight='5'
                 bdRd='15'
                 color='darkRed'
-                label={'Visualizar'}
+                label={'Lista de alunos'}
                 fontSize='16'
                 onPress={() => {
                     CreateModalStudents(item.id, item.class)
@@ -476,7 +476,7 @@ export const SummarySchedule = ({ navigation }) => {
             pdd='0'
         >
         <PDFButton
-            label='Lista'
+            label='Baixar'
             bg='darkRed'
             color='everWhite'
             wdt='140'

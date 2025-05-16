@@ -10,8 +10,8 @@ export const SelectDay: React.FC<SelectDayProps> = ({ onDaySelected, resetTrigge
     const [indexDate, setIndexDate] = useState<number | null>(null)
 
     const diasDaSemana = [
-        "Domingo", "Segunda-feira", "Terça-feira", 
-        "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"
+        "Segunda-feira", "Terça-feira", "Quarta-feira",
+        "Quinta-feira", "Sexta-feira", "Sábado"
     ]
 
     const handleButtonPress = (index: number) => {

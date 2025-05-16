@@ -19,7 +19,6 @@ export const useMonitoring = () => {
         async function loadMonitoring() {
         const today = new Date()
         today.setDate(today.getDate())
-        
         const token = await SecureStore.getItemAsync("token")
         if (!token) {
             console.log("Token não encontrado.")
