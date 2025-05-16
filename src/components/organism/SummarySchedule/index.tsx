@@ -27,7 +27,7 @@ export const SummarySchedule = ({ navigation }) => {
     const [alunos, setAlunos] = useState([])
     const [dataAgendamento, setDataAgendamento] = useState(null)
     const [materia, setMateria] = useState(null)
-    console.log("monitoring", monitoring)
+    
     useEffect(() => {
         const loadUserType = async () => {
           try {
