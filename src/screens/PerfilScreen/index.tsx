@@ -33,7 +33,7 @@ export const PerfilScreen = ({ navigation }) => {
   return (
     <Container hgt='100'>
         <PerfilHeaders />
-        <PageTitle mgTop='0'>Meu perfil</PageTitle>
+        <PageTitle mgTop='-7'>Meu perfil</PageTitle>
 
       <Subcontainer align='center' mgLeft='0' mgTop='0' maxHgt='95'>
         <Windows 
