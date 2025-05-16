@@ -53,13 +53,13 @@ export const CalendarModal = ({ onDateSelected }) => {
   const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
   return (
-    <Subcontainer align='center' justify='flex-start' maxHgt='10' mgLeft='0'>
+    <Subcontainer align='center' justify='flex-start' mgLeft='0'>
       <Windows
         bg='darkRed'
         hgt='40'
         bdRdBL='0'
         bdRdBR='0'
-        mgTop='15'
+        mgTop='0'
         justify='flex-end'
       >
 

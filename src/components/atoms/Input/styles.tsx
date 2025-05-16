@@ -2,10 +2,11 @@ import { TextInputMask } from 'react-native-masked-text'
 import styled from 'styled-components/native'
 
 export const TextInputStyle = styled.TextInput
-    <{ bgColor?: string; align?: string; color?: string; fontFamily?: string; bdRd?: string; fontSize?: string; wdt?: string; hgt?: string; pddLeft?: string; mgTop?: string; mgLeft?: string; wrap?: string }>
+    <{ bgColor?: string; align?: string; placeColor?: string; color?: string; fontFamily?: string; bdRd?: string; fontSize?: string; wdt?: string; hgt?: string; pddLeft?: string; mgTop?: string; mgLeft?: string; wrap?: string }>
 `
     backgroundColor: ${({ bgColor, theme }) => theme.colors[bgColor || 'white']};
     color: ${({ color, theme }) => theme.colors[color || 'brisk']};
+    placeholderTextColor: ${({ placeColor, theme }) => theme.colors[placeColor || 'gray']};
     textAlign: ${({ align }) => align || 'flex-start'};
     font-size: ${({ fontSize, theme }) => (fontSize ? `${theme.metrics.px(fontSize)}px` : `${theme.metrics.px(12)}px`)};
     width: ${({ wdt, theme }) => (wdt ? `${theme.metrics.px(wdt)}px` : '325px')};

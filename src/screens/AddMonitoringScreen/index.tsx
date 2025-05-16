@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { MonitorList, Container, CreateModal, DefineTimeScheduling, Headers, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, ModalText, CalendarModal } from '~/components'
+import { MonitorList, Container, CreateModal, DefineTimeScheduling, Headers, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, TextInput, ModalText, CalendarModal } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
+import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 
 export const AddMonitoringScreen = ({ navigation }) => {
   const [openModal, setOpenModal] = useState(false)
@@ -125,121 +126,148 @@ export const AddMonitoringScreen = ({ navigation }) => {
   
 
   return (
-    <Container>
-      <Headers />
-      <PageTitle>Monitoria</PageTitle>
-      <PageSubtitle>Novo agendamento de monitoria</PageSubtitle>
-
-      <Subcontainer maxHgt='50' justify='flex-start' mgLeft='0'>
-        {step >= 1 && (
-          <CalendarModal onDateSelected={(date) => {
-            if (!date) {
-              console.log("Data selecionada é inválida!")
-              return
-            }
-            setSelectedDate(date)
-            setMonitorListKey(prev => prev + 1)
-            setStep(2)
-          }} />
-        )}
-
-      <Subcontainer maxHgt='100' justify='center' mgLeft='0' mgTop='75' dir='row'>
-        {step >= 2 && (
-          <MonitorList 
-            key={monitorListKey}
-            onMonitorSelected={handleMonitorSelection} 
-            filterWeekday={filterWeekday} 
-          />      
-        )}
-
-        {step >= 3 && (
-          <DefineTimeScheduling
-            key={timeListKey}
-            onTimeSelected={async(time) => {
-              setSelectedTime(time)
-              setStep(4) }} />
-        )}
-      </Subcontainer>
-
-        {step >= 4 && (
-          <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0'>
-            <RedCancelButton
-              bg='brisk'
-              wdt='165'
-              mgTop='10'
-              bdRd='10'
-              bdColor='darkRed'
-              bdWdt='2'
-              color='darkRed'
-              label={'Cancelar'}
-              onPress={() => modalCancel()}
-            />
-
-            <SaveButton
-              bg='darkGreen'
-              wdt='165'
-              mgTop='10'
-              bdRd='10'
-              mgLeft='20'
-              color='everWhite'
-              label={'Agendar'}
-              onPress={() => modalConfirm()}
-            />
-
-            <CreateModal
-              visible={openModal}
-              bg='white'
-              bdRd='10'
-              wdt='300'
-              hgt='150'
-              pdd='15'
-            >
-              <ModalText fontFamily='bold' color='brisk' mgTop='-25' mgLeft='0' fontSize='17'>
-                {titleMessage}
-              </ModalText>
-
-              <ModalText fontFamily='regular' color='brisk' mgTop='10' fontSize='15' mgLeft='0'>
-                {bodyMessage}
-              </ModalText>
-
-              <Subcontainer dir='row-reverse' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
-                <StylezedButton
-                  label={'Confirmar'}
-                  bg='darkRed'
-                  mgTop='25'
-                  mgLeft='0'
-                  wdt='130'
-                  hgt='40'
-                  bdRd='10'
-                  fontSize='18'
-                  onPress={() => {
-                    handleOnPress()
-                    if (titleMessage === 'Confirmar agendamento') {
-                      handleConfirm(monitoriaIdToConfirm)
-                    } else if (titleMessage === 'Cancelar agendamento') {
-                      handleCancel()
-                    }
-                  }}
-                />
-
-                <StylezedButton
-                  label={'Cancelar'}
-                  bg='white'
-                  color='darkRed'
-                  mgTop='25'
-                  wdt='130'
-                  hgt='40'
-                  bdRd='10'
-                  fontSize='18'
-                  onPress={() => {
-                    handleOnPress()
-                  }}
-                />
-              </Subcontainer>
-            </CreateModal>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+    >
+      <Container>
+        <Headers />
+        <PageTitle>Monitoria</PageTitle>
+        <PageSubtitle>Novo agendamento de monitoria</PageSubtitle>
+  
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={true}
+        >
+          <Subcontainer hgt='35' justify='flex-start' align='center' dir='row' mgTop='20' mgLeft='2'>
+            {step >= 1 && (
+              <CalendarModal onDateSelected={(date) => {
+                if (!date) {
+                  console.log("Data selecionada é inválida!")
+                  return
+                }
+                setSelectedDate(date)
+                setMonitorListKey(prev => prev + 1)
+                setStep(2)
+              }} />
+            )}
           </Subcontainer>
-        )}
-      </Subcontainer>
-    </Container>
+  
+          <Subcontainer maxHgt='45' justify='center' mgLeft='0' mgTop='75' dir='row'>
+            {step >= 2 && (
+              <MonitorList
+                key={monitorListKey}
+                onMonitorSelected={handleMonitorSelection}
+                filterWeekday={filterWeekday}
+              />
+            )}
+  
+            {step >= 3 && (
+              <DefineTimeScheduling
+                key={timeListKey}
+                onTimeSelected={async (time) => {
+                  setSelectedTime(time)
+                  setStep(4)
+                }}
+              />
+            )}
+          </Subcontainer>
+  
+          {step >= 4 && (
+            <Subcontainer mgLeft='0' mgTop='25'>
+              <TextInput
+                mgLeft='12'
+                mgTop='-25'
+                wdt='350'
+                hgt='80'
+                bdRd='10'
+                bgColor='everGray'
+                color='white'
+                fontSize='16'
+                placeColor='white'
+                placeholder='Insira as suas dúvidas para o monitor ficar ciente'
+              />
+  
+              <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0' bg='pruple'>
+                <RedCancelButton
+                  bg='brisk'
+                  wdt='165'
+                  mgTop='20'
+                  bdRd='10'
+                  bdColor='darkRed'
+                  bdWdt='2'
+                  color='darkRed'
+                  label={'Cancelar'}
+                  onPress={() => modalCancel()}
+                />
+  
+                <SaveButton
+                  bg='darkGreen'
+                  wdt='165'
+                  mgTop='20'
+                  bdRd='10'
+                  mgLeft='20'
+                  color='everWhite'
+                  label={'Agendar'}
+                  onPress={() => modalConfirm()}
+                />
+  
+                <CreateModal
+                  visible={openModal}
+                  bg='white'
+                  bdRd='10'
+                  wdt='300'
+                  hgt='150'
+                  pdd='15'
+                >
+                  <ModalText fontFamily='bold' color='brisk' mgTop='-25' mgLeft='0' fontSize='17'>
+                    {titleMessage}
+                  </ModalText>
+  
+                  <ModalText fontFamily='regular' color='brisk' mgTop='10' fontSize='15' mgLeft='0'>
+                    {bodyMessage}
+                  </ModalText>
+  
+                  <Subcontainer dir='row-reverse' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
+                    <StylezedButton
+                      label={'Confirmar'}
+                      bg='darkRed'
+                      mgTop='25'
+                      mgLeft='0'
+                      wdt='130'
+                      hgt='40'
+                      bdRd='10'
+                      fontSize='18'
+                      onPress={() => {
+                        handleOnPress()
+                        if (titleMessage === 'Confirmar agendamento') {
+                          handleConfirm(monitoriaIdToConfirm)
+                        } else if (titleMessage === 'Cancelar agendamento') {
+                          handleCancel()
+                        }
+                      }}
+                    />
+  
+                    <StylezedButton
+                      label={'Cancelar'}
+                      bg='white'
+                      color='darkRed'
+                      mgTop='25'
+                      wdt='130'
+                      hgt='40'
+                      bdRd='10'
+                      fontSize='18'
+                      onPress={handleOnPress}
+                    />
+                  </Subcontainer>
+                </CreateModal>
+              </Subcontainer>
+            </Subcontainer>
+          )}
+        </ScrollView>
+      </Container>
+    </KeyboardAvoidingView>
   )
-}
+}  

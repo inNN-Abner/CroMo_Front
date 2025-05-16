@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { TextInputStyle, TimeInputStyle } from './styles'
-import contacts from '~/../archives/contacts'
 import { useTheme } from '~/context/ThemeContext'
 import { theme } from '~/styles'
 import { WindowsStyle } from '../Windows/styles'
 import { Subcontainer } from '../Container'
 import { PageSubTitleStyle } from '../Text/styles'
-import { LoginTitle } from '../Text'
 
 interface InputProps {
     children?: string
@@ -25,27 +23,29 @@ interface InputProps {
     mgTop?: string
     mgLeft?: string
     bdRd?: string
-    wrap?: string;
-    fontSize?: string;
-    align?: string;
+    wrap?: string
+    fontSize?: string
+    align?: string
+    placeColor?: string
 
     onChangeText?: (text: string) => void
     setList?: (list: any[]) => void
 }
 
-export const TextInput = ({ children, editable, value, fontSize, align, secureTextEntry, onChangeText, placeholder, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
+export const TextInput = ({ children, editable, value, fontSize, align, secureTextEntry, onChangeText, placeholder, placeColor, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
 
   return (
     <TextInputStyle
       placeholder={placeholder}
+      placeholderTextColor={placeColor}
       keyboardType={'default'}
       onChangeText={onChangeText}
       wrap={wrap}
       value={value} 
-      placeholderTextColor={'gray'}
       editable={editable} 
       fontSize={fontSize}
       align={align}
+      multiline={true}
 
       mgTop={mgTop}
       mgLeft={mgLeft}
