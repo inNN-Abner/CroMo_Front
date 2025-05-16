@@ -334,7 +334,9 @@ export const SummarySchedule = ({ navigation }) => {
     </ScrollView>
     </Subcontainer>
     )}
-    else{return (
+    else
+    { return (
+    
     <Subcontainer mgLeft='0' maxHgt='75' align='flex-end'>
     <ScrollView>
 
