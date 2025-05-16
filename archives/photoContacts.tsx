@@ -11,7 +11,31 @@ export const imageMapContact: Record<number, any> = {
   10: require('~/../assets/Contato_10.png'),
   11: require('~/../assets/Contato_11.png'),
   12: require('~/../assets/Contato_12.png'),
-  13: require('~/../assets/Contato_13.png')
+  13: require('~/../assets/Contato_13.png'),
+  14: require('~/../assets/Contato_14.png'),
+  15: require('~/../assets/Contato_15.png'),
+  16: require('~/../assets/Contato_16.png'),
+  17: require('~/../assets/Contato_17.png'),
+  18: require('~/../assets/Contato_18.png'),
+  19: require('~/../assets/Contato_19.png'),
+  20: require('~/../assets/Contato_20.png'),
+  21: require('~/../assets/Contato_21.png'),
+  22: require('~/../assets/Contato_22.png'),
+  23: require('~/../assets/Contato_23.png'),
+  24: require('~/../assets/Contato_24.png'),
+  25: require('~/../assets/Contato_25.png'),
+  26: require('~/../assets/Contato_26.png'),
+  27: require('~/../assets/Contato_27.png'),
+  28: require('~/../assets/Contato_28.png'),
+  29: require('~/../assets/Contato_29.png'),
+  30: require('~/../assets/Contato_30.png'),
+  31: require('~/../assets/Contato_31.png'),
+  32: require('~/../assets/Contato_32.png'),
+  33: require('~/../assets/Contato_33.png'),
+  34: require('~/../assets/Contato_34.png'),
+  35: require('~/../assets/Contato_35.png'),
+  36: require('~/../assets/Contato_36.png'),
+  37: require('~/../assets/Contato_37.png'),
 }
 
-export const defaultPhotoContact = require('~/../assets/Contato_13.png')
+export const defaultPhotoContact = require('~/../assets/Contato_37.png')
