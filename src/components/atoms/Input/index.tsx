@@ -12,6 +12,7 @@ interface InputProps {
     placeholder: string
     keyboardType?: string
     secureTextEntry?: boolean
+    mtline?: boolean
     editable?: boolean
   
     bgColor?: string
@@ -32,7 +33,7 @@ interface InputProps {
     setList?: (list: any[]) => void
 }
 
-export const TextInput = ({ children, editable, value, fontSize, align, secureTextEntry, onChangeText, placeholder, placeColor, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
+export const TextInput = ({ children, editable, value, fontSize, align, secureTextEntry, mtline, onChangeText, placeholder, placeColor, bgColor, color,  wdt, hgt, pddLeft, mgTop, mgLeft, bdRd, wrap }: InputProps) => {
 
   return (
     <TextInputStyle
@@ -45,7 +46,7 @@ export const TextInput = ({ children, editable, value, fontSize, align, secureTe
       editable={editable} 
       fontSize={fontSize}
       align={align}
-      multiline={true}
+      multiline={mtline}
 
       mgTop={mgTop}
       mgLeft={mgLeft}
