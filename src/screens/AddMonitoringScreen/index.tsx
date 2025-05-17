@@ -188,6 +188,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
                 fontSize='16'
                 placeColor='white'
                 placeholder='Insira as suas dúvidas para o monitor ficar ciente'
+                mtline={true}
               />
   
               <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0' bg='pruple'>
