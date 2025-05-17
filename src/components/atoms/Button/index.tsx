@@ -230,6 +230,30 @@ export const FormButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, 
   )
 }
 
+export const ListButtonText = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+      bg={bg}
+      wdt={wdt}
+      hgt={hgt}
+      bdRd={bdRd}
+      mgLeft={mgLeft}
+      mgRight={mgRight}
+      mgTop={mgTop}
+      onPress={onPress}>
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
+            <Ionicons name="list-circle" size={24} color={'red'} />
+              <ButtonTextStyle
+                mgLeft='3'
+                color={color}
+                fontSize={fontSize}>
+                {label}
+              </ButtonTextStyle>
+          </Subcontainer> 
+    </StyledButtonStyle>
+  )
+}
+
 export const ListOptionButton = ({ source, align, justify, bdRd, wdt, hgt, mgTop, mgLeft, label, labelComponent, color, bg, fontSize, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle 
@@ -282,6 +306,30 @@ export const LogoutButton  = ({ wdt, hgt, bdRd, mgTop, mgLeft, onPress }: Button
         mgTop={mgTop}
         onPress={onPress}>
         <Ionicons name="log-out" size={36} color={'white'} />
+    </StyledButtonStyle>
+  )
+}
+
+export const PDFButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgRight={mgRight}
+        mgTop={mgTop}
+        onPress={onPress}>
+          <Subcontainer align='center' justify='center' dir='row' bg='darkRed' wdt='140' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
+            <MaterialIcons name="picture-as-pdf" size={22} color="#FFFFFF" />
+              <ButtonTextStyle
+                  mgLeft='10'
+                  color={color}
+                  fontSize={fontSize}>
+                  {label}
+              </ButtonTextStyle>
+          </Subcontainer>
     </StyledButtonStyle>
   )
 }
@@ -409,7 +457,7 @@ export const ViewButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, 
   )
 }
 
-export const PDFButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+export const ViewCommentButton  = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle
         bg={bg}
@@ -417,42 +465,9 @@ export const PDFButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, f
         hgt={hgt}
         bdRd={bdRd}
         mgLeft={mgLeft}
-        mgRight={mgRight}
         mgTop={mgTop}
         onPress={onPress}>
-          <Subcontainer align='center' justify='center' dir='row' bg='darkRed' wdt='140' hgt='20' mgTop='0' mgLeft='0' bdRd='10'>
-            <MaterialIcons name="picture-as-pdf" size={22} color="#FFFFFF" />
-              <ButtonTextStyle
-                  mgLeft='10'
-                  color={color}
-                  fontSize={fontSize}>
-                  {label}
-              </ButtonTextStyle>
-          </Subcontainer>
-    </StyledButtonStyle>
-  )
-}
-
-export const ListButtonText = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
-  return (
-    <StyledButtonStyle
-      bg={bg}
-      wdt={wdt}
-      hgt={hgt}
-      bdRd={bdRd}
-      mgLeft={mgLeft}
-      mgRight={mgRight}
-      mgTop={mgTop}
-      onPress={onPress}>
-      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
-            <Ionicons name="list-circle" size={24} color={'red'} />
-              <ButtonTextStyle
-                mgLeft='3'
-                color={color}
-                fontSize={fontSize}>
-                {label}
-              </ButtonTextStyle>
-          </Subcontainer> 
+        <MaterialCommunityIcons name="comment-question" size={17} color={'white'} />
     </StyledButtonStyle>
   )
 }

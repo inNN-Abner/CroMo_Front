@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CancelButton, CreateModal, InfoTextNoWrap, PageSubtitle, PageTitle, PDFButton, Photo, StylezedButton, Subcontainer, ViewButton, Windows } from '~/components'
+import { CancelButton, CreateModal, InfoTextNoWrap, PageSubtitle, PageTitle, PDFButton, Photo, StylezedButton, Subcontainer, ViewButton, ViewCommentButton, Windows } from '~/components'
 import { defaultPhotoContact, imageMapContact } from '~/../archives/photoContacts'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAgendamento } from '~/../archives/monitoringHours'
@@ -151,6 +151,17 @@ export const SummarySchedule = ({ navigation }) => {
         setTitleMessage('Desmarcar monitoria')
         setBodyMessage('Tem certeza que deseja cancelar o\nagendamento? Essa ação é irreversível!')
         handleOnPress()
+    }
+
+    const CreateModalComment = async () => {
+        setTitleMessage('Carregando mensagem...')
+        setBodyMessage('Por favor, aguarde.')
+        setOpenCreateModal(true)
+        setAlunos([]) // Evita visualização anterior
+
+        setTitleMessage('Mensagem do aluno')
+        setBodyMessage('Teste truncado')
+        setOpenCreateModal(true)
     }
 
     const CreateModalStudents = async (monitoriaId, materiaItem) => {
@@ -451,13 +462,22 @@ export const SummarySchedule = ({ navigation }) => {
             <ScrollView>
             {alunos.length > 0 ? (
                 alunos.map((aluno, index) => (
-                <PageSubtitle
-                    key={index}
-                    color='brisk'
-                    fontSize='14'
-                    mgBottom='5'
-                    children={`${aluno.nome} - RA: ${aluno.ra}`}
-                />
+                <Subcontainer bg='white' mgLeft='0'  mgTop='0' wdt='280' hgt='35' dir='row' justify='space-between'>
+                    <PageSubtitle
+                        key={index}
+                        alignSelf='center'
+                        color='brisk'
+                        fontSize='14'
+                        mgBottom='5'
+                        children={`${aluno.nome} - RA: ${aluno.ra}`}
+                    />
+                    <ViewCommentButton
+                        mgTop='0'
+                        wdt='25'
+                        hgt='25'
+                        onPress={CreateModalComment}
+                    /> 
+                </Subcontainer>
                 ))
             ) : (
                 <PageSubtitle color='brisk' fontSize='14'>
@@ -506,5 +526,5 @@ export const SummarySchedule = ({ navigation }) => {
         </CreateModal>
     </ScrollView>
     </Subcontainer>
-    )}
+    )}    
 }
