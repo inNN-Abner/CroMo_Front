@@ -457,7 +457,7 @@ export const ViewButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, 
   )
 }
 
-export const ViewCommentButton  = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress }: ButtonProps ) => {
+export const ViewCommentButton  = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle
         bg={bg}
@@ -466,6 +466,7 @@ export const ViewCommentButton  = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, onPress 
         bdRd={bdRd}
         mgLeft={mgLeft}
         mgTop={mgTop}
+        mgRight={mgRight}
         onPress={onPress}>
         <MaterialCommunityIcons name="comment-question" size={17} color={'white'} />
     </StyledButtonStyle>

@@ -19,6 +19,7 @@ export const SummarySchedule = ({ navigation }) => {
     const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
     const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)  
     const [openCreateModal, setOpenCreateModal] = useState(false)
+    const [openCreateModalComment, setOpenCreateModalComment] = useState(false)
     const [titleMessage, setTitleMessage] = useState('')
     const [bodyMessage, setBodyMessage] = useState('')
     const [selectedMonitoria, setSelectedMonitoria] = useState(null)
@@ -46,6 +47,10 @@ export const SummarySchedule = ({ navigation }) => {
 
     function handleOnPress() {
         setOpenCreateModal(!openCreateModal)
+    }
+
+    function handleOnPressComment() {
+        setOpenCreateModalComment(!openCreateModalComment)
     }
 
     const excluirMonitoria = async() => {
@@ -154,14 +159,9 @@ export const SummarySchedule = ({ navigation }) => {
     }
 
     const CreateModalComment = async () => {
-        setTitleMessage('Carregando mensagem...')
-        setBodyMessage('Por favor, aguarde.')
-        setOpenCreateModal(true)
-        setAlunos([]) // Evita visualização anterior
-
         setTitleMessage('Mensagem do aluno')
         setBodyMessage('Teste truncado')
-        setOpenCreateModal(true)
+        setOpenCreateModalComment(true)
     }
 
     const CreateModalStudents = async (monitoriaId, materiaItem) => {
@@ -290,22 +290,94 @@ export const SummarySchedule = ({ navigation }) => {
         </Subcontainer>
 
         <Subcontainer mgLeft='0' mgTop='5' bg='darkGreen' dir='row' maxHgt='27' bdRd='0' justify='flex-end'>
+            <ViewCommentButton
+                mgTop='5'
+                mgRight='5'
+                wdt='60'
+                hgt='40'
+                bdRd='10'
+                onPress={() => {
+                    CreateModalComment()
+                }}
+            />
+                
             <CancelButton
                 bg='everWhite'
                 wdt='215'
                 hgt='40'
                 mgTop='5'
                 mgRight='5'
-                bdRd='15'
+                bdRd='10'
                 color='darkRed'
                 label={'Desmarcar monitoria'}
                 fontSize='16'
-                onPress={() => CreateModalCancel(item.id)}
+                onPress={() => 
+                    CreateModalCancel(item.id)
+                }
             />
         </Subcontainer>
         </Windows>
         </React.Fragment>
         ))}
+
+        <CreateModal visible={openCreateModalComment} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
+                
+        <Subcontainer bg='white' align='center' justify='center' maxHgt='15' mgTop='0'>
+            <PageTitle mgLeft='0' color='brisk' fontSize='20'>{'Mensagem enviada'}</PageTitle>
+        </Subcontainer>
+
+        <Subcontainer
+            bg='white'
+            align='flex-start'
+            justify='flex-start'
+            hgt='180'
+            mgTop='5'
+            pdd='10'
+        >
+            <Subcontainer bg='gray' mgLeft='0'  mgTop='0' wdt='280' hgt='200' dir='row'>
+                <ScrollView>
+                    <PageSubtitle
+                        key={1}
+                        alignSelf='center'
+                        color='white'
+                        fontSize='16'
+                        mgBottom='15'
+                        mgTop='15'
+                        mgLeft='0'
+                        children={`Dúvidas do aluno gerado por professor incompetente!`}
+                    />
+                </ScrollView>
+            </Subcontainer>
+
+        </Subcontainer>
+
+        <Subcontainer
+            bg='white'
+            dir='row-reverse'
+            justify='center'
+            align='center'
+            mgLeft='0'
+            maxHgt='15'
+            mgTop='15'
+            pdd='0'
+        >
+
+        <StylezedButton
+            label='Fechar'
+            bg='white'
+            color='darkRed'
+            wdt='140'
+            hgt='40'
+            bdRd='10'
+            fontSize='16'
+            mgTop='0'
+            onPress={() => {
+                handleOnPressComment()
+            }}
+        />
+        </Subcontainer>
+        </CreateModal>
+
 
         <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
 
@@ -444,11 +516,70 @@ export const SummarySchedule = ({ navigation }) => {
         </Windows>
         </React.Fragment>
         ))}
+        
+        <CreateModal visible={openCreateModalComment} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
+        
+        <Subcontainer bg='white' align='center' justify='center' maxHgt='15' mgTop='0'>
+            <PageTitle mgLeft='0' color='brisk' fontSize='20'>{titleMessage}</PageTitle>
+        </Subcontainer>
+
+        <Subcontainer
+            bg='white'
+            align='flex-start'
+            justify='flex-start'
+            hgt='180'
+            mgTop='5'
+            pdd='10'
+        >
+            <Subcontainer bg='gray' mgLeft='0'  mgTop='0' wdt='280' hgt='200' dir='row' justify='space-between'>
+                <ScrollView>
+                    <PageSubtitle
+                        key={1}
+                        alignSelf='center'
+                        color='white'
+                        fontSize='16'
+                        mgBottom='15'
+                        mgTop='15'
+                        mgLeft='0'
+                        children={`${'Dúvidas do aluno gerado por professor incompetente!'}`}
+                    />
+                </ScrollView>
+            </Subcontainer>
+
+        </Subcontainer>
+
+        <Subcontainer
+            bg='white'
+            dir='row-reverse'
+            justify='center'
+            align='center'
+            mgLeft='0'
+            maxHgt='15'
+            mgTop='15'
+            pdd='0'
+        >
+
+        <StylezedButton
+            label='Voltar'
+            bg='white'
+            color='darkRed'
+            wdt='140'
+            hgt='40'
+            bdRd='10'
+            fontSize='16'
+            mgTop='0'
+            onPress={() => {
+                handleOnPressComment()
+                setTitleMessage('Lista de alunos')
+            }}
+        />
+        </Subcontainer>
+        </CreateModal>
 
         <CreateModal visible={openCreateModal} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
         
         <Subcontainer bg='white' align='center' justify='center' maxHgt='15' mgTop='0'>
-            <PageTitle color='brisk' fontSize='20'>{titleMessage}</PageTitle>
+            <PageTitle mgLeft='0' color='brisk' fontSize='20'>{titleMessage}</PageTitle>
         </Subcontainer>
 
         <Subcontainer
@@ -462,20 +593,24 @@ export const SummarySchedule = ({ navigation }) => {
             <ScrollView>
             {alunos.length > 0 ? (
                 alunos.map((aluno, index) => (
-                <Subcontainer bg='white' mgLeft='0'  mgTop='0' wdt='280' hgt='35' dir='row' justify='space-between'>
+                <Subcontainer bg='brisk' mgLeft='0'  mgTop='3' wdt='280' hgt='35' dir='row' justify='space-between'>
                     <PageSubtitle
                         key={index}
                         alignSelf='center'
-                        color='brisk'
+                        color='white'
                         fontSize='14'
                         mgBottom='5'
+                        mgLeft='10'
                         children={`${aluno.nome} - RA: ${aluno.ra}`}
                     />
                     <ViewCommentButton
-                        mgTop='0'
+                        mgTop='5'
+                        mgRight='5'
                         wdt='25'
                         hgt='25'
-                        onPress={CreateModalComment}
+                        onPress={() => {
+                            CreateModalComment()
+                        }}
                     /> 
                 </Subcontainer>
                 ))
@@ -501,7 +636,7 @@ export const SummarySchedule = ({ navigation }) => {
             label='Baixar'
             bg='darkRed'
             color='everWhite'
-            wdt='140'
+            wdt='150'
             hgt='40'
             bdRd='10'
             mgTop='0'
@@ -513,18 +648,18 @@ export const SummarySchedule = ({ navigation }) => {
             label='Fechar'
             bg='white'
             color='darkRed'
-            wdt='140'
+            wdt='130'
             hgt='40'
             bdRd='10'
-            fontSize='16'
             mgTop='0'
+            fontSize='16'
             onPress={handleOnPress}
-            mgRight='10'
         />
         </Subcontainer>
 
         </CreateModal>
     </ScrollView>
+
     </Subcontainer>
     )}    
 }
