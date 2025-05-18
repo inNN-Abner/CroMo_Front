@@ -8,6 +8,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
   const [openModal, setOpenModal] = useState(false)
   const [step, setStep] = useState(1)
   const [selectedDate, setSelectedDate] = useState(null)
+  const [comment, setComment] = useState('')
   const [selectedMonitoria, setSelectedMonitoria] = useState(null)
   const [monitoriaIdToConfirm, setMonitoriaIdToConfirm] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
@@ -82,7 +83,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
       console.log("Enviando para API:", {
         idMonitoria: monitoriaAgendada,
         data: selectedDate,
-        obs: ''
+        obs: comment || ''
       })
       
       const response = await fetch(`${API_URL}/agendamento`, {
@@ -94,7 +95,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
         body: JSON.stringify({
           idMonitoria: monitoriaAgendada,
           data: selectedDate.replace(/\//g, "-"),
-          obs: ''
+          obs: comment || ''
         })
       })
   
@@ -120,6 +121,7 @@ export const AddMonitoringScreen = ({ navigation }) => {
       setSelectedMonitoria(null)
       setSelectedTime(null)
       setOpenModal(false)
+      setComment('')
     })
     return unsubscribe
   }, [navigation])
@@ -187,8 +189,10 @@ export const AddMonitoringScreen = ({ navigation }) => {
                 color='white'
                 fontSize='16'
                 placeColor='white'
-                placeholder='Insira as suas dúvidas para o monitor ficar ciente'
+                placeholder='Insira uma mensagem para o monitor. Pode ser uma observação, uma dúvida específica, etc'
                 mtline={true}
+                value={comment}
+                onChangeText={setComment}              
               />
   
               <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0' bg='pruple'>

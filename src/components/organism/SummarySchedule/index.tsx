@@ -18,13 +18,14 @@ const Clock = require( '../../../../assets/Clock.png')
 export const SummarySchedule = ({ navigation }) => {
     const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
     const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)  
+    const { monitoring, isLoaded } = useAgendamento()
     const [openModalUncheck, setOpenModalUncheck] = useState(false)
     const [openModalComment, setOpenModalComment] = useState(false)
     const [openModalList, setOpenModalList] = useState(false)
     const [titleMessage, setTitleMessage] = useState('')
     const [bodyMessage, setBodyMessage] = useState('')
+    const [comentarioAluno, setComentarioAluno] = useState('')
     const [selectedMonitoria, setSelectedMonitoria] = useState(null)
-    const { monitoring, isLoaded } = useAgendamento()
     const [userType, setUserType] = useState(null)
     const [alunos, setAlunos] = useState([])
     const [dataAgendamento, setDataAgendamento] = useState(null)
@@ -163,11 +164,38 @@ export const SummarySchedule = ({ navigation }) => {
         handleOnPressUncheck()
     }
 
-    const CreateModalComment = async () => {
-        setTitleMessage('Mensagem do aluno')
-        setBodyMessage('Mensagem do body')
-        setOpenModalComment(true)
-    }
+    const CreateModalComment = async (agendamentoId) => {
+        try {
+          const token = await SecureStore.getItemAsync('token')
+      
+          const response = await fetch(`${API_URL}/agendamento/alunosAgendados`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token || ''
+            },
+            body: JSON.stringify({ id: Number(agendamentoId) })
+          })
+      
+          const result = await response.json()
+          console.log("Resposta da API:", result)
+      
+          if (!response.ok || !result || result.length === 0) {
+            setComentarioAluno('Nenhuma mensagem enviada.')
+          } else {
+            const aluno = result.find(aluno => aluno.id) // ou o primeiro: result[0]
+            setComentarioAluno(aluno?.obs?.trim() || 'Nenhuma mensagem enviada.')
+          }
+      
+          setTitleMessage('Mensagem do aluno')
+          setOpenModalComment(true)
+        } catch (error) {
+          console.error('Erro ao buscar comentário:', error)
+          setComentarioAluno('Erro ao carregar comentário.')
+          setTitleMessage('Mensagem do aluno')
+          setOpenModalComment(true)
+        }
+      }      
 
     const CreateModalStudents = async (monitoriaId, materiaItem) => {
         setOpenModalList(false) // Garante que ele feche antes de abrir de novo
@@ -313,7 +341,7 @@ export const SummarySchedule = ({ navigation }) => {
                 hgt='40'
                 bdRd='10'
                 onPress={() => {
-                    CreateModalComment()
+                    CreateModalComment(item.id)
                 }}
             />
                 
@@ -381,7 +409,7 @@ export const SummarySchedule = ({ navigation }) => {
                         mgBottom='15'
                         mgTop='15'
                         mgLeft='0'
-                        children={`${'Dúvidas do aluno gerado por professor incompetente!'}`}
+                        children={comentarioAluno}
                     />
                 </ScrollView>
             </Subcontainer>
@@ -487,9 +515,11 @@ export const SummarySchedule = ({ navigation }) => {
                         wdt='25'
                         hgt='25'
                         onPress={() => {
-                            CreateModalComment()
+                            setTitleMessage('Mensagem do aluno')
+                            setComentarioAluno(aluno.obs || 'Nenhuma mensagem enviada.')
+                            setOpenModalComment(true)
                         }}
-                    /> 
+                    />
                 </Subcontainer>
                 ))
             ) : (
