@@ -18,8 +18,9 @@ const Clock = require( '../../../../assets/Clock.png')
 export const SummarySchedule = ({ navigation }) => {
     const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
     const { handleDelete, handleSubmit } = useAgendaActions(loadUserSchedule)  
-    const [openCreateModal, setOpenCreateModal] = useState(false)
-    const [openCreateModalComment, setOpenCreateModalComment] = useState(false)
+    const [openModalUncheck, setOpenModalUncheck] = useState(false)
+    const [openModalComment, setOpenModalComment] = useState(false)
+    const [openModalList, setOpenModalList] = useState(false)
     const [titleMessage, setTitleMessage] = useState('')
     const [bodyMessage, setBodyMessage] = useState('')
     const [selectedMonitoria, setSelectedMonitoria] = useState(null)
@@ -45,12 +46,16 @@ export const SummarySchedule = ({ navigation }) => {
         loadUserType()
       }, [])
 
-    function handleOnPress() {
-        setOpenCreateModal(!openCreateModal)
+    function handleOnPressUncheck() {
+        setOpenModalUncheck(!openModalUncheck)
     }
 
     function handleOnPressComment() {
-        setOpenCreateModalComment(!openCreateModalComment)
+        setOpenModalComment(!openModalComment)
+    }
+
+    function handleOnPressList() {
+        setOpenModalList(!openModalList)
     }
 
     const excluirMonitoria = async() => {
@@ -151,28 +156,28 @@ export const SummarySchedule = ({ navigation }) => {
         }
     }
 
-    const CreateModalCancel = (monitoria) => {
+    const CreateModalUncheck = (monitoria) => {
         setSelectedMonitoria(monitoria)
         setTitleMessage('Desmarcar monitoria')
         setBodyMessage('Tem certeza que deseja cancelar o\nagendamento? Essa ação é irreversível!')
-        handleOnPress()
+        handleOnPressUncheck()
     }
 
     const CreateModalComment = async () => {
         setTitleMessage('Mensagem do aluno')
-        setBodyMessage('Teste truncado')
-        setOpenCreateModalComment(true)
+        setBodyMessage('Mensagem do body')
+        setOpenModalComment(true)
     }
 
     const CreateModalStudents = async (monitoriaId, materiaItem) => {
-        setOpenCreateModal(false) // Garante que ele feche antes de abrir de novo
+        setOpenModalList(false) // Garante que ele feche antes de abrir de novo
         setSelectedMonitoria(monitoriaId)
         setMateria(materiaItem)
         setAlunos([]) // Evita visualização anterior
       
         setTitleMessage('Carregando alunos...')
         setBodyMessage('Por favor, aguarde.')
-        setOpenCreateModal(true)
+        setOpenModalList(true)
 
         const result = await consultarAlunos(monitoriaId)
         if (!result || result.length === 0) {
@@ -184,7 +189,7 @@ export const SummarySchedule = ({ navigation }) => {
         setDataAgendamento(result[0].data)
         setTitleMessage('Lista de alunos')
         setBodyMessage(result.map(aluno => `${aluno.nome} - RA: ${aluno.ra}`).join('\n'))
-        setOpenCreateModal(true)
+        setOpenModalList(true)
       }
 
     if (!userType) {
@@ -204,7 +209,9 @@ export const SummarySchedule = ({ navigation }) => {
             </Subcontainer>
         )
     }
-    else if (userType == "Aluno"){return (
+    else 
+    { return (
+    
     <Subcontainer mgLeft='40' maxHgt='75' align='center'>
     <ScrollView>
 
@@ -276,19 +283,28 @@ export const SummarySchedule = ({ navigation }) => {
 
         </Subcontainer>
 
-        <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
-            <Photo
-                source={imageMapContact[item.photo || defaultPhotoContact]}
-                wdt='35'
-                hgt='35'
-                mgTop='0'
-                mgLeft='15'
-            />
-            <PageSubtitle color='everWhite'>
-                {item.monitorName}
-            </PageSubtitle>
-        </Subcontainer>
+        {userType == 'Aluno' ? (
+            <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
+                <Photo
+                    source={imageMapContact[item.photo || defaultPhotoContact]}
+                    wdt='35'
+                    hgt='35'
+                    mgTop='0'
+                    mgLeft='15'
+                />
+                <PageSubtitle color='everWhite'>
+                    {item.monitorName}
+                </PageSubtitle>
+            </Subcontainer>
+        ) : (
+            <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
+                <PageSubtitle color='everWhite'>
+                    {item.quantidade}
+                </PageSubtitle>
+            </Subcontainer>
+        )}
 
+        {userType == 'Aluno' ? (
         <Subcontainer mgLeft='0' mgTop='5' bg='darkGreen' dir='row' maxHgt='27' bdRd='0' justify='flex-end'>
             <ViewCommentButton
                 mgTop='5'
@@ -312,191 +328,11 @@ export const SummarySchedule = ({ navigation }) => {
                 label={'Desmarcar monitoria'}
                 fontSize='16'
                 onPress={() => 
-                    CreateModalCancel(item.id)
+                    CreateModalUncheck(item.id)
                 }
             />
         </Subcontainer>
-        </Windows>
-        </React.Fragment>
-        ))}
-
-        <CreateModal visible={openCreateModalComment} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
-                
-        <Subcontainer bg='white' align='center' justify='center' maxHgt='15' mgTop='0'>
-            <PageTitle mgLeft='0' color='brisk' fontSize='20'>{'Mensagem enviada'}</PageTitle>
-        </Subcontainer>
-
-        <Subcontainer
-            bg='white'
-            align='flex-start'
-            justify='flex-start'
-            hgt='180'
-            mgTop='5'
-            pdd='10'
-        >
-            <Subcontainer bg='gray' mgLeft='0'  mgTop='0' wdt='280' hgt='200' dir='row'>
-                <ScrollView>
-                    <PageSubtitle
-                        key={1}
-                        alignSelf='center'
-                        color='white'
-                        fontSize='16'
-                        mgBottom='15'
-                        mgTop='15'
-                        mgLeft='0'
-                        children={`Dúvidas do aluno gerado por professor incompetente!`}
-                    />
-                </ScrollView>
-            </Subcontainer>
-
-        </Subcontainer>
-
-        <Subcontainer
-            bg='white'
-            dir='row-reverse'
-            justify='center'
-            align='center'
-            mgLeft='0'
-            maxHgt='15'
-            mgTop='15'
-            pdd='0'
-        >
-
-        <StylezedButton
-            label='Fechar'
-            bg='white'
-            color='darkRed'
-            wdt='140'
-            hgt='40'
-            bdRd='10'
-            fontSize='16'
-            mgTop='0'
-            onPress={() => {
-                handleOnPressComment()
-            }}
-        />
-        </Subcontainer>
-        </CreateModal>
-
-
-        <CreateModal visible={openCreateModal} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
-
-            <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{titleMessage}</PageTitle>
-            <PageSubtitle color='brisk' fontSize='15' mgLeft='5' alignSelf='center' >{bodyMessage}</PageSubtitle>
-            
-            <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
-                <StylezedButton
-                    label={'Desmarcar monitoria'}
-                    bg='darkRed'
-                    mgTop='27'
-                    wdt='160'
-                    hgt='40'
-                    bdRd='10'
-                    fontSize='16'
-                    onPress={() => {
-                        excluirMonitoria()
-                        loadUserSchedule()
-                        handleOnPress()
-                       // navigation.navigate('Monitoring')
-                    }}
-                />
-                <StylezedButton
-                    label={'Manter'}
-                    bg='white'
-                    color='darkRed'
-                    mgTop='27'
-                    mgLeft='-10'
-                    wdt='120'
-                    hgt='40'
-                    bdRd='10'
-                    fontSize='16'
-                    onPress={handleOnPress}
-                />
-            </Subcontainer>
-        </CreateModal>
-    </ScrollView>
-    </Subcontainer>
-    )}
-    else
-    { return (
-    
-    <Subcontainer mgLeft='0' maxHgt='75' align='flex-end'>
-    <ScrollView>
-
-        {monitoring.map((item) => (
-            <React.Fragment key={item.id}>
-
-            <Windows 
-                bg='white'
-                hgt='50'
-                bdRdBL='0'
-                bdRdBR='0'
-                mgTop='10'
-                justify='flex-end'
-            >
-                <Subcontainer dir='row' bg='white' mgTop='0' bdRd='100' align='center'>
-                    <Photo
-                        hgt='40'
-                        wdt='40'
-                        mgTop='0'
-                        mgLeft='15'
-                        source={imageMap[item.icon || defaultPhoto]} 
-                    />
-                    <PageTitle
-                        mgTop='0'
-                        mgLeft='5'
-                        color='brisk'
-                    >{item.class}
-                    </PageTitle>
-                    </Subcontainer>
-                </Windows>
-
-                <Windows
-                    bg='darkGreen'
-                    mgTop='0'
-                    hgt='180'
-                    bdRdTL='0'
-                    bdRdTR='0'
-                    dir='column'
-                    align='flex-start'
-                >   
-            <Subcontainer mgLeft='0' mgTop='15' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
-                <Photo
-                    source={Calendar}
-                    wdt='35'
-                    hgt='35'
-                    mgTop='0'
-                    mgLeft='15'
-                    bdRd='0'
-                />
-                    <PageSubtitle color='everWhite'>
-                        {item.date}
-                    </PageSubtitle>
-                    </Subcontainer>
-
-            <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
-                <Photo
-                    source={Clock}
-                    wdt='35'
-                    hgt='35'
-                    mgTop='0'
-                    mgLeft='15'
-                    bdRd='0'
-                />
-
-            <PageSubtitle color='everWhite'>
-                {item.hour + ' || (' + item.locale + ')'}
-            </PageSubtitle>
-
-        </Subcontainer>
-
-        <Subcontainer mgLeft='0' mgTop='10' bg='darkGreen' dir='row' maxHgt='16' bdRd='0' align='center' justify='flex-start'>
-            <PageSubtitle color='everWhite'>
-                {item.quantidade}
-            </PageSubtitle>
-
-        </Subcontainer>
-
+        ) : (
         <Subcontainer mgLeft='0' mgTop='5' bg='darkGreen' dir='row' maxHgt='27' bdRd='0' justify='flex-end'>
             <ViewButton
                 bg='everWhite'
@@ -512,12 +348,16 @@ export const SummarySchedule = ({ navigation }) => {
                     CreateModalStudents(item.id, item.class)
                 }}
             />
+        
         </Subcontainer>
+        )}
         </Windows>
         </React.Fragment>
         ))}
-        
-        <CreateModal visible={openCreateModalComment} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
+    </ScrollView>
+
+    {/* Modal de COMENTÁRIO */}
+    <CreateModal visible={openModalComment} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
         
         <Subcontainer bg='white' align='center' justify='center' maxHgt='15' mgTop='0'>
             <PageTitle mgLeft='0' color='brisk' fontSize='20'>{titleMessage}</PageTitle>
@@ -574,10 +414,48 @@ export const SummarySchedule = ({ navigation }) => {
             }}
         />
         </Subcontainer>
-        </CreateModal>
-
-        <CreateModal visible={openCreateModal} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
+    </CreateModal>
         
+    {/* Modal de CANCELAR MONITORIA */}
+    <CreateModal visible={openModalUncheck} bg='white' bdRd='10' wdt='300' hgt='158' pdd='0'>
+
+        <PageTitle color='brisk' mgTop='-10' mgLeft='0' fontSize='20' >{titleMessage}</PageTitle>
+        <PageSubtitle color='brisk' fontSize='15' mgLeft='5' alignSelf='center' >{bodyMessage}</PageSubtitle>
+
+        <Subcontainer dir='row-reverse' bg='brisk' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='25'>
+            <StylezedButton
+                label={'Desmarcar monitoria'}
+                bg='darkRed'
+                mgTop='27'
+                wdt='160'
+                hgt='40'
+                bdRd='10'
+                fontSize='16'
+                onPress={() => {
+                    excluirMonitoria()
+                    loadUserSchedule()
+                    handleOnPressUncheck()
+                // navigation.navigate('Monitoring')
+                }}
+            />
+            <StylezedButton
+                label={'Manter'}
+                bg='white'
+                color='darkRed'
+                mgTop='27'
+                mgLeft='-10'
+                wdt='120'
+                hgt='40'
+                bdRd='10'
+                fontSize='16'
+                onPress={handleOnPressUncheck}
+            />
+        </Subcontainer>
+    </CreateModal>
+
+    {/* Modal de LISTA DE ALUNOS */}
+    <CreateModal visible={openModalList} bdRd='10' wdt='300' hgt='300' align='flex-end' justify='flex-start' pdd='0' bg='white'>
+    
         <Subcontainer bg='white' align='center' justify='center' maxHgt='15' mgTop='0'>
             <PageTitle mgLeft='0' color='brisk' fontSize='20'>{titleMessage}</PageTitle>
         </Subcontainer>
@@ -653,13 +531,11 @@ export const SummarySchedule = ({ navigation }) => {
             bdRd='10'
             mgTop='0'
             fontSize='16'
-            onPress={handleOnPress}
+            onPress={handleOnPressList}
         />
         </Subcontainer>
 
-        </CreateModal>
-    </ScrollView>
+    </CreateModal>
 
     </Subcontainer>
-    )}    
-}
+)}}
