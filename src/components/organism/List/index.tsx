@@ -57,3 +57,58 @@ export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ nav
         />
     )
 }
+
+{/*Alteração para tela de lista de monitorias*/}
+export const ListOfClass: React.FC<{ navigation: any; list: any[] }> = ({ navigation, list }) => {
+
+    return (       
+        <FlatList 
+            keyboardShouldPersistTaps="handled"
+            data={ list }
+            keyExtractor={(item) => item.id.toString()} 
+            renderItem={({ item }) => (
+        
+            <TouchableOpacity 
+                onPress={() => {
+                    navigation.navigate('ContactsDetail', {
+                        id: item.id,
+                        nome: item.nome,        
+                        teams: item.teamsUser,   
+                        idFoto: item.idFoto,      
+                        email: item.teamsEmail,
+                        tipo: item.tipo
+                    })
+                }}>
+                <ListContainer mgLeft='0'>
+                    
+                <Photo 
+                    source={imageMapContact[item.idFoto] ?? defaultPhotoContact} 
+                />
+                        <Subcontainer
+                            mgTop='0'
+                            bg='everWhite'
+                            mgLeft='0'
+                            justify='center'
+                            hgt='48'
+                            wdt='255'
+                        >
+                            <ContactText mgTop='-3'>
+                                {item.nome}
+                            </ContactText>
+
+                            <InfoText mgTop='-3'>
+                                {item.teamsUser}
+                            </InfoText>
+                            
+                            <InfoText >
+                                {item.teamsEmail}
+                            </InfoText>
+
+                        </Subcontainer>
+                    
+                </ListContainer>
+            </TouchableOpacity>  
+            )}
+        />
+    )
+}

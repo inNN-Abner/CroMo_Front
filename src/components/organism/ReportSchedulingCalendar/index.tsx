@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AddButtonText, AppointmentCalendar, Container, Headers, ListButtonText, PageSubtitle, PageTitle, Subcontainer  } from '~/components'
+import { AddButtonText, AppointmentCalendar, Container, Headers, ListButtonText, PageSubtitle, PageTitle, Subcontainer, ViewClassButton  } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 
 export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
@@ -63,6 +63,23 @@ export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigati
             onPress={async() => {
               navigation.navigate('SummarySchedule')
               await SecureStore.setItem("allAppointments", '1')
+            }}
+          />
+          
+{/*Alteração para tela de lista de monitorias*/}
+          <ViewClassButton
+            bg='brisk'
+            color='redDarkRed'
+            fontSize='18'
+            wdt='250'
+            hgt='25'
+            mgLeft='-40'
+            mgTop='13'
+            align='flex-start'
+            justify='flex-start'
+            label={'Ver matérias'}
+            onPress={async() => {
+              navigation.navigate('ClassList')
             }}
           />
         </Subcontainer> 

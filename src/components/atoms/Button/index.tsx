@@ -457,6 +457,31 @@ export const ViewButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, 
   )
 }
 
+{/*Alteração para tela de lista de monitorias*/}
+export const ViewClassButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+      bg={bg}
+      wdt={wdt}
+      hgt={hgt}
+      bdRd={bdRd}
+      mgLeft={mgLeft}
+      mgRight={mgRight}
+      mgTop={mgTop}
+      onPress={onPress}>
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
+            <Ionicons name="list-circle" size={24} color={'red'} />
+              <ButtonTextStyle
+                mgLeft='3'
+                color={color}
+                fontSize={fontSize}>
+                {label}
+              </ButtonTextStyle>
+          </Subcontainer> 
+    </StyledButtonStyle>
+  )
+}
+
 export const ViewCommentButton  = ({ bg, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, onPress }: ButtonProps ) => {
   return (
     <StyledButtonStyle
