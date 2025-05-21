@@ -16,6 +16,7 @@ interface Monitoria {
   monitorName: string
   date: string
   quantidade: string
+  obs: string
 }
 
 export const useAgendamento = () => { 

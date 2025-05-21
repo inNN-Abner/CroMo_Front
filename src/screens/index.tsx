@@ -1,6 +1,7 @@
 export * from './AddMonitoringScreen'
 export * from './AddClassScreen'
 export * from './ContactsScreen'
+export * from './ClassDetailScreen'
 export * from './ClassListScreen'
 export * from './HomeScreen'
 export * from './LoginScreen'

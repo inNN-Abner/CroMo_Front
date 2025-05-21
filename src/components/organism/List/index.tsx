@@ -3,6 +3,7 @@ import { FlatList } from 'react-native'
 import { TouchableOpacity } from 'react-native'
 import { ContactText, InfoText, ListContainer, Photo, Subcontainer } from '~/components/atoms'
 import { imageMapContact, defaultPhotoContact } from '~/../archives/photoContacts'
+import { defaultPhoto, imageMap } from '../../../../archives/photoMapper'
 
 export const ListOfContacts: React.FC<{ navigation: any; list: any[] }> = ({ navigation, list }) => {
 
@@ -70,19 +71,14 @@ export const ListOfClass: React.FC<{ navigation: any; list: any[] }> = ({ naviga
         
             <TouchableOpacity 
                 onPress={() => {
-                    navigation.navigate('ContactsDetail', {
-                        id: item.id,
-                        nome: item.nome,        
-                        teams: item.teamsUser,   
-                        idFoto: item.idFoto,      
-                        email: item.teamsEmail,
-                        tipo: item.tipo
+                    navigation.navigate('ClassDetail', {
+                        materiaId: item.id
                     })
                 }}>
                 <ListContainer mgLeft='0'>
                     
                 <Photo 
-                    source={imageMapContact[item.idFoto] ?? defaultPhotoContact} 
+                    source={imageMap[item.idFoto] ?? defaultPhoto} 
                 />
                         <Subcontainer
                             mgTop='0'
@@ -92,18 +88,9 @@ export const ListOfClass: React.FC<{ navigation: any; list: any[] }> = ({ naviga
                             hgt='48'
                             wdt='255'
                         >
-                            <ContactText mgTop='-3'>
+                            <ContactText mgTop='-3' fontSize='16' mgLeft='7'>
                                 {item.nome}
                             </ContactText>
-
-                            <InfoText mgTop='-3'>
-                                {item.teamsUser}
-                            </InfoText>
-                            
-                            <InfoText >
-                                {item.teamsEmail}
-                            </InfoText>
-
                         </Subcontainer>
                     
                 </ListContainer>

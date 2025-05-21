@@ -28,7 +28,7 @@ export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigati
         <PageTitle color='greenWhite'>Monitorias</PageTitle>
         <PageSubtitle color='greenWhite'>Meus agendamentos</PageSubtitle>
 
-        <Subcontainer align='center' justify='center' mgLeft='0' mgTop='40' hgt='380'>
+        <Subcontainer align='center' justify='center' mgLeft='0' mgTop='0' hgt='500'>
           <AppointmentCalendar navigation={ navigation }/>
 
         {userType == 'Aluno' && (
@@ -39,7 +39,7 @@ export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigati
             wdt='250'
             hgt='25'
             mgLeft='-40'
-            mgTop='7'
+            mgTop='10'
             align='flex-start'
             justify='flex-start'
             label={'Agendar monitoria'}

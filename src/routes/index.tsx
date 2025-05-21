@@ -6,7 +6,7 @@ import { useTheme } from '~/context/ThemeContext'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { ContactsScreen, HomeScreen, LoginScreen, AddMonitoringScreen, MonitorScheduleScreen, SummaryScheduleScreen, PerfilScreen, AddClassScreen, ClassListScreen } from '../screens'
+import { ContactsScreen, HomeScreen, LoginScreen, AddMonitoringScreen, MonitorScheduleScreen, SummaryScheduleScreen, PerfilScreen, AddClassScreen, ClassListScreen, ClassDetailScreen } from '../screens'
 import { ContactsDetailScreen } from '~/screens/ContactsDetailScreen'
 import { ReportSchedulingScreen } from '~/components/organism/ReportSchedulingCalendar'
 import { PerfilGrid } from '~/components'
@@ -68,6 +68,7 @@ const BottomRoute = () => {
             <Tab.Screen name='Monitoring' component={ReportSchedulingScreen} />
             <Tab.Screen name='Contacts' component={ContactsScreen} />
             <Tab.Screen name='ContactsDetail' component={ContactsDetailScreen} options={{ tabBarButton: () => null}} />
+            <Tab.Screen name='ClassDetail' component={ClassDetailScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='ClassList' component={ClassListScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='MonitorSchedule' component={MonitorScheduleScreen} options={{ tabBarButton: () => null}} />
             <Tab.Screen name='AddMonitoring' component={AddMonitoringScreen} options={{ tabBarButton: () => null}} />

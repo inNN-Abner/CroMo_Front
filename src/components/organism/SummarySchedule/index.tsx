@@ -183,7 +183,7 @@ export const SummarySchedule = ({ navigation }) => {
           if (!response.ok || !result || result.length === 0) {
             setComentarioAluno('Nenhuma mensagem enviada.')
           } else {
-            const aluno = result.find(aluno => aluno.id) // ou o primeiro: result[0]
+            const aluno = result.find(aluno => aluno.id)
             setComentarioAluno(aluno?.obs?.trim() || 'Nenhuma mensagem enviada.')
           }
       

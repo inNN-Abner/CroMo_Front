@@ -80,3 +80,26 @@ export const ContactsDetailGrid = ({ navigation }) => {
         </>
     )
 }
+
+export const ClassDetailGrid = ({ monitorias, navigation }) => {
+    const { user } = useUser()
+
+    return (
+      <>
+        <FlatList
+          data={monitorias}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <ListContainer mgTop='-3' mgLeft='00' bg='darkGreen' dir='row'>
+              <TableGrid fontSize='11' color='white'>{item.diaSemana}</TableGrid>
+              
+              <TableGrid fontSize='14' wdt='140' fontFamily='regular'>
+                <Text style={{ fontWeight: 'bold' }}>{item.local?.nome || 'Local não definido'}</Text>{'\n'}
+                {item.horario}
+              </TableGrid>
+            </ListContainer>
+          )}
+        />
+      </>
+    )
+  }  

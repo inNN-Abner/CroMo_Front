@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API_URL } from '~/configs/config'
-import { ListOfClass, ListOfContacts } from '~/components/organism/List'
+import { ListOfClass } from '~/components/organism/List'
 import { Container, Subcontainer } from '~/components/atoms/Container'
 import { Headers, PageSubtitle, PageTitle, SearchInput, Windows } from '~/components/'
 import * as SecureStore from 'expo-secure-store'
@@ -14,7 +14,7 @@ export const ClassListScreen: React.FC<{ navigation: any }> = ({ navigation }) =
     const fetchMaterias = async () => {
       try {
         const token = await SecureStore.getItemAsync("token")
-        const response = await axios.get(`${API_URL}/materia/materias/`, {
+        const response = await axios.get(`${API_URL}/materias`, {
           headers: {
             'x-access-token': token || ''
           }
@@ -34,7 +34,7 @@ export const ClassListScreen: React.FC<{ navigation: any }> = ({ navigation }) =
     <Container>
      <Headers />
 
-      <PageTitle>Tela de monitorias</PageTitle>
+      <PageTitle>Tela de matérias</PageTitle>
       <PageSubtitle>Lista de matérias de monitorias</PageSubtitle>
         
       <Subcontainer align='center' mgLeft='0' maxHgt='77'>
