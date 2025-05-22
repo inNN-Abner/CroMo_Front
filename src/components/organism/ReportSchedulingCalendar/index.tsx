@@ -33,12 +33,12 @@ export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigati
 
         {userType == 'Aluno' && (
           <AddButtonText
-            bg='brisk'
-            color='redDarkRed'
+            bg='darkRed'
+            color='everWhite'
             fontSize='18'
             wdt='250'
-            hgt='25'
-            mgLeft='-40'
+            hgt='35'
+            mgLeft='-60'
             mgTop='10'
             align='flex-start'
             justify='flex-start'
@@ -50,13 +50,13 @@ export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigati
           )
         }
           <ListButtonText
-            bg='brisk'
-            color='redDarkRed'
+            bg='darkRed'
+            color='everWhite'
             fontSize='18'
             wdt='250'
-            hgt='25'
-            mgLeft='-40'
-            mgTop='13'
+            hgt='35'
+            mgLeft='-60'
+            mgTop='10'
             align='flex-start'
             justify='flex-start'
             label={'Visualizar agendamentos'}
@@ -68,13 +68,13 @@ export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigati
           
 {/*Alteração para tela de lista de monitorias*/}
           <ViewClassButton
-            bg='brisk'
-            color='redDarkRed'
+            bg='darkRed'
+            color='everWhite'
             fontSize='18'
             wdt='250'
-            hgt='25'
-            mgLeft='-40'
-            mgTop='13'
+            hgt='35'
+            mgLeft='-60'
+            mgTop='10'
             align='flex-start'
             justify='flex-start'
             label={'Ver matérias'}
