@@ -7,17 +7,28 @@ import { Container, Windows, Subcontainer, HeaderText, Headers, PageTitle, PageS
 export const ClassDetailScreen = ({ route, navigation }) => {
   const { materiaId } = route.params
   const [monitorias, setMonitorias] = useState([])
+  const [monitorNome, setMonitorNome] = useState('')
+  const [monitorEmail, setMonitorEmail] = useState('')
 
   useEffect(() => {
     const fetchMonitorias = async () => {
     console.log("ID da matéria:", materiaId)
       try {
         const token = await SecureStore.getItemAsync('token')
-        const response = await axios.get(`${API_URL}/materias/${materiaId}/monitorias`, {
+        const response = await axios.post(`${API_URL}/monitoria/showAll`,
+        { idMateria: materiaId },
+        {
           headers: {
             'x-access-token': token || '',
-          }
-        })
+          },
+        }
+      )
+      const monitor = response.data[0].monitorNome
+      const monitorEmail = response.data[0].monitorEmail
+
+      setMonitorNome(monitor)
+      setMonitorEmail(monitorEmail)
+
         setMonitorias(response.data)
       } catch (error) {
         console.error('Erro ao buscar monitorias:', error)
@@ -35,7 +46,7 @@ export const ClassDetailScreen = ({ route, navigation }) => {
 
       <Subcontainer align='center' mgLeft='0' mgTop='0' maxHgt='85'>
         <Windows bg='darkGreen' align='center' justify='flex-start' dir='column'>
-          <InfoCard route={route} />
+          <InfoCard route={route} monitor={monitorNome} email={monitorEmail} />
 
           <HeaderText mgTop='5' mgLeft='12' color='lightGray' fontSize='16'>
             Detalhes da monitoria
@@ -47,7 +58,7 @@ export const ClassDetailScreen = ({ route, navigation }) => {
                 Nenhuma monitoria encontrada.
               </HeaderText>
             ) : (
-                <ClassDetailGrid monitorias={monitorias} navigation={navigation}/>
+                <ClassDetailGrid monitorias={monitorias} navigation={navigation} />
             )}
           </Windows>
         </Windows>

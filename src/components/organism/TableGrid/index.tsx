@@ -84,17 +84,29 @@ export const ContactsDetailGrid = ({ navigation }) => {
 export const ClassDetailGrid = ({ monitorias, navigation }) => {
     const { user } = useUser()
 
+    function formatWeekDay(day: string): string {
+    const map: Record<string, string> = {
+        "segunda-feira": "SEG",
+        "terça-feira": "TER",
+        "quarta-feira": "QUA",
+        "quinta-feira": "QUI",
+        "sexta-feira": "SEX",
+        "sábado": "SAB",
+    }
+    return (map[day.toLowerCase()]) || day
+    }
+
     return (
       <>
         <FlatList
           data={monitorias}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
+          renderItem={({ item }) =>  (
             <ListContainer mgTop='-3' mgLeft='00' bg='darkGreen' dir='row'>
-              <TableGrid fontSize='11' color='white'>{item.diaSemana}</TableGrid>
+              <TableGrid fontSize='11' color='white'>{formatWeekDay(item.dia_semana.toString())}</TableGrid>
               
               <TableGrid fontSize='14' wdt='140' fontFamily='regular'>
-                <Text style={{ fontWeight: 'bold' }}>{item.local?.nome || 'Local não definido'}</Text>{'\n'}
+                <Text style={{ fontWeight: 'bold' }}>{item.local || 'Local não definido'}</Text>{'\n'}
                 {item.horario}
               </TableGrid>
             </ListContainer>

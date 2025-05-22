@@ -72,7 +72,9 @@ export const ListOfClass: React.FC<{ navigation: any; list: any[] }> = ({ naviga
             <TouchableOpacity 
                 onPress={() => {
                     navigation.navigate('ClassDetail', {
-                        materiaId: item.id
+                        materiaId: item.id,
+                        nome: item.nome, 
+                        idFoto: item.idFoto
                     })
                 }}>
                 <ListContainer mgLeft='0'>
