@@ -106,10 +106,10 @@ export const AddButtonText = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRigh
       mgRight={mgRight}
       mgTop={mgTop}
       onPress={onPress}>
-      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
-            <Ionicons name="add-circle" size={24} color={'red'} />
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='darkRed' wdt='240' hgt='25' mgTop='0' mgLeft='5' bdRd='10'>
+            <Ionicons name="add-circle" size={24} color={'white'} />
               <ButtonTextStyle
-                mgLeft='3'
+                mgLeft='5'
                 color={color}
                 fontSize={fontSize}>
                 {label}
@@ -241,15 +241,15 @@ export const ListButtonText = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRig
       mgRight={mgRight}
       mgTop={mgTop}
       onPress={onPress}>
-      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
-            <Ionicons name="list-circle" size={24} color={'red'} />
-              <ButtonTextStyle
-                mgLeft='3'
-                color={color}
-                fontSize={fontSize}>
-                {label}
-              </ButtonTextStyle>
-          </Subcontainer> 
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='darkRed' wdt='240' hgt='25' mgTop='0' mgLeft='5' bdRd='10'>
+        <Ionicons name="list-circle" size={24} color={'white'} />
+          <ButtonTextStyle
+            mgLeft='3'
+            color={color}
+            fontSize={fontSize}>
+            {label}
+          </ButtonTextStyle>
+        </Subcontainer> 
     </StyledButtonStyle>
   )
 }
@@ -469,8 +469,8 @@ export const ViewClassButton = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRi
       mgRight={mgRight}
       mgTop={mgTop}
       onPress={onPress}>
-      <Subcontainer align='center' justify='flex-start' dir='row' bg='brisk' wdt='250' hgt='30' mgTop='0' mgLeft='0' bdRd='10'>
-            <MaterialCommunityIcons name="book-search" size={24} color={'red'} />
+      <Subcontainer align='center' justify='flex-start' dir='row' bg='darkRed' wdt='240' hgt='25' mgTop='0' mgLeft='5' bdRd='10'>
+        <MaterialCommunityIcons name="book-search" size={24} color={'white'} />
               <ButtonTextStyle
                 mgLeft='3'
                 color={color}
