@@ -43,7 +43,7 @@ export const IdentificationCard = ({ route }) => {
 }
 
 {/*Alteração para tela de lista de monitorias*/}
-export const InfoCard = ({ route, monitor, email }) => {
+export const InfoCard = ({ route, monitor, email, teams }) => {
     const { nome, idFoto } = route.params
     const fontScale = PixelRatio.getFontScale()
     const cardHeight = fontScale > 1.1 ? '185' : '155'
@@ -66,7 +66,7 @@ export const InfoCard = ({ route, monitor, email }) => {
           justify='center'
           bg='white'
         >
-          <ContactText color='whiteGreen' fontSize='12' mgTop='-5'>
+          <ContactText color='whiteGreen' fontSize='14' mgTop='0'>
             Matéria:
           </ContactText>
           <InfoText
@@ -76,7 +76,7 @@ export const InfoCard = ({ route, monitor, email }) => {
             children={nome}
           />
   
-          <ContactText color='whiteGreen' fontSize='12' mgTop='-5'>
+          <ContactText color='whiteGreen' fontSize='14' mgTop='7'>
             Monitor responsável:
           </ContactText>
           <InfoText
@@ -86,7 +86,7 @@ export const InfoCard = ({ route, monitor, email }) => {
             children={monitor || 'N/A'}
           />
   
-          <ContactText color='whiteGreen' fontSize='12' mgTop='5'>
+          <ContactText color='whiteGreen' fontSize='14' mgTop='7'>
             E-mail do monitor:
           </ContactText>
           <InfoText
@@ -95,6 +95,17 @@ export const InfoCard = ({ route, monitor, email }) => {
             mgTop='-3'
             children={email || 'N/A'}
           />
+
+          <ContactText color='whiteGreen' fontSize='14' mgTop='7'>
+            Teams do monitor:
+          </ContactText>
+          <InfoText
+            color='whiteGreen'
+            fontWgt='normal'
+            mgTop='-3'
+            children={teams || 'N/A'}
+          />
+
         </Subcontainer>
       </Windows>
     )

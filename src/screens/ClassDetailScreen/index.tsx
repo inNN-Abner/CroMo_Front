@@ -9,6 +9,7 @@ export const ClassDetailScreen = ({ route, navigation }) => {
   const [monitorias, setMonitorias] = useState([])
   const [monitorNome, setMonitorNome] = useState('')
   const [monitorEmail, setMonitorEmail] = useState('')
+  const [monitorTeams, setMonitorTeams] = useState('')
 
   useEffect(() => {
     const fetchMonitorias = async () => {
@@ -25,9 +26,11 @@ export const ClassDetailScreen = ({ route, navigation }) => {
       )
       const monitor = response.data[0].monitorNome
       const monitorEmail = response.data[0].monitorEmail
+      const monitorTeams = response.data[0].monitorTeams
 
       setMonitorNome(monitor)
       setMonitorEmail(monitorEmail)
+      setMonitorTeams(monitorTeams)
 
         setMonitorias(response.data)
       } catch (error) {
@@ -46,13 +49,13 @@ export const ClassDetailScreen = ({ route, navigation }) => {
 
       <Subcontainer align='center' mgLeft='0' mgTop='0' maxHgt='85'>
         <Windows bg='darkGreen' align='center' justify='flex-start' dir='column'>
-          <InfoCard route={route} monitor={monitorNome} email={monitorEmail} />
+          <InfoCard route={route} monitor={monitorNome} email={monitorEmail} teams={monitorTeams}/>
 
           <HeaderText mgTop='5' mgLeft='12' color='lightGray' fontSize='16'>
-            Detalhes da monitoria
+            Horário e local
           </HeaderText>
 
-          <Windows bg='everWhite' align='flex-start' dir='column' mgTop='10'>
+          <Windows bg='darkGreen' align='flex-start' dir='column' mgTop='10'>
             {monitorias.length === 0 ? (
               <HeaderText mgLeft='10' color='lightGray'>
                 Nenhuma monitoria encontrada.

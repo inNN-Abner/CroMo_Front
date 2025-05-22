@@ -1,5 +1,7 @@
 import React from 'react'
 import { Grid } from './styles'
+import { ButtonTextStyle } from '~/components/atoms/Button/styles'
+import { Fontisto } from '@expo/vector-icons'
 
 interface GridProps {
     bg?: string
@@ -17,6 +19,9 @@ interface GridProps {
     bdRd?: string
     children?: React.ReactNode
     numberLines?: number
+
+    hour?: string
+    local?: string
 }
 
 export const TableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt, mgTop, mgLeft, align, pdd, pddLeft, bdRd, children, numberLines }: GridProps) => {
@@ -40,5 +45,43 @@ export const TableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt,
         >
             {children}
         </Grid>
+    )
+}
+
+export const IconTableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt, mgTop, mgLeft, align, pdd, pddLeft, bdRd, numberLines, hour, local }: GridProps) => {
+    return (
+        <Grid
+            numberOfLines={numberLines}
+            ellipsizeMode="tail"      
+            color={color}
+            bg={bg}
+            wdt={wdt}
+            hgt={hgt}
+            fontFamily={fontFamily}
+            fontSize={fontSize}
+            mgTop={mgTop}
+            mgLeft={mgLeft}
+            align={align}
+            pdd={pdd}
+            pddLeft={pddLeft}
+            txtAlign={txtAlign}
+            bdRd={bdRd}
+        >
+        <ButtonTextStyle
+            color={color}
+            fontSize={fontSize}
+          >
+            <Fontisto name="map-marker-alt" size={15} color='white' />
+            {local}
+        </ButtonTextStyle>
+        
+        <ButtonTextStyle
+            color={color}
+            fontSize={fontSize}
+          >
+            <Fontisto name="clock" size={15} color='white' />
+            {hour}
+        </ButtonTextStyle>
+    </Grid>
     )
 }

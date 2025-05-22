@@ -36,7 +36,7 @@ export default function App() {
     <CustomThemeProvider>
       <UserProvider>
         <StatusBar 
-          barStyle={deviceTheme ? 'dark-content' : 'light-content'}
+          barStyle={deviceTheme ? 'light-content' : 'dark-content'}
           backgroundColor="transparent" 
           translucent 
         />

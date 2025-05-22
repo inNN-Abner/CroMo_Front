@@ -156,9 +156,11 @@ export const RegisterScreen = ({ navigation }) => {
               options={Object.values(opcoesCursos)}
               userCourse={selectedCourse || opcoesCursos.vazio}
             />
-            {errorMessage ? <LoginError>{errorMessage}</LoginError> : null}
+            <Subcontainer hgt='50' dir='row' mgLeft='0' align='center' justify='center' >
+              {errorMessage ? <LoginError>{errorMessage}</LoginError> : null}
+            </Subcontainer>
 
-            <Subcontainer mgLeft='0' mgTop='15' dir='row' wdt='360' hgt='80' align='center' justify='center'>
+            <Subcontainer mgLeft='0' mgTop='-15' dir='row' wdt='360' hgt='80' align='center' justify='center'>
               <StylezedButton 
                 label="CANCELAR"
                 mgTop='0'

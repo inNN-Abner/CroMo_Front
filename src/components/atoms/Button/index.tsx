@@ -384,6 +384,31 @@ export const SaveButton = ({ bg, hgt, wdt, bdRd, mgTop, mgLeft, mgRight, fontSiz
   )
 }
 
+export const SendCommentButton  = ({ bg, color, wdt, hgt, bdRd, mgTop, mgLeft, mgRight, fontSize, label, onPress }: ButtonProps ) => {
+  return (
+    <StyledButtonStyle
+        bg={bg}
+        wdt={wdt}
+        hgt={hgt}
+        bdRd={bdRd}
+        mgLeft={mgLeft}
+        mgTop={mgTop}
+        mgRight={mgRight}
+        onPress={onPress}>
+        <Subcontainer align='center' justify='center' dir='row' bg='white' wdt='300' hgt='25' mgTop='0' mgLeft='5' bdRd='10'>
+          <Ionicons name="add-circle" size={24} color={'#a82325'} />
+          <ButtonTextStyle
+                mgLeft='5'
+                color={color}
+                fontSize={fontSize}>
+                {label}
+              </ButtonTextStyle>
+          </Subcontainer> 
+
+      </StyledButtonStyle>
+  )
+}
+
 export const SetTimeButton = ({ align, justify, bdRd, hgt, wdt, color, bg, mgTop, mgLeft, fontSize, onPress, hour, local }: ButtonProps ) => {
   return (
   <StyledButtonStyle 

@@ -31,12 +31,12 @@ export const HomeScreen = ({ navigation }) => {
 
       { userType == "Aluno" ? (
         <AddButtonText
-          bg='brisk'
-          color='redDarkRed'
+          bg='darkRed'
+          color='everWhite'
           fontSize='18'
           wdt='250'
           hgt='30'
-          mgLeft='-90'
+          mgLeft='-110'
           mgTop='7'
           align='flex-start'
           justify='flex-start'
@@ -47,12 +47,12 @@ export const HomeScreen = ({ navigation }) => {
       />
       ) : (
         <ListButtonText
-          bg='brisk'
-          color='redDarkRed'
+          bg='darkRed'
+          color='everWhite'
           fontSize='18'
           wdt='250'
           hgt='30'
-          mgLeft='-90'
+          mgLeft='-110'
           mgTop='7'
           align='flex-start'
           justify='flex-start'

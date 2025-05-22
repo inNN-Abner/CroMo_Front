@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { MonitorList, Container, CreateModal, DefineTimeScheduling, Headers, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, TextInput, ModalText, CalendarModal } from '~/components'
+import { MonitorList, Container, CreateModal, DefineTimeScheduling, Headers, PageSubtitle, PageTitle, RedCancelButton, SaveButton, StylezedButton, Subcontainer, TextInput, ModalText, CalendarModal, AddButton, AddButtonText, SendCommentButton } from '~/components'
 import * as SecureStore from 'expo-secure-store'
 import { API_URL } from '~/configs/config'
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 
 export const AddMonitoringScreen = ({ navigation }) => {
   const [openModal, setOpenModal] = useState(false)
+  const [openQuestionModal, setOpenQuestionModal] = useState(false)
   const [step, setStep] = useState(1)
   const [selectedDate, setSelectedDate] = useState(null)
   const [comment, setComment] = useState('')
@@ -178,23 +179,18 @@ export const AddMonitoringScreen = ({ navigation }) => {
           </Subcontainer>
   
           {step >= 4 && (
-            <Subcontainer mgLeft='0' mgTop='25'>
-              <TextInput
-                mgLeft='12'
-                mgTop='-25'
-                wdt='350'
-                hgt='80'
+            <Subcontainer mgLeft='0' hgt='90' mgTop='25' align='center'>
+              <SendCommentButton
+                label={'Enviar mensagem para o monitor'}
+                bg='white'
+                color='darkRed'
+                wdt='325'
+                hgt='50'
                 bdRd='10'
-                bgColor='everGray'
-                color='white'
                 fontSize='16'
-                placeColor='white'
-                placeholder='Insira uma mensagem para o monitor. Pode ser uma observação, uma dúvida específica, etc'
-                mtline={true}
-                value={comment}
-                onChangeText={setComment}              
-              />
-  
+                onPress={() => setOpenQuestionModal(true)}
+              />  
+
               <Subcontainer dir='row' justify='center' mgLeft='0' bdRd='0' bg='pruple'>
                 <RedCancelButton
                   bg='brisk'
@@ -268,11 +264,66 @@ export const AddMonitoringScreen = ({ navigation }) => {
                     />
                   </Subcontainer>
                 </CreateModal>
-              </Subcontainer>
-            </Subcontainer>
-          )}
-        </ScrollView>
-      </Container>
-    </KeyboardAvoidingView>
+    {/* Modal para inserir dúvida */}
+    <CreateModal
+      visible={openQuestionModal}
+      bg='white'
+      bdRd='10'
+      wdt='350'
+      hgt='250'
+      pdd='15'
+    >
+      <ModalText alignSelf='center' fontFamily='bold' color='brisk' mgTop='-25' mgLeft='0' fontSize='17'>
+        Insira sua mensagem
+      </ModalText>
+
+      <TextInput
+        mgLeft='0'
+        mgTop='10'
+        wdt='300'
+        hgt='125'
+        bdRd='10'
+        bgColor='everGray'
+        color='white'
+        fontSize='16'
+        placeColor='white'
+        placeholder='Digite sua dúvida ou observação'
+        mtline={true}
+        value={comment}
+        onChangeText={setComment}
+      />
+
+      <Subcontainer dir='row-reverse' mgLeft='0' justify='center' align='center' maxHgt='0' mgTop='35'>
+        <StylezedButton
+          label={'Salvar'}
+          bg='darkGreen'
+          mgTop='0'
+          mgLeft='0'
+          wdt='130'
+          hgt='40'
+          bdRd='10'
+          fontSize='18'
+          onPress={() => setOpenQuestionModal(false)}
+        />
+
+          <StylezedButton
+            label={'Cancelar'}
+            bg='white'
+            color='darkRed'
+            mgTop='0'
+            wdt='130'
+            hgt='40'
+            bdRd='10'
+            fontSize='18'
+            onPress={() => setOpenQuestionModal(false)}
+          />
+        </Subcontainer>
+        </CreateModal>
+      </Subcontainer>
+      </Subcontainer>
+      )}
+      </ScrollView>
+    </Container>
+  </KeyboardAvoidingView>
   )
 }  
