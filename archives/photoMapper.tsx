@@ -12,7 +12,8 @@ export const imageMap: Record<number, any> = {
   11: require('~/../assets/Mat_Informatica.png'),
   12: require('~/../assets/Mat_Ingles.png'),
   13: require('~/../assets/Mat_Simulacao.png'),
-  14: require('~/../assets/Mat_Algoritmo.png')
+  14: require('~/../assets/Mat_Algoritmo.png'),
+  15: require('~/../assets/Mat_Analise.png')
 }
 
 export const defaultPhoto = require('~/../assets/Bag.png')
