@@ -87,6 +87,7 @@ export const LoginScreen = ({ navigation }) => {
             onChangeText={(text) => setEmailValue(text)}
             mgTop='5'
             mgLeft='0'
+            placeColor={isDark ? '#ffffff' : '#333333'}
           />
 
           <LoginTitle mgTop='20' mgLeft='0' alignSelf='flex-start'>
@@ -101,6 +102,7 @@ export const LoginScreen = ({ navigation }) => {
             onChangeText={(text) => setPasswordValue(text)}
             mgTop='5'
             mgLeft='0'
+            placeColor={isDark ? '#ffffff' : '#333333'}
           />           
 
           <StylezedButton

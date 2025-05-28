@@ -46,7 +46,7 @@ export const EditPerfilScreen = ({ navigation }) => {
 
   const handleSave = async () => {
     if (!nameValue || nameValue.trim().length < 5) {
-      alert('O nome deve ter pelo menos 5 caracteres.')
+      Alert.alert('Atenção', 'O nome deve ter pelo menos 5 caracteres.')
       return
     }
   
@@ -87,7 +87,7 @@ export const EditPerfilScreen = ({ navigation }) => {
   
     } catch (error) {
       console.error('Erro ao atualizar perfil:', error)
-      alert('Erro ao atualizar perfil')
+      Alert.alert('Atenção','Erro ao atualizar perfil')
     }
   }
 
@@ -135,21 +135,6 @@ export const EditPerfilScreen = ({ navigation }) => {
                 />
 
               <LoginTitle mgTop='10' mgLeft='0' alignSelf='flex-start'>
-                E-mail institucional
-              </LoginTitle>
-                <TextInput
-                  placeholder={'email@fatec.sp.gov.br'} 
-                  keyboardType='email'
-                  value={emailValue}
-                  editable={false}
-                  onChangeText={(text) => setEmailValue(text)}
-                  mgTop='5'
-                  mgLeft='35'
-                  color='gray'
-                  bgColor='lightGray'
-                />
-
-              <LoginTitle mgTop='10' mgLeft='0' alignSelf='flex-start'>
                 Teams
               </LoginTitle>
                 <TextInput 
@@ -173,7 +158,7 @@ export const EditPerfilScreen = ({ navigation }) => {
                     mgLeft='35'
                   />
 
-              <Subcontainer mgLeft='0' mgTop='20' dir='row' align='center' justify='center' hgt='100'>
+              <Subcontainer mgLeft='0' mgTop='85' dir='row' align='center' justify='center' hgt='100'>
                 <RedCancelButton
                   bg='everWhite'
                   wdt='150'

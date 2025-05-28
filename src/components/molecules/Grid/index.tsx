@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid } from './styles'
 import { ButtonTextStyle } from '~/components/atoms/Button/styles'
 import { Fontisto } from '@expo/vector-icons'
+import { useTheme } from '~/context/ThemeContext'
 
 interface GridProps {
     bg?: string
@@ -23,6 +24,7 @@ interface GridProps {
     hour?: string
     local?: string
 }
+
 
 export const TableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt, mgTop, mgLeft, align, pdd, pddLeft, bdRd, children, numberLines }: GridProps) => {
     return (
@@ -49,6 +51,7 @@ export const TableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt,
 }
 
 export const IconTableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, hgt, mgTop, mgLeft, align, pdd, pddLeft, bdRd, numberLines, hour, local }: GridProps) => {
+    const { isDark } = useTheme()
     return (
         <Grid
             numberOfLines={numberLines}
@@ -70,8 +73,8 @@ export const IconTableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, 
         <ButtonTextStyle
             color={color}
             fontSize={fontSize}
-          >
-            <Fontisto name="map-marker-alt" size={15} color='white' />
+          > 
+            <Fontisto name="map-marker-alt" size={15} color={isDark ? '#333333' : '#ffffff'} />
             {local}
         </ButtonTextStyle>
         
@@ -79,7 +82,7 @@ export const IconTableGrid = ({ bg, color, fontSize, txtAlign, fontFamily, wdt, 
             color={color}
             fontSize={fontSize}
           >
-            <Fontisto name="clock" size={15} color='white' />
+            <Fontisto name="clock" size={15} color={isDark ? '#333333' : '#ffffff'} />
             {hour}
         </ButtonTextStyle>
     </Grid>

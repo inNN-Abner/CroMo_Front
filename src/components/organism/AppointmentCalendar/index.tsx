@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { LocaleConfig } from 'react-native-calendars'
 import { Calendar } from 'react-native-calendars'
 import * as SecureStore from 'expo-secure-store'
-import { useAgendamento } from '~/../archives/monitoringHours'
+import { useAgendamentoCalendar } from '~/../archives/monitoringCalendar'
 
 LocaleConfig.locales['pt-BR'] = {
   monthNames: [
@@ -34,9 +34,7 @@ interface CalendarEvent {
 
 export const AppointmentCalendar = ({ navigation }) => {
 
-  const { monitoring } = useAgendamento()
-
-
+  const { monitoring } = useAgendamentoCalendar()
   const markedDates = useMemo(() => {
     return (monitoring ?? []).reduce((acc, item) => {
       const [dia, mes, ano] = item.date.split('/')

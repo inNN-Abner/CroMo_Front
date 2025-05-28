@@ -106,7 +106,7 @@ export const ClassDetailGrid = ({ monitorias, navigation }) => {
               <TableGrid fontSize='16' color='white'>{formatWeekDay(item.dia_semana.toString())}</TableGrid>
               
             <Subcontainer bg='gray' wdt='100' hgt='50' pdd='0' mgLeft='5' mgTop='5' bdRd='5' >
-              <IconTableGrid fontSize='14' wdt='220' fontFamily='regular' align='flex-start' mgTop='0' mgLeft='10' bdRd='5'
+              <IconTableGrid fontSize='14' color='white' wdt='220' fontFamily='regular' align='flex-start' mgTop='0' mgLeft='10' bdRd='5'
                 local = {' Local: ' + item.local + '\n' || 'Local não definido'}
                 hour ={' Horário: ' + item.horario || 'Horário não definido'}
             />

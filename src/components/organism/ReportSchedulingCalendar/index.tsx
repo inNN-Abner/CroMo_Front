@@ -4,6 +4,7 @@ import * as SecureStore from 'expo-secure-store'
 
 export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [userType, setUserType] = useState(null)
+  
     
     useEffect(() => {
         const loadUserType = async () => {
@@ -26,7 +27,7 @@ export const ReportSchedulingScreen: React.FC<{ navigation: any }> = ({ navigati
       
       <Headers />
         <PageTitle color='greenWhite'>Monitorias</PageTitle>
-        <PageSubtitle color='greenWhite'>Meus agendamentos</PageSubtitle>
+        <PageSubtitle mgBottom='25' color='greenWhite'>Meus agendamentos</PageSubtitle>
 
         <Subcontainer align='center' justify='center' mgLeft='0' mgTop='0' hgt='500'>
           <AppointmentCalendar navigation={ navigation }/>

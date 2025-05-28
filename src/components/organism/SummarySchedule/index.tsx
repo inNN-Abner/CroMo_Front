@@ -11,9 +11,14 @@ import * as Sharing from 'expo-sharing'
 import { API_URL } from '~/configs/config'
 import HTMLListaPresenca from '~/services/HTMLListaPresenca'
 import { defaultPhoto, imageMap } from '~/../archives/photoMapper'
+import { Alert } from 'react-native'
 
 const Calendar = require('../../../../assets/Calendar.png')
 const Clock = require( '../../../../assets/Clock.png')
+
+function delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
 export const SummarySchedule = ({ navigation }) => {
     const { agendas, loading, error, loadUserSchedule } = useUserSchedule()
@@ -30,7 +35,7 @@ export const SummarySchedule = ({ navigation }) => {
     const [alunos, setAlunos] = useState([])
     const [dataAgendamento, setDataAgendamento] = useState(null)
     const [materia, setMateria] = useState(null)
-    
+
     useEffect(() => {
         const loadUserType = async () => {
           try {
@@ -96,7 +101,7 @@ export const SummarySchedule = ({ navigation }) => {
         console.log("Resposta:", result)
 
         if (!result) {
-            alert("Resposta inválida da API.")
+            Alert.alert("Atenção", "Resposta inválida da API.")
             return
         }
     
@@ -109,7 +114,7 @@ export const SummarySchedule = ({ navigation }) => {
 
     const gerarPDF = async() => {
         if (!alunos || alunos.length === 0) {
-            alert('Nenhum aluno encontrado.')
+            Alert.alert('Atenção', 'Nenhum aluno encontrado.')
             return
     }
     
@@ -119,7 +124,7 @@ export const SummarySchedule = ({ navigation }) => {
         if (await Sharing.isAvailableAsync()) {
             await Sharing.shareAsync(uri)
         } else {
-            alert('Compartilhamento não está disponível no dispositivo.')
+            Alert.alert('Atenção','Compartilhamento não está disponível no dispositivo.')
         }
     }
 
@@ -209,7 +214,7 @@ export const SummarySchedule = ({ navigation }) => {
 
         const result = await consultarAlunos(monitoriaId)
         if (!result || result.length === 0) {
-          alert('Nenhum aluno encontrado.')
+          Alert.alert('Atenção','Nenhum aluno encontrado.')
           return
         }
       
@@ -219,6 +224,16 @@ export const SummarySchedule = ({ navigation }) => {
         setBodyMessage(result.map(aluno => `${aluno.nome} - RA: ${aluno.ra}`).join('\n'))
         setOpenModalList(true)
       }
+
+    if (!isLoaded || loading) {
+    return (
+        <Subcontainer mgLeft='0' mgTop='60' wdt='250' hgt='40' align='center' justify='center' pdd='0'>
+            <InfoTextNoWrap color='everWhite' alignSelf='center' fontSize='20'>
+                Carregando...
+            </InfoTextNoWrap>
+        </Subcontainer>
+    )
+    }
 
     if (!userType) {
     return (
